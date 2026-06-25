@@ -1,5 +1,6 @@
 import { Link, useLocation } from 'react-router-dom'
-import { useState, useRef, useEffect, useCallback, ReactNode } from 'react'
+import { useState, useRef, useEffect, useCallback } from 'react'
+import type { ReactNode } from 'react'
 import { TransitionLink } from '@/components/ui/TransitionLink'
 
 /**

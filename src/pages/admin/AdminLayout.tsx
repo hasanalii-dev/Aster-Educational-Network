@@ -2,7 +2,10 @@ import { Outlet, NavLink, useNavigate, useLocation } from 'react-router-dom'
 import { useAuth } from '@/hooks/useAuth'
 import { useEffect, useState } from 'react'
 
-const navSections = [
+type NavItem = { label: string; path: string; icon: string; end?: boolean };
+type NavSection = { title: string; items: NavItem[] };
+
+const navSections: NavSection[] = [
     { title: 'Overview', items: [{ label: 'Dashboard', path: '/admin', icon: '◫', end: true }] },
     { title: 'Content', items: [
         { label: 'Site Settings', path: '/admin/settings', icon: '⚙' },

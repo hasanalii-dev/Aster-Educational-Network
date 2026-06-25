@@ -109,7 +109,7 @@ export function AboutPrologue() {
 
                     {/* STACK CARD 1: CORAL (#e97f7b) */}
                     <div
-                        ref={el => cardsRef.current[0] = el!}
+                        ref={el => { cardsRef.current[0] = el!; }}
                         className="sticky top-[120px] w-full bg-[#e97f7b] rounded-[40px] p-10 md:p-16 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center shadow-2xl transition-all duration-300 border border-white/25 will-change-transform z-10"
                     >
                         {/* Left Copy: FORCED PURE ASTER WHITE */}
@@ -135,7 +135,7 @@ export function AboutPrologue() {
 
                     {/* STACK CARD 2: BOTANICAL SAGE (#6ab39d) */}
                     <div
-                        ref={el => cardsRef.current[1] = el!}
+                        ref={el => { cardsRef.current[1] = el!; }}
                         className="sticky top-[152px] w-full bg-[#6ab39d] rounded-[40px] p-10 md:p-16 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center shadow-2xl transition-all duration-300 border border-white/25 will-change-transform z-20"
                     >
                         {/* Left Copy: FORCED PURE ASTER WHITE */}
@@ -161,7 +161,7 @@ export function AboutPrologue() {
 
                     {/* STACK CARD 3: LAVENDER (#9765d1) */}
                     <div
-                        ref={el => cardsRef.current[2] = el!}
+                        ref={el => { cardsRef.current[2] = el!; }}
                         className="sticky top-[184px] w-full bg-[#9765d1] rounded-[40px] p-10 md:p-16 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center shadow-2xl transition-all duration-300 border border-white/25 will-change-transform z-30"
                     >
                         {/* Left Copy: FORCED PURE ASTER WHITE */}

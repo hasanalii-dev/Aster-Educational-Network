@@ -1,4 +1,5 @@
-import { useRef, useEffect, useCallback, ReactNode } from 'react';
+import { useRef, useEffect, useCallback } from 'react';
+import type { ReactNode } from 'react';
 
 export interface ClickSparkProps {
   sparkSize?: number;
@@ -36,7 +37,7 @@ const ClickSpark = ({
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    let resizeTimeout: NodeJS.Timeout;
+    let resizeTimeout: ReturnType<typeof setTimeout>;
 
     const resizeCanvas = () => {
       if (canvas.width !== window.innerWidth || canvas.height !== window.innerHeight) {

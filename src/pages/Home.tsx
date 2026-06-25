@@ -8,8 +8,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 
-// Import the custom SVG ornament you created
-import linesOrnament from '@/assets/icons/lines.svg'
+
 
 /**
  * ImageWithSkeleton Helper Component

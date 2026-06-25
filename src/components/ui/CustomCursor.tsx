@@ -17,7 +17,7 @@ export function CustomCursor() {
         stateRef.current = cursorState
     }, [cursorState])
 
-    const scrollTimeout = useRef<NodeJS.Timeout | null>(null)
+    const scrollTimeout = useRef<ReturnType<typeof setTimeout> | null>(null)
     // Track exact mouse position to allow instant target detection during scroll
     const lastPos = useRef({ x: window.innerWidth / 2, y: window.innerHeight / 2 })
 

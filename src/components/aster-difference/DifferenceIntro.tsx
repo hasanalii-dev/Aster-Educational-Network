@@ -86,7 +86,7 @@ export function DifferenceIntro() {
                     y: 4 // Pushed down slightly
                 },
                 {
-                    color: (i, el) => el.dataset.color || '#5C5C61', // Resolve to dataset target color
+                    color: (_, el) => el.dataset.color || '#5C5C61', // Resolve to dataset target color
                     y: 0, // Physically locks into place as it colors in
                     stagger: 0.1,
                     ease: 'power1.out',

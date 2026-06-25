@@ -164,7 +164,7 @@ export function PageLoader() {
                                 {sloganWords.map((word, i) => (
                                     <span
                                         key={i}
-                                        ref={el => wordRefs.current[i] = el!}
+                                        ref={el => { wordRefs.current[i] = el!; }}
                                         className="staggered-slogan-word"
                                     >
                                         {word}
