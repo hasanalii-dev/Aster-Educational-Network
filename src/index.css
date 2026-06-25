@@ -1,0 +1,404 @@
+@import "tailwindcss";
+
+/*
+ * ============================================
+ * ASTER PAKISTAN — Design System
+ * ============================================
+ * 
+ * This file defines the global design tokens,
+ * custom utilities, and base styles for the
+ * Aster Pakistan website.
+ *
+ * Color palette sourced from official brand guidelines.
+ * Font: Quicksand (Google Fonts)
+ */
+
+/* ----------------------------------------
+ * Custom Theme Variables
+ * ---------------------------------------- */
+@theme {
+  /* Primary Brand Colors — Blue */
+  --color-brand-blue-900: #334a89;
+  --color-brand-blue-700: #394da1;
+  --color-brand-blue-500: #4d67bd;
+  --color-brand-blue-300: #6080cf;
+  --color-brand-blue-100: #5781e5;
+
+  /* Primary Brand Colors — Gold / Yellow */
+  --color-brand-gold-900: #d69f18;
+  --color-brand-gold-700: #edad0c;
+  --color-brand-gold-500: #ffc715;
+  --color-brand-gold-300: #fcd165;
+
+  /* Secondary Colors — Coral / Salmon */
+  --color-accent-coral: #e97f7b;
+  --color-accent-coral-light: #f0907f;
+  --color-accent-salmon: #f8a1b4;
+  --color-accent-peach: #ffb288;
+
+  /* Secondary Colors — Purple */
+  --color-accent-purple: #9765d1;
+  --color-accent-purple-light: #976ecd;
+  --color-accent-lavender: #a881e6;
+  --color-accent-lilac: #b994ff;
+
+  /* Secondary Colors — Green / Teal */
+  --color-accent-green: #6ab39d;
+  --color-accent-teal: #7accb2;
+  --color-accent-mint: #89e6c8;
+  --color-accent-seafoam: #99ffdd;
+
+  /* Neutral Palette */
+  --color-neutral-50: #FAFAF9;
+  --color-neutral-100: #F5F5F4;
+  --color-neutral-200: #E7E5E4;
+  --color-neutral-300: #D6D3D1;
+  --color-neutral-400: #A8A29E;
+  --color-neutral-500: #78716C;
+  --color-neutral-600: #57534E;
+  --color-neutral-700: #44403C;
+  --color-neutral-800: #292524;
+  --color-neutral-900: #1C1917;
+  --color-neutral-950: #0C0A09;
+
+  /* Semantic Colors */
+  --color-success: #16A34A;
+  --color-warning: #EAB308;
+  --color-error: #DC2626;
+  --color-info: #2563EB;
+
+  /* Background Colors */
+  --color-bg-primary: #FFFFFF;
+  --color-bg-secondary: #FAFAF9;
+  --color-bg-tertiary: #F5F5F4;
+  --color-bg-dark: #1C1917;
+
+  /* Text Colors */
+  --color-text-primary: #1C1917;
+  --color-text-secondary: #57534E;
+  --color-text-tertiary: #78716C;
+  --color-text-inverse: #FAFAF9;
+
+  /* Elite Master Palette */
+  --color-aster-blue: #394EA2;
+  --color-aster-gold: #FFC51B;
+  --color-academic-slate: #050b14;
+  --color-frosted-ice-blue: #E4F0F9;
+  --color-alabaster: #FAFAFA;
+
+  /* Typography — Dual-Tier System */
+  --font-family-display: 'Playfair Display', Georgia, serif;
+  --font-family-heading: 'Quicksand', sans-serif;
+  --font-family-body: 'Quicksand', sans-serif;
+  --font-family-accent: 'Quicksand', sans-serif;
+  --font-sans: 'Quicksand', sans-serif;
+
+  /* Spacing Scale */
+  --spacing-section: 6rem;
+  --spacing-section-sm: 4rem;
+
+  /* Border Radius */
+  --radius-card: 1rem;
+  --radius-button: 0.5rem;
+  --radius-badge: 9999px;
+
+  /* Shadows */
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-card-hover: 0 10px 25px rgba(0, 0, 0, 0.08), 0 4px 10px rgba(0, 0, 0, 0.04);
+  --shadow-elevated: 0 20px 50px rgba(0, 0, 0, 0.12), 0 8px 20px rgba(0, 0, 0, 0.06);
+
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Container */
+  --container-max: 1280px;
+  --container-narrow: 960px;
+  --container-wide: 1440px;
+}
+
+/* ----------------------------------------
+ * Base Styles
+ * ---------------------------------------- */
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-family-body);
+    color: var(--color-text-primary);
+    background-color: var(--color-bg-primary);
+    line-height: 1.6;
+  }
+
+  h1, h2 {
+    font-family: var(--font-family-display);
+    font-weight: 500;
+    line-height: 1.1;
+    color: var(--color-text-primary);
+  }
+
+  h3, h4, h5, h6 {
+    font-family: var(--font-family-heading);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--color-text-primary);
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  ::selection {
+    background-color: var(--color-brand-gold-500);
+    color: var(--color-brand-blue-900);
+  }
+}
+
+/* ----------------------------------------
+ * Custom Utility Classes
+ * ---------------------------------------- */
+@layer utilities {
+  .container-default {
+    width: 100%;
+    max-width: var(--container-max);
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+  }
+
+  .container-narrow {
+    width: 100%;
+    max-width: var(--container-narrow);
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+  }
+
+  .container-wide {
+    width: 100%;
+    max-width: var(--container-wide);
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+  }
+
+  .section-padding {
+    padding-block: var(--spacing-section);
+  }
+
+  .section-padding-sm {
+    padding-block: var(--spacing-section-sm);
+  }
+
+  .text-gradient {
+    background: linear-gradient(135deg, var(--color-brand-blue-900), var(--color-brand-blue-500));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-accent {
+    background: linear-gradient(135deg, var(--color-brand-gold-700), var(--color-brand-gold-300));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+/* ----------------------------------------
+ * Premium Animated Buttons
+ * ---------------------------------------- */
+
+.btn-animated {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, color 0.3s ease;
+  will-change: transform;
+}
+
+/* The liquid blob rising effect */
+.btn-animated::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -50%;
+  width: 150%;
+  height: 150%;
+  background-color: rgba(255, 255, 255, 0.15); /* Default wash */
+  transform: translateX(-50%) translateY(100%) scale(1);
+  border-radius: 50%;
+  z-index: -1;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+/* Sub-classes for different background washes */
+.btn-animated.btn-light::after {
+  background-color: rgba(57, 78, 162, 0.08); /* Aster blue wash for white/light buttons */
+}
+
+.btn-animated.btn-yellow::after {
+  background-color: rgba(255, 255, 255, 0.35); /* Stronger white wash for yellow buttons */
+}
+
+/* Hover States */
+.btn-animated:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 28px -8px rgba(0,0,0,0.25);
+}
+
+.btn-animated:active {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 12px -6px rgba(0,0,0,0.25);
+  transition: all 0.1s;
+}
+
+.btn-animated:hover::after {
+  transform: translateX(-50%) translateY(0) scale(1.5);
+}
+
+/* The Glassy Shine Effect sweeping across */
+.btn-animated::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    to right, 
+    rgba(255,255,255,0) 0%, 
+    rgba(255,255,255,0.4) 50%, 
+    rgba(255,255,255,0) 100%
+  );
+  transform: skewX(-25deg);
+  z-index: 1;
+  animation: none;
+  pointer-events: none;
+}
+
+.btn-animated.btn-light::before {
+  background: linear-gradient(
+    to right, 
+    rgba(255,255,255,0) 0%, 
+    rgba(57, 78, 162, 0.1) 50%, 
+    rgba(255,255,255,0) 100%
+  );
+}
+
+.btn-animated:hover::before {
+  animation: btn-shine 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes btn-shine {
+  0% { left: -100%; }
+  100% { left: 200%; }
+}
+
+/* ----------------------------------------
+ * Custom Webkit Scrollbar
+ * ---------------------------------------- */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #FAFAFC; 
+}
+
+::-webkit-scrollbar-thumb {
+  background: #394ea1; 
+  border-radius: 6px;
+  border: 3px solid #FAFAFC; /* Creates a pseudo-padding effect */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #25336e; 
+}
+
+/* === GLOBAL BUTTON SYSTEM === */
+.btn-aster {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 24px;
+  border-radius: 9999px;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, box-shadow;
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.btn-aster:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+.btn-aster:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* Primary Yellow */
+.btn-aster-primary {
+  background-color: #FFC51B;
+  color: #050B14;
+}
+.btn-aster-primary:hover {
+  background-color: #e5b018;
+  box-shadow: 0 12px 24px rgba(255, 197, 27, 0.25);
+}
+
+/* Primary Blue */
+.btn-aster-blue {
+  background-color: #394EA2;
+  color: #FFFFFF;
+}
+.btn-aster-blue:hover {
+  background-color: #2e3e82;
+  box-shadow: 0 12px 24px rgba(57, 78, 162, 0.3);
+}
+
+/* Secondary White */
+.btn-aster-white {
+  background-color: #FFFFFF;
+  color: #394EA2;
+}
+.btn-aster-white:hover {
+  background-color: #F5F5F4;
+  box-shadow: 0 12px 24px rgba(255, 255, 255, 0.2);
+}
+
+/* Secondary Outline */
+.btn-aster-outline {
+  background-color: transparent;
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #FFFFFF;
+}
+.btn-aster-outline:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: #FFFFFF;
+}
+
+/* === GLOBAL REVEAL ANIMATIONS === */
+.reveal-up {
+  opacity: 0;
+  filter: blur(8px);
+  transform: translateY(30px);
+  will-change: opacity, transform, filter;
+}
