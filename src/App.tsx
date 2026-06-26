@@ -30,6 +30,7 @@ const {
   JournalArticle,
   Contact,
   NotFound,
+  ProfileDashboard,
 } = pageComponents
 
 // Admin pages (lazy-loaded, separate bundle)
@@ -77,6 +78,7 @@ const router = createBrowserRouter([
       { path: 'journal', element: <Journal /> },
       { path: 'journal/:slug', element: <JournalArticle /> },
       { path: 'contact', element: <Contact /> },
+      { path: 'profile', element: <ProfileDashboard /> },
       { path: '*', element: <NotFound /> },
     ],
   },

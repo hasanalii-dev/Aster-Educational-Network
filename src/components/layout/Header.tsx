@@ -414,9 +414,14 @@ export function Header({
                         <div className="header-actions" style={{ gap: '16px' }}>
                             {user ? (
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-                                    <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: '#ffc715', color: '#334a89', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold' }} title={user.email || 'Profile'}>
-                                        {user.email?.[0]?.toUpperCase() || 'U'}
-                                    </div>
+                                    <TransitionLink to="/profile" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none' }}>
+                                        <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: '#ffc715', color: '#334a89', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold' }} title={user.email || 'Profile'}>
+                                            {user.email?.[0]?.toUpperCase() || 'U'}
+                                        </div>
+                                        <span className="nav-link" style={{ padding: 0, textTransform: 'none' }}>
+                                            {user.email?.split('@')[0]}
+                                        </span>
+                                    </TransitionLink>
                                     <button onClick={() => signOut()} className="nav-link" style={{ padding: 0 }} aria-label="Sign out" title="Sign Out">
                                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                             <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
@@ -502,15 +507,29 @@ export function Header({
                         {/* Auth Card (Sign In / Sign Up OR Profile / Logout) */}
                         <div className="mobile-anim-item" style={{ '--anim-delay': '500ms' } as React.CSSProperties}>
                             {user ? (
-                                <button className="mobile-action-card card-transparent" onClick={async () => { await signOut(); closeMobile(); }} style={{ width: '100%', textAlign: 'left', cursor: 'pointer', border: 'none', background: 'rgba(255, 255, 255, 0.1)' }}>
-                                    <div className="mobile-action-content">
-                                        <span className="mobile-action-title">Sign Out</span>
-                                        <span className="mobile-action-desc">{user.email}</span>
-                                    </div>
-                                    <div className="mobile-action-icon" style={{ borderRadius: '50%', background: '#ffc715', color: '#334a89', fontWeight: 'bold', fontSize: '18px', border: 'none' }}>
-                                        {user.email?.[0]?.toUpperCase() || 'U'}
-                                    </div>
-                                </button>
+                                <div style={{ display: 'flex', gap: '8px', flexDirection: 'column' }}>
+                                    <Link to="/profile" className="mobile-action-card card-transparent" onClick={closeMobile} style={{ background: 'rgba(255, 255, 255, 0.1)' }}>
+                                        <div className="mobile-action-content">
+                                            <span className="mobile-action-title">My Profile</span>
+                                            <span className="mobile-action-desc">{user.email}</span>
+                                        </div>
+                                        <div className="mobile-action-icon" style={{ borderRadius: '50%', background: '#ffc715', color: '#334a89', fontWeight: 'bold', fontSize: '18px', border: 'none' }}>
+                                            {user.email?.[0]?.toUpperCase() || 'U'}
+                                        </div>
+                                    </Link>
+                                    <button className="mobile-action-card card-transparent" onClick={async () => { await signOut(); closeMobile(); }} style={{ width: '100%', textAlign: 'left', cursor: 'pointer', border: 'none', background: 'rgba(255, 255, 255, 0.05)', padding: '12px 24px' }}>
+                                        <div className="mobile-action-content">
+                                            <span className="mobile-action-title" style={{ fontSize: '16px' }}>Sign Out</span>
+                                        </div>
+                                        <div className="mobile-action-icon" style={{ width: '32px', height: '32px', background: 'transparent', color: '#fff' }}>
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                                <polyline points="16 17 21 12 16 7"></polyline>
+                                                <line x1="21" y1="12" x2="9" y2="12"></line>
+                                            </svg>
+                                        </div>
+                                    </button>
+                                </div>
                             ) : (
                                 <Link to="/admin/login" className="mobile-action-card card-transparent" onClick={closeMobile}>
                                     <div className="mobile-action-content">

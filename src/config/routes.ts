@@ -28,6 +28,7 @@ const Journal = lazy(() => import('@/pages/Journal'))
 const JournalArticle = lazy(() => import('@/pages/JournalArticle'))
 const Contact = lazy(() => import('@/pages/Contact'))
 const NotFound = lazy(() => import('@/pages/NotFound'))
+const ProfileDashboard = lazy(() => import('@/pages/ProfileDashboard'))
 
 // Route metadata for SEO and navigation
 export interface RouteConfig {
@@ -137,4 +138,5 @@ export const pageComponents = {
   JournalArticle,
   Contact,
   NotFound,
+  ProfileDashboard,
 }
