@@ -264,7 +264,7 @@ export default function UnifiedAuth() {
                                 {authStep === 'credentials' ? (
                                     <form onSubmit={handleCredentialsSubmit} className="flex flex-col gap-4.5">
 
-                                        {error && <div className="auth-alert-error">{error}</div>}
+                                        {error && <div className="auth-alert-error">{typeof error === 'string' ? error : JSON.stringify(error)}</div>}
 
                                         {isSignUp && (
                                             <div className="gsap-auth-field flex flex-col gap-1.5 input-motion-group">
@@ -317,7 +317,7 @@ export default function UnifiedAuth() {
                                     /* ── VIEW B: 6-DIGIT OTP FIELD ── */
                                     <form onSubmit={handleOtpSubmit} className="flex flex-col gap-5">
 
-                                        {error && <div className="auth-alert-error">{error}</div>}
+                                        {error && <div className="auth-alert-error">{typeof error === 'string' ? error : JSON.stringify(error)}</div>}
                                         {statusMsg && <div className="auth-alert-success">{statusMsg}</div>}
 
                                         <div className="flex flex-col gap-2 mt-1">
