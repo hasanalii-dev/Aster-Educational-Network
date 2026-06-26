@@ -409,7 +409,10 @@ export function Header({
                             </div>
                         </nav>
 
-                        <div className="header-actions">
+                        <div className="header-actions" style={{ gap: '16px' }}>
+                            <TransitionLink to="/admin/login" className="nav-link" id="nav-login">
+                                <span>Sign In / Sign Up</span>
+                            </TransitionLink>
                             <TransitionLink to="/contact" className="btn-aster btn-aster-primary" id="nav-book-visit">
                                 <span>Book a Campus Visit</span>
                             </TransitionLink>
@@ -485,6 +488,21 @@ export function Header({
                                 <div className="mobile-action-icon">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                         <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline>
+                                    </svg>
+                                </div>
+                            </Link>
+                        </div>
+
+                        {/* Card 3: Sign In / Sign Up (Transparent Palette) */}
+                        <div className="mobile-anim-item" style={{ '--anim-delay': '500ms' } as React.CSSProperties}>
+                            <Link to="/admin/login" className="mobile-action-card card-transparent" onClick={closeMobile}>
+                                <div className="mobile-action-content">
+                                    <span className="mobile-action-title">Sign In / Sign Up</span>
+                                    <span className="mobile-action-desc">Access your account.</span>
+                                </div>
+                                <div className="mobile-action-icon">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle>
                                     </svg>
                                 </div>
                             </Link>
@@ -863,6 +881,7 @@ const headerStyles = `
 
 .card-yellow { background: #ffc715; color: #334a89; }
 .card-white { background: #FFFFFF; color: #334a89; }
+.card-transparent { background: rgba(255, 255, 255, 0.1); color: #FFFFFF; }
 
 .mobile-action-content { display: flex; flex-direction: column; gap: 4px; }
 .mobile-action-title { font-family: 'Quicksand', sans-serif; font-size: 20px; font-weight: 700; letter-spacing: -0.02em; }
@@ -873,6 +892,7 @@ const headerStyles = `
   width: 48px; height: 48px; background: rgba(51, 74, 137, 0.1); border-radius: 12px; color: #334a89;
 }
 .card-white .mobile-action-icon { background: rgba(51, 74, 137, 0.06); }
+.card-transparent .mobile-action-icon { background: rgba(255, 255, 255, 0.1); color: #FFFFFF; }
 
 /* === RESPONSIVE ALIGNMENT === */
 @media (max-width: 1200px) {

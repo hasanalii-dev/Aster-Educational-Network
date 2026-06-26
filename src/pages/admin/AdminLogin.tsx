@@ -2,85 +2,215 @@ import { useState, type FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { supabase } from '@/lib/supabase'
 
-export default function AdminLogin() {
+export default function UnifiedAuth() {
+    const [isSignUp, setIsSignUp] = useState(false)
+    const [fullName, setFullName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
+    const [statusMsg, setStatusMsg] = useState('')
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
 
-    const handleSubmit = async (e: FormEvent) => {
+    const handleAuthSubmit = async (e: FormEvent) => {
         e.preventDefault()
         setError('')
+        setStatusMsg('')
         setLoading(true)
 
-        const { error: authError } = await supabase.auth.signInWithPassword({
-            email,
-            password,
-        })
+        if (isSignUp) {
+            // ── SIGN UP FLOW ──
+            const { data, error: signUpError } = await supabase.auth.signUp({
+                email,
+                password,
+                options: {
+                    data: {
+                        full_name: fullName,
+                    },
+                },
+            })
 
-        if (authError) {
-            setError(authError.message)
-            setLoading(false)
-            return
+            if (signUpError) {
+                setError(signUpError.message)
+                setLoading(false)
+                return
+            }
+
+            // Check if email confirmation is required by Supabase project settings
+            if (data.session === null) {
+                setStatusMsg('Account created! Please check your email to verify your account before logging in.')
+                setLoading(false)
+                return
+            }
+
+            // Route based on requested Super Admin trapdoor
+            if (email === 'hasanalijaffe@gmail.com') {
+                navigate('/admin')
+            } else {
+                navigate('/portal')
+            }
+        } else {
+            // ── SIGN IN FLOW ──
+            const { data: authData, error: signInError } = await supabase.auth.signInWithPassword({
+                email,
+                password,
+            })
+
+            if (signInError) {
+                setError(signInError.message)
+                setLoading(false)
+                return
+            }
+
+            // Fetch role from profiles table to route correctly
+            const { data: profile } = await supabase
+                .from('profiles')
+                .select('role')
+                .eq('id', authData.user.id)
+                .single()
+
+            if (profile && (profile.role === 'admin' || profile.role === 'super_admin')) {
+                navigate('/admin')
+            } else {
+                navigate('/portal')
+            }
         }
 
-        navigate('/admin')
+        setLoading(false)
     }
 
-    const handleForgotPassword = (e: React.MouseEvent) => {
+    const handleForgotPassword = async (e: React.MouseEvent) => {
         e.preventDefault()
-        // Here we could implement forgot password logic
-        alert("Password reset instructions will be sent to your email if it exists in our system.");
+        if (!email) {
+            setError('Please enter your email address first to reset your password.')
+            return
+        }
+        setLoading(true)
+        const { error: resetError } = await supabase.auth.resetPasswordForEmail(email, {
+            redirectTo: `${window.location.origin}/reset-password`,
+        })
+        setLoading(false)
+        if (resetError) {
+            setError(resetError.message)
+        } else {
+            setStatusMsg('Password reset instructions have been sent to your email.')
+        }
     }
 
     return (
         <>
-            <style>{loginStyles}</style>
-            <div className="admin-login-container">
-                <div className="admin-login-left">
-                    <div className="admin-login-form-wrapper">
-                        <div className="admin-login-brand">
-                            <img src="/logo.jpg" alt="Aster School" className="admin-login-logo" />
-                            <h1 className="admin-login-title">Welcome Back</h1>
-                            <p className="admin-login-subtitle">Sign in to Aster CMS to manage your content.</p>
+            <style>{authStyles}</style>
+            <div className="auth-container select-none">
+
+                {/* =========================================================
+            LEFT COLUMN: THE AUTHENTICATION PLINTH
+        ========================================================= */}
+                <div className="auth-left">
+                    <div className="auth-form-wrapper">
+
+                        {/* Brand Header */}
+                        <div className="auth-brand">
+                            <img src="/logo.jpg" alt="Aster School" className="auth-logo" />
+                            <h1 className="auth-title !text-[#111827]">
+                                {isSignUp ? 'Join Aster Portal' : 'Welcome Back'}
+                            </h1>
+                            <p className="auth-subtitle !text-[#6B7280]">
+                                {isSignUp
+                                    ? 'Create an account to track your campus tours and admissions.'
+                                    : 'Sign in to access your dashboard and saved forms.'
+                                }
+                            </p>
                         </div>
 
-                        <form onSubmit={handleSubmit} className="admin-login-form">
+                        {/* Mode Switcher Tabs */}
+                        <div className="auth-mode-switcher">
+                            <button
+                                type="button"
+                                onClick={() => { setIsSignUp(false); setError(''); setStatusMsg(''); }}
+                                className={`switcher-btn ${!isSignUp ? 'active' : ''}`}
+                            >
+                                Sign In
+                            </button>
+                            <button
+                                type="button"
+                                onClick={() => { setIsSignUp(true); setError(''); setStatusMsg(''); }}
+                                className={`switcher-btn ${isSignUp ? 'active' : ''}`}
+                            >
+                                Create Account
+                            </button>
+                        </div>
+
+                        <form onSubmit={handleAuthSubmit} className="auth-form">
+
+                            {/* Error Feed */}
                             {error && (
-                                <div className="admin-login-error">
-                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                <div className="auth-error !text-[#B91C1C]">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="shrink-0">
                                         <circle cx="12" cy="12" r="10" /><line x1="15" y1="9" x2="9" y2="15" /><line x1="9" y1="9" x2="15" y2="15" />
                                     </svg>
-                                    {error}
+                                    <span>{error}</span>
                                 </div>
                             )}
 
-                            <div className="admin-login-field group">
-                                <label htmlFor="admin-email">Email Address</label>
+                            {/* Success/Status Feed */}
+                            {statusMsg && (
+                                <div className="auth-status !text-[#065F46]">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="shrink-0">
+                                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline>
+                                    </svg>
+                                    <span>{statusMsg}</span>
+                                </div>
+                            )}
+
+                            {/* Full Name Field (Only visible on Sign Up) */}
+                            {isSignUp && (
+                                <div className="auth-field group">
+                                    <label htmlFor="full-name">Full Name</label>
+                                    <div className="input-wrapper">
+                                        <svg className="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle>
+                                        </svg>
+                                        <input
+                                            id="full-name"
+                                            type="text"
+                                            value={fullName}
+                                            onChange={(e) => setFullName(e.target.value)}
+                                            placeholder="Syed Ali"
+                                            required={isSignUp}
+                                        />
+                                    </div>
+                                </div>
+                            )}
+
+                            {/* Email Field */}
+                            <div className="auth-field group">
+                                <label htmlFor="auth-email">Email Address</label>
                                 <div className="input-wrapper">
                                     <svg className="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                         <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                                         <polyline points="22,6 12,13 2,6"></polyline>
                                     </svg>
                                     <input
-                                        id="admin-email"
+                                        id="auth-email"
                                         type="email"
                                         value={email}
                                         onChange={(e) => setEmail(e.target.value)}
-                                        placeholder="admin@asterschool.pk"
+                                        placeholder="parent@example.com"
                                         required
                                         autoFocus
                                     />
                                 </div>
                             </div>
 
-                            <div className="admin-login-field group">
+                            {/* Password Field */}
+                            <div className="auth-field group">
                                 <div className="password-header">
-                                    <label htmlFor="admin-password">Password</label>
-                                    <button type="button" onClick={handleForgotPassword} className="forgot-password-link">
-                                        Forgot password?
-                                    </button>
+                                    <label htmlFor="auth-password">Password</label>
+                                    {!isSignUp && (
+                                        <button type="button" onClick={handleForgotPassword} className="forgot-password-link">
+                                            Forgot password?
+                                        </button>
+                                    )}
                                 </div>
                                 <div className="input-wrapper">
                                     <svg className="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -88,71 +218,77 @@ export default function AdminLogin() {
                                         <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
                                     </svg>
                                     <input
-                                        id="admin-password"
+                                        id="auth-password"
                                         type="password"
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
                                         placeholder="••••••••"
                                         required
+                                        minLength={6}
                                     />
                                 </div>
                             </div>
 
                             <button
                                 type="submit"
-                                className="admin-login-btn"
+                                className="auth-btn"
                                 disabled={loading}
                             >
                                 {loading ? (
-                                    <span className="admin-login-spinner" />
+                                    <span className="auth-spinner" />
                                 ) : (
-                                    'Sign In to Dashboard'
+                                    isSignUp ? 'Create Aster Account' : 'Sign In to Portal'
                                 )}
                             </button>
                         </form>
 
-                        <p className="admin-login-footer">
-                            &copy; {new Date().getFullYear()} Aster School. Protected area.
+                        <p className="auth-footer !text-[#9CA3AF]">
+                            &copy; {new Date().getFullYear()} The Aster School. Secure Institutional Portal.
                         </p>
                     </div>
                 </div>
-                <div className="admin-login-right">
-                    <div className="admin-login-image-overlay"></div>
-                    <img src="/admin-login-bg.png" alt="Aster Architecture" className="admin-login-bg-img" />
-                    <div className="admin-login-quote-container">
-                        <div className="admin-login-quote">
-                            "Empowering education through seamless digital experiences."
+
+                {/* =========================================================
+            RIGHT COLUMN: ARCHITECTURAL VISUAL
+        ========================================================= */}
+                <div className="auth-right">
+                    <div className="auth-image-overlay"></div>
+                    <img src="/admin-login-bg.png" alt="Aster Architecture" className="auth-bg-img" />
+                    <div className="auth-quote-container">
+                        <div className="auth-quote">
+                            "Education should not simply prepare children for the next grade. It should prepare them for the future."
                         </div>
-                        <div className="admin-login-quote-author">— Aster CMS Team</div>
+                        <div className="auth-quote-author">— The Aster Philosophy</div>
                     </div>
                 </div>
+
             </div>
         </>
     )
 }
 
-const loginStyles = `
+const authStyles = `
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
 
-.admin-login-container {
+.auth-container {
   min-height: 100vh;
   display: flex;
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'Quicksand', sans-serif !important;
   background: #ffffff;
 }
 
-.admin-login-left {
+.auth-left {
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 40px;
+  padding: 40px 24px;
   position: relative;
   background: #ffffff;
   z-index: 10;
 }
 
-.admin-login-form-wrapper {
+.auth-form-wrapper {
   width: 100%;
   max-width: 440px;
   animation: slideUpFade 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -161,58 +297,94 @@ const loginStyles = `
 }
 
 @keyframes slideUpFade {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-.admin-login-brand {
-  margin-bottom: 48px;
+.auth-brand {
+  margin-bottom: 32px;
 }
 
-.admin-login-logo {
+.auth-logo {
   width: 64px;
   height: 64px;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
   border-radius: 16px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 }
 
-.admin-login-title {
-  font-size: 36px;
+.auth-title {
+  font-size: 32px;
   font-weight: 700;
-  color: #111827;
   margin: 0;
   letter-spacing: -0.03em;
   line-height: 1.2;
 }
 
-.admin-login-subtitle {
-  font-size: 16px;
-  color: #6B7280;
+.auth-subtitle {
+  font-size: 15px;
   margin: 8px 0 0;
-  font-weight: 400;
+  font-weight: 500;
+  line-height: 1.5;
 }
 
-.admin-login-form {
+.auth-mode-switcher {
+  display: flex;
+  background: #F3F4F6;
+  padding: 4px;
+  border-radius: 14px;
+  margin-bottom: 28px;
+  border: 1px solid #E5E7EB;
+}
+
+.switcher-btn {
+  flex: 1;
+  padding: 10px 0;
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  color: #6B7280;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.switcher-btn.active {
+  background: #FFFFFF;
+  color: #334a89;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.auth-form {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;
 }
 
-.admin-login-error {
+.auth-error {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 16px;
+  padding: 14px 16px;
   background: #FEF2F2;
   border: 1px solid #FECACA;
   border-radius: 12px;
-  color: #B91C1C;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+.auth-status {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  background: #ECFDF5;
+  border: 1px solid #A7F3D0;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
 }
 
 @keyframes shake {
@@ -222,7 +394,7 @@ const loginStyles = `
   40%, 60% { transform: translate3d(4px, 0, 0); }
 }
 
-.admin-login-field {
+.auth-field {
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -234,26 +406,24 @@ const loginStyles = `
   align-items: baseline;
 }
 
-.admin-login-field label {
+.auth-field label {
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 700;
   color: #374151;
 }
 
 .forgot-password-link {
   background: none;
   border: none;
-  color: #394da1;
+  color: #334a89;
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 600;
   font-family: inherit;
   cursor: pointer;
   padding: 0;
-  transition: color 0.2s ease;
 }
 
 .forgot-password-link:hover {
-  color: #2e4091;
   text-decoration: underline;
 }
 
@@ -270,89 +440,90 @@ const loginStyles = `
   transition: color 0.3s ease;
 }
 
-.admin-login-field:focus-within .input-icon {
-  color: #394da1;
+.auth-field:focus-within .input-icon {
+  color: #334a89;
 }
 
-.admin-login-field input {
+.auth-field input {
   width: 100%;
-  height: 56px;
+  height: 52px;
   padding: 0 16px 0 48px;
   border: 1.5px solid #E5E7EB;
   border-radius: 12px;
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'Quicksand', sans-serif !important;
   font-size: 15px;
+  font-weight: 500;
   color: #1F2937;
   background: #F9FAFB;
   outline: none;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s ease;
   box-sizing: border-box;
 }
 
-.admin-login-field input:focus {
-  border-color: #394da1;
+.auth-field input:focus {
+  border-color: #334a89;
   background: #FFFFFF;
-  box-shadow: 0 0 0 4px rgba(57, 77, 161, 0.1);
+  box-shadow: 0 0 0 4px rgba(51, 74, 137, 0.1);
 }
 
-.admin-login-field input::placeholder {
+.auth-field input::placeholder {
   color: #9CA3AF;
+  font-weight: 400;
 }
 
-.admin-login-btn {
-  height: 56px;
-  background: linear-gradient(135deg, #394da1 0%, #2e4091 100%);
+.auth-btn {
+  height: 54px;
+  background: linear-gradient(135deg, #334a89 0%, #253666 100%);
   color: #FFFFFF;
   border: none;
   border-radius: 12px;
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'Quicksand', sans-serif !important;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
   transition: all 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-top: 8px;
-  box-shadow: 0 10px 25px -5px rgba(57, 77, 161, 0.4);
+  box-shadow: 0 10px 25px -5px rgba(51, 74, 137, 0.35);
 }
 
-.admin-login-btn:hover:not(:disabled) {
+.auth-btn:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 15px 30px -5px rgba(57, 77, 161, 0.5);
+  box-shadow: 0 15px 30px -5px rgba(51, 74, 137, 0.45);
 }
 
-.admin-login-btn:active:not(:disabled) {
+.auth-btn:active:not(:disabled) {
   transform: translateY(0);
-  box-shadow: 0 5px 15px -5px rgba(57, 77, 161, 0.4);
 }
 
-.admin-login-btn:disabled {
+.auth-btn:disabled {
   opacity: 0.7;
   cursor: not-allowed;
 }
 
-.admin-login-spinner {
-  width: 24px;
-  height: 24px;
+.auth-spinner {
+  width: 22px;
+  height: 22px;
   border: 3px solid rgba(255, 255, 255, 0.3);
   border-top-color: #FFFFFF;
   border-radius: 50%;
-  animation: admin-spin 0.8s linear infinite;
+  animation: auth-spin 0.8s linear infinite;
 }
 
-@keyframes admin-spin {
+@keyframes auth-spin {
   to { transform: rotate(360deg); }
 }
 
-.admin-login-footer {
+.auth-footer {
   text-align: center;
   font-size: 13px;
-  color: #9CA3AF;
-  margin-top: 48px;
+  font-weight: 500;
+  margin-top: 40px;
 }
 
-.admin-login-right {
+.auth-right {
   flex: 1.2;
   position: relative;
   overflow: hidden;
@@ -360,12 +531,10 @@ const loginStyles = `
 }
 
 @media (min-width: 1024px) {
-  .admin-login-right {
-    display: block;
-  }
+  .auth-right { display: block; }
 }
 
-.admin-login-bg-img {
+.auth-bg-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -380,48 +549,40 @@ const loginStyles = `
   100% { transform: scale(1.05); }
 }
 
-.admin-login-image-overlay {
+.auth-image-overlay {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, rgba(28, 31, 55, 0.4) 0%, rgba(57, 77, 161, 0.2) 100%);
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: linear-gradient(135deg, rgba(21, 40, 61, 0.6) 0%, rgba(51, 74, 137, 0.3) 100%);
   z-index: 1;
 }
 
-.admin-login-quote-container {
+.auth-quote-container {
   position: absolute;
-  bottom: 60px;
-  left: 60px;
-  right: 60px;
+  bottom: 60px; left: 60px; right: 60px;
   z-index: 2;
   color: white;
   background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(12px);
-  padding: 32px;
-  border-radius: 20px;
+  backdrop-filter: blur(16px);
+  padding: 36px;
+  border-radius: 24px;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  transform: translateY(30px);
-  opacity: 0;
   animation: slideUpFade 1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
 }
 
-.admin-login-quote {
-  font-size: 24px;
-  font-weight: 500;
-  line-height: 1.4;
+.auth-quote {
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.45;
   margin-bottom: 16px;
   font-style: italic;
-  letter-spacing: -0.01em;
 }
 
-.admin-login-quote-author {
-  font-size: 15px;
-  font-weight: 600;
+.auth-quote-author {
+  font-size: 14px;
+  font-weight: 700;
   opacity: 0.9;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
+  color: #ffc715;
 }
 `
-
