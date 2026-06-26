@@ -2,6 +2,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { useState, useRef, useEffect, useCallback } from 'react'
 import type { ReactNode } from 'react'
 import { TransitionLink } from '@/components/ui/TransitionLink'
+import { useAuth } from '@/hooks/useAuth'
 
 /**
  * Site Header — Aster Pakistan
@@ -251,6 +252,7 @@ export function Header({
                            marqueeLink = "/admissions"
                        }: HeaderProps) {
     const location = useLocation()
+    const { user, signOut } = useAuth()
     const [openDropdown, setOpenDropdown] = useState<string | null>(null)
     const [dropdownStyle, setDropdownStyle] = useState({ left: 0, opacity: 0, pointerEvents: 'none' })
     const [mobileOpen, setMobileOpen] = useState(false)
@@ -410,12 +412,29 @@ export function Header({
                         </nav>
 
                         <div className="header-actions" style={{ gap: '16px' }}>
-                            <TransitionLink to="/admin/login" className="nav-link" id="nav-login">
-                                <span>Sign In / Sign Up</span>
-                            </TransitionLink>
-                            <TransitionLink to="/contact" className="btn-aster btn-aster-primary" id="nav-book-visit">
-                                <span>Book a Campus Visit</span>
-                            </TransitionLink>
+                            {user ? (
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+                                    <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: '#ffc715', color: '#334a89', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold' }} title={user.email || 'Profile'}>
+                                        {user.email?.[0]?.toUpperCase() || 'U'}
+                                    </div>
+                                    <button onClick={() => signOut()} className="nav-link" style={{ padding: 0 }} aria-label="Sign out" title="Sign Out">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                            <polyline points="16 17 21 12 16 7"></polyline>
+                                            <line x1="21" y1="12" x2="9" y2="12"></line>
+                                        </svg>
+                                    </button>
+                                </div>
+                            ) : (
+                                <>
+                                    <TransitionLink to="/admin/login" className="nav-link" id="nav-login">
+                                        <span>Sign In</span>
+                                    </TransitionLink>
+                                    <TransitionLink to="/admin/login" className="btn-aster btn-aster-primary" id="nav-signup">
+                                        <span>Sign Up</span>
+                                    </TransitionLink>
+                                </>
+                            )}
                         </div>
 
                         {/* Hamburger Button (Only opens the menu) */}
@@ -463,22 +482,9 @@ export function Header({
                     {/* Bottom Action Cards Section */}
                     <div className="mobile-drawer-actions">
 
-                        {/* Card 1: Campus Visit (Yellow Palette) */}
-                        <div className="mobile-anim-item" style={{ '--anim-delay': '400ms' } as React.CSSProperties}>
-                            <Link to="/contact" className="mobile-action-card card-yellow" onClick={closeMobile}>
-                                <div className="mobile-action-content">
-                                    <span className="mobile-action-title">Campus Visit</span>
-                                    <span className="mobile-action-desc">Experience Aster in person.</span>
-                                </div>
-                                <div className="mobile-action-icon">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle>
-                                    </svg>
-                                </div>
-                            </Link>
-                        </div>
+                        {/* Removed Campus Visit Card */}
 
-                        {/* Card 2: Admissions (White Palette) */}
+                        {/* Card 1: Admissions (White Palette) */}
                         <div className="mobile-anim-item" style={{ '--anim-delay': '450ms' } as React.CSSProperties}>
                             <Link to="/admissions" className="mobile-action-card card-white" onClick={closeMobile}>
                                 <div className="mobile-action-content">
@@ -493,19 +499,31 @@ export function Header({
                             </Link>
                         </div>
 
-                        {/* Card 3: Sign In / Sign Up (Transparent Palette) */}
+                        {/* Auth Card (Sign In / Sign Up OR Profile / Logout) */}
                         <div className="mobile-anim-item" style={{ '--anim-delay': '500ms' } as React.CSSProperties}>
-                            <Link to="/admin/login" className="mobile-action-card card-transparent" onClick={closeMobile}>
-                                <div className="mobile-action-content">
-                                    <span className="mobile-action-title">Sign In / Sign Up</span>
-                                    <span className="mobile-action-desc">Access your account.</span>
-                                </div>
-                                <div className="mobile-action-icon">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle>
-                                    </svg>
-                                </div>
-                            </Link>
+                            {user ? (
+                                <button className="mobile-action-card card-transparent" onClick={async () => { await signOut(); closeMobile(); }} style={{ width: '100%', textAlign: 'left', cursor: 'pointer', border: 'none', background: 'rgba(255, 255, 255, 0.1)' }}>
+                                    <div className="mobile-action-content">
+                                        <span className="mobile-action-title">Sign Out</span>
+                                        <span className="mobile-action-desc">{user.email}</span>
+                                    </div>
+                                    <div className="mobile-action-icon" style={{ borderRadius: '50%', background: '#ffc715', color: '#334a89', fontWeight: 'bold', fontSize: '18px', border: 'none' }}>
+                                        {user.email?.[0]?.toUpperCase() || 'U'}
+                                    </div>
+                                </button>
+                            ) : (
+                                <Link to="/admin/login" className="mobile-action-card card-transparent" onClick={closeMobile}>
+                                    <div className="mobile-action-content">
+                                        <span className="mobile-action-title">Sign In / Sign Up</span>
+                                        <span className="mobile-action-desc">Access your account.</span>
+                                    </div>
+                                    <div className="mobile-action-icon">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle>
+                                        </svg>
+                                    </div>
+                                </Link>
+                            )}
                         </div>
 
                     </div>
