@@ -1,12 +1,13 @@
 import { useState, useEffect, useRef, type FormEvent } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import gsap from 'gsap'
 import { supabase } from '@/lib/supabase'
+import { Header } from '@/components/layout/Header'
 
 export default function UnifiedAuth() {
-    // Navigation & Animation Refs
     const containerRef = useRef<HTMLDivElement>(null)
     const formStageRef = useRef<HTMLDivElement>(null)
+    const navbarRef = useRef<HTMLDivElement>(null)
     const navigate = useNavigate()
 
     // State Engine
@@ -25,29 +26,43 @@ export default function UnifiedAuth() {
     const [loading, setLoading] = useState(false)
 
     // =========================================================
-    // INITIAL GSAP PAGE DEAL
+    // INITIAL GSAP PAGE ENTRANCE
     // =========================================================
     useEffect(() => {
         const ctx = gsap.context(() => {
-            // Staggered entrance for the left authentication plinth
+            // 1. Navbar Fade-Down
+            gsap.fromTo(
+                navbarRef.current,
+                { opacity: 0, y: -20 },
+                { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }
+            )
+
+            // 2. Form Element Cascade Stagger
             gsap.fromTo(
                 '.gsap-auth-elem',
-                { opacity: 0, y: 28 },
+                { opacity: 0, y: 24 },
                 {
                     opacity: 1,
                     y: 0,
-                    duration: 0.85,
-                    stagger: 0.07,
+                    duration: 0.8,
+                    stagger: 0.06,
                     ease: 'power3.out',
-                    clearProps: 'all' // Clears inline styles after landing so inputs remain clickable!
+                    clearProps: 'transform' // Preserves structural focus positions
                 }
             )
 
-            // Cinematic quote slide-up on the right column
+            // 3. Field Stagger Initialization
             gsap.fromTo(
-                '.gsap-auth-quote',
-                { opacity: 0, y: 40 },
-                { opacity: 1, y: 0, duration: 1.2, delay: 0.3, ease: 'power2.out' }
+                '.gsap-auth-field',
+                { opacity: 0, y: 15 },
+                { opacity: 1, y: 0, duration: 0.6, stagger: 0.05, ease: 'power2.out', delay: 0.2 }
+            )
+
+            // 4. Full-Bleed Video Plinth Slide-In
+            gsap.fromTo(
+                '.gsap-video-panel',
+                { opacity: 0, scale: 1.02 },
+                { opacity: 1, scale: 1, duration: 1.2, ease: 'power3.out' }
             )
         }, containerRef)
 
@@ -55,7 +70,36 @@ export default function UnifiedAuth() {
     }, [])
 
     // =========================================================
-    // VIEW SWITCHER ANIMATION (Credentials <-> OTP)
+    // ANIMATED SWITCH BETWEEN SIGN IN & SIGN UP
+    // =========================================================
+    const toggleAuthMode = (targetMode: boolean) => {
+        if (isSignUp === targetMode) return
+        setError('')
+        setStatusMsg('')
+
+        const fields = formStageRef.current?.querySelectorAll('.gsap-auth-field')
+        const header = containerRef.current?.querySelector('.gsap-header-text')
+
+        const tl = gsap.timeline({
+            onComplete: () => {
+                setIsSignUp(targetMode)
+                // Wait for React to re-render DOM with new state
+                setTimeout(() => {
+                    gsap.fromTo(
+                        containerRef.current?.querySelectorAll('.gsap-header-text, .gsap-auth-field, .gsap-submit-trigger'),
+                        { opacity: 0, y: 10 },
+                        { opacity: 1, y: 0, duration: 0.4, stagger: 0.04, ease: 'power2.out' }
+                    )
+                }, 0)
+            }
+        })
+
+        // Compress outgoing architecture smoothly
+        tl.to([fields, header], { opacity: 0, y: -10, duration: 0.2, ease: 'power2.in' })
+    }
+
+    // =========================================================
+    // ANIMATED VIEW CHANGE (Credentials <-> OTP)
     // =========================================================
     const animateStepChange = (nextStep: 'credentials' | 'otp') => {
         if (!formStageRef.current) {
@@ -65,15 +109,14 @@ export default function UnifiedAuth() {
 
         gsap.to(formStageRef.current.children, {
             opacity: 0,
-            x: -25,
+            x: -20,
             duration: 0.25,
             ease: 'power2.in',
             onComplete: () => {
                 setAuthStep(nextStep)
-                // Pull the next view in from the right
                 gsap.fromTo(
                     formStageRef.current!.children,
-                    { opacity: 0, x: 25 },
+                    { opacity: 0, x: 20 },
                     { opacity: 1, x: 0, duration: 0.4, ease: 'power2.out' }
                 )
             }
@@ -81,7 +124,7 @@ export default function UnifiedAuth() {
     }
 
     // =========================================================
-    // AUTH LOGIC HANDLERS
+    // AUTH EXECUTION HANDLERS
     // =========================================================
     const handleCredentialsSubmit = async (e: FormEvent) => {
         e.preventDefault()
@@ -103,7 +146,7 @@ export default function UnifiedAuth() {
             }
 
             animateStepChange('otp')
-            setStatusMsg(`We sent a 6-digit verification code to ${email}`)
+            setStatusMsg(`Verification code dispatched to ${email}`)
             setLoading(false)
         } else {
             const { data: authData, error: signInError } = await supabase.auth.signInWithPassword({
@@ -133,7 +176,7 @@ export default function UnifiedAuth() {
         })
 
         if (verifyError) {
-            setError('Invalid confirmation code. Please check your inbox and try again.')
+            setError('Invalid code block. Check your inbox and try again.')
             setLoading(false)
             return
         }
@@ -165,182 +208,173 @@ export default function UnifiedAuth() {
     return (
         <>
             <style>{authStyles}</style>
-            <div ref={containerRef} className="auth-master-grid select-none">
+            <div ref={containerRef} className="auth-master-plinth">
 
-                {/* =========================================================
-            LEFT COLUMN: THE AUTHENTICATION PLINTH
-        ========================================================= */}
-                <div className="auth-left-col">
-                    <div className="auth-content-max">
+                <Header />
 
-                        {/* Brand Header */}
-                        <div className="gsap-auth-elem mb-8">
-                            <img src="/logo.jpg" alt="Aster School" className="auth-logo-sharp" />
-                            <h1 className="font-['Quicksand'] text-3xl md:text-4xl font-extrabold tracking-tight !text-[#15283D] m-0">
-                                {authStep === 'otp'
-                                    ? 'Confirm Your Email'
-                                    : isSignUp ? 'Save Your Aster Forms' : 'Welcome Back'
-                                }
-                            </h1>
-                            <p className="font-['Quicksand'] text-sm md:text-base font-medium leading-relaxed !text-[#5C5C61] mt-2.5 mb-0">
-                                {authStep === 'otp'
-                                    ? 'Enter the confirmation code sent to your inbox to instantly activate your account.'
-                                    : isSignUp
-                                        ? 'Submitting a campus tour request or application doesn’t require an account—but creating one saves your submitted forms, tracks your scheduled dates, and lets you view school responses anytime.'
-                                        : 'Sign in to access your saved applications and check campus tour updates.'
-                                }
-                            </p>
-                        </div>
+                {/* Master Shell Split Layout */}
+                <div className="auth-split-wrapper" style={{ paddingTop: '80px' }}>
 
-                        {/* Mode Switcher Tabs */}
-                        {authStep === 'credentials' && (
-                            <div className="gsap-auth-elem auth-switcher-bg mb-8">
-                                <button
-                                    type="button"
-                                    onClick={() => { setIsSignUp(false); setError(''); setStatusMsg(''); }}
-                                    className={`auth-tab-btn ${!isSignUp ? 'is-active' : ''}`}
-                                >
-                                    Sign In
-                                </button>
-                                <button
-                                    type="button"
-                                    onClick={() => { setIsSignUp(true); setError(''); setStatusMsg(''); }}
-                                    className={`auth-tab-btn ${isSignUp ? 'is-active' : ''}`}
-                                >
-                                    Create Account
-                                </button>
+                    {/* =========================================================
+              LEFT SHEET: THE CONTROLS PLINTH
+          ========================================================= */}
+                    <div className="auth-left-sheet">
+                        <div className="auth-form-max">
+
+                            {/* Dynamic Header Copy Block */}
+                            <div className="gsap-auth-elem gsap-header-text mb-8">
+                                <h1 className="font-['Quicksand'] text-3xl font-extrabold tracking-tight !text-[#15283D] m-0">
+                                    {authStep === 'otp'
+                                        ? 'Confirm Email'
+                                        : isSignUp ? 'Create an Account' : 'Sign In'
+                                    }
+                                </h1>
+                                <p className="font-['Quicksand'] text-sm font-medium leading-relaxed !text-[#5C5C61] mt-2.5 m-0">
+                                    {authStep === 'otp'
+                                        ? 'Provide the 6-digit verification code token sent directly to your email address.'
+                                        : isSignUp
+                                            ? 'Create an account to securely track your applications, forms, and admission updates.'
+                                            : 'Sign in to access your portal, forms, and events.'
+                                    }
+                                </p>
                             </div>
-                        )}
 
-                        {/* Animated Form Stage */}
-                        <div ref={formStageRef} className="w-full">
-                            {authStep === 'credentials' ? (
-                                <form onSubmit={handleCredentialsSubmit} className="flex flex-col gap-5">
+                            {/* Mode Switcher Tabs */}
+                            {authStep === 'credentials' && (
+                                <div className="gsap-auth-elem switcher-capsule mb-8">
+                                    <button
+                                        type="button"
+                                        onClick={() => toggleAuthMode(false)}
+                                        className={`switcher-tab-link ${!isSignUp ? 'is-active' : ''}`}
+                                    >
+                                        Sign In
+                                    </button>
+                                    <button
+                                        type="button"
+                                        onClick={() => toggleAuthMode(true)}
+                                        className={`switcher-tab-link ${isSignUp ? 'is-active' : ''}`}
+                                    >
+                                        Create Account
+                                    </button>
+                                </div>
+                            )}
 
-                                    {error && <div className="gsap-auth-elem auth-alert-error">{error}</div>}
+                            {/* Form Payload Core Stage */}
+                            <div ref={formStageRef} className="w-full">
+                                {authStep === 'credentials' ? (
+                                    <form onSubmit={handleCredentialsSubmit} className="flex flex-col gap-4.5">
 
-                                    {isSignUp && (
-                                        <div className="gsap-auth-elem flex flex-col gap-1.5">
-                                            <label htmlFor="full-name" className="auth-label">Parent / Guardian Name</label>
+                                        {error && <div className="auth-alert-error">{error}</div>}
+
+                                        {isSignUp && (
+                                            <div className="gsap-auth-field flex flex-col gap-1.5 input-motion-group">
+                                                <label htmlFor="full-name" className="auth-label-node">Parent / Guardian Full Name</label>
+                                                <input
+                                                    id="full-name"
+                                                    type="text"
+                                                    value={fullName}
+                                                    onChange={(e) => setFullName(e.target.value)}
+                                                    placeholder="Syed Ali"
+                                                    className="auth-field-input"
+                                                    required
+                                                />
+                                            </div>
+                                        )}
+
+                                        <div className="gsap-auth-field flex flex-col gap-1.5 input-motion-group">
+                                            <label htmlFor="auth-email" className="auth-label-node">Email Address</label>
                                             <input
-                                                id="full-name"
-                                                type="text"
-                                                value={fullName}
-                                                onChange={(e) => setFullName(e.target.value)}
-                                                placeholder="Syed Ali"
-                                                className="auth-input"
+                                                id="auth-email"
+                                                type="email"
+                                                value={email}
+                                                onChange={(e) => setEmail(e.target.value)}
+                                                placeholder="parent@example.com"
+                                                className="auth-field-input"
                                                 required
                                             />
                                         </div>
-                                    )}
 
-                                    <div className="gsap-auth-elem flex flex-col gap-1.5">
-                                        <label htmlFor="auth-email" className="auth-label">Email Address</label>
-                                        <input
-                                            id="auth-email"
-                                            type="email"
-                                            value={email}
-                                            onChange={(e) => setEmail(e.target.value)}
-                                            placeholder="parent@example.com"
-                                            className="auth-input"
-                                            required
-                                        />
-                                    </div>
-
-                                    <div className="gsap-auth-elem flex flex-col gap-1.5">
-                                        <div className="flex justify-between items-baseline">
-                                            <label htmlFor="auth-password" className="auth-label">Password</label>
+                                        <div className="gsap-auth-field flex flex-col gap-1.5 input-motion-group">
+                                            <label htmlFor="auth-password" className="auth-label-node">Password</label>
+                                            <input
+                                                id="auth-password"
+                                                type="password"
+                                                value={password}
+                                                onChange={(e) => setPassword(e.target.value)}
+                                                placeholder="••••••••"
+                                                className="auth-field-input"
+                                                required
+                                                minLength={6}
+                                            />
                                         </div>
-                                        <input
-                                            id="auth-password"
-                                            type="password"
-                                            value={password}
-                                            onChange={(e) => setPassword(e.target.value)}
-                                            placeholder="••••••••"
-                                            className="auth-input"
-                                            required
-                                            minLength={6}
-                                        />
-                                    </div>
 
-                                    <button type="submit" className="gsap-auth-elem auth-submit-btn mt-2" disabled={loading}>
-                                        {loading ? <span className="auth-spinner" /> : isSignUp ? 'Verify Email →' : 'Access Dashboard'}
-                                    </button>
-                                </form>
-                            ) : (
+                                        <button type="submit" className="gsap-submit-trigger auth-master-button mt-2" disabled={loading}>
+                                            {loading ? <span className="auth-loading-spinner" /> : isSignUp ? 'Sign Up' : 'Sign In'}
+                                        </button>
+                                    </form>
+                                ) : (
 
-                                /* ── VIEW B: 6-DIGIT OTP INPUT ── */
-                                <form onSubmit={handleOtpSubmit} className="flex flex-col gap-5">
+                                    /* ── VIEW B: 6-DIGIT OTP FIELD ── */
+                                    <form onSubmit={handleOtpSubmit} className="flex flex-col gap-5">
 
-                                    {error && <div className="auth-alert-error">{error}</div>}
-                                    {statusMsg && <div className="auth-alert-success">{statusMsg}</div>}
+                                        {error && <div className="auth-alert-error">{error}</div>}
+                                        {statusMsg && <div className="auth-alert-success">{statusMsg}</div>}
 
-                                    <div className="flex flex-col gap-2 mt-2">
-                                        <label htmlFor="otp-input" className="text-center font-['Quicksand'] !text-xs font-bold tracking-[0.2em] uppercase !text-[#334a89]">
-                                            Confirmation Code
-                                        </label>
-                                        <input
-                                            id="otp-input"
-                                            type="text"
-                                            maxLength={6}
-                                            value={otpCode}
-                                            onChange={(e) => setOtpCode(e.target.value.replace(/\D/g, ''))}
-                                            placeholder="123456"
-                                            className="auth-input !text-center !text-3xl !tracking-[0.4em] !font-extrabold !h-16"
-                                            required
-                                            autoFocus
-                                        />
-                                    </div>
+                                        <div className="flex flex-col gap-2 mt-1">
+                                            <label htmlFor="otp-input" className="text-center font-['Quicksand'] text-xs font-bold tracking-[0.2em] uppercase !text-[#334a89]">
+                                                Verification Token
+                                            </label>
+                                            <input
+                                                id="otp-input"
+                                                type="text"
+                                                maxLength={6}
+                                                value={otpCode}
+                                                onChange={(e) => setOtpCode(e.target.value.replace(/\D/g, ''))}
+                                                placeholder="000000"
+                                                className="auth-field-input !text-center !text-3xl !tracking-[0.4em] !font-extrabold !h-16"
+                                                required
+                                                autoFocus
+                                            />
+                                        </div>
 
-                                    <button type="submit" className="auth-submit-btn mt-2" disabled={loading || otpCode.length < 6}>
-                                        {loading ? <span className="auth-spinner" /> : 'Confirm & Save Forms'}
-                                    </button>
+                                        <button type="submit" className="auth-master-button mt-2" disabled={loading || otpCode.length < 6}>
+                                            {loading ? <span className="auth-loading-spinner" /> : 'Confirm Code'}
+                                        </button>
 
-                                    <button
-                                        type="button"
-                                        onClick={() => animateStepChange('credentials')}
-                                        className="!bg-transparent !border-none font-['Quicksand'] !text-xs font-semibold !text-[#5C5C61] hover:!text-[#334a89] !cursor-pointer text-center underline mt-1"
-                                    >
-                                        ← Use a different email address
-                                    </button>
-                                </form>
-                            )}
+                                        <button
+                                            type="button"
+                                            onClick={() => animateStepChange('credentials')}
+                                            className="!bg-transparent !border-none font-['Quicksand'] !text-xs font-semibold !text-[#5C5C61] hover:!text-[#334a89] !cursor-pointer text-center underline"
+                                        >
+                                            ← Modify Email Address
+                                        </button>
+                                    </form>
+                                )}
+                            </div>
+
                         </div>
-
-                        <p className="gsap-auth-elem text-center font-['Quicksand'] !text-xs font-medium !text-[#9CA3AF] mt-12">
-                            &copy; {new Date().getFullYear()} The Aster School. Institutional Form Management.
-                        </p>
                     </div>
-                </div>
 
-                {/* =========================================================
-            RIGHT COLUMN: FULL-BLEED HERO VIDEO BACKGROUND
-            Strictly covers 100% of the section width & height.
-        ========================================================= */}
-                <div className="auth-right-col">
+                    {/* =========================================================
+              RIGHT SHEET: KINETIC ARCHITECTURAL COVER
+          ========================================================= */}
+                    <div className="gsap-video-panel auth-right-sheet">
+                        <video
+                            src="https://alpha.edu.pk/img/hero.mp4"
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
+                            className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#15283D] via-[#15283D]/40 to-transparent pointer-events-none" />
 
-                    {/* Natively streaming Alpha Edu Hero Video */}
-                    <video
-                        src="https://alpha.edu.pk/img/hero.mp4"
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        className="absolute inset-0 w-full h-full object-cover pointer-events-none"
-                    />
-
-                    {/* Rich Dark Gradient Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#15283D] via-[#15283D]/40 to-transparent pointer-events-none" />
-
-                    {/* Frosted Glass Institutional Quote */}
-                    <div className="gsap-auth-quote relative z-10 p-10 md:p-14 max-w-xl mb-6">
-                        <div className="w-10 h-[3px] bg-[#ffc715] mb-6" />
-                        <blockquote className="font-['Playfair_Display'] text-3xl md:text-4xl italic font-normal text-white !text-white leading-[1.35] m-0">
-                            "Education should not simply prepare children for the next grade. It should prepare them for tomorrow."
-                        </blockquote>
-                        <p className="font-['Quicksand'] text-xs font-bold tracking-[0.25em] uppercase text-[#ffc715] !text-[#ffc715] mt-6 mb-0">
-                            — The Aster Philosophy
-                        </p>
+                        <div className="gsap-auth-quote relative z-10 p-12 lg:p-16 max-w-lg mb-8">
+                            <div className="w-10 h-[3px] bg-[#ffc715] mb-6" />
+                            <blockquote className="font-['Cormorant_Garamond'] text-3xl md:text-4xl italic font-normal text-white !text-white leading-[1.35] m-0">
+                                "Education should not simply prepare children for the next grade. It should prepare them for tomorrow."
+                            </blockquote>
+                        </div>
                     </div>
 
                 </div>
@@ -351,184 +385,245 @@ export default function UnifiedAuth() {
 }
 
 const authStyles = `
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap');
 
-.auth-master-grid {
+/* Bulletproof Structural Reset to guarantee absolutely 0 horizontal bleed */
+.auth-master-plinth {
+  width: 100vw;
+  max-width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #FFFFFF;
+  overflow-x: hidden !important;
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* =========================================================
+    INTEGRATED NAVBAR RULES
+========================================================= */
+.auth-navbar-node {
+  width: 100%;
+  height: 80px;
+  background: #FFFFFF;
+  border-bottom: 1px solid #E5E7EB;
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 50;
+  padding: 0 24px;
+  box-sizing: border-box;
+}
+
+.navbar-bounds {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-brand-group {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+}
+
+.navbar-logo-sharp {
+  width: 38px;
+  height: 38px;
+  border-radius: 0px !important; /* Strict geometry */
+  object-fit: cover;
+}
+
+.navbar-brand-text {
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 800;
+  font-size: 14px;
+  letter-spacing: 0.15em;
+  color: #15283D;
+  margin-top: 2px;
+}
+
+.navbar-links-desktop {
+  display: none;
+  gap: 28px;
+}
+
+@media (min-width: 768px) {
+  .navbar-links-desktop { display: flex; }
+}
+
+.nav-node {
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  font-size: 13.5px;
+  color: #5C5C61;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.nav-node:hover {
+  color: #334a89;
+}
+
+/* =========================================================
+    SPLIT PAGE ARCHITECTURE
+========================================================= */
+.auth-split-wrapper {
   display: grid;
   grid-template-columns: 1fr;
-  min-height: 100vh;
-  width: 100vw;
-  background: #FFFFFF;
-  overflow-x: hidden;
+  flex-grow: 1;
+  width: 100%;
+  position: relative;
 }
 
 @media (min-width: 1024px) {
-  .auth-master-grid {
-    grid-template-columns: 460px 1fr;
-  }
+  .auth-split-wrapper { grid-template-columns: 480px 1fr; }
 }
-
 @media (min-width: 1280px) {
-  .auth-master-grid {
-    grid-template-columns: 520px 1fr;
-  }
+  .auth-split-wrapper { grid-template-columns: 540px 1fr; }
 }
 
-.auth-left-col {
+.auth-left-sheet {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 48px 36px;
+  padding: 48px 24px;
   background: #FFFFFF;
-  z-index: 20;
 }
 
-.auth-content-max {
+.auth-form-max {
   width: 100%;
-  max-width: 400px;
+  max-width: 380px;
 }
 
-/* STRICTLY 0px uncurved logo */
-.auth-logo-sharp {
-  width: 54px;
-  height: 54px;
-  margin-bottom: 24px;
-  border-radius: 0px !important;
-  display: block;
-}
-
-.auth-switcher-bg {
+.switcher-capsule {
   display: flex;
   background: #F4F7FB;
   padding: 5px;
-  border-radius: 14px;
+  border-radius: 12px;
   border: 1px solid #E5E7EB;
 }
 
-.auth-tab-btn {
+.switcher-tab-link {
   flex: 1;
-  padding: 12px 0;
+  padding: 11px 0;
   border: none;
   background: transparent;
   font-family: 'Quicksand', sans-serif !important;
-  font-size: 14px;
+  font-size: 13.5px;
   font-weight: 700;
   color: #6B7280;
-  border-radius: 10px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.auth-tab-btn.is-active {
+.switcher-tab-link.is-active {
   background: #FFFFFF;
   color: #334a89;
-  box-shadow: 0 4px 12px rgba(21, 40, 61, 0.08);
+  box-shadow: 0 4px 10px rgba(21, 40, 61, 0.06);
 }
 
-.auth-label {
+.auth-label-node {
   font-family: 'Quicksand', sans-serif !important;
-  font-size: 13.5px;
+  font-size: 13px;
   font-weight: 700;
   color: #15283D !important;
 }
 
-.auth-input {
+.auth-field-input {
   width: 100%;
-  height: 52px;
+  height: 50px;
   padding: 0 16px;
   border: 1.5px solid #E5E7EB;
-  border-radius: 12px;
+  border-radius: 10px;
   font-family: 'Quicksand', sans-serif !important;
-  font-size: 15px;
+  font-size: 14.5px;
   font-weight: 600;
   color: #15283D !important;
   background: #FAFAFA;
   outline: none;
-  transition: all 0.2s ease;
   box-sizing: border-box;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.auth-input:focus {
+/* Fluid scale input animation upon cursor active bounds */
+.auth-field-input:focus {
   border-color: #334a89;
   background: #FFFFFF;
-  box-shadow: 0 0 0 4px rgba(51, 74, 137, 0.1);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(51, 74, 137, 0.06);
 }
 
-.auth-input::placeholder {
-  color: #9CA3AF;
-  font-weight: 400;
-}
-
-.auth-submit-btn {
-  height: 54px;
+.auth-master-button {
+  height: 52px;
   width: 100%;
   background: #334a89;
   color: #FFFFFF !important;
   border: none;
-  border-radius: 12px;
+  border-radius: 10px;
   font-family: 'Quicksand', sans-serif !important;
-  font-size: 15.5px;
+  font-size: 15px;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.25s ease;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 10px 25px -5px rgba(51, 74, 137, 0.35);
+  box-shadow: 0 8px 22px -4px rgba(51, 74, 137, 0.3);
 }
 
-.auth-submit-btn:hover:not(:disabled) {
-  background: #263868;
+.auth-master-button:hover:not(:disabled) {
+  background: #253766;
   transform: translateY(-1px);
-  box-shadow: 0 15px 30px -5px rgba(51, 74, 137, 0.45);
+  box-shadow: 0 12px 26px -4px rgba(51, 74, 137, 0.4);
 }
 
-.auth-submit-btn:active:not(:disabled) {
-  transform: translateY(0);
-}
-
-.auth-submit-btn:disabled {
-  opacity: 0.6;
+.auth-master-button:disabled {
+  opacity: 0.65;
   cursor: not-allowed;
 }
 
 .auth-alert-error {
-  padding: 14px 16px;
+  padding: 12px 16px;
   background: #FEF2F2;
   border: 1px solid #FECACA;
-  border-radius: 12px;
+  border-radius: 10px;
   font-family: 'Quicksand', sans-serif !important;
-  font-size: 13.5px;
+  font-size: 13px;
   font-weight: 600;
   color: #B91C1C !important;
 }
 
 .auth-alert-success {
-  padding: 14px 16px;
+  padding: 12px 16px;
   background: #ECFDF5;
   border: 1px solid #A7F3D0;
-  border-radius: 12px;
+  border-radius: 10px;
   font-family: 'Quicksand', sans-serif !important;
-  font-size: 13.5px;
+  font-size: 13px;
   font-weight: 600;
   color: #065F46 !important;
 }
 
-.auth-spinner {
-  width: 22px;
-  height: 22px;
-  border: 3px solid rgba(255, 255, 255, 0.3);
+.auth-loading-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2.5px solid rgba(255, 255, 255, 0.3);
   border-top-color: #FFFFFF;
   border-radius: 50%;
-  animation: auth-spin 0.8s linear infinite;
+  animation: auth-spin-loop 0.8s linear infinite;
 }
 
-@keyframes auth-spin {
-  to { transform: rotate(360deg); }
-}
+@keyframes auth-spin-loop { to { transform: rotate(360deg); } }
 
-/* ── RIGHT COLUMN: FULL BLEED COVER ── */
-.auth-right-col {
+/* ── RIGHT COLUMN: FULL BLEED ARCHITECTURAL SCREEN ── */
+.auth-right-sheet {
   position: relative;
   display: none;
   width: 100%;
@@ -538,7 +633,7 @@ const authStyles = `
 }
 
 @media (min-width: 1024px) {
-  .auth-right-col {
+  .auth-right-sheet {
     display: flex;
     align-items: flex-end;
     justify-content: flex-start;
