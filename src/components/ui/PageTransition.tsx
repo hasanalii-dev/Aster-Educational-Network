@@ -18,8 +18,9 @@ const TransitionContext = createContext<TransitionContextType | null>(null)
 
 export function useTransition() {
     const ctx = useContext(TransitionContext)
+    const navigate = useNavigate()
     if (!ctx) {
-        return { navigateWithTransition: () => {} }
+        return { navigateWithTransition: (to: string) => navigate(to) }
     }
     return ctx
 }

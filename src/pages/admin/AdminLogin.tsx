@@ -7,7 +7,6 @@ import { Header } from '@/components/layout/Header'
 export default function UnifiedAuth() {
     const containerRef = useRef<HTMLDivElement>(null)
     const formStageRef = useRef<HTMLDivElement>(null)
-    const navbarRef = useRef<HTMLDivElement>(null)
     const navigate = useNavigate()
 
     // State Engine
@@ -30,12 +29,7 @@ export default function UnifiedAuth() {
     // =========================================================
     useEffect(() => {
         const ctx = gsap.context(() => {
-            // 1. Navbar Fade-Down
-            gsap.fromTo(
-                navbarRef.current,
-                { opacity: 0, y: -20 },
-                { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }
-            )
+            // 1. (Removed broken navbar animation)
 
             // 2. Form Element Cascade Stagger
             gsap.fromTo(
