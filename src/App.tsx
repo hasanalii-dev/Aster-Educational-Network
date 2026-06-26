@@ -31,6 +31,8 @@ const {
   Contact,
   NotFound,
   ProfileDashboard,
+  Apply,
+  BookTour,
 } = pageComponents
 
 // Admin pages (lazy-loaded, separate bundle)
@@ -42,6 +44,8 @@ const JournalManager = lazy(() => import('@/pages/admin/sections/JournalManager'
 const TestimonialsManager = lazy(() => import('@/pages/admin/sections/TestimonialsManager'))
 const FAQManager = lazy(() => import('@/pages/admin/sections/FAQManager'))
 const InquiriesManager = lazy(() => import('@/pages/admin/sections/InquiriesManager'))
+const AdmissionsManager = lazy(() => import('@/pages/admin/sections/AdmissionsManager'))
+const CampusToursManager = lazy(() => import('@/pages/admin/sections/CampusToursManager'))
 
 const AdminSuspense = ({ children }: { children: React.ReactNode }) => (
   <Suspense fallback={
@@ -79,6 +83,8 @@ const router = createBrowserRouter([
       { path: 'journal/:slug', element: <JournalArticle /> },
       { path: 'contact', element: <Contact /> },
       { path: 'profile', element: <ProfileDashboard /> },
+      { path: 'apply', element: <Apply /> },
+      { path: 'book-tour', element: <BookTour /> },
       { path: '*', element: <NotFound /> },
     ],
   },
@@ -98,6 +104,8 @@ const router = createBrowserRouter([
       { path: 'testimonials', element: <AdminSuspense><TestimonialsManager /></AdminSuspense> },
       { path: 'faqs', element: <AdminSuspense><FAQManager /></AdminSuspense> },
       { path: 'inquiries', element: <AdminSuspense><InquiriesManager /></AdminSuspense> },
+      { path: 'admissions', element: <AdminSuspense><AdmissionsManager /></AdminSuspense> },
+      { path: 'campus-tours', element: <AdminSuspense><CampusToursManager /></AdminSuspense> },
     ],
   },
 ])

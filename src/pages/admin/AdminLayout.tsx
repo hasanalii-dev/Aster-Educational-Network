@@ -13,7 +13,11 @@ const navSections: NavSection[] = [
         { label: 'Testimonials', path: '/admin/testimonials', icon: '❝' },
         { label: 'FAQs', path: '/admin/faqs', icon: '?' },
     ]},
-    { title: 'Engagement', items: [{ label: 'Inquiries', path: '/admin/inquiries', icon: '✉' }] },
+    { title: 'Engagement', items: [
+        { label: 'Campus Tours', path: '/admin/campus-tours', icon: '📅' },
+        { label: 'Admissions', path: '/admin/admissions', icon: '🎓' },
+        { label: 'Inquiries', path: '/admin/inquiries', icon: '✉' }
+    ] },
 ]
 
 export default function AdminLayout() {
