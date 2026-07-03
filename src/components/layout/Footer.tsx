@@ -2,6 +2,7 @@ import { useRef, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { ArrowUp } from 'lucide-react'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -11,6 +12,7 @@ gsap.registerPlugin(ScrollTrigger)
  * - Floating overlapping Newsletter card (Polished UI).
  * - Clean, multi-column navigation mapped to all CMS pages.
  * - GSAP Parallax and stagger reveal animations.
+ * - Animated Oxygen Bubbles background effect.
  */
 
 const footerLinks = {
@@ -38,6 +40,102 @@ const footerLinks = {
         { label: 'FAQs', path: '/faqs' },
         { label: 'Contact Us', path: '/contact' },
     ]
+}
+
+function OxygenBubbles() {
+    const containerRef = useRef<HTMLDivElement>(null)
+
+    useEffect(() => {
+        if (!containerRef.current) return
+        const container = containerRef.current
+
+        let isActive = true
+        const spawnBubble = () => {
+            if (!isActive) return
+            const bubble = document.createElement('div')
+            const size = gsap.utils.random(12, 32)
+            const startX = gsap.utils.random(5, 95) // percentage
+            const opacity = gsap.utils.random(0.05, 0.15) // highly transparent
+
+            bubble.style.position = 'absolute'
+            bubble.style.bottom = '-40px'
+            bubble.style.left = `${startX}%`
+            bubble.style.width = `${size}px`
+            bubble.style.height = `${size}px`
+            bubble.style.borderRadius = '50%'
+            bubble.style.backgroundColor = `rgba(255, 255, 255, ${opacity * 0.5})`
+            bubble.style.border = `1px solid rgba(255, 255, 255, ${opacity * 2})`
+            bubble.style.pointerEvents = 'none'
+            bubble.style.zIndex = '1'
+
+            const highlight = document.createElement('div')
+            highlight.style.position = 'absolute'
+            highlight.style.bottom = '10%'
+            highlight.style.right = '10%'
+            highlight.style.width = '60%'
+            highlight.style.height = '60%'
+            highlight.style.borderRadius = '50%'
+            highlight.style.borderBottom = `1.5px solid rgba(255, 255, 255, ${opacity * 4})`
+            highlight.style.transform = 'rotate(-45deg)'
+
+            bubble.appendChild(highlight)
+
+            container.appendChild(bubble)
+
+            const duration = gsap.utils.random(15, 30)
+            const targetY = -gsap.utils.random(300, 800)
+
+            const tl = gsap.timeline({
+                onComplete: () => {
+                    if (!isActive) return
+                    // Bubble Pop Animation
+                    gsap.to(bubble, {
+                        scale: 1.8,
+                        opacity: 0,
+                        duration: 0.25,
+                        ease: 'power2.out',
+                        onComplete: () => {
+                            if (bubble.parentNode === container) {
+                                bubble.remove()
+                            }
+                        }
+                    })
+                }
+            })
+
+            // Rise Up
+            tl.to(bubble, {
+                y: targetY,
+                duration: duration,
+                ease: 'power1.inOut'
+            }, 0)
+
+            // Zig Zag / Drift
+            tl.to(bubble, {
+                x: `+=${gsap.utils.random(-80, 80)}`,
+                duration: duration / 3,
+                yoyo: true,
+                repeat: 2,
+                ease: 'sine.inOut'
+            }, 0)
+
+            // Fade in slightly at start
+            gsap.fromTo(bubble, { opacity: 0 }, { opacity: 1, duration: 0.5 })
+
+            setTimeout(spawnBubble, gsap.utils.random(1500, 3500))
+        }
+
+        // Start a few bubbles immediately
+        for(let i=0; i<2; i++) {
+            setTimeout(spawnBubble, i * 400)
+        }
+
+        return () => {
+            isActive = false
+        }
+    }, [])
+
+    return <div ref={containerRef} className="absolute inset-0 overflow-hidden pointer-events-none z-0" />
 }
 
 export function Footer() {
@@ -98,6 +196,10 @@ export function Footer() {
         setTimeout(() => setSubscribed(false), 5000)
     }
 
+    const scrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
+
     return (
         <>
             <style>{footerStyles}</style>
@@ -156,6 +258,7 @@ export function Footer() {
                 </div>
 
                 <div className="footer-background">
+                    <OxygenBubbles />
                     <div ref={contentRef} className="footer-content-wrapper">
                         <div className="footer-grid">
                             <div className="footer-brand-col footer-anim-group">
@@ -214,14 +317,25 @@ export function Footer() {
                             </div>
                         </div>
                         <div className="footer-legal-bar footer-anim-group">
-                            <p className="footer-copyright">
-                                &copy; {currentYear} The Aster School. All rights reserved.
-                            </p>
-                            <div className="footer-legal-links">
-                                <Link to="/safeguarding" className="footer-legal-item">Safeguarding</Link>
-                                <Link to="#" className="footer-legal-item">Privacy Policy</Link>
-                                <Link to="#" className="footer-legal-item">Terms of Service</Link>
+                            <div className="footer-legal-left">
+                                <p className="footer-copyright">
+                                    &copy; {currentYear} The Aster School. All rights reserved.
+                                </p>
+                                <div className="footer-legal-links">
+                                    <Link to="/safeguarding" className="footer-legal-item">Safeguarding</Link>
+                                    <span className="footer-legal-dot">•</span>
+                                    <Link to="#" className="footer-legal-item">Privacy Policy</Link>
+                                    <span className="footer-legal-dot">•</span>
+                                    <Link to="#" className="footer-legal-item">Terms of Service</Link>
+                                </div>
                             </div>
+                            
+                            <button onClick={scrollToTop} className="footer-back-to-top" aria-label="Scroll back to top">
+                                <span className="font-['Quicksand'] font-bold text-sm">BACK TO TOP</span>
+                                <div className="footer-back-icon">
+                                    <ArrowUp className="w-4 h-4" />
+                                </div>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -423,6 +537,7 @@ const footerStyles = `
   display: flex;
   flex-direction: column;
   gap: 24px;
+  z-index: 10;
 }
 .footer-logo-img {
   height: 60px;
@@ -431,40 +546,43 @@ const footerStyles = `
 }
 .footer-slogan {
   font-size: 18px;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 160%;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.9);
   margin: 0;
 }
 .footer-contact {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
   margin-top: 8px;
 }
 .footer-contact-link {
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 700;
   color: #FFFFFF;
   text-decoration: none;
-  transition: color 200ms ease;
+  transition: color 200ms ease, transform 200ms ease;
+  display: inline-block;
+  transform-origin: left;
 }
-.footer-contact-link:hover { color: #ffc715; }
+.footer-contact-link:hover { color: #ffc715; transform: translateX(4px); }
 .footer-links-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 32px;
+  z-index: 10;
 }
 .footer-link-group {
   display: flex;
   flex-direction: column;
 }
 .footer-link-title {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.15em;
-  color: #8fa5e6; 
+  color: #ffc715; 
   margin: 0 0 24px 0;
 }
 .footer-link-list {
@@ -478,18 +596,17 @@ const footerStyles = `
 .footer-link-item {
   position: relative;
   display: inline-flex;
-  font-size: 15px;
-  font-weight: 500;
+  font-size: 16px;
+  font-weight: 600;
   color: #E4F0F9;
   text-decoration: none;
-  transition: color 250ms ease;
-  padding-bottom: 2px;
+  transition: color 250ms ease, transform 250ms ease;
 }
 .footer-link-item::after {
-  content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 1px; background-color: #ffc715;
+  content: ''; position: absolute; bottom: -2px; left: 0; width: 100%; height: 2px; background-color: #ffc715;
   transform: scaleX(0); transform-origin: right; transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
 }
-.footer-link-item:hover { color: #FFFFFF; }
+.footer-link-item:hover { color: #FFFFFF; transform: translateX(4px); }
 .footer-link-item:hover::after { transform: scaleX(1); transform-origin: left; }
 .footer-legal-bar {
   margin-top: 80px;
@@ -499,29 +616,71 @@ const footerStyles = `
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
   position: relative;
   z-index: 10;
 }
+.footer-legal-left {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
 .footer-copyright {
-  font-size: 14px;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.5);
+  font-size: 15px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
   margin: 0;
 }
 .footer-legal-links {
   display: flex;
   flex-direction: row;
-  gap: 32px;
+  align-items: center;
+  gap: 16px;
+}
+.footer-legal-dot {
+  color: rgba(255,255,255,0.3);
+  font-size: 12px;
 }
 .footer-legal-item {
   font-size: 14px;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.5);
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.6);
   text-decoration: none;
   transition: color 200ms ease;
 }
 .footer-legal-item:hover { color: #ffc715; }
+
+.footer-back-to-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  padding: 8px 0;
+  transition: opacity 0.2s ease;
+}
+.footer-back-to-top:hover {
+  opacity: 0.8;
+}
+.footer-back-to-top:hover .footer-back-icon {
+  transform: translateY(-4px);
+  background: #ffc715;
+  color: #334a89;
+  border-color: #ffc715;
+}
+.footer-back-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 
 @media (max-width: 1024px) {
   .newsletter-card { flex-direction: column; text-align: center; padding: 40px; }
@@ -540,8 +699,11 @@ const footerStyles = `
   .footer-content-wrapper { padding: 0 24px; }
   .footer-links-grid { grid-template-columns: 1fr; gap: 40px; text-align: center; }
   .footer-link-item::after { left: 50%; transform: translateX(-50%) scaleX(0); transform-origin: center; }
+  .footer-link-item:hover { transform: translateY(-2px); }
   .footer-link-item:hover::after { transform: translateX(-50%) scaleX(1); }
-  .footer-legal-bar { flex-direction: column; gap: 24px; text-align: center; }
-  .footer-legal-links { flex-direction: column; gap: 16px; align-items: center; }
+  .footer-legal-bar { flex-direction: column-reverse; gap: 32px; text-align: center; align-items: center; }
+  .footer-legal-left { align-items: center; gap: 16px; }
+  .footer-legal-links { flex-direction: column; gap: 12px; align-items: center; }
+  .footer-legal-dot { display: none; }
 }
 `

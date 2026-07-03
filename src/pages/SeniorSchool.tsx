@@ -1,24 +1,29 @@
-import { useDocumentTitle } from '@/hooks'
+import { useDocumentTitle, useScrollToTop } from '@/hooks'
+import { SeniorHero } from '@/components/senior/SeniorHero'
+import { SeniorIntro } from '@/components/senior/SeniorIntro'
+import { SeniorCambridge } from '@/components/senior/SeniorCambridge'
+import { SeniorInnovation } from '@/components/senior/SeniorInnovation'
+import { SeniorCommunication } from '@/components/senior/SeniorCommunication'
+import { SeniorLeadership } from '@/components/senior/SeniorLeadership'
+import { SeniorBeyond } from '@/components/senior/SeniorBeyond'
+import { SeniorFaculty } from '@/components/senior/SeniorFaculty'
+import { SeniorFinale } from '@/components/senior/SeniorFinale'
 
-/**
- * Senior School Page — Aster Pakistan
- * 
- * Content: Academic Programs, Examination Pathways,
- * University Preparation, Leadership Development
- */
 export default function SeniorSchool() {
-  useDocumentTitle('Senior School')
+    useDocumentTitle('Senior School | The Aster School')
+    useScrollToTop()
 
-  return (
-    <div id="page-senior-school">
-      <section className="section-padding">
-        <div className="container-default">
-          <h1 className="text-4xl md:text-6xl font-bold">Senior School</h1>
-          <p className="mt-6 text-lg text-[var(--color-text-secondary)] max-w-2xl">
-            Academic programs, examination pathways, university preparation, and leadership development.
-          </p>
-        </div>
-      </section>
-    </div>
-  )
+    return (
+        <main className="w-full bg-[#FAFAFA] relative">
+            <SeniorHero />
+            <SeniorIntro />
+            <SeniorCambridge />
+            <SeniorInnovation />
+            <SeniorCommunication />
+            <SeniorLeadership />
+            <SeniorBeyond />
+            <SeniorFaculty />
+            <SeniorFinale />
+        </main>
+    )
 }

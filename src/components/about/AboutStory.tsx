@@ -169,22 +169,6 @@ export function AboutStory() {
                         )
                     }
                 })
-
-                // 4. Scrub word animation
-                const words = gsap.utils.toArray<HTMLElement>('.gsap-scrub-word')
-                if (words.length > 0) {
-                    gsap.to(words, {
-                        opacity: 1,
-                        stagger: 0.1,
-                        ease: 'none',
-                        scrollTrigger: {
-                            trigger: '.prose-reveal-container',
-                            start: 'top 80%',
-                            end: 'bottom 50%',
-                            scrub: true,
-                        }
-                    })
-                }
             })
 
             // =========================================================
@@ -215,6 +199,21 @@ export function AboutStory() {
                     }
                 })
             })
+
+            // 4. Normal quote reveal animation (Global)
+            gsap.fromTo('.prose-reveal-container',
+                { opacity: 0, y: 20 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: '.prose-reveal-container',
+                        start: 'top 85%',
+                    }
+                }
+            )
 
             return () => window.removeEventListener('resize', calibrateSpineRails)
         }, sectionRef)
@@ -271,10 +270,8 @@ export function AboutStory() {
                     <p className="font-['Quicksand'] font-bold text-white/75 tracking-[0.25em] uppercase text-xs mb-3">
                         Throughout this journey, one purpose has remained unchanged:
                     </p>
-                    <p className="font-['Quicksand'] font-bold text-xl md:text-2xl text-[#ffc715] leading-[1.3] max-w-3xl mx-auto prose-reveal-container">
-                        &ldquo;{`To create learning experiences that help children grow into capable individuals who lead with excellence, humility, resilience, and purpose.`.split(' ').map((word, i) => (
-                            <span key={i} className="gsap-scrub-word inline-block mr-[0.25em] will-change-transform opacity-20">{word}</span>
-                        ))}&rdquo;
+                    <p className="font-['Quicksand'] font-bold text-xl md:text-2xl text-[#ffc715] leading-[1.3] max-w-3xl mx-auto prose-reveal-container opacity-0">
+                        &ldquo;To create learning experiences that help children grow into capable individuals who lead with excellence, humility, resilience, and purpose.&rdquo;
                     </p>
                 </div>
 
@@ -289,7 +286,7 @@ export function AboutStory() {
                     </div>
 
                     {/* ── Mobile Calibrated Spine Wrapper ── */}
-                    <div ref={mobileSpineRef} className="absolute left-[2px] w-[3px] z-10 block lg:hidden will-change-transform">
+                    <div ref={mobileSpineRef} className="absolute left-[8px] transform -translate-x-1/2 w-[3px] z-10 block lg:hidden will-change-transform">
                         <div className="absolute inset-0 bg-white/10 rounded-full" />
                         <div className="mobile-fill-runner absolute top-0 left-0 right-0 bg-gradient-to-b from-[#ffc715] to-[#ffdd6b] rounded-full origin-top shadow-[0_0_12px_#ffc715]" />
                         <div className="mobile-glow-runner absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-[#ffc715] rounded-full shadow-[0_0_16px_4px_rgba(255,199,21,0.6)]" />
@@ -380,7 +377,7 @@ const storyStyles = `
 
 .story-node-mobile {
     position: absolute;
-    left: -1px;
+    left: 8px;
     top: 4px;
     width: 14px;
     height: 14px;

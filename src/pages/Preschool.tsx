@@ -1,24 +1,39 @@
 import { useDocumentTitle } from '@/hooks'
+import { PreschoolHero } from '@/components/preschool/PreschoolHero'
+import { PreschoolJourney } from '@/components/preschool/PreschoolJourney'
+import { PreschoolMaterials } from '@/components/preschool/PreschoolMaterials'
+import { PreschoolPace } from '@/components/preschool/PreschoolPace'
+import { PreschoolPracticalLife } from '@/components/preschool/PreschoolPracticalLife'
+import { PreschoolLanguage } from '@/components/preschool/PreschoolLanguage'
+import { PreschoolMath } from '@/components/preschool/PreschoolMath'
+import { PreschoolWorld } from '@/components/preschool/PreschoolWorld'
+import { PreschoolSocialEmotional } from '@/components/preschool/PreschoolSocialEmotional'
+import { PreschoolDifference } from '@/components/preschool/PreschoolDifference'
+import { PreschoolFinale } from '@/components/preschool/PreschoolFinale'
 
 /**
- * Preschool Page — Aster Pakistan
+ * Preschool (Early Years) Page — Aster Pakistan
  * 
- * Content: Curriculum Overview, Learning Environment,
- * Development Focus, Activities, Facilities
+ * Content: Montessori-inspired program overview, CASA stages,
+ * learning areas, practical life, language, mathematics,
+ * world understanding, social-emotional & Islamic development
  */
 export default function Preschool() {
-  useDocumentTitle('Preschool')
+  useDocumentTitle('Preschool (Early Years)')
 
   return (
     <div id="page-preschool">
-      <section className="section-padding">
-        <div className="container-default">
-          <h1 className="text-4xl md:text-6xl font-bold">Preschool</h1>
-          <p className="mt-6 text-lg text-[var(--color-text-secondary)] max-w-2xl">
-            Curriculum overview, learning environment, development focus, activities, and facilities.
-          </p>
-        </div>
-      </section>
+      <PreschoolHero />
+      <PreschoolJourney />
+      <PreschoolMaterials />
+      <PreschoolPace />
+      <PreschoolPracticalLife />
+      <PreschoolLanguage />
+      <PreschoolMath />
+      <PreschoolWorld />
+      <PreschoolSocialEmotional />
+      <PreschoolDifference />
+      <PreschoolFinale />
     </div>
   )
 }

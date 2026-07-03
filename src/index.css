@@ -308,21 +308,21 @@
  * Custom Webkit Scrollbar
  * ---------------------------------------- */
 ::-webkit-scrollbar {
-  width: 12px;
+  width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #FAFAFC; 
+  background: #FAFAF9; 
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #394ea1; 
-  border-radius: 6px;
-  border: 3px solid #FAFAFC; /* Creates a pseudo-padding effect */
+  background: #394EA2; 
+  border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #25336e; 
+  background: #FFC51B; 
 }
 
 /* === GLOBAL BUTTON SYSTEM === */
@@ -401,4 +401,21 @@
   filter: blur(8px);
   transform: translateY(30px);
   will-change: opacity, transform, filter;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.hover-shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent);
+  transform: translateX(-100%);
+  pointer-events: none;
+}
+.hover-shimmer:hover::after {
+  animation: shimmer 1.2s infinite;
 }

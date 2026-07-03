@@ -1,24 +1,28 @@
 import { useDocumentTitle } from '@/hooks'
+import { CampusesHero } from '@/components/campuses/CampusesHero'
+import { CampusesIntro } from '@/components/campuses/CampusesIntro'
+import { CampusShowcase } from '@/components/campuses/CampusShowcase'
+import { CampusesInternational } from '@/components/campuses/CampusesInternational'
+import { CampusesExperience } from '@/components/campuses/CampusesExperience'
+import { CampusesFinale } from '@/components/campuses/CampusesFinale'
 
 /**
  * Our Campuses Page — Aster Pakistan
  * 
- * Content: Campus Information, Facilities,
- * Location Information, Campus Highlights
+ * Showcases the different campuses, facilities,
+ * location information, and global expansion.
  */
 export default function Campuses() {
   useDocumentTitle('Our Campuses')
 
   return (
-    <div id="page-campuses">
-      <section className="section-padding">
-        <div className="container-default">
-          <h1 className="text-4xl md:text-6xl font-bold">Our Campuses</h1>
-          <p className="mt-6 text-lg text-[var(--color-text-secondary)] max-w-2xl">
-            Campus information, facilities, location information, and campus highlights.
-          </p>
-        </div>
-      </section>
+    <div id="page-campuses" className="bg-white">
+      <CampusesHero />
+      <CampusesIntro />
+      <CampusShowcase />
+      <CampusesInternational />
+      <CampusesExperience />
+      <CampusesFinale />
     </div>
   )
 }

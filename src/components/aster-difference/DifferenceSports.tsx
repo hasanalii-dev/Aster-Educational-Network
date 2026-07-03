@@ -49,6 +49,17 @@ export function DifferenceSports() {
                         scrollTrigger: {
                             trigger: ropeRef.current,
                             start: 'top 80%',
+                        },
+                        onComplete: function() {
+                            this.targets().forEach((target: any) => {
+                                gsap.to(target, {
+                                    rotation: "+=4",
+                                    duration: 2.5 + Math.random(),
+                                    ease: "sine.inOut",
+                                    yoyo: true,
+                                    repeat: -1
+                                })
+                            })
                         }
                     }
                 )
@@ -147,7 +158,7 @@ export function DifferenceSports() {
                     <div 
                         key={i}
                         className="polaroid-wrapper absolute z-10 hover:z-30 pointer-events-auto"
-                        style={{ left: `${p.x}%`, top: `${p.y}%`, transform: 'translate(-50%, 0)' }}
+                        style={{ left: `${p.x}%`, top: `${p.y}%`, transform: 'translate(-50%, 0)', transformOrigin: 'top center' }}
                     >
                         <div 
                             className="group relative w-[24vw] sm:w-[180px] md:w-[240px] lg:w-[280px] bg-white p-2 sm:p-3 md:p-4 pb-6 sm:pb-8 md:pb-12 shadow-[0_20px_40px_rgba(0,0,0,0.3)] rounded-sm cursor-pointer origin-top flex flex-col transition-transform duration-300 ease-[cubic-bezier(0.34,1.3,0.64,1)] hover:scale-110 hover:rotate-0"

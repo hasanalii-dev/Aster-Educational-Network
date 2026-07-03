@@ -15,9 +15,6 @@ export function PageLoader() {
     const progressBarRef = useRef<HTMLDivElement>(null)
     const wordRefs = useRef<HTMLSpanElement[]>([])
 
-    // 3 Layers for the diagonal sweep
-    const layer1 = useRef<HTMLDivElement>(null)
-    const layer2 = useRef<HTMLDivElement>(null)
     const layer3 = useRef<HTMLDivElement>(null)
 
     // === 1. REAL DOM & FONT LISTENER ===
@@ -61,7 +58,7 @@ export function PageLoader() {
         gsap.set(progressTrackRef.current, { opacity: 0, scaleX: 0 })
         gsap.set(progressBarRef.current, { scaleX: 0, transformOrigin: 'left center' })
         gsap.set(wordRefs.current, { opacity: 0, y: 16 })
-        gsap.set([layer1.current, layer2.current, layer3.current], { yPercent: 0, rotation: 0 })
+        gsap.set(layer3.current, { y: 0, rotation: 0 })
 
         // A. Materialize Logo & Base Track
         tl.to(logoRef.current, { opacity: 1, scale: 1, duration: 0.6, ease: 'power3.out' })
@@ -114,10 +111,16 @@ export function PageLoader() {
             ease: 'power2.inOut'
         }, "-=0.2")
 
-        // F. THE DIAGONAL RIP
-        tl.to(layer3.current, { yPercent: -120, rotation: 12, duration: 0.85, ease: 'power4.inOut' }, "-=0.1")
-        tl.to(layer2.current, { yPercent: -120, rotation: 12, duration: 0.85, ease: 'power4.inOut' }, "-=0.75")
-        tl.to(layer1.current, { yPercent: -120, rotation: 12, duration: 0.85, ease: 'power4.inOut' }, "-=0.75")
+        // F. THE WATER DRAIN OUT
+        // Waves get agitated as water drains
+        tl.to('.ldr-wave-surface', { scaleY: 2.0, duration: 0.3, ease: 'power2.out' }, "-=0.2")
+        
+        // The entire water tank drops down to empty
+        tl.to(layer3.current, { 
+            y: window.innerHeight + 400, 
+            duration: 1.0, 
+            ease: 'power2.inOut' 
+        }, "-=0.1")
 
         tl.set(containerRef.current, { pointerEvents: 'none' })
 
@@ -138,9 +141,23 @@ export function PageLoader() {
             <style>{smartLoaderStyles}</style>
 
             <div ref={containerRef} className="smart-loader-master-veil">
-                <div ref={layer1} className="ldr-layer ldr-layer-1" />
-                <div ref={layer2} className="ldr-layer ldr-layer-2" />
                 <div ref={layer3} className="ldr-layer ldr-layer-3">
+
+                    {/* The Water Surface — 4 animated layers matching PageTransition */}
+                    <div className="ldr-wave-surface">
+                        <svg className="ldr-wave-svg ldr-wave-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 160" preserveAspectRatio="none">
+                            <path d="M0,64 C120,20 240,100 360,64 C480,28 600,100 720,64 C840,28 960,100 1080,64 C1200,28 1320,100 1440,64 L1440,160 L0,160 Z" fill="#8999CC" />
+                        </svg>
+                        <svg className="ldr-wave-svg ldr-wave-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 160" preserveAspectRatio="none">
+                            <path d="M0,80 C160,40 320,120 480,80 C640,40 800,120 960,80 C1120,40 1280,120 1440,80 L1440,160 L0,160 Z" fill="#6272B5" />
+                        </svg>
+                        <svg className="ldr-wave-svg ldr-wave-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 160" preserveAspectRatio="none">
+                            <path d="M0,96 C200,50 400,130 600,96 C800,62 1000,130 1200,96 C1300,80 1400,110 1440,96 L1440,160 L0,160 Z" fill="#4A5FA6" />
+                        </svg>
+                        <svg className="ldr-wave-svg ldr-wave-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 160" preserveAspectRatio="none">
+                            <path d="M0,110 C240,75 480,140 720,110 C960,80 1200,140 1440,110 L1440,160 L0,160 Z" fill="#3D5298" />
+                        </svg>
+                    </div>
 
                     <div className="smart-sanctuary-portal">
 
@@ -191,15 +208,37 @@ const smartLoaderStyles = `
 }
 
 .ldr-layer {
-  position: fixed;
-  top: -20%; left: -20%; right: -20%; bottom: -20%;
+  position: absolute;
+  inset: 0;
   z-index: 99999;
   will-change: transform;
 }
 
-.ldr-layer-1 { background: #FFC51B; z-index: 99999; }
-.ldr-layer-2 { background: #394EA2; z-index: 100000; }
-.ldr-layer-3 { background: #050B14; z-index: 100001; display: flex; align-items: center; justify-content: center; }
+.ldr-layer-3 { background: #334a89; display: flex; align-items: center; justify-content: center; }
+
+.ldr-wave-surface {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  width: 100%;
+  height: clamp(120px, 15vw, 200px);
+  line-height: 0;
+  transform-origin: center bottom;
+  will-change: transform;
+}
+
+.ldr-wave-svg { width: 200%; height: 100%; position: absolute; left: 0; bottom: 0; }
+
+.ldr-wave-1 { animation: ldr-drift 2.5s linear infinite, ldr-bob-1 1.8s ease-in-out infinite; }
+.ldr-wave-2 { animation: ldr-drift 3.5s linear infinite, ldr-bob-2 2.4s ease-in-out infinite; }
+.ldr-wave-3 { animation: ldr-drift 5s   linear infinite, ldr-bob-3 3.0s ease-in-out infinite; }
+.ldr-wave-4 { animation: ldr-drift 7s   linear infinite, ldr-bob-4 3.6s ease-in-out infinite; }
+
+@keyframes ldr-drift { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+@keyframes ldr-bob-1 { 0%,100% { top: 0; } 50% { top: -8px; } }
+@keyframes ldr-bob-2 { 0%,100% { top: 0; } 50% { top: 6px; } }
+@keyframes ldr-bob-3 { 0%,100% { top: 0; } 50% { top: -5px; } }
+@keyframes ldr-bob-4 { 0%,100% { top: 0; } 50% { top: 4px; } }
 
 .smart-sanctuary-portal {
   position: relative;

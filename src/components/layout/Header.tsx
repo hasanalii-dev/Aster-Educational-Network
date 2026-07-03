@@ -618,9 +618,10 @@ const headerStyles = `
 }
 
 .site-header--scrolled .header-nav-container { 
-  background: #ffffff;
-  box-shadow: 0 4px 24px rgba(51, 74, 137, 0.08); 
-  border-bottom: 1px solid rgba(51, 74, 137, 0.08);
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(51, 74, 137, 0.1);
 }
 
 .header-inner {

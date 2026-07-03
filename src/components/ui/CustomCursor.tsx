@@ -8,7 +8,7 @@ export function CustomCursor() {
     const imageContainerRef = useRef<HTMLDivElement>(null)
     const indicatorRef = useRef<HTMLDivElement>(null)
     const [cursorState, setCursorState] = useState<CursorState>('default')
-    const [cursorTheme, setCursorTheme] = useState<'light' | 'dark'>('light')
+    const [cursorTheme, setCursorTheme] = useState<'blue' | 'yellow' | 'white'>('blue')
     const stateRef = useRef<CursorState>('default')
     const [bgImage, setBgImage] = useState<string | null>(null)
     const [videoPlaying, setVideoPlaying] = useState(false)
@@ -20,6 +20,7 @@ export function CustomCursor() {
     const scrollTimeout = useRef<ReturnType<typeof setTimeout> | null>(null)
     // Track exact mouse position to allow instant target detection during scroll
     const lastPos = useRef({ x: window.innerWidth / 2, y: window.innerHeight / 2 })
+    const lastBgColorRef = useRef<string | null>(null)
 
     useEffect(() => {
         if (window.matchMedia("(pointer: coarse)").matches) return
@@ -42,21 +43,47 @@ export function CustomCursor() {
         const updateStateFromTarget = (target: HTMLElement | null) => {
             if (!target) return
 
-            const section = target.closest('section, footer, header, [data-cursor-theme]') as HTMLElement
-            if (section) {
-                const explicitTheme = section.getAttribute('data-cursor-theme')
-                if (explicitTheme === 'dark' || explicitTheme === 'light') {
-                    setCursorTheme(explicitTheme)
-                } else {
-                    const bg = window.getComputedStyle(section).backgroundColor
+            // Determine background color robustly
+            const explicitTheme = target.closest('[data-cursor-theme]')?.getAttribute('data-cursor-theme')
+            if (explicitTheme) {
+                if (explicitTheme !== lastBgColorRef.current) {
+                    lastBgColorRef.current = explicitTheme
+                    if (explicitTheme === 'dark') {
+                        setCursorTheme(Math.random() > 0.5 ? 'yellow' : 'white')
+                    } else if (explicitTheme === 'light') {
+                        setCursorTheme(Math.random() > 0.5 ? 'blue' : 'yellow')
+                    }
+                }
+            } else {
+                let el: HTMLElement | null = target
+                let bg = 'rgba(0, 0, 0, 0)'
+                while (el && el !== document.documentElement) {
+                    bg = window.getComputedStyle(el).backgroundColor
+                    if (bg !== 'rgba(0, 0, 0, 0)' && bg !== 'transparent' && bg !== '') {
+                        break;
+                    }
+                    el = el.parentElement
+                }
+                
+                if (bg !== lastBgColorRef.current) {
+                    lastBgColorRef.current = bg
+                    let newTheme: 'blue' | 'yellow' | 'white' = 'blue'
                     const match = bg.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/)
                     if (match) {
                         const [, r, g, b] = match.map(Number)
                         const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255
-                        setCursorTheme(luminance < 0.45 ? 'dark' : 'light')
-                    } else {
-                        setCursorTheme('light')
+                        
+                        const isYellow = r > 200 && g > 150 && b < 100;
+                        
+                        if (isYellow) {
+                            newTheme = Math.random() > 0.5 ? 'blue' : 'white';
+                        } else if (luminance > 0.6) {
+                            newTheme = Math.random() > 0.5 ? 'blue' : 'yellow';
+                        } else {
+                            newTheme = Math.random() > 0.5 ? 'yellow' : 'white';
+                        }
                     }
+                    setCursorTheme(newTheme)
                 }
             }
 
@@ -213,10 +240,22 @@ export function CustomCursor() {
         const indicator = indicatorRef.current
         if (!cursor || !imgContainer || !indicator) return
 
-        const mainColor = cursorTheme === 'dark' ? '#FFC51B' : '#394EA2'
-        const mainColorAlpha = cursorTheme === 'dark' ? 'rgba(255, 197, 27, 0.4)' : 'rgba(57, 78, 162, 0.4)'
-        const mainColorLight = cursorTheme === 'dark' ? 'rgba(255, 197, 27, 0.1)' : 'rgba(57, 78, 162, 0.1)'
-        const indicatorColor = cursorTheme === 'dark' ? '#050B14' : '#FFFFFF'
+        let mainColor = '#334a89'
+        let mainColorAlpha = 'rgba(51, 74, 137, 0.4)'
+        let mainColorLight = 'rgba(51, 74, 137, 0.1)'
+        let indicatorColor = '#ffffff'
+
+        if (cursorTheme === 'yellow') {
+            mainColor = '#ffc715'
+            mainColorAlpha = 'rgba(255, 199, 21, 0.4)'
+            mainColorLight = 'rgba(255, 199, 21, 0.1)'
+            indicatorColor = '#334a89'
+        } else if (cursorTheme === 'white') {
+            mainColor = '#ffffff'
+            mainColorAlpha = 'rgba(255, 255, 255, 0.4)'
+            mainColorLight = 'rgba(255, 255, 255, 0.1)'
+            indicatorColor = '#334a89'
+        }
 
         // Lightning fast state transitions
         const dur = 0.15
@@ -228,10 +267,9 @@ export function CustomCursor() {
                 gsap.to(indicator, { opacity: 0, scale: 0, duration: dur })
                 break;
             case 'hover':
-                gsap.to(cursor, { width: 64, height: 64, borderRadius: '0%', backgroundColor: 'transparent', border: 'none', scale: 1, rotation: 90, duration: 0.2, ease: "back.out(1.5)" })
+                gsap.to(cursor, { width: 36, height: 36, borderRadius: '50%', backgroundColor: mainColorLight, border: `2px solid ${mainColor}`, scale: 1, rotation: 0, duration: 0.3, ease: 'power3.out' })
                 gsap.to(imgContainer, { opacity: 0, scale: 0.5, duration: dur })
-                gsap.to(indicator, { opacity: 1, scale: 1, duration: dur })
-                if (indicator) indicator.innerHTML = `<svg width="64" height="64" viewBox="0 0 24 24" fill="${mainColor}"><path d="M12 0C12 6.627 17.373 12 24 12C17.373 12 12 17.373 12 24C12 17.373 6.627 12 0 12C6.627 12 12 6.627 12 0Z"/></svg>`
+                gsap.to(indicator, { opacity: 0, scale: 0, duration: dur })
                 break;
             case 'text':
                 gsap.to(cursor, { width: 4, height: 32, borderRadius: '2px', backgroundColor: mainColor, border: 'none', scale: 1, rotation: 0, duration: dur })
