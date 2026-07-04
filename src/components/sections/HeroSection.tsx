@@ -18,6 +18,7 @@ export function HeroSection() {
 
                 {/* 1. PERMANENTLY MUTED AMBIENT BACKGROUND VIDEO */}
                 {!isVideoLoaded && <div className="hero-video-skeleton absolute inset-0 z-0"></div>}
+                
                 <video
                     ref={videoRef}
                     className={`cinematic-video-bg transition-opacity duration-1000 ${isVideoLoaded ? 'opacity-100' : 'opacity-0'}`}
@@ -26,9 +27,10 @@ export function HeroSection() {
                     loop
                     muted // Hard-locked permanently
                     playsInline
-                    poster="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=2000&auto=format&fit=crop"
+                    preload="auto"
+                    poster="https://res.cloudinary.com/lpxp5l3a/video/upload/f_auto,q_auto/v1/ASTER_SCHOOL__2_3_ldqbk5.jpg"
                 >
-                    <source src="https://alpha.edu.pk/img/hero.mp4" type="video/mp4" />
+                    <source src="https://res.cloudinary.com/lpxp5l3a/video/upload/q_auto,f_auto,w_1920/ASTER_SCHOOL__2_3_ldqbk5.mp4" type="video/mp4" />
                 </video>
 
                 {/* Master Vignette to guarantee text contrast */}
@@ -148,6 +150,7 @@ const eliteHeroStyles = `
   object-fit: cover;
   z-index: 0;
   filter: contrast(1.05) brightness(0.85);
+  transform: scale(1.35); /* Increased scale to fully push massive black bars outside the container */
 }
 
 /* Vignette */

@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { Heart, Eye, Brain, Users, Sparkles, Shield } from 'lucide-react'
+import { WaveDivider } from '@/components/ui/WaveDivider'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -94,8 +95,9 @@ export function PreschoolSocialEmotional() {
         {
             title: 'Social Emotional Learning',
             desc: 'Through guided experiences, children learn to understand their emotions, build friendships, and navigate social situations with confidence.',
-            frontColor: 'bg-[#e97f7b]',
-            backColor: 'bg-[#cf6562]',
+            frontColor: 'bg-[#FFC51B]',
+            backColor: 'bg-[#E5B018]',
+            textColor: 'text-white',
             images: [
                 'https://images.unsplash.com/photo-1511629091441-ee46146481b6?q=80&w=600&auto=format&fit=crop',
                 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=600&auto=format&fit=crop',
@@ -105,8 +107,9 @@ export function PreschoolSocialEmotional() {
         {
             title: 'Islamic Education',
             desc: 'Children are gently introduced to Islamic values, Quranic learning, and moral foundations through age-appropriate stories, songs, and daily routines.',
-            frontColor: 'bg-[#6ab39d]',
-            backColor: 'bg-[#52937e]',
+            frontColor: 'bg-white',
+            backColor: 'bg-[#f0f0f0]',
+            textColor: 'text-[#334a89]',
             images: [
                 'https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=600&auto=format&fit=crop',
                 'https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=600&auto=format&fit=crop',
@@ -153,7 +156,8 @@ export function PreschoolSocialEmotional() {
 
     return (
         <section ref={sectionRef} className="py-24 md:py-36 px-6 md:px-12 bg-[#334a89] select-none overflow-hidden relative">
-            <div className="max-w-[1360px] mx-auto flex flex-col items-center">
+            <WaveDivider color="#1A362D" position="top" />
+            <div className="max-w-[1360px] mx-auto flex flex-col items-center relative z-10 pt-8">
 
                 <div ref={introRef} className="flex flex-col items-center text-center max-w-4xl mx-auto mb-20">
                     <div className="inline-flex items-center justify-center gap-3 mb-6">
@@ -201,10 +205,10 @@ export function PreschoolSocialEmotional() {
 
                             {/* Front Cover */}
                             <div className={`relative mt-20 p-8 md:p-10 rounded-[24px] shadow-[0_-8px_25px_rgba(21,40,61,0.15)] border-t border-white/30 flex flex-col items-center text-center z-20 flex-grow ${folder.frontColor} transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:scale-[1.02] group-hover:translate-y-2 group-[.is-open]:scale-[1.02] group-[.is-open]:translate-y-2 pointer-events-none`}>
-                                <h3 className="font-['Quicksand'] font-extrabold text-2xl md:text-3xl mb-4 tracking-tight text-white">
+                                <h3 className={`font-['Quicksand'] font-extrabold text-2xl md:text-3xl mb-4 tracking-tight ${folder.textColor}`}>
                                     {folder.title}
                                 </h3>
-                                <p className="font-['Quicksand'] text-sm md:text-base font-medium leading-[1.6] text-white opacity-95">
+                                <p className={`font-['Quicksand'] text-sm md:text-base font-medium leading-[1.6] ${folder.textColor} opacity-95`}>
                                     {folder.desc}
                                 </p>
                             </div>
@@ -237,6 +241,8 @@ export function PreschoolSocialEmotional() {
                 </div>
 
             </div>
+            
+            <WaveDivider color="#FAFAFA" position="bottom" />
 
             {/* Modal */}
             <div

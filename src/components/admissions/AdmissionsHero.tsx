@@ -70,23 +70,8 @@ export function AdmissionsHero() {
     return (
         <section
             ref={sectionRef}
-            className="w-full pt-28 md:pt-32 pb-16 md:pb-24 relative flex flex-col items-center overflow-x-hidden overflow-y-visible bg-white select-none"
+            className="w-full pt-28 md:pt-32 pb-16 md:pb-24 relative z-10 flex flex-col items-center overflow-x-hidden overflow-y-visible bg-white select-none"
         >
-            {/* Trust Bar */}
-            <div className="w-full bg-[#15283D] py-3 z-30 relative top-[-1.5rem] md:top-[-2rem]">
-                <div className="max-w-[1360px] mx-auto px-4 text-center">
-                    <p className="font-['Quicksand'] text-[10px] md:text-xs font-bold tracking-[0.2em] uppercase text-[#ffc715] flex flex-wrap justify-center items-center gap-x-2 md:gap-x-4 gap-y-2">
-                        <span>Licensed Cambridge School</span>
-                        <span className="hidden md:inline text-white/30">•</span>
-                        <span>100% Cambridge Success Rate</span>
-                        <span className="hidden md:inline text-white/30">•</span>
-                        <span>3 Campuses</span>
-                        <span className="hidden md:inline text-white/30">•</span>
-                        <span>International Expansion to Riyadh</span>
-                    </p>
-                </div>
-            </div>
-
             <div
                 ref={bannerFrameRef}
                 className="w-[calc(100%-3rem)] md:w-[calc(100%-6rem)] max-w-[1360px] h-[35vh] md:h-[50vh] min-h-[300px] relative will-change-transform"
@@ -105,15 +90,15 @@ export function AdmissionsHero() {
             </div>
 
             {/* Stationary Card Container */}
-            <div className="absolute top-36 md:top-40 w-[calc(100%-3rem)] md:w-[calc(100%-6rem)] max-w-[1360px] h-[35vh] md:h-[50vh] min-h-[300px] pointer-events-none">
+            <div className="absolute top-28 md:top-32 w-[calc(100%-3rem)] md:w-[calc(100%-6rem)] max-w-[1360px] h-[35vh] md:h-[50vh] min-h-[300px] pointer-events-none">
                 <div
                     ref={textStackRef}
-                    className="absolute -bottom-8 md:-bottom-12 left-1/2 -translate-x-1/2 bg-[#394EA2] w-fit min-w-[85%] md:min-w-[700px] py-10 px-8 md:py-12 md:px-16 text-left z-20 pointer-events-auto"
+                    className="absolute -bottom-8 md:-bottom-12 left-1/2 -translate-x-1/2 bg-[#394EA2] w-fit min-w-[85%] md:min-w-[700px] py-10 px-8 md:py-12 md:px-16 z-20 pointer-events-auto flex flex-col items-center text-center shadow-xl"
                 >
                     <span className="font-['Quicksand'] font-bold text-xs tracking-[0.3em] text-[#ffc715] uppercase block mb-4">
                         ADMISSIONS
                     </span>
-                    <h1 className="font-['Playfair_Display'] text-4xl md:text-6xl font-medium text-white tracking-tight leading-none whitespace-nowrap">
+                    <h1 className="font-['Playfair_Display'] text-4xl md:text-6xl font-medium text-white tracking-tight leading-none ">
                         Begin your journey
                     </h1>
                 </div>

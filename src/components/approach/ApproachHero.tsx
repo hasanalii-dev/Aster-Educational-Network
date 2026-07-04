@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
@@ -10,6 +10,7 @@ export function ApproachHero() {
     const imageRef = useRef<HTMLImageElement>(null)
     const textStackRef = useRef<HTMLDivElement>(null)
     const contentRef = useRef<HTMLDivElement>(null)
+    const [imgLoaded, setImgLoaded] = useState(false)
 
     useEffect(() => {
         const ctx = gsap.context(() => {
@@ -97,7 +98,7 @@ export function ApproachHero() {
     }, [])
 
     return (
-        <section ref={sectionRef} className="w-full pt-28 md:pt-32 pb-8 md:pb-12 relative flex flex-col items-center bg-white select-none overflow-x-hidden">
+        <section ref={sectionRef} className="w-full pt-28 md:pt-32 pb-16 md:pb-24 relative z-10 flex flex-col items-center bg-white select-none">
             <div className="flex justify-center w-full">
                 <div
                     ref={bannerFrameRef}
@@ -105,11 +106,15 @@ export function ApproachHero() {
                     style={{ borderRadius: '16px' }}
                 >
                     <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none" style={{ borderRadius: 'inherit' }}>
+                        {!imgLoaded && (
+                            <div className="absolute inset-0 bg-gray-200 animate-pulse z-10" />
+                        )}
                         <img
                             ref={imageRef}
                             src="https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=1600&auto=format&fit=crop"
                             alt="Students actively learning"
-                            className="w-full h-full object-cover filter brightness-[0.85] contrast-105 will-change-transform"
+                            onLoad={() => setImgLoaded(true)}
+                            className={`w-full h-full object-cover filter brightness-[0.85] contrast-105 will-change-transform transition-opacity duration-700 ${imgLoaded ? 'opacity-100' : 'opacity-0'}`}
                         />
                         <div className="absolute inset-0 bg-black/15 z-10 pointer-events-none" />
                     </div>
@@ -118,13 +123,13 @@ export function ApproachHero() {
                 <div className="absolute top-28 md:top-32 w-[calc(100%-3rem)] md:w-[calc(100%-6rem)] max-w-[1360px] h-[35vh] md:h-[50vh] min-h-[300px] pointer-events-none">
                     <div
                         ref={textStackRef}
-                        className="absolute -bottom-8 md:-bottom-12 left-1/2 -translate-x-1/2 bg-[#394EA2] w-fit min-w-[85%] md:min-w-[800px] py-10 px-8 md:py-12 md:px-16 text-center z-20 pointer-events-auto"
+                        className="absolute -bottom-8 md:-bottom-12 left-1/2 -translate-x-1/2 bg-[#394EA2] w-fit min-w-[85%] md:min-w-[700px] py-10 px-8 md:py-12 md:px-16 text-left z-20 pointer-events-auto"
                     >
                         <span className="font-['Quicksand'] font-bold text-xs tracking-[0.3em] text-[#ffc715] uppercase block mb-4">
-                            OUR APPROACH
+                            APPROACH
                         </span>
                         <h1 className="font-['Playfair_Display'] text-4xl md:text-5xl lg:text-[56px] font-medium text-white tracking-tight leading-[1.1] whitespace-nowrap">
-                            Preparing Children for <em className="italic font-medium text-[#ffc715]">Life</em>, Not Just School
+                            Our Approach
                         </h1>
                     </div>
                 </div>

@@ -79,21 +79,7 @@ export function AboutPhilosophy() {
                 }}
             />
 
-            {/* =========================================================
-          AMBIENT SKY LAYER: FREE-FLOATING CLOUDS (ON TOP OF BLUE RECTANGLE)
-      ========================================================= */}
-            <div className="absolute inset-0 pointer-events-none z-[15] overflow-hidden max-w-[1500px] mx-auto">
-                <div className="gsap-ambient-cloud-left absolute top-12 md:top-24 left-4 md:left-24 w-32 md:w-48 text-white">
-                    <svg viewBox="0 0 120 70" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M96 46.5C96 55.06 89.06 62 80.5 62H27.5C18.94 62 12 55.06 12 46.5C12 39.46 16.69 33.52 23.23 31.55C25.42 21.6 34.33 14 45 14C53.37 14 60.62 18.77 64.12 25.85C66.42 24.08 69.29 23 72.5 23C79.88 23 85.95 28.61 86.91 35.85C92.05 37.3 96 41.44 96 46.5Z" />
-                    </svg>
-                </div>
-                <div className="gsap-ambient-cloud-right absolute top-8 md:top-16 right-0 md:right-16 w-40 md:w-56 text-white">
-                    <svg viewBox="0 0 120 70" fill="currentColor" xmlns="http://www.w3.org/2000/svg" className="transform -scale-x-100">
-                        <path d="M96 46.5C96 55.06 89.06 62 80.5 62H27.5C18.94 62 12 55.06 12 46.5C12 39.46 16.69 33.52 23.23 31.55C25.42 21.6 34.33 14 45 14C53.37 14 60.62 18.77 64.12 25.85C66.42 24.08 69.29 23 72.5 23C79.88 23 85.95 28.61 86.91 35.85C92.05 37.3 96 41.44 96 46.5Z" />
-                    </svg>
-                </div>
-            </div>
+
 
             <div className="max-w-[1360px] mx-auto relative z-10">
 

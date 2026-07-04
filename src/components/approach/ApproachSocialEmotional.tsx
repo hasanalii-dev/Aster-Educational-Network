@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { Heart } from 'lucide-react'
@@ -7,6 +7,7 @@ gsap.registerPlugin(ScrollTrigger)
 
 export function ApproachSocialEmotional() {
     const sectionRef = useRef<HTMLElement>(null)
+    const [imgLoaded, setImgLoaded] = useState(false)
 
     useEffect(() => {
         const ctx = gsap.context(() => {
@@ -103,10 +104,14 @@ export function ApproachSocialEmotional() {
                 {/* Visual Side */}
                 <div className="w-full lg:w-1/2">
                     <div className="visual-container relative h-[500px] md:h-[700px] w-full overflow-hidden bg-gray-50">
+                        {!imgLoaded && (
+                            <div className="absolute inset-0 bg-gray-300 animate-pulse z-10" />
+                        )}
                         <img
                             src="https://images.unsplash.com/photo-1511629091441-ee46146481b6?q=80&w=1200&auto=format&fit=crop"
                             alt="Students collaborating and smiling"
-                            className="parallax-img w-full h-full object-cover"
+                            onLoad={() => setImgLoaded(true)}
+                            className={`parallax-img w-full h-full object-cover transition-opacity duration-700 ${imgLoaded ? 'opacity-100' : 'opacity-0'}`}
                         />
                         <div className="absolute inset-0 bg-[#334a89]/20 mix-blend-multiply"></div>
                     </div>

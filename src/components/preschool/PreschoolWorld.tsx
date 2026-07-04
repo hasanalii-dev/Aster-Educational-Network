@@ -77,24 +77,24 @@ export function PreschoolWorld() {
     ]
 
     return (
-        <section ref={sectionRef} className="py-24 md:py-36 px-6 md:px-12 bg-white select-none overflow-hidden">
+        <section ref={sectionRef} className="py-24 md:py-36 px-6 md:px-12 bg-[#1A362D] select-none overflow-hidden">
             <div className="max-w-[1200px] mx-auto text-center flex flex-col items-center">
 
                 <div ref={headerRef} className="flex flex-col items-center max-w-4xl mx-auto mb-16 md:mb-24">
                     <div className="inline-flex items-center justify-center gap-3 mb-6">
-                        <Globe2 className="w-5 h-5 text-[#6ab39d] shrink-0" strokeWidth={2.5} />
-                        <span className="font-['Quicksand'] font-bold text-xs md:text-sm tracking-[0.3em] text-[#334a89] uppercase mt-0.5 text-left md:text-center">
+                        <Globe2 className="w-5 h-5 text-[#6ab39d]" strokeWidth={2.5} />
+                        <span className="font-['Quicksand'] font-bold text-xs md:text-sm tracking-[0.3em] text-white/80 uppercase mt-0.5 text-left md:text-center">
                             UNDERSTANDING THE WORLD
                         </span>
                     </div>
 
-                    <h2 className="font-['Playfair_Display'] text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight text-black leading-[1.1] mb-6">
+                    <h2 className="font-['Playfair_Display'] text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight text-white leading-[1.1] mb-6">
                         Curious Minds, <em className="font-medium italic text-[#6ab39d]">Global Hearts</em>
                     </h2>
 
                     <div className="w-16 h-[2px] bg-[#6ab39d] mb-10" />
 
-                    <p className="font-['Quicksand'] text-base md:text-lg lg:text-[20px] text-[#5C5C61] leading-[1.65] font-medium max-w-3xl">
+                    <p className="font-['Quicksand'] text-base md:text-lg lg:text-[20px] text-white/80 leading-[1.65] font-medium max-w-3xl">
                         Children are naturally curious about the world around them. Through culture studies, science exploration, geography, nature experiences, and sustainability initiatives, children develop an appreciation for:
                     </p>
                 </div>
@@ -142,7 +142,7 @@ export function PreschoolWorld() {
                 </div>
 
                 <div ref={footerRef} className="text-center max-w-3xl mx-auto">
-                    <p className="font-['Quicksand'] font-bold text-xl md:text-2xl text-[#334a89] leading-snug">
+                    <p className="font-['Quicksand'] font-bold text-xl md:text-2xl text-white leading-snug">
                         These experiences help children become thoughtful, curious, and globally aware learners.
                     </p>
                 </div>

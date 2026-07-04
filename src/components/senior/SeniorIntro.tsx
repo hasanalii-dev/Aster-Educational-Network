@@ -39,7 +39,7 @@ export function SeniorIntro() {
                 
                 <div ref={contentRef} className="flex flex-col items-center max-w-4xl">
                     <div className="gsap-stagger-item flex items-center justify-center gap-3 mb-6">
-                        <GraduationCap className="w-5 h-5 text-[#C9A84C] shrink-0" strokeWidth={2.5} />
+                        <GraduationCap className="w-5 h-5 text-[#edad0c] shrink-0" strokeWidth={2.5} />
                         <span className="font-['Quicksand'] font-bold text-xs md:text-sm tracking-[0.3em] text-[#15283D] uppercase mt-0.5">
                             SENIOR SCHOOL
                         </span>
@@ -49,7 +49,7 @@ export function SeniorIntro() {
                         Where Future-Ready Leaders<br />Are <em className="font-medium italic text-[#334a89]">Built</em>
                     </h2>
 
-                    <div className="gsap-stagger-item w-16 h-[2px] bg-[#C9A84C] mb-10 mx-auto" />
+                    <div className="gsap-stagger-item w-16 h-[2px] bg-[#edad0c] mb-10 mx-auto" />
 
                     <div className="font-['Quicksand'] text-base md:text-lg text-[#5C5C61] space-y-6 leading-[1.65] font-medium max-w-3xl">
                         <p className="gsap-stagger-item">

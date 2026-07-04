@@ -70,7 +70,7 @@ export function SafeguardingHero() {
     return (
         <section
             ref={sectionRef}
-            className="w-full pt-28 md:pt-32 pb-16 md:pb-24 relative flex flex-col items-center overflow-x-hidden overflow-y-visible bg-[#fbfaf8] select-none"
+            className="w-full pt-40 md:pt-48 pb-16 md:pb-24 relative z-10 flex flex-col items-center overflow-x-hidden overflow-y-visible bg-[#fbfaf8] select-none"
         >
             <div
                 ref={bannerFrameRef}
@@ -91,16 +91,16 @@ export function SafeguardingHero() {
             </div>
 
             {/* Stationary Card Container */}
-            <div className="absolute top-28 md:top-32 w-[calc(100%-3rem)] md:w-[calc(100%-6rem)] max-w-[1360px] h-[35vh] md:h-[50vh] min-h-[300px] pointer-events-none">
+            <div className="absolute top-40 md:top-48 w-[calc(100%-3rem)] md:w-[calc(100%-6rem)] max-w-[1360px] h-[35vh] md:h-[50vh] min-h-[300px] pointer-events-none">
                 {/* Overlapping Blue Rectangle */}
                 <div
                     ref={textStackRef}
-                    className="absolute -bottom-8 md:-bottom-12 left-1/2 -translate-x-1/2 bg-[#3A53A4] w-fit min-w-[85%] md:min-w-[700px] py-10 px-8 md:py-12 md:px-16 text-center md:text-left z-20 pointer-events-auto"
+                    className="absolute left-1/2 -translate-x-1/2 bg-[#3A53A4] w-fit min-w-[85%] md:min-w-[700px] py-10 px-8 md:py-12 md:px-16 z-20 pointer-events-auto top-0 -translate-y-1/2 flex flex-col items-center text-center"
                 >
                     <span className="font-['Quicksand'] font-bold text-xs tracking-[0.3em] text-[#FBBB21] uppercase block mb-4">
                         EVERY CHILD DESERVES TO FEEL SAFE
                     </span>
-                    <h1 className="font-['Playfair_Display'] text-4xl md:text-6xl font-medium text-white tracking-tight leading-none whitespace-nowrap">
+                    <h1 className="font-['Playfair_Display'] text-4xl md:text-6xl font-medium text-white tracking-tight leading-none ">
                         Safeguarding
                     </h1>
                 </div>

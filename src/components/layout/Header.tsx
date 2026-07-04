@@ -334,7 +334,42 @@ export function Header({
             <header id="site-header" ref={headerRef} className={`site-header ${scrolledClass}`}>
 
                 {/* === TOP MARQUEE STRIP === */}
-                {marqueeText && (
+                {location.pathname.startsWith('/journal') ? (
+                    <div className="header-marquee-wrapper" style={{ backgroundColor: '#15283D', justifyContent: 'center' }}>
+                        <span className="header-marquee-link" style={{ pointerEvents: 'none', color: '#ffc715', fontSize: '12px', letterSpacing: '0.2em', fontWeight: 'bold' }}>
+                            Ideas, Insights & Conversations That Shape Better Futures
+                        </span>
+                    </div>
+                ) : location.pathname.includes('/admissions') ? (
+                    <div className="header-marquee-wrapper" style={{ backgroundColor: '#15283D' }}>
+                        <div className="header-marquee-track">
+                            <div className="header-marquee-group" style={{ animationDuration: '30s' }}>
+                                {[
+                                    "Licensed Cambridge School", "100% Cambridge Success Rate", "3 Campuses", "International Expansion to Riyadh",
+                                    "Licensed Cambridge School", "100% Cambridge Success Rate", "3 Campuses", "International Expansion to Riyadh",
+                                    "Licensed Cambridge School", "100% Cambridge Success Rate", "3 Campuses", "International Expansion to Riyadh"
+                                ].map((item, i) => (
+                                    <div className="header-marquee-item" key={`m1-adm-${i}`}>
+                                        <span className="header-marquee-link" style={{ pointerEvents: 'none', color: '#FFF' }}>{item}</span>
+                                        <span className="header-marquee-separator" style={{ color: '#ffc715', fontSize: '18px' }}>•</span>
+                                    </div>
+                                ))}
+                            </div>
+                            <div className="header-marquee-group" aria-hidden="true" style={{ animationDuration: '30s' }}>
+                                {[
+                                    "Licensed Cambridge School", "100% Cambridge Success Rate", "3 Campuses", "International Expansion to Riyadh",
+                                    "Licensed Cambridge School", "100% Cambridge Success Rate", "3 Campuses", "International Expansion to Riyadh",
+                                    "Licensed Cambridge School", "100% Cambridge Success Rate", "3 Campuses", "International Expansion to Riyadh"
+                                ].map((item, i) => (
+                                    <div className="header-marquee-item" key={`m2-adm-${i}`}>
+                                        <span className="header-marquee-link" style={{ pointerEvents: 'none', color: '#FFF' }}>{item}</span>
+                                        <span className="header-marquee-separator" style={{ color: '#ffc715', fontSize: '18px' }}>•</span>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                ) : marqueeText ? (
                     <div className="header-marquee-wrapper">
                         <div className="header-marquee-track">
                             <div className="header-marquee-group">
@@ -355,7 +390,7 @@ export function Header({
                             </div>
                         </div>
                     </div>
-                )}
+                ) : null}
 
                 {/* === MAIN NAVBAR === */}
                 <div className="header-nav-container">
@@ -414,7 +449,7 @@ export function Header({
                         <div className="header-actions" style={{ gap: '16px' }}>
                             {user ? (
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-                                    <TransitionLink to="/profile" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none' }}>
+                                    <TransitionLink to="/profile" className="flex items-center gap-2 !no-underline">
                                         <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: '#ffc715', color: '#334a89', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold' }} title={user.email || 'Profile'}>
                                             {user.email?.[0]?.toUpperCase() || 'U'}
                                         </div>

@@ -54,7 +54,7 @@ export function CareersHero() {
     return (
         <section
             ref={sectionRef}
-            className="w-full pt-28 md:pt-32 pb-16 md:pb-24 relative flex flex-col items-center overflow-x-hidden overflow-y-visible bg-[#fbfaf8] select-none"
+            className="w-full pt-28 md:pt-32 pb-16 md:pb-24 relative z-10 flex flex-col items-center overflow-x-hidden overflow-y-visible bg-[#fbfaf8] select-none"
         >
             <div
                 ref={bannerFrameRef}
@@ -75,7 +75,7 @@ export function CareersHero() {
             <div className="absolute top-28 md:top-32 w-[calc(100%-3rem)] md:w-[calc(100%-6rem)] max-w-[1360px] h-[35vh] md:h-[50vh] min-h-[300px] pointer-events-none">
                 <div
                     ref={textStackRef}
-                    className="absolute -bottom-8 md:-bottom-12 left-1/2 -translate-x-1/2 bg-[#3A53A4] w-fit min-w-[85%] md:min-w-[700px] py-10 px-8 md:py-12 md:px-16 text-center md:text-left z-20 pointer-events-auto"
+                    className="absolute left-1/2 -translate-x-1/2 bg-[#3A53A4] w-fit min-w-[85%] md:min-w-[700px] py-10 px-8 md:py-12 md:px-16 z-20 pointer-events-auto top-1/2 -translate-y-1/2 flex flex-col items-center text-center"
                 >
                     <span className="font-['Quicksand'] font-bold text-xs tracking-[0.3em] text-[#FBBB21] uppercase block mb-4">
                         CAREERS AT THE ASTER SCHOOL

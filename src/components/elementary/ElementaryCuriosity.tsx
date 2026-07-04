@@ -59,7 +59,7 @@ export function ElementaryCuriosity() {
                     playsInline
                     className="absolute inset-0 w-full h-full object-cover"
                 >
-                    <source src="https://alpha.edu.pk/img/hero.mp4" type="video/mp4" />
+                    <source src="https://alpha.edu.pk/img/C3%20LR.mp4" type="video/mp4" />
                 </video>
                 {/* Vignette Overlay */}
                 <div className="absolute inset-0 bg-[#15283D]/50" />

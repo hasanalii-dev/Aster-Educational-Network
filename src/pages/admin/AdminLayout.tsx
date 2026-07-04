@@ -1,22 +1,23 @@
 import { Outlet, NavLink, useNavigate, useLocation } from 'react-router-dom'
 import { useAuth } from '@/hooks/useAuth'
 import { useEffect, useState } from 'react'
+import { LayoutDashboard, Settings, PenTool, MessageSquareQuote, HelpCircle, Map, GraduationCap, Mail, LogOut, Menu } from 'lucide-react'
 
-type NavItem = { label: string; path: string; icon: string; end?: boolean };
+type NavItem = { label: string; path: string; icon: React.ReactNode; end?: boolean };
 type NavSection = { title: string; items: NavItem[] };
 
 const navSections: NavSection[] = [
-    { title: 'Overview', items: [{ label: 'Dashboard', path: '/admin', icon: '◫', end: true }] },
+    { title: 'Overview', items: [{ label: 'Dashboard', path: '/admin', icon: <LayoutDashboard size={18} />, end: true }] },
     { title: 'Content', items: [
-        { label: 'Site Settings', path: '/admin/settings', icon: '⚙' },
-        { label: 'Journal', path: '/admin/journal', icon: '✎' },
-        { label: 'Testimonials', path: '/admin/testimonials', icon: '❝' },
-        { label: 'FAQs', path: '/admin/faqs', icon: '?' },
+        { label: 'Site Settings', path: '/admin/settings', icon: <Settings size={18} /> },
+        { label: 'Journal', path: '/admin/journal', icon: <PenTool size={18} /> },
+        { label: 'Testimonials', path: '/admin/testimonials', icon: <MessageSquareQuote size={18} /> },
+        { label: 'FAQs', path: '/admin/faqs', icon: <HelpCircle size={18} /> },
     ]},
     { title: 'Engagement', items: [
-        { label: 'Campus Tours', path: '/admin/campus-tours', icon: '📅' },
-        { label: 'Admissions', path: '/admin/admissions', icon: '🎓' },
-        { label: 'Inquiries', path: '/admin/inquiries', icon: '✉' }
+        { label: 'Campus Tours', path: '/admin/campus-tours', icon: <Map size={18} /> },
+        { label: 'Admissions', path: '/admin/admissions', icon: <GraduationCap size={18} /> },
+        { label: 'Inquiries', path: '/admin/inquiries', icon: <Mail size={18} /> }
     ] },
 ]
 
@@ -49,11 +50,11 @@ export default function AdminLayout() {
                             </div>
                         ))}
                     </nav>
-                    <div className="adm-sb-ft"><button className="adm-ni adm-so" onClick={async()=>{await signOut();navigate('/admin/login')}}><span className="adm-nic">⏻</span><span>Sign Out</span></button></div>
+                    <div className="adm-sb-ft"><button className="adm-ni adm-so" onClick={async()=>{await signOut();navigate('/admin/login')}}><span className="adm-nic"><LogOut size={18} /></span><span>Sign Out</span></button></div>
                 </aside>
                 <div className="adm-main">
                     <header className="adm-tb">
-                        <div className="adm-tb-l"><button className="adm-hb" onClick={()=>setSidebarOpen(!sidebarOpen)}><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button><h1 className="adm-tb-t">{currentTitle}</h1></div>
+                        <div className="adm-tb-l"><button className="adm-hb" onClick={()=>setSidebarOpen(!sidebarOpen)}><Menu size={24} /></button><h1 className="adm-tb-t">{currentTitle}</h1></div>
                         <div className="adm-tb-r"><span className="adm-tb-em">{user.email}</span><div className="adm-tb-av">{user.email?.[0]?.toUpperCase()||'A'}</div></div>
                     </header>
                     <div className="adm-ct"><Outlet /></div>

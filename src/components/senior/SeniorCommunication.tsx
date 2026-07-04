@@ -92,16 +92,16 @@ export function SeniorCommunication() {
                 
                 <div className="flex flex-col lg:flex-row gap-16 lg:gap-24">
                     {/* Left Column: Quote & Badge */}
-                    <div className="w-full lg:w-5/12 flex flex-col border-t-2 border-[#C9A84C]/30 pt-8">
+                    <div className="w-full lg:w-5/12 flex flex-col border-t-2 border-[#edad0c]/30 pt-8">
                         <div className="flex items-center gap-3 mb-8">
-                            <MessageCircle className="w-5 h-5 text-[#C9A84C]" strokeWidth={2.5} />
-                            <span className="font-['Quicksand'] font-bold text-xs md:text-sm tracking-[0.3em] text-[#C9A84C] uppercase mt-0.5">
+                            <MessageCircle className="w-5 h-5 text-[#edad0c]" strokeWidth={2.5} />
+                            <span className="font-['Quicksand'] font-bold text-xs md:text-sm tracking-[0.3em] text-[#edad0c] uppercase mt-0.5">
                                 COMMUNICATION & PERSPECTIVE
                             </span>
                         </div>
                         
                         <h2 ref={quoteRef} className="font-['Playfair_Display'] text-4xl md:text-5xl lg:text-[52px] font-medium text-white leading-[1.1]">
-                            Finding Their <em className="italic text-[#C9A84C]">Voice.</em>
+                            Finding Their <em className="italic text-[#edad0c]">Voice.</em>
                         </h2>
                     </div>
 
@@ -117,12 +117,12 @@ export function SeniorCommunication() {
                             </p>
                         </div>
 
-                        <div className="comm-reveal w-12 h-[2px] bg-[#C9A84C] my-10" />
+                        <div className="comm-reveal w-12 h-[2px] bg-[#edad0c] my-10" />
 
                         <div className="comm-reveal grid grid-cols-1 sm:grid-cols-2 gap-4">
                             {['Presentations', 'Public speaking', 'Debates', 'Discussions', 'Model United Nations (MUN)'].map((item, i) => (
                                 <div key={i} className="flex items-center gap-4">
-                                    <div className="w-1.5 h-1.5 bg-[#C9A84C] shrink-0" />
+                                    <div className="w-1.5 h-1.5 bg-[#edad0c] shrink-0" />
                                     <span className="font-['Quicksand'] text-base font-bold text-white uppercase tracking-wider">{item}</span>
                                 </div>
                             ))}

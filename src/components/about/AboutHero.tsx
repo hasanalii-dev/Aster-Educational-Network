@@ -7,7 +7,7 @@ gsap.registerPlugin(ScrollTrigger)
 export function AboutHero() {
     const sectionRef = useRef<HTMLElement>(null)
     const bannerFrameRef = useRef<HTMLDivElement>(null)
-    const imageRef = useRef<HTMLImageElement>(null)
+    const mediaRef = useRef<HTMLVideoElement>(null)
     const textStackRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
@@ -42,7 +42,7 @@ export function AboutHero() {
                 )
 
                 tl.fromTo(
-                    imageRef.current,
+                    mediaRef.current,
                     { yPercent: -10, scale: 1.15 },
                     { yPercent: 10, scale: 1.05, ease: 'none' },
                     0
@@ -70,20 +70,23 @@ export function AboutHero() {
     return (
         <section
             ref={sectionRef}
-            className="w-full pt-28 md:pt-32 pb-16 md:pb-24 relative flex flex-col items-center overflow-x-hidden overflow-y-visible bg-white select-none"
+            className="w-full pt-28 md:pt-32 pb-16 md:pb-24 relative z-10 flex flex-col items-center bg-white select-none"
         >
             <div
                 ref={bannerFrameRef}
                 className="w-[calc(100%-3rem)] md:w-[calc(100%-6rem)] max-w-[1360px] h-[35vh] md:h-[50vh] min-h-[300px] relative will-change-transform"
                 style={{ borderRadius: '16px' }}
             >
-                {/* The Image Mask (inherits border radius) */}
+                {/* The Media Mask (inherits border radius) */}
                 <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none" style={{ borderRadius: 'inherit' }}>
-                    <img
-                        ref={imageRef}
-                        src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=1600&auto=format&fit=crop"
-                        alt="The Aster School Campus"
-                        className="w-full h-full object-cover filter brightness-[0.85] contrast-105 will-change-transform"
+                    <video
+                        ref={mediaRef}
+                        src="https://alpha.edu.pk/img/hero.mp4"
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        className="absolute -top-[15%] left-0 w-full h-[130%] object-cover filter brightness-[0.85] contrast-105 will-change-transform"
                     />
                     {/* LOW OPACITY DARK OVERLAY */}
                     <div className="absolute inset-0 bg-black/15 z-10 pointer-events-none" />

@@ -56,32 +56,32 @@ const differenceData = [
     {
         title: "Robotics & Digital Literacy",
         desc: "Students learn to think critically, solve problems, and engage confidently with technology through coding, robotics, and digital exploration.",
-        image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=800&auto=format&fit=crop"
+        image: "https://res.cloudinary.com/lpxp5l3a/image/upload/v1783169976/DSC03243_bvvzmf.jpg"
     },
     {
         title: "Sports & Discipline",
         desc: "From swimming and football to gymnastics and taekwondo, sports help students develop resilience, teamwork, focus, and self-belief.",
-        image: "https://images.unsplash.com/photo-1526232761682-d26e03ac148e?q=80&w=800&auto=format&fit=crop"
+        image: "https://res.cloudinary.com/lpxp5l3a/image/upload/v1783170082/496200395_1242109967922604_7907344747179719709_n_ut5v1l.jpg"
     },
     {
         title: "Social Emotional Learning",
         desc: "We intentionally nurture emotional intelligence, confidence, empathy, and communication helping students understand themselves and others.",
-        image: "https://images.unsplash.com/photo-1529390079861-591de354faf5?q=80&w=800&auto=format&fit=crop"
+        image: "https://res.cloudinary.com/lpxp5l3a/image/upload/v1783170199/As_part_of_Mental_Health_week_our_students_practiced_mindfulness_through_yoga_explored_emotion_vub6lj.jpg"
     },
     {
         title: "Islamic Learning",
         desc: "Students develop strong values rooted in humility, integrity, respect, and purposeful living.",
-        image: "https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?q=80&w=800&auto=format&fit=crop"
+        image: "https://res.cloudinary.com/lpxp5l3a/image/upload/v1783170305/495188560_1242587767874824_655110840629499397_n_yofyut.jpg"
     },
     {
         title: "Sustainability & Green Goals",
         desc: "Through hands-on environmental initiatives, students learn responsibility, awareness, and care for the world around them.",
-        image: "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?q=80&w=800&auto=format&fit=crop"
+        image: "https://res.cloudinary.com/lpxp5l3a/image/upload/v1783170377/473127865_1676555299592329_7824417284584904866_n_tmd7uc.jpg"
     },
     {
         title: "Passion Projects & Entrepreneurship",
         desc: "Students are encouraged to think independently, take initiative, solve problems creatively, and confidently present their ideas.",
-        image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=800&auto=format&fit=crop"
+        image: "https://res.cloudinary.com/lpxp5l3a/image/upload/v1783170483/MEP04640_qkhjcw.jpg"
     }
 ]
 
@@ -222,7 +222,7 @@ export default function Home() {
 
                         <div ref={wcuImgLargeRef} className="wcu-parallax-wrap wcu-img-large">
                             <ImageWithSkeleton
-                                src="https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=1200&auto=format&fit=crop"
+                                src="https://res.cloudinary.com/lpxp5l3a/image/upload/v1783169370/1000555006_ptbiit.jpg"
                                 alt="Students collaborating at Aster"
                                 className="wcu-img-fill rounded-[4px]"
                             />
@@ -230,7 +230,7 @@ export default function Home() {
 
                         <div ref={wcuImgSmallRef} className="wcu-parallax-wrap wcu-img-small">
                             <ImageWithSkeleton
-                                src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=800&auto=format&fit=crop"
+                                src="https://res.cloudinary.com/lpxp5l3a/image/upload/v1783169602/1000555000_qvecon.jpg"
                                 alt="Aster student working on a project"
                                 className="wcu-img-fill rounded-[4px]"
                             />
@@ -339,7 +339,7 @@ export default function Home() {
                                         alt={item.title}
                                         className="w-full h-full shadow-[0_20px_40px_rgba(0,0,0,0.15)] overflow-hidden"
                                         style={{ borderRadius: '11px' }}
-                                        imgStyle={{ borderRadius: '11px', transform: 'matrix(-1, 0, 0, 1, 0, 0)' }}
+                                        imgStyle={{ borderRadius: '11px' }}
                                     />
                                 </div>
                             ))}

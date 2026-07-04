@@ -1,24 +1,26 @@
 import { useDocumentTitle } from '@/hooks'
+import { CommunityHero } from '@/components/community/CommunityHero'
+import { CommunityIntro } from '@/components/community/CommunityIntro'
+import { CommunityAmbassadors } from '@/components/community/CommunityAmbassadors'
+import { CommunityWorkshops } from '@/components/community/CommunityWorkshops'
+import { CommunityWellbeing } from '@/components/community/CommunityWellbeing'
+import { CommunityEvents } from '@/components/community/CommunityEvents'
+import { CommunityValues } from '@/components/community/CommunityValues'
+import { CommunityCtaSection } from '@/components/sections/CommunityCtaSection'
 
-/**
- * Community Page — Aster Pakistan
- * 
- * Content: Parent Engagement, Community Programs,
- * Partnerships, Social Impact
- */
 export default function Community() {
-  useDocumentTitle('Community')
+  useDocumentTitle('Community | The Aster School')
 
   return (
-    <div id="page-community">
-      <section className="section-padding">
-        <div className="container-default">
-          <h1 className="text-4xl md:text-6xl font-bold">Community</h1>
-          <p className="mt-6 text-lg text-[var(--color-text-secondary)] max-w-2xl">
-            Parent engagement, community programs, partnerships, and social impact.
-          </p>
-        </div>
-      </section>
+    <div id="page-community" className="bg-[#fbfaf8]">
+      <CommunityHero />
+      <CommunityIntro />
+      <CommunityAmbassadors />
+      <CommunityWorkshops />
+      <CommunityWellbeing />
+      <CommunityEvents />
+      <CommunityValues />
+      <CommunityCtaSection />
     </div>
   )
 }

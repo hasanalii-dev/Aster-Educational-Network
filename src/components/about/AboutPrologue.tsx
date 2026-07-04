@@ -1,7 +1,6 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ChevronUp, ChevronDown } from 'lucide-react'
-import atomsIcon from '@/assets/icons/atoms.svg'
 import pasteIcon from '@/assets/icons/paste.svg'
 import ribbonIcon from '@/assets/icons/ribbon.svg'
 
@@ -31,7 +30,6 @@ export function AboutPrologue() {
     const cardsRef = useRef<(HTMLDivElement | null)[]>([])
     const currentIndexRef = useRef(0)
     const isAnimatingRef = useRef(false)
-    const [activeIndex, setActiveIndex] = useState(0)
 
     const N = carouselCards.length
 
@@ -81,7 +79,6 @@ export function AboutPrologue() {
         const tl = gsap.timeline({
             onComplete: () => {
                 currentIndexRef.current = nextIdx
-                setActiveIndex(nextIdx)
                 isAnimatingRef.current = false
             }
         })
@@ -129,7 +126,6 @@ export function AboutPrologue() {
         const tl = gsap.timeline({
             onComplete: () => {
                 currentIndexRef.current = prevIdx
-                setActiveIndex(prevIdx)
                 isAnimatingRef.current = false
             }
         })
@@ -170,7 +166,6 @@ export function AboutPrologue() {
         <section ref={sectionRef} className="bg-white pt-28 pb-32 relative overflow-hidden">
             {/* Background Depth Layer */}
             <div className="absolute inset-0 max-w-[1500px] mx-auto pointer-events-none z-0">
-                <img src={atomsIcon} alt="" className="hidden md:block depth-icon-1 absolute top-20 right-4 md:right-12 w-44 md:w-64 h-auto opacity-60 blur-[2px]" />
                 <img src={pasteIcon} alt="" className="hidden md:block depth-icon-2 absolute top-[40%] right-[10%] w-36 md:w-52 h-auto opacity-70" />
                 <img src={ribbonIcon} alt="" className="hidden md:block depth-icon-3 absolute top-16 -left-8 md:-left-12 w-64 md:w-80 h-auto opacity-60" />
             </div>

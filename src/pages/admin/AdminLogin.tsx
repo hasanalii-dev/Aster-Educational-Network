@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef, type FormEvent } from 'react'
-import { useNavigate, Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import gsap from 'gsap'
 import { supabase } from '@/lib/supabase'
 import { Header } from '@/components/layout/Header'
+import { User, Mail, Lock, KeyRound, ArrowRight, ShieldCheck, Loader2, AlertCircle, CheckCircle2, Fingerprint, Bot } from 'lucide-react'
 
 export default function UnifiedAuth() {
     const containerRef = useRef<HTMLDivElement>(null)
@@ -12,6 +13,7 @@ export default function UnifiedAuth() {
     // State Engine
     const [isSignUp, setIsSignUp] = useState(false)
     const [authStep, setAuthStep] = useState<'credentials' | 'otp'>('credentials')
+    const [welcomeScreen, setWelcomeScreen] = useState<{type: 'new' | 'existing' | 'admin', name: string} | null>(null)
 
     // Form Payload
     const [fullName, setFullName] = useState('')
@@ -29,34 +31,25 @@ export default function UnifiedAuth() {
     // =========================================================
     useEffect(() => {
         const ctx = gsap.context(() => {
-            // 1. (Removed broken navbar animation)
-
-            // 2. Form Element Cascade Stagger
+            // Form Element Cascade Stagger
             gsap.fromTo(
                 '.gsap-auth-elem',
-                { opacity: 0, y: 24 },
+                { opacity: 0, y: 30 },
                 {
                     opacity: 1,
                     y: 0,
-                    duration: 0.8,
-                    stagger: 0.06,
-                    ease: 'power3.out',
-                    clearProps: 'transform' // Preserves structural focus positions
+                    duration: 1,
+                    stagger: 0.08,
+                    ease: 'expo.out',
+                    delay: 0.1
                 }
             )
 
-            // 3. Field Stagger Initialization
-            gsap.fromTo(
-                '.gsap-auth-field',
-                { opacity: 0, y: 15 },
-                { opacity: 1, y: 0, duration: 0.6, stagger: 0.05, ease: 'power2.out', delay: 0.2 }
-            )
-
-            // 4. Full-Bleed Video Plinth Slide-In
+            // Full-Bleed Video Plinth Slide-In
             gsap.fromTo(
                 '.gsap-video-panel',
-                { opacity: 0, scale: 1.02 },
-                { opacity: 1, scale: 1, duration: 1.2, ease: 'power3.out' }
+                { opacity: 0, x: 40, scale: 0.98 },
+                { opacity: 1, x: 0, scale: 1, duration: 1.5, ease: 'expo.out' }
             )
         }, containerRef)
 
@@ -71,25 +64,25 @@ export default function UnifiedAuth() {
         setError('')
         setStatusMsg('')
 
-        const fields = formStageRef.current?.querySelectorAll('.gsap-auth-field')
-        const header = containerRef.current?.querySelector('.gsap-header-text')
+        const elements = formStageRef.current?.children
 
-        const tl = gsap.timeline({
+        gsap.to(elements || [], {
+            opacity: 0,
+            y: -15,
+            duration: 0.25,
+            ease: 'power2.in',
+            stagger: 0.02,
             onComplete: () => {
                 setIsSignUp(targetMode)
-                // Wait for React to re-render DOM with new state
                 setTimeout(() => {
                     gsap.fromTo(
-                        containerRef.current?.querySelectorAll('.gsap-header-text, .gsap-auth-field, .gsap-submit-trigger'),
-                        { opacity: 0, y: 10 },
-                        { opacity: 1, y: 0, duration: 0.4, stagger: 0.04, ease: 'power2.out' }
+                        formStageRef.current?.children || [],
+                        { opacity: 0, y: 15 },
+                        { opacity: 1, y: 0, duration: 0.5, stagger: 0.05, ease: 'expo.out' }
                     )
-                }, 0)
+                }, 10)
             }
         })
-
-        // Compress outgoing architecture smoothly
-        tl.to([fields, header], { opacity: 0, y: -10, duration: 0.2, ease: 'power2.in' })
     }
 
     // =========================================================
@@ -103,16 +96,19 @@ export default function UnifiedAuth() {
 
         gsap.to(formStageRef.current.children, {
             opacity: 0,
-            x: -20,
-            duration: 0.25,
+            x: -30,
+            duration: 0.3,
             ease: 'power2.in',
+            stagger: 0.02,
             onComplete: () => {
                 setAuthStep(nextStep)
-                gsap.fromTo(
-                    formStageRef.current!.children,
-                    { opacity: 0, x: 20 },
-                    { opacity: 1, x: 0, duration: 0.4, ease: 'power2.out' }
-                )
+                setTimeout(() => {
+                    gsap.fromTo(
+                        formStageRef.current?.children || [],
+                        { opacity: 0, x: 30 },
+                        { opacity: 1, x: 0, duration: 0.6, stagger: 0.05, ease: 'expo.out' }
+                    )
+                }, 10)
             }
         })
     }
@@ -170,7 +166,7 @@ export default function UnifiedAuth() {
         })
 
         if (verifyError) {
-            setError('Invalid code block. Check your inbox and try again.')
+            setError('Invalid verification code. Please check your inbox and try again.')
             setLoading(false)
             return
         }
@@ -181,456 +177,346 @@ export default function UnifiedAuth() {
     }
 
     const routeUser = async (userId: string) => {
+        let isAdmin = false
+        let userName = fullName || email.split('@')[0]
+
         if (email === 'hasanalijaffe@gmail.com') {
-            navigate('/admin')
-            return
-        }
-
-        const { data: profile } = await supabase
-            .from('profiles')
-            .select('role')
-            .eq('id', userId)
-            .single()
-
-        if (profile && (profile.role === 'admin' || profile.role === 'super_admin')) {
-            navigate('/admin')
+            isAdmin = true
+            userName = 'Admin'
         } else {
-            navigate('/dashboard')
+            const { data: profile } = await supabase
+                .from('profiles')
+                .select('role, full_name')
+                .eq('id', userId)
+                .single()
+
+            if (profile) {
+                if (profile.role === 'admin' || profile.role === 'super_admin') {
+                    isAdmin = true
+                }
+                if (profile.full_name) userName = profile.full_name
+            }
         }
+
+        const type = isAdmin ? 'admin' : isSignUp ? 'new' : 'existing'
+        setWelcomeScreen({ type, name: userName })
+
+        setTimeout(() => {
+            if (isAdmin) {
+                navigate('/admin')
+            } else {
+                navigate('/profile')
+            }
+        }, 3200)
     }
 
+    useEffect(() => {
+        if (welcomeScreen) {
+            // IN Animation
+            gsap.fromTo('.gsap-welcome-chat', 
+                { opacity: 0, y: 30, scale: 0.9, transformOrigin: "bottom right" }, 
+                { opacity: 1, y: 0, scale: 1, duration: 0.6, ease: 'back.out(1.2)' }
+            )
+            
+            // OUT Animation
+            gsap.to('.gsap-welcome-chat', { opacity: 0, scale: 0.95, y: 20, duration: 0.4, delay: 2.7, ease: 'power2.in' })
+        }
+    }, [welcomeScreen])
+
     return (
-        <>
-            <style>{authStyles}</style>
-            <div ref={containerRef} className="auth-master-plinth">
+        <div ref={containerRef} className="min-h-screen w-full bg-white flex flex-col font-['Quicksand'] selection:bg-[#334a89]/20 selection:text-[#334a89] overflow-x-hidden">
+            <Header />
 
-                <Header />
+            {/* Master Split Layout */}
+            <div className="flex-1 flex w-full pt-[80px]">
 
-                {/* Master Shell Split Layout */}
-                <div className="auth-split-wrapper" style={{ paddingTop: '80px' }}>
+                {/* =========================================================
+                    LEFT SHEET: THE MINIMALIST FORM PLINTH
+                ========================================================= */}
+                <div className="w-full lg:w-[45%] xl:w-[40%] flex flex-col justify-center px-8 md:px-16 lg:px-24 py-12 relative z-10">
+                    <div className="w-full max-w-[420px] mx-auto lg:mx-0">
 
-                    {/* =========================================================
-              LEFT SHEET: THE CONTROLS PLINTH
-          ========================================================= */}
-                    <div className="auth-left-sheet">
-                        <div className="auth-form-max">
+                        {/* Dynamic Header Block */}
+                        <div className="gsap-auth-elem mb-10 text-center lg:text-left">
 
-                            {/* Dynamic Header Copy Block */}
-                            <div className="gsap-auth-elem gsap-header-text mb-8">
-                                <h1 className="font-['Quicksand'] text-3xl font-extrabold tracking-tight !text-[#15283D] m-0">
-                                    {authStep === 'otp'
-                                        ? 'Confirm Email'
-                                        : isSignUp ? 'Create an Account' : 'Sign In'
-                                    }
-                                </h1>
-                                <p className="font-['Quicksand'] text-sm font-medium leading-relaxed !text-[#5C5C61] mt-2.5 m-0">
-                                    {authStep === 'otp'
-                                        ? 'Provide the 6-digit verification code token sent directly to your email address.'
-                                        : isSignUp
-                                            ? 'Create an account to securely track your applications, forms, and admission updates.'
-                                            : 'Sign in to access your portal, forms, and events.'
-                                    }
-                                </p>
-                            </div>
-
-                            {/* Mode Switcher Tabs */}
-                            {authStep === 'credentials' && (
-                                <div className="gsap-auth-elem switcher-capsule mb-8">
-                                    <button
-                                        type="button"
-                                        onClick={() => toggleAuthMode(false)}
-                                        className={`switcher-tab-link ${!isSignUp ? 'is-active' : ''}`}
-                                    >
-                                        Sign In
-                                    </button>
-                                    <button
-                                        type="button"
-                                        onClick={() => toggleAuthMode(true)}
-                                        className={`switcher-tab-link ${isSignUp ? 'is-active' : ''}`}
-                                    >
-                                        Create Account
-                                    </button>
+                            {/* Un-curved Logo as strictly requested */}
+                            {authStep === 'credentials' ? (
+                                <img src="/logo.jpg" alt="Aster School" className="w-[50px] h-[50px] object-contain rounded-none mb-8 mx-auto lg:mx-0" />
+                            ) : (
+                                <div className="w-[50px] h-[50px] bg-[#334a89]/5 rounded-none flex items-center justify-center mb-8 mx-auto lg:mx-0 border border-[#334a89]/10">
+                                    <ShieldCheck className="w-6 h-6 text-[#334a89]" />
                                 </div>
                             )}
 
-                            {/* Form Payload Core Stage */}
-                            <div ref={formStageRef} className="w-full">
-                                {authStep === 'credentials' ? (
-                                    <form onSubmit={handleCredentialsSubmit} className="flex flex-col gap-4.5">
+                            <h1 className="font-['Quicksand'] text-3xl md:text-[34px] font-bold tracking-tight text-[#15283D] mb-3">
+                                {authStep === 'otp'
+                                    ? 'Confirm Email'
+                                    : isSignUp ? 'Create an Account' : 'Sign In'
+                                }
+                            </h1>
+                            <p className="font-['Quicksand'] text-[15px] font-medium text-[#5C5C61] leading-relaxed">
+                                {authStep === 'otp'
+                                    ? 'Provide the 6-digit verification code token sent directly to your email address.'
+                                    : isSignUp
+                                        ? 'Create an account to securely track your applications, forms, and admission updates.'
+                                        : 'Sign in to access your portal, forms, and events.'
+                                }
+                            </p>
+                        </div>
 
-                                        {error && <div className="auth-alert-error">{typeof error === 'string' ? error : JSON.stringify(error)}</div>}
+                        {/* SaaS Segmented Switcher Tabs */}
+                        {authStep === 'credentials' && (
+                            <div className="gsap-auth-elem flex bg-[#F4F6F8] p-1.5 rounded-[20px] mb-10 w-full max-w-[320px] mx-auto lg:mx-0 border border-[#E5E7EB]">
+                                <button
+                                    type="button"
+                                    onClick={() => toggleAuthMode(false)}
+                                    className={`flex-1 py-2.5 rounded-[16px] font-['Quicksand'] font-bold text-[13px] tracking-wide transition-all duration-300 ${!isSignUp ? 'bg-white text-[#334a89] shadow-[0_4px_12px_rgba(21,40,61,0.06)]' : 'bg-transparent text-[#5C5C61] hover:text-[#15283D]'}`}
+                                >
+                                    Sign In
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={() => toggleAuthMode(true)}
+                                    className={`flex-1 py-2.5 rounded-[16px] font-['Quicksand'] font-bold text-[13px] tracking-wide transition-all duration-300 ${isSignUp ? 'bg-white text-[#334a89] shadow-[0_4px_12px_rgba(21,40,61,0.06)]' : 'bg-transparent text-[#5C5C61] hover:text-[#15283D]'}`}
+                                >
+                                    Create Account
+                                </button>
+                            </div>
+                        )}
 
-                                        {isSignUp && (
-                                            <div className="gsap-auth-field flex flex-col gap-1.5 input-motion-group">
-                                                <label htmlFor="full-name" className="auth-label-node">Parent / Guardian Full Name</label>
+                        {/* Form Payload Core Stage */}
+                        <div ref={formStageRef} className="w-full">
+                            {authStep === 'credentials' ? (
+                                <form onSubmit={handleCredentialsSubmit} className="flex flex-col gap-6">
+
+                                    {/* Error Alert Box */}
+                                    {error && (
+                                        <div className="p-4 bg-red-50/80 border border-red-100 rounded-2xl flex items-start gap-3">
+                                            <AlertCircle className="w-5 h-5 text-red-600 shrink-0 mt-0.5" />
+                                            <p className="font-['Quicksand'] text-sm font-bold text-red-700 leading-relaxed">{typeof error === 'string' ? error : JSON.stringify(error)}</p>
+                                        </div>
+                                    )}
+
+                                    {isSignUp && (
+                                        <div className="flex flex-col gap-2">
+                                            <label className="font-['Quicksand'] font-bold text-[11px] text-[#15283D]/60 uppercase tracking-[0.15em] pl-1">Parent / Guardian Full Name</label>
+                                            <div className="relative group">
+                                                <User className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-[#A0AEC0] transition-colors group-focus-within:text-[#334a89]" />
                                                 <input
-                                                    id="full-name"
                                                     type="text"
                                                     value={fullName}
                                                     onChange={(e) => setFullName(e.target.value)}
                                                     placeholder="Syed Ali"
-                                                    className="auth-field-input"
+                                                    className="w-full pl-14 pr-5 py-4 bg-[#F4F6F8] rounded-[20px] font-['Quicksand'] font-bold text-[15px] text-[#15283D] placeholder-[#A0AEC0] border border-transparent focus:bg-white focus:ring-4 focus:ring-[#334a89]/15 outline-none transition-all duration-300"
                                                     required
                                                 />
                                             </div>
-                                        )}
+                                        </div>
+                                    )}
 
-                                        <div className="gsap-auth-field flex flex-col gap-1.5 input-motion-group">
-                                            <label htmlFor="auth-email" className="auth-label-node">Email Address</label>
+                                    <div className="flex flex-col gap-2">
+                                        <label className="font-['Quicksand'] font-bold text-[11px] text-[#15283D]/60 uppercase tracking-[0.15em] pl-1">Email Address</label>
+                                        <div className="relative group">
+                                            <Mail className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-[#A0AEC0] transition-colors group-focus-within:text-[#334a89]" />
                                             <input
-                                                id="auth-email"
                                                 type="email"
                                                 value={email}
                                                 onChange={(e) => setEmail(e.target.value)}
                                                 placeholder="parent@example.com"
-                                                className="auth-field-input"
+                                                className="w-full pl-14 pr-5 py-4 bg-[#F4F6F8] rounded-[20px] font-['Quicksand'] font-bold text-[15px] text-[#15283D] placeholder-[#A0AEC0] border border-transparent focus:bg-white focus:ring-4 focus:ring-[#334a89]/15 outline-none transition-all duration-300"
                                                 required
                                             />
                                         </div>
+                                    </div>
 
-                                        <div className="gsap-auth-field flex flex-col gap-1.5 input-motion-group">
-                                            <label htmlFor="auth-password" className="auth-label-node">Password</label>
+                                    <div className="flex flex-col gap-2">
+                                        <label className="font-['Quicksand'] font-bold text-[11px] text-[#15283D]/60 uppercase tracking-[0.15em] pl-1">Password</label>
+                                        <div className="relative group">
+                                            <Lock className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-[#A0AEC0] transition-colors group-focus-within:text-[#334a89]" />
                                             <input
-                                                id="auth-password"
                                                 type="password"
                                                 value={password}
                                                 onChange={(e) => setPassword(e.target.value)}
                                                 placeholder="••••••••"
-                                                className="auth-field-input"
+                                                className="w-full pl-14 pr-5 py-4 bg-[#F4F6F8] rounded-[20px] font-['Quicksand'] font-bold text-[15px] text-[#15283D] placeholder-[#A0AEC0] border border-transparent focus:bg-white focus:ring-4 focus:ring-[#334a89]/15 outline-none transition-all duration-300 tracking-[0.2em]"
                                                 required
                                                 minLength={6}
                                             />
                                         </div>
+                                    </div>
 
-                                        <button type="submit" className="gsap-submit-trigger auth-master-button mt-2" disabled={loading}>
-                                            {loading ? <span className="auth-loading-spinner" /> : isSignUp ? 'Sign Up' : 'Sign In'}
-                                        </button>
-                                    </form>
-                                ) : (
+                                    <button
+                                        type="submit"
+                                        disabled={loading}
+                                        className="w-full mt-2 flex items-center justify-center gap-3 bg-[#334a89] text-white px-8 py-5 rounded-[20px] font-['Quicksand'] font-bold text-[14px] tracking-[0.15em] uppercase transition-all duration-300 hover:bg-[#15283D] hover:shadow-[0_20px_40px_rgba(51,74,137,0.25)] disabled:opacity-70 disabled:cursor-not-allowed group/btn"
+                                    >
+                                        {loading ? (
+                                            <Loader2 className="w-5 h-5 animate-spin" />
+                                        ) : (
+                                            <>
+                                                {isSignUp ? 'Sign Up' : 'Sign In'}
+                                                <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover/btn:translate-x-1" />
+                                            </>
+                                        )}
+                                    </button>
+                                </form>
+                            ) : (
 
-                                    /* ── VIEW B: 6-DIGIT OTP FIELD ── */
-                                    <form onSubmit={handleOtpSubmit} className="flex flex-col gap-5">
+                                /* ── VIEW B: 6-DIGIT OTP VAULT ── */
+                                <form onSubmit={handleOtpSubmit} className="flex flex-col gap-6">
 
-                                        {error && <div className="auth-alert-error">{typeof error === 'string' ? error : JSON.stringify(error)}</div>}
-                                        {statusMsg && <div className="auth-alert-success">{statusMsg}</div>}
+                                    {error && (
+                                        <div className="p-4 bg-red-50/80 border border-red-100 rounded-2xl flex items-start gap-3">
+                                            <AlertCircle className="w-5 h-5 text-red-600 shrink-0 mt-0.5" />
+                                            <p className="font-['Quicksand'] text-sm font-bold text-red-700 leading-relaxed">{typeof error === 'string' ? error : JSON.stringify(error)}</p>
+                                        </div>
+                                    )}
+                                    {statusMsg && (
+                                        <div className="p-4 bg-[#334a89]/5 border border-[#334a89]/20 rounded-2xl flex items-start gap-3">
+                                            <CheckCircle2 className="w-5 h-5 text-[#334a89] shrink-0 mt-0.5" />
+                                            <p className="font-['Quicksand'] text-sm font-bold text-[#334a89] leading-relaxed">{statusMsg}</p>
+                                        </div>
+                                    )}
 
-                                        <div className="flex flex-col gap-2 mt-1">
-                                            <label htmlFor="otp-input" className="text-center font-['Quicksand'] text-xs font-bold tracking-[0.2em] uppercase !text-[#334a89]">
-                                                Verification Token
-                                            </label>
+                                    <div className="flex flex-col gap-2 mt-2">
+                                        <label className="font-['Quicksand'] text-center font-bold text-[11px] text-[#15283D]/60 uppercase tracking-[0.2em] mb-2">
+                                            Verification Token
+                                        </label>
+                                        <div className="relative group">
+                                            <KeyRound className="absolute left-6 top-1/2 -translate-y-1/2 w-6 h-6 text-[#A0AEC0] transition-colors group-focus-within:text-[#334a89]" />
                                             <input
-                                                id="otp-input"
                                                 type="text"
                                                 maxLength={6}
                                                 value={otpCode}
                                                 onChange={(e) => setOtpCode(e.target.value.replace(/\D/g, ''))}
                                                 placeholder="000000"
-                                                className="auth-field-input !text-center !text-3xl !tracking-[0.4em] !font-extrabold !h-16"
+                                                className="w-full pl-16 pr-6 py-5 bg-[#F4F6F8] rounded-[24px] font-['Quicksand'] text-center text-3xl tracking-[0.5em] font-extrabold text-[#15283D] placeholder-[#A0AEC0]/30 border border-transparent focus:bg-white focus:ring-4 focus:ring-[#334a89]/15 outline-none transition-all duration-300"
                                                 required
                                                 autoFocus
                                             />
                                         </div>
+                                    </div>
 
-                                        <button type="submit" className="auth-master-button mt-2" disabled={loading || otpCode.length < 6}>
-                                            {loading ? <span className="auth-loading-spinner" /> : 'Confirm Code'}
-                                        </button>
+                                    <button
+                                        type="submit"
+                                        disabled={loading || otpCode.length < 6}
+                                        className="w-full mt-2 flex items-center justify-center gap-3 bg-[#334a89] text-white px-8 py-5 rounded-[24px] font-['Quicksand'] font-bold text-[14px] tracking-[0.15em] uppercase transition-all duration-300 hover:bg-[#15283D] hover:shadow-[0_20px_40px_rgba(51,74,137,0.25)] disabled:opacity-70 disabled:cursor-not-allowed group/btn"
+                                    >
+                                        {loading ? (
+                                            <Loader2 className="w-5 h-5 animate-spin" />
+                                        ) : (
+                                            <>
+                                                Confirm Code
+                                                <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover/btn:translate-x-1" />
+                                            </>
+                                        )}
+                                    </button>
 
-                                        <button
-                                            type="button"
-                                            onClick={() => animateStepChange('credentials')}
-                                            className="!bg-transparent !border-none font-['Quicksand'] !text-xs font-semibold !text-[#5C5C61] hover:!text-[#334a89] !cursor-pointer text-center underline"
-                                        >
-                                            ← Modify Email Address
-                                        </button>
-                                    </form>
-                                )}
+                                    <button
+                                        type="button"
+                                        onClick={() => animateStepChange('credentials')}
+                                        className="mt-4 font-['Quicksand'] text-[13px] font-bold text-[#5C5C61] hover:text-[#334a89] transition-colors text-center underline underline-offset-4"
+                                    >
+                                        ← Modify Email Address
+                                    </button>
+                                </form>
+                            )}
+                        </div>
+
+                    </div>
+                </div>
+
+                {/* =========================================================
+                    RIGHT SHEET: ARCHITECTURAL MEDIA COVER
+                ========================================================= */}
+                <div className="gsap-video-panel hidden lg:flex flex-1 relative m-6 ml-0 rounded-[40px] overflow-hidden shadow-[0_40px_80px_rgba(21,40,61,0.12)] bg-[#15283D]">
+                    <video
+                        src="https://alpha.edu.pk/img/hero.mp4"
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        className="absolute inset-0 w-full h-full object-cover scale-105"
+                    />
+
+                    {/* Dark gradient mapping to push focus to the quote */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#15283D]/90 via-[#15283D]/20 to-transparent pointer-events-none" />
+
+                    {/* Glassmorphic Quote Dossier (Preserving Client Content) */}
+                    <div className="absolute bottom-12 left-12 right-12 bg-white/10 backdrop-blur-xl border border-white/20 p-10 rounded-[32px] shadow-2xl">
+                        <div className="w-10 h-[3px] bg-[#ffc715] mb-6" />
+                        <blockquote className="font-['Cormorant_Garamond'] text-[28px] xl:text-[34px] italic font-normal text-white leading-[1.3] tracking-tight mb-8">
+                            "Education should not simply prepare children for the next grade. It should prepare them for tomorrow."
+                        </blockquote>
+                        <div className="flex items-center gap-4">
+                            <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center p-2 shadow-inner">
+                                <img src="/logo.jpg" alt="Aster School" className="w-full h-full object-contain rounded-full" />
                             </div>
-
+                            <div>
+                                <p className="font-['Quicksand'] font-bold text-white text-[15px]">The Aster School</p>
+                                <p className="font-['Quicksand'] font-medium text-white/70 text-[13px]">Karachi, Pakistan</p>
+                            </div>
                         </div>
                     </div>
-
-                    {/* =========================================================
-              RIGHT SHEET: KINETIC ARCHITECTURAL COVER
-          ========================================================= */}
-                    <div className="gsap-video-panel auth-right-sheet">
-                        <video
-                            src="https://alpha.edu.pk/img/hero.mp4"
-                            autoPlay
-                            loop
-                            muted
-                            playsInline
-                            className="absolute inset-0 w-full h-full object-cover pointer-events-none"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#15283D] via-[#15283D]/40 to-transparent pointer-events-none" />
-
-                        <div className="gsap-auth-quote relative z-10 p-12 lg:p-16 max-w-lg mb-8">
-                            <div className="w-10 h-[3px] bg-[#ffc715] mb-6" />
-                            <blockquote className="font-['Cormorant_Garamond'] text-3xl md:text-4xl italic font-normal text-white !text-white leading-[1.35] m-0">
-                                "Education should not simply prepare children for the next grade. It should prepare them for tomorrow."
-                            </blockquote>
-                        </div>
-                    </div>
-
                 </div>
 
             </div>
-        </>
+
+            {/* =========================================================
+                CHATBOT STYLE WELCOME NOTIFICATION
+            ========================================================= */}
+            {welcomeScreen && (
+                <div className="gsap-welcome-chat fixed bottom-6 right-6 z-[999] opacity-0 flex items-end gap-3 pointer-events-none">
+                    
+                    {/* Speech Bubble */}
+                    <div className="bg-white rounded-2xl rounded-br-sm shadow-[0_10px_40px_rgba(21,40,61,0.12)] border border-gray-100 p-5 max-w-[320px] mb-2 relative">
+                        <div className="absolute -bottom-2 right-4 w-4 h-4 bg-white border-b border-r border-gray-100 transform rotate-45 z-[-1]"></div>
+                        
+                        {welcomeScreen.type === 'new' && (
+                            <>
+                                <h3 className="font-['Quicksand'] text-[15px] font-bold text-[#15283D] mb-1">
+                                    Welcome to Aster, <span className="text-[#ffc715]">{welcomeScreen.name}</span>!
+                                </h3>
+                                <p className="font-['Quicksand'] text-[13px] font-medium text-[#5C5C61] leading-snug">
+                                    We are thrilled to have you here. Setting up your family profile...
+                                </p>
+                            </>
+                        )}
+
+                        {welcomeScreen.type === 'existing' && (
+                            <>
+                                <h3 className="font-['Quicksand'] text-[15px] font-bold text-[#15283D] mb-1">
+                                    Welcome back, <span>{welcomeScreen.name}</span>!
+                                </h3>
+                                <p className="font-['Quicksand'] text-[13px] font-medium text-[#5C5C61] leading-snug">
+                                    Great to see you again. Preparing your portal...
+                                </p>
+                            </>
+                        )}
+
+                        {welcomeScreen.type === 'admin' && (
+                            <>
+                                <h3 className="font-['Quicksand'] text-[15px] font-bold text-red-600 mb-1 flex items-center gap-2">
+                                    <Fingerprint className="w-4 h-4" /> System Auth Complete
+                                </h3>
+                                <p className="font-['Quicksand'] text-[13px] font-medium text-[#5C5C61] leading-snug">
+                                    Welcome, {welcomeScreen.name}. Initializing secure admin console...
+                                </p>
+                            </>
+                        )}
+
+                        <div className="mt-4 flex items-center gap-2">
+                            <Loader2 className={`w-4 h-4 animate-spin ${welcomeScreen.type === 'new' ? 'text-[#ffc715]' : welcomeScreen.type === 'admin' ? 'text-red-500' : 'text-[#334a89]'}`} />
+                            <span className="font-['Quicksand'] text-[11px] font-bold text-[#A0AEC0] uppercase tracking-wider">Redirecting</span>
+                        </div>
+                    </div>
+
+                    {/* Chatbot Avatar */}
+                    <div className="w-14 h-14 bg-[#394EA2] rounded-full flex items-center justify-center shadow-[0_4px_15px_rgba(57,78,162,0.4)] shrink-0 border-2 border-white">
+                        <Bot className="w-7 h-7 text-white" />
+                    </div>
+                </div>
+            )}
+        </div>
     )
 }
-
-const authStyles = `
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap');
-
-/* Bulletproof Structural Reset to guarantee absolutely 0 horizontal bleed */
-.auth-master-plinth {
-  width: 100vw;
-  max-width: 100%;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  background: #FFFFFF;
-  overflow-x: hidden !important;
-  position: relative;
-  box-sizing: border-box;
-}
-
-/* =========================================================
-    INTEGRATED NAVBAR RULES
-========================================================= */
-.auth-navbar-node {
-  width: 100%;
-  height: 80px;
-  background: #FFFFFF;
-  border-bottom: 1px solid #E5E7EB;
-  display: flex;
-  align-items: center;
-  position: relative;
-  z-index: 50;
-  padding: 0 24px;
-  box-sizing: border-box;
-}
-
-.navbar-bounds {
-  width: 100%;
-  max-width: 1440px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.navbar-brand-group {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  text-decoration: none;
-}
-
-.navbar-logo-sharp {
-  width: 38px;
-  height: 38px;
-  border-radius: 0px !important; /* Strict geometry */
-  object-fit: cover;
-}
-
-.navbar-brand-text {
-  font-family: 'Quicksand', sans-serif;
-  font-weight: 800;
-  font-size: 14px;
-  letter-spacing: 0.15em;
-  color: #15283D;
-  margin-top: 2px;
-}
-
-.navbar-links-desktop {
-  display: none;
-  gap: 28px;
-}
-
-@media (min-width: 768px) {
-  .navbar-links-desktop { display: flex; }
-}
-
-.nav-node {
-  font-family: 'Quicksand', sans-serif;
-  font-weight: 700;
-  font-size: 13.5px;
-  color: #5C5C61;
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-
-.nav-node:hover {
-  color: #334a89;
-}
-
-/* =========================================================
-    SPLIT PAGE ARCHITECTURE
-========================================================= */
-.auth-split-wrapper {
-  display: grid;
-  grid-template-columns: 1fr;
-  flex-grow: 1;
-  width: 100%;
-  position: relative;
-}
-
-@media (min-width: 1024px) {
-  .auth-split-wrapper { grid-template-columns: 480px 1fr; }
-}
-@media (min-width: 1280px) {
-  .auth-split-wrapper { grid-template-columns: 540px 1fr; }
-}
-
-.auth-left-sheet {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 48px 24px;
-  background: #FFFFFF;
-}
-
-.auth-form-max {
-  width: 100%;
-  max-width: 380px;
-}
-
-.switcher-capsule {
-  display: flex;
-  background: #F4F7FB;
-  padding: 5px;
-  border-radius: 12px;
-  border: 1px solid #E5E7EB;
-}
-
-.switcher-tab-link {
-  flex: 1;
-  padding: 11px 0;
-  border: none;
-  background: transparent;
-  font-family: 'Quicksand', sans-serif !important;
-  font-size: 13.5px;
-  font-weight: 700;
-  color: #6B7280;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.switcher-tab-link.is-active {
-  background: #FFFFFF;
-  color: #334a89;
-  box-shadow: 0 4px 10px rgba(21, 40, 61, 0.06);
-}
-
-.auth-label-node {
-  font-family: 'Quicksand', sans-serif !important;
-  font-size: 13px;
-  font-weight: 700;
-  color: #15283D !important;
-}
-
-.auth-field-input {
-  width: 100%;
-  height: 50px;
-  padding: 0 16px;
-  border: 1.5px solid #E5E7EB;
-  border-radius: 10px;
-  font-family: 'Quicksand', sans-serif !important;
-  font-size: 14.5px;
-  font-weight: 600;
-  color: #15283D !important;
-  background: #FAFAFA;
-  outline: none;
-  box-sizing: border-box;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Fluid scale input animation upon cursor active bounds */
-.auth-field-input:focus {
-  border-color: #334a89;
-  background: #FFFFFF;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(51, 74, 137, 0.06);
-}
-
-.auth-master-button {
-  height: 52px;
-  width: 100%;
-  background: #334a89;
-  color: #FFFFFF !important;
-  border: none;
-  border-radius: 10px;
-  font-family: 'Quicksand', sans-serif !important;
-  font-size: 15px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.25s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 8px 22px -4px rgba(51, 74, 137, 0.3);
-}
-
-.auth-master-button:hover:not(:disabled) {
-  background: #253766;
-  transform: translateY(-1px);
-  box-shadow: 0 12px 26px -4px rgba(51, 74, 137, 0.4);
-}
-
-.auth-master-button:disabled {
-  opacity: 0.65;
-  cursor: not-allowed;
-}
-
-.auth-alert-error {
-  padding: 12px 16px;
-  background: #FEF2F2;
-  border: 1px solid #FECACA;
-  border-radius: 10px;
-  font-family: 'Quicksand', sans-serif !important;
-  font-size: 13px;
-  font-weight: 600;
-  color: #B91C1C !important;
-}
-
-.auth-alert-success {
-  padding: 12px 16px;
-  background: #ECFDF5;
-  border: 1px solid #A7F3D0;
-  border-radius: 10px;
-  font-family: 'Quicksand', sans-serif !important;
-  font-size: 13px;
-  font-weight: 600;
-  color: #065F46 !important;
-}
-
-.auth-loading-spinner {
-  width: 20px;
-  height: 20px;
-  border: 2.5px solid rgba(255, 255, 255, 0.3);
-  border-top-color: #FFFFFF;
-  border-radius: 50%;
-  animation: auth-spin-loop 0.8s linear infinite;
-}
-
-@keyframes auth-spin-loop { to { transform: rotate(360deg); } }
-
-/* ── RIGHT COLUMN: FULL BLEED ARCHITECTURAL SCREEN ── */
-.auth-right-sheet {
-  position: relative;
-  display: none;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  background: #15283D;
-}
-
-@media (min-width: 1024px) {
-  .auth-right-sheet {
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
-  }
-}
-`

@@ -110,7 +110,7 @@ export function SeniorInnovation() {
                     {/* Left: Typography Content */}
                     <div className="w-full lg:w-5/12 flex flex-col" ref={contentRef}>
                         <div className="flex items-center gap-3 mb-6">
-                            <Lightbulb className="w-5 h-5 text-[#C9A84C]" strokeWidth={2.5} />
+                            <Lightbulb className="w-5 h-5 text-[#edad0c]" strokeWidth={2.5} />
                             <span className="font-['Quicksand'] font-bold text-xs md:text-sm tracking-[0.3em] text-[#15283D] uppercase">
                                 DEVELOPING FUTURE-READY LEARNERS
                             </span>
@@ -132,7 +132,7 @@ export function SeniorInnovation() {
                         <ul className="mt-10 space-y-4 font-['Quicksand'] text-lg font-bold text-[#15283D]">
                             {['Think strategically', 'Solve real-world problems', 'Work collaboratively', 'Adapt to emerging technologies', 'Turn ideas into action'].map((item, i) => (
                                 <li key={i} className="flex items-center gap-4">
-                                    <div className="w-2 h-2 bg-[#C9A84C]" />
+                                    <div className="w-2 h-2 bg-[#edad0c]" />
                                     {item}
                                 </li>
                             ))}

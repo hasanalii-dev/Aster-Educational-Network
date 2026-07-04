@@ -7,32 +7,12 @@ gsap.registerPlugin(ScrollTrigger)
 
 export function SeniorCambridge() {
     const sectionRef = useRef<HTMLElement>(null)
-    const contentRef = useRef<HTMLDivElement>(null)
-    const imgWrapRef = useRef<HTMLDivElement>(null)
-    const imgRef = useRef<HTMLImageElement>(null)
+    const contentBoxRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
         const ctx = gsap.context(() => {
-            if (contentRef.current) {
-                const children = contentRef.current.querySelectorAll('.cambridge-stagger')
-                gsap.fromTo(children,
-                    { y: 30, opacity: 0 },
-                    {
-                        y: 0,
-                        opacity: 1,
-                        duration: 1,
-                        stagger: 0.15,
-                        ease: "power3.out",
-                        scrollTrigger: {
-                            trigger: contentRef.current,
-                            start: "top 80%",
-                        }
-                    }
-                )
-            }
-
-            if (imgWrapRef.current && imgRef.current) {
-                gsap.fromTo(imgWrapRef.current,
+            if (contentBoxRef.current) {
+                gsap.fromTo(contentBoxRef.current,
                     { y: 60, opacity: 0 },
                     {
                         y: 0,
@@ -40,22 +20,25 @@ export function SeniorCambridge() {
                         duration: 1.2,
                         ease: "power3.out",
                         scrollTrigger: {
-                            trigger: imgWrapRef.current,
-                            start: "top 85%",
+                            trigger: sectionRef.current,
+                            start: "top 75%",
                         }
                     }
                 )
 
-                gsap.fromTo(imgRef.current,
-                    { scale: 1.1 },
+                // Stagger inner elements
+                const children = contentBoxRef.current.querySelectorAll('.cambridge-stagger')
+                gsap.fromTo(children,
+                    { y: 20, opacity: 0 },
                     {
-                        scale: 1,
-                        ease: "none",
+                        y: 0,
+                        opacity: 1,
+                        duration: 0.8,
+                        stagger: 0.15,
+                        ease: "power2.out",
                         scrollTrigger: {
-                            trigger: imgWrapRef.current,
-                            start: "top bottom",
-                            end: "bottom top",
-                            scrub: true
+                            trigger: sectionRef.current,
+                            start: "top 70%",
                         }
                     }
                 )
@@ -65,73 +48,72 @@ export function SeniorCambridge() {
     }, [])
 
     return (
-        <section ref={sectionRef} className="w-full py-24 md:py-36 bg-white overflow-hidden">
-            <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-24 flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
+        <section ref={sectionRef} className="relative w-full min-h-[800px] flex items-center overflow-hidden bg-[#15283D]">
+            
+            {/* Absolute Full-width Video Background */}
+            <div className="absolute inset-0 w-full h-full overflow-hidden">
+                <video
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="absolute inset-0 w-full h-full object-cover"
+                >
+                    <source src="https://res.cloudinary.com/lpxp5l3a/video/upload/q_auto,f_auto,w_1920/ASTER_SCHOOL__2_3_ldqbk5.mp4" type="video/mp4" />
+                </video>
+                {/* Vignette Overlay */}
+                <div className="absolute inset-0 bg-[#15283D]/50" />
+            </div>
+
+            <div className="relative z-10 w-full max-w-[1440px] mx-auto px-6 md:px-12 lg:px-24 flex justify-center py-24 md:py-36">
                 
-                {/* Left: Typography Content */}
-                <div ref={contentRef} className="w-full lg:w-1/2 flex flex-col">
+                {/* Centered Solid Content Box */}
+                <div 
+                    ref={contentBoxRef}
+                    className="relative p-10 md:p-14 lg:p-16 max-w-[800px] flex flex-col items-center text-center shadow-2xl bg-white"
+                    style={{ borderRadius: '0px' }}
+                >
+                    {/* Corner Accent Rectangles */}
+                    <div className="absolute top-0 left-0 w-6 h-6 bg-[#15283D]" />
+                    <div className="absolute top-0 right-0 w-6 h-6 bg-[#15283D]" />
+                    <div className="absolute bottom-0 left-0 w-6 h-6 bg-[#15283D]" />
+                    <div className="absolute bottom-0 right-0 w-6 h-6 bg-[#15283D]" />
+
                     <div className="cambridge-stagger flex items-center gap-3 mb-6">
-                        <Award className="w-5 h-5 text-[#C9A84C]" strokeWidth={2.5} />
+                        <Award className="w-5 h-5 text-[#edad0c]" strokeWidth={2.5} />
                         <span className="font-['Quicksand'] font-bold text-xs md:text-sm tracking-[0.3em] text-[#15283D] uppercase">
                             ACADEMIC EXCELLENCE WITH PURPOSE
                         </span>
                     </div>
 
-                    <h2 className="cambridge-stagger font-['Playfair_Display'] text-4xl md:text-[50px] lg:text-[56px] font-medium leading-[1.1] text-[#15283D] mb-8">
-                        The Cambridge <em className="text-[#334a89] italic">Pathway</em>.
+                    <h2 className="cambridge-stagger font-['Playfair_Display'] text-4xl md:text-[50px] font-medium leading-[1.1] text-[#15283D] mb-8">
+                        The Cambridge <em className="text-[#15283D] italic">Pathway</em>.
                     </h2>
 
-                    <div className="cambridge-stagger font-['Quicksand'] text-lg leading-[1.65] text-[#5C5C61] space-y-6 font-medium">
+                    <div className="cambridge-stagger font-['Quicksand'] text-[17px] leading-[1.65] text-[#5C5C61] space-y-6 font-medium w-full">
                         <p>
                             As a licensed Cambridge school, Aster offers an internationally recognized academic pathway that prepares students for future success in higher education and beyond.
                         </p>
                         <p>
-                            We are proud of our <strong className="text-[#15283D]">100% Cambridge examination success rate</strong>, reflecting a culture of high expectations, consistent support, and a commitment to excellence.
+                            We are proud of our <strong className="text-[#15283D] font-bold">100% Cambridge examination success rate</strong>, reflecting a culture of high expectations, consistent support, and a commitment to excellence.
                         </p>
-                    </div>
-
-                    <div className="cambridge-stagger w-12 h-[2px] bg-[#C9A84C] my-8" />
-
-                    <ul className="cambridge-stagger space-y-4 font-['Quicksand'] text-lg font-bold text-[#15283D]">
-                        {['Critical thinking', 'Research skills', 'Independent learning habits', 'Problem-solving abilities', 'Academic confidence'].map((item, i) => (
-                            <li key={i} className="flex items-center gap-4">
-                                <div className="w-2 h-2 bg-[#C9A84C] shrink-0" />
-                                {item}
-                            </li>
-                        ))}
-                    </ul>
-
-                    <p className="cambridge-stagger mt-10 font-['Quicksand'] text-xl leading-[1.6] text-[#15283D] font-bold">
-                        Academic achievement at Aster is not simply about results. It is about developing learners who understand concepts deeply and can apply their knowledge meaningfully.
-                    </p>
-                </div>
-
-                {/* Right: Editorial Image */}
-                <div className="w-full lg:w-1/2 relative flex justify-center lg:justify-end">
-                    <div 
-                        ref={imgWrapRef}
-                        className="relative w-full max-w-[500px] aspect-[3/4] z-10"
-                    >
-                        {/* Gold Frame Accent */}
-                        <div className="absolute -inset-4 border border-[#C9A84C] z-0 pointer-events-none" />
                         
-                        <div className="w-full h-full relative z-10 overflow-hidden shadow-2xl bg-gray-100" style={{ borderRadius: '0px' }}>
-                            <img
-                                ref={imgRef}
-                                src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1200&auto=format&fit=crop"
-                                alt="Students reading"
-                                className="w-full h-full object-cover transform-gpu"
-                                style={{ borderRadius: '0px' }}
-                            />
-                        </div>
+                        <div className="w-12 h-[2px] bg-[#edad0c] my-6 mx-auto" />
                         
-                        {/* Decorative Box */}
-                        <div className="absolute -bottom-8 -left-8 w-32 h-32 bg-[#15283D] z-20 flex items-center justify-center p-6 shadow-xl">
-                            <span className="font-['Playfair_Display'] italic text-white text-3xl font-medium leading-none text-center">
-                                100%<br />
-                                <span className="font-['Quicksand'] not-italic text-xs tracking-widest text-[#C9A84C] font-bold mt-2 block uppercase">Success Rate</span>
-                            </span>
+                        <div className="flex flex-col items-start mx-auto w-fit space-y-3 font-['Quicksand'] text-[17px] font-bold text-[#15283D] text-left">
+                            {['Critical thinking', 'Research skills', 'Independent learning habits', 'Problem-solving abilities', 'Academic confidence'].map((item, i) => (
+                                <div key={i} className="flex items-center gap-4">
+                                    <div className="w-2 h-2 bg-[#edad0c] shrink-0" />
+                                    <span>{item}</span>
+                                </div>
+                            ))}
                         </div>
+
+                        <div className="w-12 h-[2px] bg-[#edad0c] my-6 mx-auto" />
+
+                        <p className="text-[#15283D] font-bold text-lg">
+                            Academic achievement at Aster is not simply about results. It is about developing learners who understand concepts deeply and can apply their knowledge meaningfully.
+                        </p>
                     </div>
                 </div>
 

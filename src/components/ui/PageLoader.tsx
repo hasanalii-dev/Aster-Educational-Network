@@ -49,6 +49,7 @@ export function PageLoader() {
             onComplete: () => {
                 document.body.style.overflow = ''
                 setIsVisible(false)
+                window.dispatchEvent(new CustomEvent('asterLoaderFinished'))
             }
         })
         masterTlRef.current = tl

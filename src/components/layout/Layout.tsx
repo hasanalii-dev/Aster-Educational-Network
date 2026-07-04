@@ -7,6 +7,7 @@ import { useSmoothScroll } from '@/hooks/useSmoothScroll'
 import { useGlobalReveal } from '@/hooks/useGlobalReveal'
 import { TransitionProvider } from '@/components/ui/PageTransition'
 import { CustomCursor } from '@/components/ui/CustomCursor'
+import { ChatbotWidget } from '@/components/ui/ChatbotWidget'
 
 /**
  * Root Layout — Aster Pakistan
@@ -40,6 +41,7 @@ export function Layout() {
         </main>
         <Footer />
       </div>
+      <ChatbotWidget />
     </TransitionProvider>
   )
 }

@@ -57,7 +57,7 @@ export function SeniorBeyond() {
                 
                 <div ref={contentRef} className="flex flex-col items-center max-w-4xl mb-16">
                     <div className="gsap-stagger-item flex items-center gap-3 mb-6">
-                        <Compass className="w-5 h-5 text-[#C9A84C]" strokeWidth={2.5} />
+                        <Compass className="w-5 h-5 text-[#edad0c]" strokeWidth={2.5} />
                         <span className="font-['Quicksand'] font-bold text-xs md:text-sm tracking-[0.3em] text-[#15283D] uppercase">
                             LEARNING BEYOND THE CLASSROOM
                         </span>
@@ -67,7 +67,7 @@ export function SeniorBeyond() {
                         Experiences That Shape <em className="text-[#334a89] italic">Growth</em>
                     </h2>
 
-                    <div className="gsap-stagger-item w-16 h-[2px] bg-[#C9A84C] mb-8 mx-auto" />
+                    <div className="gsap-stagger-item w-16 h-[2px] bg-[#edad0c] mb-8 mx-auto" />
 
                     <div className="gsap-stagger-item font-['Quicksand'] text-lg md:text-xl text-[#5C5C61] space-y-6 font-medium leading-[1.6]">
                         <p>

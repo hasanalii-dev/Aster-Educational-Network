@@ -29,14 +29,14 @@ const ImageWithSkeleton = ({ src, alt, className }: { src: string, alt: string, 
  * High-Reliability Pexels CDN Image Data
  * ---------------------------------------- */
 const learnerData = [
-  { title: "Annual plays and performances", image: "https://images.pexels.com/photos/713149/pexels-photo-713149.jpeg?auto=compress&cs=tinysrgb&w=800" },
-  { title: "Robotics competitions", image: "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800" },
-  { title: "Sports tournaments", image: "https://images.pexels.com/photos/841130/pexels-photo-841130.jpeg?auto=compress&cs=tinysrgb&w=800" },
-  { title: "Passion Projects", image: "https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=800" },
-  { title: "Student-led initiatives", image: "https://images.pexels.com/photos/5212345/pexels-photo-5212345.jpeg?auto=compress&cs=tinysrgb&w=800" },
-  { title: "Entrepreneurship experiences", image: "https://images.pexels.com/photos/3182812/pexels-photo-3182812.jpeg?auto=compress&cs=tinysrgb&w=800" },
-  { title: "Community and fundraising events", image: "https://images.pexels.com/photos/6646917/pexels-photo-6646917.jpeg?auto=compress&cs=tinysrgb&w=800" },
-  { title: "Field trips and experiential learning", image: "https://images.pexels.com/photos/296301/pexels-photo-296301.jpeg?auto=compress&cs=tinysrgb&w=800" },
+  { title: "Annual plays and performances", image: "https://res.cloudinary.com/lpxp5l3a/image/upload/v1783170587/647867463_1519242336876031_2472216514536120184_n_rqsshg.jpg" },
+  { title: "Robotics competitions", image: "https://res.cloudinary.com/lpxp5l3a/image/upload/v1783170629/DSC03571_xhi0f1.jpg" },
+  { title: "Sports tournaments", image: "https://res.cloudinary.com/lpxp5l3a/image/upload/v1783170666/490848489_1216868750446726_890053301611107485_n_1_tcdxil.jpg" },
+  { title: "Passion Projects", image: "https://res.cloudinary.com/lpxp5l3a/image/upload/v1783170702/494206368_1231093142357620_4404713336800911290_n_s2wfdt.jpg" },
+  { title: "Student-led initiatives", image: "https://res.cloudinary.com/lpxp5l3a/image/upload/v1783170735/image00002_onmsna.jpg" },
+  { title: "Entrepreneurship experiences", image: "https://res.cloudinary.com/lpxp5l3a/image/upload/v1783170868/image00016_s28yly.jpg" },
+  { title: "Community and fundraising events", image: "https://res.cloudinary.com/lpxp5l3a/image/upload/v1783170911/image00028_yjfnfc.jpg" },
+  { title: "Field trips and experiential learning", image: "https://res.cloudinary.com/lpxp5l3a/image/upload/v1783170968/471264397_1668017843779408_2247922833050165345_n_kmaaqh.jpg" },
 ]
 
 export function ProgramsSection() {
@@ -425,20 +425,39 @@ const programsStyles = `
 
 @media (max-width: 1024px) {
   .learners-section { padding: 100px 0; }
-  .learners-container { flex-direction: column; padding: 0 40px; gap: 60px; min-height: auto; }
-  .learners-left { width: 100%; align-items: flex-start; }
-  .learners-list { display: none; }
-  .learners-right { transform: none; width: 100%; height: auto; display: flex; flex-direction: column; gap: 24px; }
-  .learners-image-wrapper { width: 100%; height: auto; aspect-ratio: 4/5; max-width: 500px; }
-  .learners-yellow-card { position: relative; width: 100%; right: auto; bottom: auto; padding: 32px; max-width: 500px; }
+  .learners-container { flex-direction: column; padding: 0 40px; gap: 40px; min-height: auto; overflow: hidden; }
+  .learners-left { width: 100%; align-items: flex-start; gap: 24px; max-width: 100%; }
+  
+  /* Show list as horizontally scrolling tabs on mobile */
+  .learners-list { 
+    display: flex; 
+    flex-direction: row; 
+    width: 100%; 
+    padding-left: 0; 
+    padding-bottom: 16px;
+    gap: 24px; 
+    overflow-x: auto; 
+    -ms-overflow-style: none; 
+    scrollbar-width: none; 
+    -webkit-overflow-scrolling: touch;
+  }
+  .learners-list::-webkit-scrollbar { display: none; }
+  
+  .learner-item { flex-shrink: 0; opacity: 0.5; }
+  .learner-item.is-active { opacity: 1; }
+  .learner-line { display: none; }
+  
+  .learners-right { transform: none; width: 100%; height: auto; display: flex; flex-direction: column; gap: 24px; max-width: 100%; }
+  .learners-image-wrapper { width: 100%; height: auto; aspect-ratio: 4/5; max-width: 100%; }
+  .learners-yellow-card { position: relative; width: 100%; right: auto; bottom: auto; padding: 32px; max-width: 100%; }
   .learners-pagination { display: none; }
 }
 
 @media (max-width: 600px) {
   .learners-section { padding: 64px 0; }
-  .learners-container { padding: 0 24px; gap: 40px; }
-  .learners-title { font-size: 40px; }
+  .learners-container { padding: 0 24px; gap: 32px; }
+  .learners-title { font-size: 36px; }
   .learners-image-wrapper { aspect-ratio: 1; }
   .learners-yellow-card p { font-size: 16px; }
 }
-`; // Explicitly closed and terminated!
+`;

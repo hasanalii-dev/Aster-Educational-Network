@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { Smile } from 'lucide-react'
@@ -7,6 +7,7 @@ gsap.registerPlugin(ScrollTrigger)
 
 export function ApproachChildCentered() {
     const sectionRef = useRef<HTMLElement>(null)
+    const [imgLoaded, setImgLoaded] = useState(false)
 
     useEffect(() => {
         const ctx = gsap.context(() => {
@@ -73,10 +74,14 @@ export function ApproachChildCentered() {
                 {/* Visual Side */}
                 <div className="w-full lg:w-1/2">
                     <div className="visual-container relative h-[500px] md:h-[650px] w-full overflow-hidden shadow-2xl">
+                        {!imgLoaded && (
+                            <div className="absolute inset-0 bg-gray-200 animate-pulse z-10" />
+                        )}
                         <img
                             src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=1200&auto=format&fit=crop"
                             alt="Child engaged in learning"
-                            className="parallax-img w-full h-full object-cover"
+                            onLoad={() => setImgLoaded(true)}
+                            className={`parallax-img w-full h-full object-cover transition-opacity duration-700 ${imgLoaded ? 'opacity-100' : 'opacity-0'}`}
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-[#3A53A4]/40 to-transparent mix-blend-multiply"></div>
                     </div>

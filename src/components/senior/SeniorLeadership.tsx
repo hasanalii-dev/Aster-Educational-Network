@@ -81,7 +81,7 @@ export function SeniorLeadership() {
                 
                 <div ref={headerRef} className="flex flex-col mb-16 md:mb-24">
                     <div className="flex items-center gap-3 mb-6">
-                        <Shield className="w-5 h-5 text-[#C9A84C]" strokeWidth={2.5} />
+                        <Shield className="w-5 h-5 text-[#edad0c]" strokeWidth={2.5} />
                         <span className="text-[#15283D] tracking-[0.3em] font-['Quicksand'] font-bold text-sm uppercase">
                             LEADERSHIP & CHARACTER
                         </span>
@@ -103,12 +103,12 @@ export function SeniorLeadership() {
                         {leadershipTraits.map((trait, i) => (
                             <div 
                                 key={i}
-                                className="trait-item group relative bg-white border border-[#15283D]/10 p-6 flex items-center gap-6 cursor-default transition-all duration-300 hover:shadow-xl hover:-translate-y-1 hover:border-[#C9A84C]/50"
+                                className="trait-item group relative bg-white border border-[#15283D]/10 p-6 flex items-center gap-6 cursor-default transition-all duration-300 hover:shadow-xl hover:-translate-y-1 hover:border-[#edad0c]/50"
                                 style={{ borderRadius: '0px' }}
                             >
                                 <div className="absolute inset-0 bg-[#15283D]/[0.02] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
                                 
-                                <span className="font-['Playfair_Display'] text-2xl md:text-3xl font-bold text-[#C9A84C]/40 group-hover:text-[#C9A84C] transition-colors duration-300 shrink-0">
+                                <span className="font-['Playfair_Display'] text-2xl md:text-3xl font-bold text-[#edad0c]/40 group-hover:text-[#edad0c] transition-colors duration-300 shrink-0">
                                     {trait.num}
                                 </span>
                                 
@@ -116,7 +116,7 @@ export function SeniorLeadership() {
                                     {trait.text}
                                 </span>
 
-                                <ArrowRight className="w-5 h-5 text-[#C9A84C] ml-auto opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
+                                <ArrowRight className="w-5 h-5 text-[#edad0c] ml-auto opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
                             </div>
                         ))}
                     </div>
@@ -132,7 +132,7 @@ export function SeniorLeadership() {
                             />
                             {/* Accent block */}
                             <div className="absolute -top-6 -right-6 w-32 h-32 bg-[#15283D] -z-10" />
-                            <div className="absolute -bottom-6 -left-6 w-48 h-48 border-2 border-[#C9A84C] -z-10" />
+                            <div className="absolute -bottom-6 -left-6 w-48 h-48 border-2 border-[#edad0c] -z-10" />
                         </div>
                     </div>
 

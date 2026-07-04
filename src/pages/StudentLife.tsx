@@ -1,24 +1,26 @@
 import { useDocumentTitle } from '@/hooks'
+import { StudentLifeHero } from '@/components/student-life/StudentLifeHero'
+import { StudentLifeIntro } from '@/components/student-life/StudentLifeIntro'
+import { StudentLifeBelonging } from '@/components/student-life/StudentLifeBelonging'
+import { StudentLifeExperiences } from '@/components/student-life/StudentLifeExperiences'
+import { StudentLifeTraditions } from '@/components/student-life/StudentLifeTraditions'
+import { StudentLifeGrowth } from '@/components/student-life/StudentLifeGrowth'
+import { StudentLifeOutro } from '@/components/student-life/StudentLifeOutro'
+import { CommunityCtaSection } from '@/components/sections/CommunityCtaSection'
 
-/**
- * Student Life Page — Aster Pakistan
- * 
- * Content: Student Activities, Clubs, Events,
- * Sports, Creative Programs, Student Experience
- */
 export default function StudentLife() {
-  useDocumentTitle('Student Life')
+  useDocumentTitle('Student Life | The Aster School')
 
   return (
-    <div id="page-student-life">
-      <section className="section-padding">
-        <div className="container-default">
-          <h1 className="text-4xl md:text-6xl font-bold">Student Life</h1>
-          <p className="mt-6 text-lg text-[var(--color-text-secondary)] max-w-2xl">
-            Student activities, clubs, events, sports, creative programs, and student experience.
-          </p>
-        </div>
-      </section>
+    <div id="page-student-life" className="bg-[#fbfaf8]">
+      <StudentLifeHero />
+      <StudentLifeIntro />
+      <StudentLifeBelonging />
+      <StudentLifeExperiences />
+      <StudentLifeTraditions />
+      <StudentLifeGrowth />
+      <StudentLifeOutro />
+      <CommunityCtaSection />
     </div>
   )
 }

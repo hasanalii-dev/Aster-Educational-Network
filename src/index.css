@@ -1,5 +1,5 @@
 @import "tailwindcss";
-
+@plugin "@tailwindcss/typography";
 /*
  * ============================================
  * ASTER PAKISTAN — Design System
@@ -327,6 +327,8 @@
 
 /* === GLOBAL BUTTON SYSTEM === */
 .btn-aster {
+  position: relative;
+  overflow: hidden;
   display: inline-flex;
   align-items: center;
   justify-content: center;

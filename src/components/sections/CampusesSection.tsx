@@ -94,7 +94,7 @@ const campusesData: CampusItem[] = [
         name: "PECHS Junior",
         grades: "EARLY YEARS – GRADE 4",
         desc: "A nurturing environment focused on foundational learning, confidence-building, and curiosity-driven exploration.",
-        image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=800&auto=format&fit=crop",
+        image: "https://res.cloudinary.com/lpxp5l3a/image/upload/v1783171182/500077944_1251016823698585_2689627082250163943_n_bmhohl.jpg",
         video: "https://alpha.edu.pk/img/hero.mp4",
         path: "/campuses"
     },
@@ -102,7 +102,7 @@ const campusesData: CampusItem[] = [
         name: "PECHS Senior",
         grades: "GRADE 5 – GRADE 11",
         desc: "A future-focused environment where students develop leadership, academic excellence, independence, and real-world readiness.",
-        image: "https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=800&auto=format&fit=crop",
+        image: "https://res.cloudinary.com/lpxp5l3a/image/upload/v1783171285/image00022_pbq3wd.jpg",
         video: "https://alpha.edu.pk/img/hero.mp4",
         path: "/campuses"
     },
@@ -110,7 +110,7 @@ const campusesData: CampusItem[] = [
         name: "Clifton Campus",
         grades: "EARLY YEARS – GRADE 5",
         desc: "A vibrant learning space where creativity, exploration, and skill-building are woven into everyday learning.",
-        image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=800&auto=format&fit=crop",
+        image: "https://res.cloudinary.com/lpxp5l3a/image/upload/v1783171083/1000555027_lxuh4i.jpg",
         video: "https://alpha.edu.pk/img/hero.mp4",
         path: "/campuses"
     }

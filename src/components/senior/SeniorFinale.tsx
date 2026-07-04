@@ -67,15 +67,15 @@ export function SeniorFinale() {
                         <img src="/logo.jpg" alt="" className="w-full h-full object-contain grayscale mix-blend-screen" style={{ borderRadius: '0px' }} />
                     </div>
 
-                    <div className="absolute top-0 left-12 right-12 h-1.5 bg-[#C9A84C]" style={{ borderRadius: '0px' }} />
-                    <span className="font-['Quicksand'] font-bold text-xs tracking-[0.3em] text-[#C9A84C] uppercase mb-6 relative z-10">
+                    <div className="absolute top-0 left-12 right-12 h-1.5 bg-[#edad0c]" style={{ borderRadius: '0px' }} />
+                    <span className="font-['Quicksand'] font-bold text-xs tracking-[0.3em] text-[#edad0c] uppercase mb-6 relative z-10">
                         LOOKING TOWARD THE FUTURE
                     </span>
                     <h2 className="font-['Playfair_Display'] text-3xl md:text-5xl font-medium text-white max-w-4xl leading-[1.1] mb-6 relative z-10">
                         “Because the ultimate goal of education is not simply achievement, it is developing individuals who can transform the world through excellence-driven leadership that uplifts humanity.”
                     </h2>
                     <p className="font-['Quicksand'] font-medium text-base md:text-lg text-white/80 max-w-2xl leading-relaxed mb-12 relative z-10">
-                        Prepared not only for university, but for the opportunities and challenges of an ever-changing world. <strong className="text-[#C9A84C] font-bold">The Aster School — Whatever It Takes!</strong>
+                        Prepared not only for university, but for the opportunities and challenges of an ever-changing world. <strong className="text-[#edad0c] font-bold">The Aster School — Whatever It Takes!</strong>
                     </p>
                     
                     <div className="w-full max-w-xl border-t border-white/10 pt-10 flex flex-col items-center gap-8 relative z-10">
@@ -84,7 +84,7 @@ export function SeniorFinale() {
                             Join a learning community that prepares students for success in university, career, and life.
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4 w-full justify-center mt-2">
-                            <Link to="/admissions" className="bg-[#C9A84C] hover:bg-[#b59540] text-[#15283D] font-['Quicksand'] font-bold uppercase tracking-wider text-sm px-8 py-4 transition-all flex items-center justify-center gap-2 group" style={{ borderRadius: '0px' }}>
+                            <Link to="/admissions" className="bg-[#edad0c] hover:bg-[#d69c0a] text-[#15283D] font-['Quicksand'] font-bold uppercase tracking-wider text-sm px-8 py-4 transition-all flex items-center justify-center gap-2 group" style={{ borderRadius: '0px' }}>
                                 <span>Join the Waitlist</span>
                                 <span className="group-hover:translate-x-1 transition-transform">→</span>
                             </Link>
