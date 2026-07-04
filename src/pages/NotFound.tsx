@@ -1,14 +1,14 @@
 import { Link } from 'react-router-dom'
-import { useDocumentTitle } from '@/hooks'
+import { SEO } from '@/components/seo/SEO'
 
 /**
  * 404 Not Found Page — Aster Pakistan
  */
 export default function NotFound() {
-  useDocumentTitle('Page Not Found')
 
   return (
     <div id="page-not-found" className="flex items-center justify-center min-h-[60vh]">
+            <SEO title="Page Not Found" />
       <div className="text-center">
         <p className="text-8xl font-bold text-[var(--color-brand-primary)] font-[var(--font-family-heading)]">
           404

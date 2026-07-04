@@ -1,4 +1,4 @@
-import { useDocumentTitle } from '@/hooks'
+import { SEO } from '@/components/seo/SEO'
 import { CustomCursor } from '@/components/ui/CustomCursor'
 
 import { DifferenceHero } from '@/components/aster-difference/DifferenceHero'
@@ -14,10 +14,10 @@ import { DifferenceWhyAster } from '@/components/aster-difference/DifferenceWhyA
 import { DifferenceCTA } from '@/components/aster-difference/DifferenceCTA'
 
 export default function AsterDifference() {
-    useDocumentTitle('The Aster Difference')
 
     return (
         <div id="page-aster-difference" className="bg-[#FAFAFA] min-h-screen">
+            <SEO title="The Aster Difference" />
             <CustomCursor />
             <DifferenceHero />
             <DifferenceIntro />

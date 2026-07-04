@@ -1,4 +1,4 @@
-import { useDocumentTitle, useScrollToTop } from '@/hooks'
+import { SEO } from '@/components/seo/SEO'
 import { ElementaryHero } from '@/components/elementary/ElementaryHero'
 import { ElementaryIntro } from '@/components/elementary/ElementaryIntro'
 import { ElementaryCuriosity } from '@/components/elementary/ElementaryCuriosity'
@@ -15,11 +15,10 @@ import { ElementaryIslamic } from '@/components/elementary/ElementaryIslamic'
 import { ElementaryFinale } from '@/components/elementary/ElementaryFinale'
 
 export default function Elementary() {
-    useDocumentTitle('Elementary School | The Aster School')
-    useScrollToTop()
 
     return (
         <main className="w-full bg-white relative">
+            <SEO title="Elementary School | The Aster School" />
             <ElementaryHero />
             <ElementaryIntro />
             <ElementaryCuriosity />

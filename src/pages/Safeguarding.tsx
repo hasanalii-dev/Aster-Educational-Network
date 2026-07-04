@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import { useDocumentTitle } from '@/hooks'
+import { SEO } from '@/components/seo/SEO'
 import { SafeguardingHero } from '@/components/safeguarding/SafeguardingHero'
 import { SafeguardingIntro } from '@/components/safeguarding/SafeguardingIntro'
 import { SafeguardingCommitment } from '@/components/safeguarding/SafeguardingCommitment'
@@ -11,7 +11,6 @@ import { SafeguardingFamilies } from '@/components/safeguarding/SafeguardingFami
 import { SafeguardingFinale } from '@/components/safeguarding/SafeguardingFinale'
 
 export default function Safeguarding() {
-    useDocumentTitle('Safeguarding | The Aster School')
     const location = useLocation()
 
     useEffect(() => {
@@ -20,6 +19,7 @@ export default function Safeguarding() {
 
     return (
         <main className="bg-[#fbfaf8] min-h-screen">
+            <SEO title="Safeguarding | The Aster School" />
             <SafeguardingHero />
             <SafeguardingIntro />
             <SafeguardingCommitment />

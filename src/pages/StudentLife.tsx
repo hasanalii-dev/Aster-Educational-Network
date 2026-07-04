@@ -1,4 +1,4 @@
-import { useDocumentTitle } from '@/hooks'
+import { SEO } from '@/components/seo/SEO'
 import { StudentLifeHero } from '@/components/student-life/StudentLifeHero'
 import { StudentLifeIntro } from '@/components/student-life/StudentLifeIntro'
 import { StudentLifeBelonging } from '@/components/student-life/StudentLifeBelonging'
@@ -9,10 +9,10 @@ import { StudentLifeOutro } from '@/components/student-life/StudentLifeOutro'
 import { CommunityCtaSection } from '@/components/sections/CommunityCtaSection'
 
 export default function StudentLife() {
-  useDocumentTitle('Student Life | The Aster School')
 
   return (
     <div id="page-student-life" className="bg-[#fbfaf8]">
+            <SEO title="Student Life | The Aster School" />
       <StudentLifeHero />
       <StudentLifeIntro />
       <StudentLifeBelonging />

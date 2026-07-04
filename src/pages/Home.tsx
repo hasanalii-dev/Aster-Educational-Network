@@ -1,9 +1,10 @@
 import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
-import { useDocumentTitle } from '@/hooks'
+import { SEO } from '@/components/seo/SEO'
 import { useDraggableScroll } from '@/hooks/useDraggableScroll'
 import { HeroSection, CampusesSection, ProgramsSection, TestimonialsSection, CommunityCtaSection } from '@/components/sections'
 import gsap from 'gsap'
+import ribbonSvg from '@/assets/ribbon.svg'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -98,8 +99,6 @@ const differenceData = [
  * Parent Testimonials, Latest Journal Articles, Contact CTA
  */
 export default function Home() {
-    useDocumentTitle('Aster Pakistan — Building Future-Ready Leaders')
-
     // Local state for the Aster Difference accordion
     const [activeDifferenceIndex, setActiveDifferenceIndex] = useState(0)
     
@@ -121,67 +120,32 @@ export default function Home() {
             // WCU VELOCITY TRACKER & PARALLAX
             // ==========================================
             if (wcuSectionRef.current) {
-                const velocityElements = [
-                    wcuImgLargeRef.current,
-                    wcuImgSmallRef.current,
-                    wcuTitleCardRef.current,
-                ].filter(Boolean) as HTMLElement[]
-
-                let currentVelocity = 0
-                let velocitySkew = 0
-
-                ScrollTrigger.create({
-                    trigger: wcuSectionRef.current,
-                    start: 'top bottom',
-                    end: 'bottom top',
-                    onUpdate: (self) => {
-                        currentVelocity = self.getVelocity()
-                        const clampedVelocity = gsap.utils.clamp(-2000, 2000, currentVelocity)
-                        velocitySkew = clampedVelocity / 800
-                    },
-                })
-
-                gsap.ticker.add(() => {
-                    const currentSkew = gsap.utils.interpolate(
-                        parseFloat(velocityElements[0]?.style.getPropertyValue('--v-skew') || '0'),
-                        velocitySkew,
-                        0.08
-                    )
-
-                    velocityElements.forEach(el => {
-                        el.style.setProperty('--v-skew', String(currentSkew))
-                        el.style.transform = `${el.dataset.baseTransform || ''} skewY(${currentSkew}deg)`.trim()
-                    })
-
-                    velocitySkew *= 0.95
-                    if (Math.abs(velocitySkew) < 0.01) velocitySkew = 0
-                })
 
                 gsap.fromTo(wcuImgLargeRef.current,
-                    { y: 30 },
-                    { y: -30, ease: 'none', scrollTrigger: { trigger: wcuSectionRef.current, start: 'top bottom', end: 'bottom top', scrub: 1.5, onUpdate: (self) => { if (wcuImgLargeRef.current) { wcuImgLargeRef.current.dataset.baseTransform = `translateY(${gsap.utils.interpolate(30, -30, self.progress)}px)` } } } }
+                    { y: 40 },
+                    { y: -40, ease: 'none', scrollTrigger: { trigger: wcuSectionRef.current, start: 'top bottom', end: 'bottom top', scrub: 1 } }
                 )
 
                 gsap.fromTo(wcuImgSmallRef.current,
-                    { y: 50 },
-                    { y: -50, ease: 'none', scrollTrigger: { trigger: wcuSectionRef.current, start: 'top bottom', end: 'bottom top', scrub: 2.2, onUpdate: (self) => { if (wcuImgSmallRef.current) { wcuImgSmallRef.current.dataset.baseTransform = `translateY(${gsap.utils.interpolate(50, -50, self.progress)}px)` } } } }
+                    { y: 70 },
+                    { y: -70, ease: 'none', scrollTrigger: { trigger: wcuSectionRef.current, start: 'top bottom', end: 'bottom top', scrub: 1.5 } }
                 )
 
                 gsap.fromTo(wcuTitleCardRef.current,
-                    { y: 20 },
-                    { y: -20, ease: 'none', scrollTrigger: { trigger: wcuSectionRef.current, start: 'top bottom', end: 'bottom top', scrub: 1, onUpdate: (self) => { if (wcuTitleCardRef.current) { wcuTitleCardRef.current.dataset.baseTransform = `translateY(${gsap.utils.interpolate(20, -20, self.progress)}px)` } } } }
+                    { y: 30 },
+                    { y: -30, ease: 'none', scrollTrigger: { trigger: wcuSectionRef.current, start: 'top bottom', end: 'bottom top', scrub: 1 } }
                 )
 
                 if (wcuContentRef.current?.children) {
                     gsap.fromTo(Array.from(wcuContentRef.current.children),
-                        { y: 40, opacity: 0 },
+                        { y: 30, opacity: 0 },
                         { y: 0, opacity: 1, duration: 0.8, stagger: 0.15, ease: 'power2.out', scrollTrigger: { trigger: wcuContentRef.current, start: 'top 85%', end: 'top 50%', toggleActions: 'play none none reverse' } }
                     )
                 }
 
                 gsap.fromTo(wcuOrnamentRef.current,
-                    { y: 20 },
-                    { y: -20, ease: 'none', scrollTrigger: { trigger: wcuSectionRef.current, start: 'top bottom', end: 'bottom top', scrub: 2.5 } }
+                    { y: 30 },
+                    { y: -30, ease: 'none', scrollTrigger: { trigger: wcuSectionRef.current, start: 'top bottom', end: 'bottom top', scrub: 1 } }
                 )
             }
 
@@ -194,6 +158,7 @@ export default function Home() {
 
     return (
         <div id="page-home" className="page-wrapper">
+            <SEO title="Home" />
             <style>{homeStyles}</style>
 
             {/* =========================================
@@ -212,7 +177,7 @@ export default function Home() {
 
                 {/* Custom SVG Ornament (Top Right) */}
                 <div className="wcu-ornament-grid" aria-hidden="true" ref={wcuOrnamentRef}>
-                    <img src="/ribbon.svg" alt="" className="wcu-lines-svg" />
+                    <img src={ribbonSvg} alt="" className="wcu-lines-svg" />
                 </div>
 
                 <div className="wcu-container">
@@ -553,8 +518,7 @@ const homeStyles = `
 
 .wcu-parallax-wrap {
   will-change: transform;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 .wcu-img-fill {
@@ -579,7 +543,6 @@ const homeStyles = `
   width: 315px;
   height: 340px;
   z-index: 2;
-  box-shadow: 0 24px 48px rgba(0,0,0,0.15); 
   border-radius: 4px;
 }
 
@@ -595,10 +558,8 @@ const homeStyles = `
   align-items: flex-end;
   gap: 20px;
   z-index: 3;
-  box-shadow: 0 32px 64px rgba(21, 40, 61, 0.12);
   will-change: transform, opacity;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 .wcu-badge {

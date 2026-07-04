@@ -1,4 +1,4 @@
-import { useDocumentTitle } from '@/hooks'
+import { SEO } from '@/components/seo/SEO'
 import { CampusesHero } from '@/components/campuses/CampusesHero'
 import { CampusesIntro } from '@/components/campuses/CampusesIntro'
 import { CampusShowcase } from '@/components/campuses/CampusShowcase'
@@ -13,10 +13,10 @@ import { CampusesFinale } from '@/components/campuses/CampusesFinale'
  * location information, and global expansion.
  */
 export default function Campuses() {
-  useDocumentTitle('Our Campuses')
 
   return (
     <div id="page-campuses" className="bg-white">
+            <SEO title="Our Campuses" />
       <CampusesHero />
       <CampusesIntro />
       <CampusShowcase />

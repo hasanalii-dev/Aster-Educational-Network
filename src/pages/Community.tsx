@@ -1,4 +1,4 @@
-import { useDocumentTitle } from '@/hooks'
+import { SEO } from '@/components/seo/SEO'
 import { CommunityHero } from '@/components/community/CommunityHero'
 import { CommunityIntro } from '@/components/community/CommunityIntro'
 import { CommunityAmbassadors } from '@/components/community/CommunityAmbassadors'
@@ -9,10 +9,10 @@ import { CommunityValues } from '@/components/community/CommunityValues'
 import { CommunityCtaSection } from '@/components/sections/CommunityCtaSection'
 
 export default function Community() {
-  useDocumentTitle('Community | The Aster School')
 
   return (
     <div id="page-community" className="bg-[#fbfaf8]">
+            <SEO title="Community | The Aster School" />
       <CommunityHero />
       <CommunityIntro />
       <CommunityAmbassadors />

@@ -1,4 +1,4 @@
-import { useDocumentTitle, useScrollToTop } from '@/hooks'
+import { SEO } from '@/components/seo/SEO'
 import { SeniorHero } from '@/components/senior/SeniorHero'
 import { SeniorIntro } from '@/components/senior/SeniorIntro'
 import { SeniorCambridge } from '@/components/senior/SeniorCambridge'
@@ -10,11 +10,10 @@ import { SeniorFaculty } from '@/components/senior/SeniorFaculty'
 import { SeniorFinale } from '@/components/senior/SeniorFinale'
 
 export default function SeniorSchool() {
-    useDocumentTitle('Senior School | The Aster School')
-    useScrollToTop()
 
     return (
         <main className="w-full bg-[#FAFAFA] relative">
+            <SEO title="Senior School | The Aster School" />
             <SeniorHero />
             <SeniorIntro />
             <SeniorCambridge />

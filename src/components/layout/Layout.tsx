@@ -8,6 +8,7 @@ import { useGlobalReveal } from '@/hooks/useGlobalReveal'
 import { TransitionProvider } from '@/components/ui/PageTransition'
 import { CustomCursor } from '@/components/ui/CustomCursor'
 import { ChatbotWidget } from '@/components/ui/ChatbotWidget'
+import { PageSkeleton } from '@/components/ui/PageSkeleton'
 
 /**
  * Root Layout — Aster Pakistan
@@ -27,14 +28,7 @@ export function Layout() {
         <Header />
         <main id="main-content" className="flex-1">
           <Suspense
-            fallback={
-              <div className="flex items-center justify-center min-h-[60vh]">
-                <div className="flex flex-col items-center gap-4">
-                  <div className="w-10 h-10 border-3 border-[var(--color-brand-primary)] border-t-transparent rounded-full animate-spin" />
-                  <p className="text-sm text-neutral-400 font-[var(--font-family-body)]">Loading...</p>
-                </div>
-              </div>
-            }
+            fallback={<PageSkeleton />}
           >
             <Outlet />
           </Suspense>

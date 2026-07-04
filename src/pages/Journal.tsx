@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { BookOpen, BrainCircuit, HeartHandshake, Lightbulb, GraduationCap, User, Search, School } from 'lucide-react'
-import { useDocumentTitle } from '@/hooks'
+import { SEO } from '@/components/seo/SEO'
 import { useAuth } from '@/hooks/useAuth'
 import { supabase } from '@/lib/supabase'
 import gsap from 'gsap'
@@ -60,7 +60,6 @@ const CATEGORY_INFO = [
 ];
 
 export default function Journal() {
-    useDocumentTitle('The Aster Journal')
     const { user, loading: authLoading } = useAuth()
     const [articles, setArticles] = useState<Article[]>([])
     const [loading, setLoading] = useState(true)
@@ -169,6 +168,7 @@ export default function Journal() {
     if (!user) {
         return (
             <div className="min-h-screen flex items-center justify-center bg-[#FAFAFA] px-4">
+            <SEO title="The Aster Journal" />
                 <style>{`
                     @keyframes bounce-subtle {
                         0%, 100% { transform: translateY(0); }

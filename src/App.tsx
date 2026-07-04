@@ -3,6 +3,7 @@ import { Layout } from '@/components/layout'
 import { pageComponents } from '@/config/routes'
 import { lazy, Suspense } from 'react'
 import { PageLoader } from '@/components/ui/PageLoader'
+import { HelmetProvider } from 'react-helmet-async'
 
 // ============================================
 // Aster Pakistan — Application Router
@@ -114,10 +115,12 @@ import ClickSpark from '@/components/ui/ClickSpark'
 
 function App() {
   return (
-    <ClickSpark sparkCount={10} sparkRadius={25}>
-      <PageLoader />
-      <RouterProvider router={router} />
-    </ClickSpark>
+    <HelmetProvider>
+      <ClickSpark sparkCount={10} sparkRadius={25}>
+        <PageLoader />
+        <RouterProvider router={router} />
+      </ClickSpark>
+    </HelmetProvider>
   )
 }
 

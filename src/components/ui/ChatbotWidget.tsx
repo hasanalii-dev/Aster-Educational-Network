@@ -60,17 +60,18 @@ export function ChatbotWidget() {
     useEffect(() => {
         if (showCookieNotice && cookieBubbleRef.current) {
             gsap.fromTo(cookieBubbleRef.current,
-                { opacity: 0, y: 20, scale: 0.8, transformOrigin: "bottom right" },
-                { opacity: 1, y: 0, scale: 1, duration: 0.6, ease: "back.out(1.5)" }
+                { opacity: 0, y: 20, scale: 0.9, transformOrigin: "bottom right" },
+                { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: "power2.out", force3D: true }
             );
             // Continuous floating animation
             gsap.to(cookieBubbleRef.current, {
-                y: -6,
-                duration: 1.5,
+                y: -4,
+                duration: 2,
                 yoyo: true,
                 repeat: -1,
                 ease: "sine.inOut",
-                delay: 0.6
+                delay: 0.5,
+                force3D: true
             });
         }
     }, [showCookieNotice]);
@@ -104,8 +105,8 @@ export function ChatbotWidget() {
     useEffect(() => {
         if (isOpen && chatWindowRef.current) {
             gsap.fromTo(chatWindowRef.current,
-                { opacity: 0, y: 30, scale: 0.95, transformOrigin: "bottom right" },
-                { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: "power3.out" }
+                { opacity: 0, y: 20, scale: 0.98, transformOrigin: "bottom right" },
+                { opacity: 1, y: 0, scale: 1, duration: 0.4, ease: "power2.out", force3D: true }
             );
         }
     }, [isOpen]);
@@ -118,7 +119,7 @@ export function ChatbotWidget() {
     const handleClose = () => {
         if (chatWindowRef.current) {
             gsap.to(chatWindowRef.current, {
-                opacity: 0, y: 30, scale: 0.95, duration: 0.3, ease: "power3.in",
+                opacity: 0, y: 20, scale: 0.98, duration: 0.25, ease: "power2.in", force3D: true,
                 onComplete: () => setIsOpen(false)
             });
         } else {
@@ -252,7 +253,7 @@ export function ChatbotWidget() {
             {isOpen && (
                 <div
                     ref={chatWindowRef}
-                    className="fixed bottom-6 right-6 z-[1000] w-[350px] max-w-[calc(100vw-3rem)] h-[550px] max-h-[calc(100vh-6rem)] bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col border border-gray-100"
+                    className="fixed bottom-6 right-6 z-[1000] w-[350px] max-w-[calc(100vw-3rem)] h-[550px] max-h-[calc(100vh-6rem)] bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col border border-gray-100 will-change-transform"
                     style={{ opacity: 0 }}
                 >
                     {/* Header */}

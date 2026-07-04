@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { useAuth } from '@/hooks/useAuth'
 import { supabase } from '@/lib/supabase'
 import { Link, Navigate } from 'react-router-dom'
-import { useDocumentTitle } from '@/hooks'
+import { SEO } from '@/components/seo/SEO'
 import gsap from 'gsap'
 import { GraduationCap, Map, ArrowRight, FileText, CheckCircle2, Clock, XCircle, MessageSquareQuote, LayoutDashboard, ChevronRight } from 'lucide-react'
 
@@ -21,7 +21,6 @@ const getAvatarStyle = (char: string) => {
 }
 
 export default function ProfileDashboard() {
-  useDocumentTitle('Parent Portal')
   const { user, loading } = useAuth()
   const [tours, setTours] = useState<any[]>([])
   const [admissions, setAdmissions] = useState<any[]>([])
@@ -73,6 +72,7 @@ export default function ProfileDashboard() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#FAFAF9]">
+            <SEO title="Parent Portal" />
         <div className="w-10 h-10 border-4 border-[#F4F6F8] border-t-[#334a89] rounded-full animate-spin"></div>
       </div>
     )

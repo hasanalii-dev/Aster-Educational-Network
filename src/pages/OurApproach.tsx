@@ -1,4 +1,4 @@
-import { useDocumentTitle } from '@/hooks'
+import { SEO } from '@/components/seo/SEO'
 import { ApproachHero } from '@/components/approach/ApproachHero'
 import { ApproachChildCentered } from '@/components/approach/ApproachChildCentered'
 import { ApproachHandsOn } from '@/components/approach/ApproachHandsOn'
@@ -16,10 +16,10 @@ import { ApproachFinale } from '@/components/approach/ApproachFinale'
  * Student Development Model, Educational Principles
  */
 export default function OurApproach() {
-  useDocumentTitle('Our Approach | The Aster School')
 
   return (
     <main id="page-our-approach" className="bg-white selection:bg-[#FBBB21] selection:text-[#334a89]">
+            <SEO title="Our Approach | The Aster School" />
       <ApproachHero />
       <ApproachChildCentered />
       <ApproachHandsOn />

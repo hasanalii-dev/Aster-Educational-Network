@@ -56,7 +56,7 @@ export function ProgramsSection() {
             end: "+=2400",
             pin: true,
             pinSpacing: true,
-            scrub: true,
+            scrub: 1,
             invalidateOnRefresh: true,
             onUpdate: (self) => {
               const totalItems = learnerData.length;

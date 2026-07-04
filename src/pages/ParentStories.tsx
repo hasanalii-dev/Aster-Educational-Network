@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { useDocumentTitle } from '@/hooks'
+import { SEO } from '@/components/seo/SEO'
 
 import { ParentStoriesHero } from '@/components/parent-stories/ParentStoriesHero'
 import { ParentStoriesMasonry } from '@/components/parent-stories/ParentStoriesMasonry'
@@ -10,7 +10,6 @@ import { ParentStoriesFinale } from '@/components/parent-stories/ParentStoriesFi
 gsap.registerPlugin(ScrollTrigger)
 
 export default function ParentStories() {
-    useDocumentTitle('Parent Stories — The Aster School')
     const masterRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
@@ -37,6 +36,7 @@ export default function ParentStories() {
 
     return (
         <div id="page-parent-stories" ref={masterRef} className="bg-[#FAFAF9] selection:bg-[#ffc715] selection:text-[#334a89]">
+            <SEO title="Parent Stories — The Aster School" />
             {/* Google Fonts */}
             <link rel="preconnect" href="https://fonts.googleapis.com" />
             <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />

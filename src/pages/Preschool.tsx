@@ -1,4 +1,4 @@
-import { useDocumentTitle } from '@/hooks'
+import { SEO } from '@/components/seo/SEO'
 import { PreschoolHero } from '@/components/preschool/PreschoolHero'
 import { PreschoolJourney } from '@/components/preschool/PreschoolJourney'
 import { PreschoolMaterials } from '@/components/preschool/PreschoolMaterials'
@@ -19,10 +19,10 @@ import { PreschoolFinale } from '@/components/preschool/PreschoolFinale'
  * world understanding, social-emotional & Islamic development
  */
 export default function Preschool() {
-  useDocumentTitle('Preschool (Early Years)')
 
   return (
     <div id="page-preschool">
+      <SEO title="Preschool (Early Years)" />
       <PreschoolHero />
       <PreschoolJourney />
       <PreschoolMaterials />

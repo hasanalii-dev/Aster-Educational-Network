@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { useDocumentTitle } from '@/hooks'
+import { SEO } from '@/components/seo/SEO'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ChevronDown, Mail, Calendar, UserPlus } from 'lucide-react'
@@ -83,6 +83,7 @@ function FAQItem({ faq, isOpen, onClick, index }: { faq: {q: string, a: string},
         <div 
             className={`relative overflow-hidden transition-[border-radius,background-color,height] duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] shadow-sm hover:shadow-md text-white ${bgColor} ${isOpen ? 'rounded-2xl' : 'rounded-[32px] md:rounded-[40px]'}`}
         >
+            <SEO title="FAQs | The Aster School" />
             <button
                 onClick={onClick}
                 className={`relative z-10 w-full flex items-center justify-between text-left focus:outline-none group transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] text-white ${isOpen ? 'p-6 md:p-8 pb-4' : 'px-6 py-5 md:px-10 md:py-8'}`}
@@ -112,7 +113,6 @@ function FAQItem({ faq, isOpen, onClick, index }: { faq: {q: string, a: string},
 }
 
 export default function FAQs() {
-    useDocumentTitle('FAQs | The Aster School')
 
     const pageRef = useRef<HTMLDivElement>(null)
     const bannerFrameRef = useRef<HTMLDivElement>(null)

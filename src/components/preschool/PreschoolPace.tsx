@@ -177,7 +177,7 @@ export function PreschoolPace() {
                         <div className="absolute top-1 left-0 right-0 h-[2px] bg-[#334a89]/15 shadow-sm rounded-full" />
 
                         {/* Photos hanging from the clothesline */}
-                        <div className="flex flex-wrap md:flex-nowrap gap-6 md:gap-8 justify-center relative z-10">
+                        <div className="flex flex-col md:flex-row gap-8 items-center justify-center relative z-10">
                             {clotheslineImages.map((img, i) => (
                                 <div
                                     key={i}
@@ -185,13 +185,13 @@ export function PreschoolPace() {
                                     style={{ transformOrigin: 'top center' }}
                                 >
                                     {/* Clothespin */}
-                                    <div className="relative z-20 w-4 h-8 flex flex-col items-center">
+                                    <div className={`relative z-20 w-4 h-8 flex-col items-center ${i === 0 ? 'flex' : 'hidden md:flex'}`}>
                                         <div className="w-3 h-3 rounded-full bg-[#e97f7b] border-2 border-[#cf6562] shadow-sm" />
                                         <div className="w-[2px] h-5 bg-[#e97f7b]/60" />
                                     </div>
 
                                     {/* Photo Container */}
-                                    <div className="relative -mt-1 w-40 sm:w-48 md:w-56 aspect-[3/4] rounded-lg bg-white border-[4px] border-white shadow-[0_12px_30px_rgba(21,40,61,0.12)] overflow-hidden transition-all duration-500 group-hover:shadow-[0_20px_40px_rgba(21,40,61,0.2)] group-hover:scale-[1.03]">
+                                    <div className={`relative w-48 sm:w-56 md:w-56 aspect-[3/4] rounded-lg bg-white border-[4px] border-white shadow-[0_12px_30px_rgba(21,40,61,0.12)] overflow-hidden transition-all duration-500 group-hover:shadow-[0_20px_40px_rgba(21,40,61,0.2)] group-hover:scale-[1.03] ${i !== 0 ? 'mt-0 md:-mt-1' : '-mt-1'}`}>
                                         <img
                                             src={img.src}
                                             alt={img.alt}
