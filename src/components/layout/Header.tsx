@@ -544,11 +544,11 @@ export function Header({
                             {user ? (
                                 <div style={{ display: 'flex', gap: '8px', flexDirection: 'column' }}>
                                     <Link to="/profile" className="mobile-action-card card-transparent" onClick={closeMobile} style={{ background: 'rgba(255, 255, 255, 0.1)' }}>
-                                        <div className="mobile-action-content">
+                                        <div className="mobile-action-content overflow-hidden">
                                             <span className="mobile-action-title">My Profile</span>
-                                            <span className="mobile-action-desc">{user.email}</span>
+                                            <span className="mobile-action-desc truncate block">{user.email}</span>
                                         </div>
-                                        <div className="mobile-action-icon" style={{ borderRadius: '50%', background: '#ffc715', color: '#334a89', fontWeight: 'bold', fontSize: '18px', border: 'none' }}>
+                                        <div className="mobile-action-icon" style={{ flexShrink: 0, borderRadius: '50%', background: '#ffc715', color: '#334a89', fontWeight: 'bold', fontSize: '18px', border: 'none' }}>
                                             {user.email?.[0]?.toUpperCase() || 'U'}
                                         </div>
                                     </Link>

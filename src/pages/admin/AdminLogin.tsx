@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import gsap from 'gsap'
 import { supabase } from '@/lib/supabase'
 import { Header } from '@/components/layout/Header'
-import { User, Mail, Lock, KeyRound, ArrowRight, ShieldCheck, Loader2, AlertCircle, CheckCircle2, Fingerprint, Bot } from 'lucide-react'
+import { User, Mail, Lock, KeyRound, ArrowRight, ShieldCheck, Loader2, AlertCircle, CheckCircle2, Fingerprint, Bot, Eye, EyeOff } from 'lucide-react'
 
 export default function UnifiedAuth() {
     const containerRef = useRef<HTMLDivElement>(null)
@@ -14,6 +14,7 @@ export default function UnifiedAuth() {
     const [isSignUp, setIsSignUp] = useState(false)
     const [authStep, setAuthStep] = useState<'credentials' | 'otp'>('credentials')
     const [welcomeScreen, setWelcomeScreen] = useState<{type: 'new' | 'existing' | 'admin', name: string} | null>(null)
+    const [showPassword, setShowPassword] = useState(false)
 
     // Form Payload
     const [fullName, setFullName] = useState('')
@@ -334,14 +335,28 @@ export default function UnifiedAuth() {
                                         <div className="relative group">
                                             <Lock className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-[#A0AEC0] transition-colors group-focus-within:text-[#334a89]" />
                                             <input
-                                                type="password"
+                                                type={showPassword ? "text" : "password"}
                                                 value={password}
                                                 onChange={(e) => setPassword(e.target.value)}
                                                 placeholder="••••••••"
-                                                className="w-full pl-14 pr-5 py-4 bg-[#F4F6F8] rounded-[20px] font-['Quicksand'] font-bold text-[15px] text-[#15283D] placeholder-[#A0AEC0] border border-transparent focus:bg-white focus:ring-4 focus:ring-[#334a89]/15 outline-none transition-all duration-300 tracking-[0.2em]"
+                                                className={`w-full pl-14 pr-14 py-4 bg-[#F4F6F8] rounded-[20px] font-['Quicksand'] font-bold text-[15px] text-[#15283D] placeholder-[#A0AEC0] border border-transparent focus:bg-white focus:ring-4 focus:ring-[#334a89]/15 outline-none transition-all duration-300 ${!showPassword ? 'tracking-[0.2em]' : 'tracking-normal'}`}
                                                 required
                                                 minLength={6}
                                             />
+                                            <button 
+                                                type="button" 
+                                                onClick={() => setShowPassword(!showPassword)}
+                                                className="absolute right-5 top-1/2 -translate-y-1/2 text-[#A0AEC0] hover:text-[#334a89] transition-colors focus:outline-none"
+                                            >
+                                                <div className="relative w-5 h-5">
+                                                    <div className={`absolute inset-0 transition-all duration-300 ${showPassword ? 'opacity-100 scale-100 rotate-0' : 'opacity-0 scale-50 rotate-90'}`}>
+                                                        <EyeOff className="w-5 h-5" />
+                                                    </div>
+                                                    <div className={`absolute inset-0 transition-all duration-300 ${!showPassword ? 'opacity-100 scale-100 rotate-0' : 'opacity-0 scale-50 -rotate-90'}`}>
+                                                        <Eye className="w-5 h-5" />
+                                                    </div>
+                                                </div>
+                                            </button>
                                         </div>
                                     </div>
 
