@@ -136,7 +136,7 @@ export default function UnifiedAuth() {
             }
 
             animateStepChange('otp')
-            setStatusMsg(`Verification code dispatched to ${email}`)
+            setStatusMsg(`Verification code dispatched to ${email}. Please also check your spam/junk folder.`)
             setLoading(false)
         } else {
             const { data: authData, error: signInError } = await supabase.auth.signInWithPassword({
@@ -256,7 +256,7 @@ export default function UnifiedAuth() {
                             </h1>
                             <p className="font-['Quicksand'] text-[15px] font-medium text-[#5C5C61] leading-relaxed">
                                 {authStep === 'otp'
-                                    ? 'Provide the 6-digit verification code token sent directly to your email address.'
+                                    ? 'Provide the 6-digit verification code token sent to your email address. (Check your spam/junk folder if you don\'t see it)'
                                     : isSignUp
                                         ? 'Create an account to securely track your applications, forms, and admission updates.'
                                         : 'Sign in to access your portal, forms, and events.'

@@ -121,10 +121,10 @@ function InteractiveMap({ selectedCampus, onSelectCampus }: { selectedCampus: st
 
     // Abstract Topology Coordinates
     const campusData = [
-        { id: "Riyadh Campus", x: 20, y: 45, region: "Saudi Arabia", address: "Opening Soon in Riyadh" },
-        { id: "PECHS Junior Campus", x: 70, y: 35, region: "Karachi, PK", address: "Plot 37 C, Block-6 PECHS" },
-        { id: "PECHS Senior Campus", x: 80, y: 48, region: "Karachi, PK", address: "33-D, Block 6, PECHS" },
-        { id: "Clifton Campus", x: 65, y: 65, region: "Karachi, PK", address: "Plot D, 97, Block 4, Clifton" }
+        { id: "Riyadh Campus", x: 20, y: 35, region: "Saudi Arabia", address: "Opening Soon in Riyadh" },
+        { id: "PECHS Junior Campus", x: 70, y: 25, region: "Karachi, PK", address: "Plot 37 C, Block-6 PECHS" },
+        { id: "PECHS Senior Campus", x: 80, y: 38, region: "Karachi, PK", address: "33-D, Block 6, PECHS" },
+        { id: "Clifton Campus", x: 65, y: 55, region: "Karachi, PK", address: "Plot D, 97, Block 4, Clifton" }
     ]
 
     const activeData = campusData.find(c => c.id === selectedCampus)
@@ -142,7 +142,7 @@ function InteractiveMap({ selectedCampus, onSelectCampus }: { selectedCampus: st
             {/* SVG Flight Line (Riyadh to Karachi) */}
             <svg className="absolute inset-0 w-full h-full pointer-events-none" preserveAspectRatio="none">
                 <path
-                    d="M 20% 45% Q 45% 25% 70% 35%"
+                    d="M 20% 35% Q 45% 15% 70% 25%"
                     fill="none"
                     stroke="rgba(255,199,21,0.3)"
                     strokeWidth="2"
@@ -427,7 +427,7 @@ export default function BookTour() {
                                                 <label className="font-['Quicksand'] font-bold text-[11px] text-[#15283D]/60 uppercase tracking-[0.15em] pl-1">Phone Number *</label>
                                                 <div className="flex gap-3">
                                                     <CountryCodeSelect value={formData.country_code} onChange={(val) => setFormData({...formData, country_code: val})} />
-                                                    <input required type="tel" value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})} placeholder="300 1234567" className="flex-1 px-5 py-4 bg-[#F4F6F8] rounded-[20px] transition-all duration-300 focus:outline-none focus:bg-white focus:ring-4 focus:ring-[#334a89]/15 font-['Quicksand'] font-bold text-[15px] text-[#15283D] placeholder-[#15283D]/30" />
+                                                    <input required type="tel" value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})} placeholder="300 1234567" className="flex-1 min-w-0 px-5 py-4 bg-[#F4F6F8] rounded-[20px] transition-all duration-300 focus:outline-none focus:bg-white focus:ring-4 focus:ring-[#334a89]/15 font-['Quicksand'] font-bold text-[15px] text-[#15283D] placeholder-[#15283D]/30" />
                                                 </div>
                                             </div>
                                         </div>

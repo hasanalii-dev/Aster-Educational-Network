@@ -372,7 +372,7 @@ export default function Apply() {
                                                     <label className="font-['Quicksand'] font-bold text-[11px] text-[#15283D]/60 uppercase tracking-[0.15em] pl-1">Phone Number *</label>
                                                     <div className="flex gap-3">
                                                         <CountryCodeSelect value={formData.country_code} onChange={(val) => setFormData({...formData, country_code: val})} />
-                                                        <input required type="tel" value={formData.parent_phone} onChange={e => setFormData({...formData, parent_phone: e.target.value})} placeholder="300 1234567" className="flex-1 px-5 py-4 bg-[#F4F6F8] rounded-[20px] transition-all duration-300 focus:outline-none focus:bg-white focus:ring-4 focus:ring-[#334a89]/15 font-['Quicksand'] font-bold text-[15px] text-[#15283D] placeholder-[#15283D]/30" />
+                                                        <input required type="tel" value={formData.parent_phone} onChange={e => setFormData({...formData, parent_phone: e.target.value})} placeholder="300 1234567" className="flex-1 min-w-0 px-5 py-4 bg-[#F4F6F8] rounded-[20px] transition-all duration-300 focus:outline-none focus:bg-white focus:ring-4 focus:ring-[#334a89]/15 font-['Quicksand'] font-bold text-[15px] text-[#15283D] placeholder-[#15283D]/30" />
                                                     </div>
                                                 </div>
 
