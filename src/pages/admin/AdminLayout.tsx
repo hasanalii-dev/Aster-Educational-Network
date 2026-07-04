@@ -2,6 +2,7 @@ import { Outlet, NavLink, useNavigate, useLocation } from 'react-router-dom'
 import { useAuth } from '@/hooks/useAuth'
 import { useEffect, useState } from 'react'
 import { LayoutDashboard, Settings, PenTool, MessageSquareQuote, HelpCircle, Map, GraduationCap, Mail, LogOut, Menu } from 'lucide-react'
+import { LogoutModal } from '@/components/ui/LogoutModal'
 
 type NavItem = { label: string; path: string; icon: React.ReactNode; end?: boolean };
 type NavSection = { title: string; items: NavItem[] };
@@ -26,6 +27,7 @@ export default function AdminLayout() {
     const navigate = useNavigate()
     const location = useLocation()
     const [sidebarOpen, setSidebarOpen] = useState(false)
+    const [showLogoutModal, setShowLogoutModal] = useState(false)
 
     useEffect(() => {
         if (!loading && !user) navigate('/admin/login', { replace: true })
@@ -50,7 +52,7 @@ export default function AdminLayout() {
                             </div>
                         ))}
                     </nav>
-                    <div className="adm-sb-ft"><button className="adm-ni adm-so" onClick={async()=>{await signOut();navigate('/admin/login')}}><span className="adm-nic"><LogOut size={18} /></span><span>Sign Out</span></button></div>
+                    <div className="adm-sb-ft"><button className="adm-ni adm-so" onClick={() => setShowLogoutModal(true)}><span className="adm-nic"><LogOut size={18} /></span><span>Sign Out</span></button></div>
                 </aside>
                 <div className="adm-main">
                     <header className="adm-tb">
@@ -60,6 +62,16 @@ export default function AdminLayout() {
                     <div className="adm-ct"><Outlet /></div>
                 </div>
             </div>
+
+            <LogoutModal 
+                isOpen={showLogoutModal} 
+                onClose={() => setShowLogoutModal(false)} 
+                onConfirm={async () => {
+                    await signOut();
+                    setShowLogoutModal(false);
+                    navigate('/admin/login');
+                }} 
+            />
         </>
     )
 }

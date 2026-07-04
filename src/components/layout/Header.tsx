@@ -3,6 +3,7 @@ import { useState, useRef, useEffect, useCallback } from 'react'
 import type { ReactNode } from 'react'
 import { TransitionLink } from '@/components/ui/TransitionLink'
 import { useAuth } from '@/hooks/useAuth'
+import { LogoutModal } from '@/components/ui/LogoutModal'
 
 /**
  * Site Header — Aster Pakistan
@@ -258,6 +259,7 @@ export function Header({
     const [mobileOpen, setMobileOpen] = useState(false)
     const [mobileAccordion, setMobileAccordion] = useState<string | null>(null)
     const [scrolled, setScrolled] = useState(false)
+    const [showLogoutModal, setShowLogoutModal] = useState(false)
     
     const headerRef = useRef<HTMLElement>(null)
     const navRef = useRef<HTMLElement>(null)
@@ -457,7 +459,7 @@ export function Header({
                                             {user.email?.split('@')[0]}
                                         </span>
                                     </TransitionLink>
-                                    <button onClick={() => signOut()} className="nav-link" style={{ padding: 0 }} aria-label="Sign out" title="Sign Out">
+                                    <button onClick={() => setShowLogoutModal(true)} className="nav-link" style={{ padding: 0 }} aria-label="Sign out" title="Sign Out">
                                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                             <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
                                             <polyline points="16 17 21 12 16 7"></polyline>
@@ -552,7 +554,7 @@ export function Header({
                                             {user.email?.[0]?.toUpperCase() || 'U'}
                                         </div>
                                     </Link>
-                                    <button className="mobile-action-card card-transparent" onClick={async () => { await signOut(); closeMobile(); }} style={{ width: '100%', textAlign: 'left', cursor: 'pointer', border: 'none', background: 'rgba(255, 255, 255, 0.05)', padding: '12px 24px' }}>
+                                    <button className="mobile-action-card card-transparent" onClick={() => setShowLogoutModal(true)} style={{ width: '100%', textAlign: 'left', cursor: 'pointer', border: 'none', background: 'rgba(255, 255, 255, 0.05)', padding: '12px 24px' }}>
                                         <div className="mobile-action-content">
                                             <span className="mobile-action-title" style={{ fontSize: '16px' }}>Sign Out</span>
                                         </div>
@@ -583,6 +585,16 @@ export function Header({
                     </div>
                 </div>
             </div>
+
+            <LogoutModal 
+                isOpen={showLogoutModal} 
+                onClose={() => setShowLogoutModal(false)} 
+                onConfirm={async () => {
+                    await signOut();
+                    setShowLogoutModal(false);
+                    closeMobile();
+                }} 
+            />
         </>
     )
 }

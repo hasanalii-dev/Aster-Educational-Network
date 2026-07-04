@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
-import { BookOpen, BrainCircuit, HeartHandshake, Lightbulb, GraduationCap, User, Search } from 'lucide-react'
+import { BookOpen, BrainCircuit, HeartHandshake, Lightbulb, GraduationCap, User, Search, School } from 'lucide-react'
 import { useDocumentTitle } from '@/hooks'
 import { useAuth } from '@/hooks/useAuth'
 import { supabase } from '@/lib/supabase'
@@ -169,14 +169,30 @@ export default function Journal() {
     if (!user) {
         return (
             <div className="min-h-screen flex items-center justify-center bg-[#FAFAFA] px-4">
-                <div className="text-center max-w-lg mx-auto p-12 bg-white rounded-3xl border border-[#E5E7EB] shadow-sm relative overflow-hidden">
+                <style>{`
+                    @keyframes bounce-subtle {
+                        0%, 100% { transform: translateY(0); }
+                        50% { transform: translateY(-10px); }
+                    }
+                    .animate-bounce-subtle {
+                        animation: bounce-subtle 2s ease-in-out infinite;
+                    }
+                `}</style>
+                <div className="text-center max-w-lg mx-auto p-12 bg-white rounded-3xl border border-[#E5E7EB] shadow-[0_20px_60px_rgba(21,40,61,0.04)] relative overflow-hidden">
                     <div className="absolute top-0 right-0 w-32 h-32 bg-[#ffc715] rounded-full blur-[80px] opacity-20 pointer-events-none"></div>
-                    <BookOpen className="w-12 h-12 text-[#394EA2] mx-auto mb-6 opacity-80" />
-                    <h2 className="font-['Playfair_Display'] text-3xl md:text-4xl font-bold text-[#15283D] mb-4">Under Development</h2>
-                    <p className="font-['Quicksand'] text-[#5C5C61] text-lg font-medium leading-relaxed">
+                    
+                    {/* Animated Building Loader */}
+                    <div className="relative w-20 h-20 mx-auto mb-8 flex items-center justify-center">
+                        <div className="absolute inset-0 bg-[#394EA2]/5 rounded-full animate-ping opacity-75"></div>
+                        <div className="absolute inset-0 bg-[#394EA2]/10 rounded-full animate-pulse"></div>
+                        <School className="w-10 h-10 text-[#394EA2] relative z-10 animate-bounce-subtle" />
+                    </div>
+
+                    <h2 className="font-['Quicksand'] text-3xl md:text-4xl font-bold text-[#15283D] mb-4">Under Development</h2>
+                    <p className="font-['Quicksand'] text-[#5C5C61] text-[17px] font-medium leading-relaxed max-w-md mx-auto">
                         The Aster Journal is currently being crafted. Please check back soon for exciting updates and stories from our community.
                     </p>
-                    <Link to="/" className="inline-block mt-8 text-[#394EA2] font-['Quicksand'] font-bold uppercase tracking-wider text-sm hover:text-[#ffc715] transition-colors">
+                    <Link to="/" className="inline-flex items-center justify-center gap-2 mt-8 px-8 py-4 bg-[#F4F6F8] rounded-full text-[#394EA2] font-['Quicksand'] font-bold uppercase tracking-wider text-sm hover:bg-[#394EA2] hover:text-white transition-all duration-300">
                         ← Back to Home
                     </Link>
                 </div>
