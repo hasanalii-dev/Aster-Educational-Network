@@ -126,11 +126,7 @@ export function CampusesSection() {
             // Desktop Cinematic Experience
             mm.add("(min-width: 1024px)", () => {
 
-                // 1. Kicker & Title Bloom
-                gsap.fromTo(".kicker-gold-rule",
-                    { width: 0 },
-                    { width: 40, duration: 1.2, ease: "power3.out", scrollTrigger: { trigger: ".campuses-header-block", start: "top 80%" } }
-                )
+
                 gsap.fromTo(".campuses-main-title",
                     { y: 40, opacity: 0 },
                     { y: 0, opacity: 1, duration: 1.2, ease: "power3.out", scrollTrigger: { trigger: ".campuses-header-block", start: "top 80%" } }
