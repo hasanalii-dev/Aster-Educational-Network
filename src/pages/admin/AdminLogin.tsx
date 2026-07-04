@@ -124,7 +124,7 @@ export default function UnifiedAuth() {
         setLoading(true)
 
         if (isSignUp) {
-            const { error: signUpError } = await supabase.auth.signUp({
+            const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
                 email,
                 password,
                 options: { data: { full_name: fullName } },
@@ -132,6 +132,13 @@ export default function UnifiedAuth() {
 
             if (signUpError) {
                 setError(signUpError.message)
+                setLoading(false)
+                return
+            }
+
+            // Supabase returns an empty identities array if the user already exists and email confirmations are enabled
+            if (signUpData?.user?.identities && signUpData.user.identities.length === 0) {
+                setError('An account with this email address already exists. Please sign in instead.')
                 setLoading(false)
                 return
             }
