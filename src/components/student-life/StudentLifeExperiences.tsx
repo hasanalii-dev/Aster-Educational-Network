@@ -19,7 +19,7 @@ const experiences = [
     {
         title: 'Robotics',
         desc: 'Students love the opportunity to build, create, experiment, and solve problems through Robotics. These hands-on experiences encourage creativity, innovation, and critical thinking while making learning engaging and enjoyable.',
-        image: 'https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783273516/472812802_1675941452987047_403031076935867847_n_rxx545.jpg',
+        image: 'https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783273542/DSC03790_o8lfwo.jpg',
     }
 ]
 
@@ -107,7 +107,7 @@ export function StudentLifeExperiences() {
 
                 {/* More Than A Classroom Image */}
                 <div className="w-full h-[300px] md:h-[500px] lg:h-[600px] rounded-[24px] overflow-hidden shadow-2xl relative mb-24 md:mb-32 exp-intro border-4 border-white/10">
-                    <img src="https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783273542/DSC03790_o8lfwo.jpg" alt="More than a classroom" className="w-full h-full object-cover" />
+                    <img src="https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783273457/1000555042_ajkadi.jpg" alt="More than a classroom" className="w-full h-full object-cover" />
                 </div>
 
                 {/* The Experiences They Love */}
