@@ -24,6 +24,7 @@ const campuses = [
         finaleText: 'A place where curiosity is encouraged, confidence grows, and learning comes to life.',
         image: 'https://res.cloudinary.com/lpxp5l3a/image/upload/v1783171083/1000555027_lxuh4i.jpg', // Reel aspect ratio
         video: 'https://alpha.edu.pk/img/hero.mp4',
+        mapQuery: 'Plot+D%2C+97%2C+Block+4%2C+Block+2+Clifton%2C+Karachi%2C+Pakistan',
     },
     {
         id: 'pechs-junior',
@@ -42,6 +43,7 @@ const campuses = [
         finaleText: 'A place where children develop independence, confidence, and a genuine love for learning.',
         image: 'https://res.cloudinary.com/lpxp5l3a/image/upload/v1783171182/500077944_1251016823698585_2689627082250163943_n_bmhohl.jpg', // Reel aspect ratio
         video: 'https://alpha.edu.pk/img/hero.mp4',
+        mapQuery: 'Plot+37+C%2C+Block-6+PECHS%2C+Karachi+City%2C+Sindh%2C+Pakistan%2C+75500',
     },
     {
         id: 'pechs-senior',
@@ -62,6 +64,7 @@ const campuses = [
         finaleText: 'A learning environment where students are challenged to think critically, lead confidently, and contribute meaningfully.',
         image: 'https://res.cloudinary.com/lpxp5l3a/image/upload/v1783171285/image00022_pbq3wd.jpg', // Reel aspect ratio
         video: 'https://alpha.edu.pk/img/hero.mp4',
+        mapQuery: '33-D%2C+Block+6%2C+PECHS%2C+Shahrah-e-Faisal+Road%2C+Karachi%2C+Pakistan%2C+75500',
     }
 ]
 
@@ -211,9 +214,21 @@ function CampusCard({ campus, isEven }: { campus: any, isEven: boolean }) {
                 </div>
 
                 <div className="bg-white p-8 md:p-10 rounded-2xl border border-[#e5e7eb] shadow-sm mb-10 hover:shadow-md transition-shadow duration-300">
-                    <p className="font-['Playfair_Display'] italic text-2xl text-[#3A53A4] leading-snug">
+                    <p className="font-['Quicksand'] font-medium text-xl md:text-2xl text-[#3A53A4] leading-snug">
                         "{campus.finaleText}"
                     </p>
+                </div>
+
+                <div className="w-full h-[250px] rounded-2xl overflow-hidden mb-10 shadow-sm border border-[#e5e7eb]">
+                    <iframe
+                        src={`https://maps.google.com/maps?q=${campus.mapQuery}&t=&z=14&ie=UTF8&iwloc=&output=embed`}
+                        width="100%"
+                        height="100%"
+                        style={{ border: 0 }}
+                        allowFullScreen
+                        loading="lazy"
+                        referrerPolicy="no-referrer-when-downgrade"
+                    />
                 </div>
 
                 <div>
