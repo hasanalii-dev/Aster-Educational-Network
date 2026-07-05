@@ -19,21 +19,7 @@ export function CampusesIntro() {
                     }
                 }
             )
-            
-            const words = gsap.utils.toArray<HTMLElement>('.gsap-scrub-word-intro')
-            if (words.length > 0) {
-                gsap.to(words, {
-                    opacity: 1,
-                    stagger: 0.1,
-                    ease: 'none',
-                    scrollTrigger: {
-                        trigger: '.intro-prose-reveal',
-                        start: 'top 90%',
-                        end: 'bottom 70%',
-                        scrub: true,
-                    }
-                })
-            }
+
         }, sectionRef)
 
         return () => ctx.revert()
@@ -57,10 +43,8 @@ export function CampusesIntro() {
                     </span>
                 </div>
                 
-                <h2 className="font-['Playfair_Display'] text-3xl md:text-5xl font-medium text-[#1c1c1c] leading-[1.2] max-w-3xl mb-8 intro-prose-reveal">
-                    {`Every stage of childhood brings unique opportunities for growth.`.split(' ').map((word, i) => (
-                        <span key={i} className="gsap-scrub-word-intro inline-block mr-[0.25em] opacity-20 will-change-transform">{word}</span>
-                    ))}
+                <h2 className="font-['Playfair_Display'] text-3xl md:text-5xl font-medium text-[#334a89] leading-[1.2] max-w-3xl mb-8">
+                    Every stage of childhood brings unique opportunities for growth.
                 </h2>
                 
                 <p className="font-['Quicksand'] font-medium text-base md:text-lg text-[#5C5C61] max-w-2xl leading-relaxed">

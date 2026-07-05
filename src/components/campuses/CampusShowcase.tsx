@@ -22,7 +22,7 @@ const campuses = [
             'A supportive and family-oriented community',
         ],
         finaleText: 'A place where curiosity is encouraged, confidence grows, and learning comes to life.',
-        image: 'https://images.unsplash.com/photo-1576495199011-eb94736d05d6?q=80&w=1200&auto=format&fit=crop', // Reel aspect ratio
+        image: 'https://res.cloudinary.com/lpxp5l3a/image/upload/v1783171083/1000555027_lxuh4i.jpg', // Reel aspect ratio
         video: 'https://alpha.edu.pk/img/hero.mp4',
     },
     {
@@ -40,7 +40,7 @@ const campuses = [
             'Individual attention and guidance',
         ],
         finaleText: 'A place where children develop independence, confidence, and a genuine love for learning.',
-        image: 'https://images.unsplash.com/photo-1588072432836-e10032774350?q=80&w=1200&auto=format&fit=crop', // Reel aspect ratio
+        image: 'https://res.cloudinary.com/lpxp5l3a/image/upload/v1783171182/500077944_1251016823698585_2689627082250163943_n_bmhohl.jpg', // Reel aspect ratio
         video: 'https://alpha.edu.pk/img/hero.mp4',
     },
     {
@@ -60,7 +60,7 @@ const campuses = [
             'Community engagement and service',
         ],
         finaleText: 'A learning environment where students are challenged to think critically, lead confidently, and contribute meaningfully.',
-        image: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1200&auto=format&fit=crop', // Reel aspect ratio
+        image: 'https://res.cloudinary.com/lpxp5l3a/image/upload/v1783171285/image00022_pbq3wd.jpg', // Reel aspect ratio
         video: 'https://alpha.edu.pk/img/hero.mp4',
     }
 ]
@@ -190,7 +190,7 @@ function CampusCard({ campus, isEven }: { campus: any, isEven: boolean }) {
                         CAMPUS PROFILE
                     </span>
                 </div>
-                <h2 className="font-['Playfair_Display'] text-4xl md:text-5xl font-medium text-[#1c1c1c] mb-8 leading-[1.1]">
+                <h2 className="font-['Playfair_Display'] text-4xl md:text-5xl font-medium text-[#334a89] mb-8 leading-[1.1]">
                     {campus.name}
                 </h2>
                 

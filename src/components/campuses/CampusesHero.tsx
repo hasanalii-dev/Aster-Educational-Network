@@ -81,7 +81,7 @@ export function CampusesHero() {
                 <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none" style={{ borderRadius: 'inherit' }}>
                     <img
                         ref={imageRef}
-                        src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=2000&auto=format&fit=crop"
+                        src="https://res.cloudinary.com/lpxp5l3a/image/upload/v1783259891/imageye___-_imgi_132_image_crrae4.webp"
                         alt="The Aster School Campuses"
                         className="w-full h-full object-cover filter brightness-[0.80] contrast-105 will-change-transform"
                     />

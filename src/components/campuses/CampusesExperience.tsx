@@ -71,7 +71,7 @@ export function CampusesExperience() {
                             SHARED PHILOSOPHY
                         </span>
                     </div>
-                    <h2 className="font-['Playfair_Display'] text-4xl md:text-5xl font-medium text-[#1c1c1c] mb-8 leading-[1.1]">
+                    <h2 className="font-['Playfair_Display'] text-4xl md:text-5xl font-medium text-[#334a89] mb-8 leading-[1.1]">
                         The Aster Experience Across Every Campus
                     </h2>
                     <p className="font-['Quicksand'] font-medium text-lg text-[#5C5C61] leading-relaxed">
