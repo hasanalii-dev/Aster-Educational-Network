@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { ChevronUp, ChevronDown } from 'lucide-react'
 import pasteIcon from '@/assets/icons/paste.svg'
@@ -15,7 +15,7 @@ const carouselCards = [
         bg: 'bg-[#6ab39d]',
         title: 'Environments Built for Purpose',
         text: 'From the earliest years to senior school, we intentionally create environments where students are encouraged to think independently, lead with empathy, communicate confidently, and grow with purpose.',
-        image: 'https://res.cloudinary.com/lpxp5l3a/image/upload/v1783253218/500036594_1251017057031895_7179780475084031344_n_ilxlck.jpg',
+        image: 'https://res.cloudinary.com/lpxp5l3a/image/upload/v1783253316/499487982_1251017437031857_8533168766544290791_n_tuaxmy.jpg',
     },
     {
         bg: 'bg-[#9765d1]',
@@ -30,6 +30,7 @@ export function AboutPrologue() {
     const cardsRef = useRef<(HTMLDivElement | null)[]>([])
     const currentIndexRef = useRef(0)
     const isAnimatingRef = useRef(false)
+    const [isHovered, setIsHovered] = useState(false)
 
     const N = carouselCards.length
 
@@ -61,12 +62,13 @@ export function AboutPrologue() {
     }, [])
 
     useEffect(() => {
+        if (isHovered) return;
         // Auto-play interval
         const timer = setInterval(() => {
             handleNext()
         }, 4000)
         return () => clearInterval(timer)
-    }, [])
+    }, [isHovered])
 
     const handleNext = () => {
         if (isAnimatingRef.current) return
@@ -194,7 +196,11 @@ export function AboutPrologue() {
                 </div>
 
                 {/* 3D Stacked Deck */}
-                <div className="w-full max-w-[1100px] mx-auto px-6 md:px-12 pb-24 h-[550px] md:h-[450px] lg:h-[450px] relative perspective-[1200px] mt-4 group">
+                <div 
+                    className="w-full max-w-[1100px] mx-auto px-6 md:px-12 pb-24 h-[550px] md:h-[450px] lg:h-[450px] relative perspective-[1200px] mt-4 group"
+                    onMouseEnter={() => setIsHovered(true)}
+                    onMouseLeave={() => setIsHovered(false)}
+                >
                     {carouselCards.map((card, idx) => (
                         <div 
                             key={idx}

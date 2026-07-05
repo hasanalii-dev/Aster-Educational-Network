@@ -17,7 +17,7 @@ gsap.registerPlugin(ScrollTrigger)
  * Displays a pulsing skeleton background until the image is fully downloaded.
  * Includes a fix for cached images preventing the onLoad event.
  */
-const ImageWithSkeleton = ({ src, alt, className, imgClassName, style, imgStyle }: { src: string, alt: string, className?: string, imgClassName?: string, style?: React.CSSProperties, imgStyle?: React.CSSProperties }) => {
+const ImageWithSkeleton = ({ src, alt, className, imgClassName, style, imgStyle, priority = false }: { src: string, alt: string, className?: string, imgClassName?: string, style?: React.CSSProperties, imgStyle?: React.CSSProperties, priority?: boolean }) => {
     const wrapperRef = useRef<HTMLDivElement>(null)
     const imgRef = useRef<HTMLImageElement>(null)
 
@@ -42,7 +42,8 @@ const ImageWithSkeleton = ({ src, alt, className, imgClassName, style, imgStyle 
                 onError={handleLoad}
                 className={imgClassName || ''}
                 style={imgStyle}
-                loading="lazy"
+                loading={priority ? "eager" : "lazy"}
+                decoding={priority ? "sync" : "async"}
             />
         </div>
     )
@@ -196,6 +197,7 @@ export default function Home() {
                                 src="https://res.cloudinary.com/lpxp5l3a/image/upload/v1783169370/1000555006_ptbiit.jpg"
                                 alt="Students collaborating at Aster"
                                 className="wcu-img-fill rounded-[4px]"
+                                priority={true}
                             />
                         </div>
 
@@ -204,6 +206,7 @@ export default function Home() {
                                 src="https://res.cloudinary.com/lpxp5l3a/image/upload/v1783169602/1000555000_qvecon.jpg"
                                 alt="Aster student working on a project"
                                 className="wcu-img-fill rounded-[4px]"
+                                priority={true}
                             />
                         </div>
 
@@ -299,7 +302,7 @@ export default function Home() {
                             {differenceData.map((item, i) => (
                                 <div
                                     key={i}
-                                    className={`absolute w-[75%] md:w-[413px] h-[70%] md:h-[400px] left-[50%] md:left-[calc(50%+30px)] top-[50%] md:top-[calc(50%-15px)] -translate-x-1/2 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                                    className={`absolute w-[75%] md:w-[413px] h-[70%] md:h-[400px] left-[50%] md:left-[calc(50%+30px)] top-[50%] md:top-[calc(50%-15px)] -translate-x-1/2 transition-[transform,opacity] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-[transform,opacity] ${
                                         activeDifferenceIndex === i
                                             ? 'opacity-100 -translate-y-1/2 scale-100 z-10'
                                             : 'opacity-0 -translate-y-[40%] scale-95 z-0'
@@ -311,6 +314,7 @@ export default function Home() {
                                         className="w-full h-full shadow-[0_20px_40px_rgba(0,0,0,0.15)] overflow-hidden"
                                         style={{ borderRadius: '11px' }}
                                         imgStyle={{ borderRadius: '11px' }}
+                                        priority={i === 0}
                                     />
                                 </div>
                             ))}
