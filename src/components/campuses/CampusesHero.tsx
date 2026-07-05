@@ -43,8 +43,8 @@ export function CampusesHero() {
 
                 tl.fromTo(
                     imageRef.current,
-                    { yPercent: -15, scale: 1.35 },
-                    { yPercent: 15, scale: 1.25, ease: 'none' },
+                    { yPercent: -15, scale: 1.4 },
+                    { yPercent: 15, scale: 1.3, ease: 'none' },
                     0
                 )
             })
@@ -74,7 +74,7 @@ export function CampusesHero() {
         >
             <div
                 ref={bannerFrameRef}
-                className="w-[calc(100%-3rem)] md:w-[calc(100%-6rem)] max-w-[1360px] h-[45vh] md:h-[60vh] min-h-[350px] relative will-change-transform"
+                className="w-[calc(100%-3rem)] md:w-[calc(100%-6rem)] max-w-[1360px] h-[35vh] md:h-[50vh] min-h-[300px] relative will-change-transform"
                 style={{ borderRadius: '16px' }}
             >
                 {/* The Image Mask (inherits border radius) */}
@@ -83,7 +83,7 @@ export function CampusesHero() {
                         ref={imageRef}
                         src="https://res.cloudinary.com/lpxp5l3a/image/upload/v1783259891/imageye___-_imgi_132_image_crrae4.webp"
                         alt="The Aster School Campuses"
-                        className="absolute -inset-[10%] w-[120%] h-[120%] object-cover filter brightness-[0.80] contrast-105 will-change-transform"
+                        className="w-full h-full object-cover filter brightness-[0.80] contrast-105 will-change-transform"
                     />
                     {/* LOW OPACITY DARK OVERLAY */}
                     <div className="absolute inset-0 bg-black/20 z-10 pointer-events-none" />
@@ -91,7 +91,7 @@ export function CampusesHero() {
             </div>
 
             {/* Stationary Card Container */}
-            <div className="absolute top-28 md:top-32 w-[calc(100%-3rem)] md:w-[calc(100%-6rem)] max-w-[1360px] h-[45vh] md:h-[60vh] min-h-[350px] pointer-events-none">
+            <div className="absolute top-28 md:top-32 w-[calc(100%-3rem)] md:w-[calc(100%-6rem)] max-w-[1360px] h-[35vh] md:h-[50vh] min-h-[300px] pointer-events-none">
                 {/* Overlapping Blue Rectangle */}
                 <div
                     ref={textStackRef}

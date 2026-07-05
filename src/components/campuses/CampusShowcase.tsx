@@ -82,10 +82,10 @@ export function CampusShowcase() {
                 // Parallax on image
                 if (img) {
                     gsap.fromTo(img,
-                        { yPercent: -15, scale: 1.1 },
+                        { yPercent: -15, scale: 1.35 },
                         {
                             yPercent: 15,
-                            scale: 1,
+                            scale: 1.35,
                             ease: 'none',
                             scrollTrigger: {
                                 trigger: card,
