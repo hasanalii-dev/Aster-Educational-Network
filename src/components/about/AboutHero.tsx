@@ -7,7 +7,7 @@ gsap.registerPlugin(ScrollTrigger)
 export function AboutHero() {
     const sectionRef = useRef<HTMLElement>(null)
     const bannerFrameRef = useRef<HTMLDivElement>(null)
-    const mediaRef = useRef<HTMLVideoElement>(null)
+    const mediaRef = useRef<HTMLImageElement>(null)
     const textStackRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
@@ -79,13 +79,10 @@ export function AboutHero() {
             >
                 {/* The Media Mask (inherits border radius) */}
                 <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none" style={{ borderRadius: 'inherit' }}>
-                    <video
+                    <img
                         ref={mediaRef}
-                        src="https://alpha.edu.pk/img/hero.mp4"
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
+                        src="https://res.cloudinary.com/lpxp5l3a/image/upload/v1783253673/imageye___-_imgi_120_image_p6jnss.webp"
+                        alt="Aster School Students"
                         className="absolute -top-[15%] left-0 w-full h-[130%] object-cover filter brightness-[0.85] contrast-105 will-change-transform"
                     />
                     {/* LOW OPACITY DARK OVERLAY */}

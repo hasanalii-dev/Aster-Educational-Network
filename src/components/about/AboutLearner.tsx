@@ -154,7 +154,7 @@ export function AboutLearner() {
                         {/* True-Color 3:4 Student Focus Portrait */}
                         <div className="w-full aspect-[3/4] rounded-[28px] overflow-hidden shadow-xl border border-[#334a89]/15 bg-[#334a89]/5">
                             <img
-                                src="https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=800&auto=format&fit=crop"
+                                src="https://res.cloudinary.com/lpxp5l3a/image/upload/v1783254166/As_part_of_Mental_Health_week_our_students_practiced_mindfulness_through_yoga_explored_emotion_4_s1s0dh.jpg"
                                 alt="Aster Student engaged in deep focus"
                                 className="gsap-parallax-media w-full h-full object-cover contrast-105 will-change-transform"
                             />

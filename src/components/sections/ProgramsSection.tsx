@@ -9,16 +9,29 @@ gsap.registerPlugin(ScrollTrigger)
  * Includes real-time loading states and an onError escape hatch.
  */
 const ImageWithSkeleton = ({ src, alt, className }: { src: string, alt: string, className?: string }) => {
-  const [isLoaded, setIsLoaded] = useState(false)
+  const wrapperRef = useRef<HTMLDivElement>(null)
+  const imgRef = useRef<HTMLImageElement>(null)
+
+  const handleLoad = () => {
+      if (imgRef.current) imgRef.current.classList.add('is-visible')
+      if (wrapperRef.current) wrapperRef.current.classList.add('is-loaded')
+  }
+
+  useEffect(() => {
+      if (imgRef.current?.complete) {
+          handleLoad()
+      }
+  }, [src])
 
   return (
-    <div className={`skeleton-wrapper ${className || ''}`}>
+    <div ref={wrapperRef} className={`skeleton-wrapper ${className || ''}`}>
       <img
+        ref={imgRef}
         src={src}
         alt={alt}
-        onLoad={() => setIsLoaded(true)}
-        onError={() => setIsLoaded(true)} // Prevents infinite skeleton trapping if a link drops
-        className={`program-img ${isLoaded ? 'is-visible' : ''}`}
+        onLoad={handleLoad}
+        onError={handleLoad}
+        className="program-img"
         loading="lazy"
       />
     </div>
@@ -61,7 +74,12 @@ export function ProgramsSection() {
             onUpdate: (self) => {
               const totalItems = learnerData.length;
               const newIndex = Math.min(totalItems - 1, Math.floor(self.progress * totalItems));
-              setActiveLearnerIndex(newIndex);
+              setActiveLearnerIndex((prevIndex) => {
+                  if (prevIndex !== newIndex) {
+                      return newIndex;
+                  }
+                  return prevIndex;
+              });
             }
           });
         }
@@ -177,6 +195,11 @@ const programsStyles = `
   100% { background-position: -200% 0; }
 }
 
+.skeleton-wrapper.is-loaded {
+  animation: none;
+  background: transparent;
+}
+
 .program-img {
   width: 100%;
   height: 100%;
@@ -186,6 +209,7 @@ const programsStyles = `
   transition: opacity 0.6s ease-out, transform 0.6s ease-out;
   display: block;
   border-radius: inherit;
+  will-change: opacity, transform;
 }
 
 .program-img.is-visible {

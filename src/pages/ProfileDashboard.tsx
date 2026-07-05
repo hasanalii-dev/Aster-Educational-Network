@@ -52,19 +52,19 @@ export default function ProfileDashboard() {
         // Banner animation
         gsap.fromTo('.gsap-banner', 
             { opacity: 0, y: 30 },
-            { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', clearProps: 'all' }
+            { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', clearProps: 'transform' }
         )
 
         // Action Tiles staggered pop-in
         gsap.fromTo('.gsap-action-tile',
             { opacity: 0, y: 20 },
-            { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: 'power2.out', delay: 0.15, clearProps: 'all' }
+            { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: 'power2.out', delay: 0.15, clearProps: 'transform' }
         )
 
         // Vault cards animation
         gsap.fromTo('.gsap-vault-card',
             { opacity: 0, y: 20 },
-            { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: 'power2.out', delay: 0.3, clearProps: 'all' }
+            { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: 'power2.out', delay: 0.3, clearProps: 'transform' }
         )
     }
   }, [loading, fetching])

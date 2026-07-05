@@ -18,23 +18,29 @@ gsap.registerPlugin(ScrollTrigger)
  * Includes a fix for cached images preventing the onLoad event.
  */
 const ImageWithSkeleton = ({ src, alt, className, imgClassName, style, imgStyle }: { src: string, alt: string, className?: string, imgClassName?: string, style?: React.CSSProperties, imgStyle?: React.CSSProperties }) => {
-    const [isLoaded, setIsLoaded] = useState(false)
+    const wrapperRef = useRef<HTMLDivElement>(null)
     const imgRef = useRef<HTMLImageElement>(null)
+
+    const handleLoad = () => {
+        if (imgRef.current) imgRef.current.classList.add('loaded')
+        if (wrapperRef.current) wrapperRef.current.classList.add('is-loaded')
+    }
 
     useEffect(() => {
         if (imgRef.current?.complete) {
-            setIsLoaded(true)
+            handleLoad()
         }
     }, [src])
 
     return (
-        <div className={`skeleton-wrapper ${className || ''}`} style={style}>
+        <div ref={wrapperRef} className={`skeleton-wrapper ${className || ''}`} style={style}>
             <img
                 ref={imgRef}
                 src={src}
                 alt={alt}
-                onLoad={() => setIsLoaded(true)}
-                className={`${isLoaded ? 'loaded' : ''} ${imgClassName || ''}`}
+                onLoad={handleLoad}
+                onError={handleLoad}
+                className={imgClassName || ''}
                 style={imgStyle}
                 loading="lazy"
             />
@@ -433,7 +439,10 @@ const homeStyles = `
   0% { background-position: 200% 0; }
   100% { background-position: -200% 0; }
 }
-
+.skeleton-wrapper.is-loaded {
+  animation: none;
+  background: transparent;
+}
 .skeleton-wrapper img {
   width: 100%;
   height: 100%;
@@ -442,6 +451,7 @@ const homeStyles = `
   transition: opacity 0.5s ease-in-out;
   display: block;
   border-radius: inherit;
+  will-change: opacity;
 }
 .skeleton-wrapper img.loaded { opacity: 1; }
 
