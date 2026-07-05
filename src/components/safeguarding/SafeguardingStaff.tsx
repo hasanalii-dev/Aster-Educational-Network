@@ -70,7 +70,7 @@ export function SafeguardingStaff() {
                         </span>
                     </div>
                     
-                    <h2 className="font-['Playfair_Display'] text-4xl md:text-5xl lg:text-6xl font-medium text-[#1c1c1c] leading-[1.1] mb-10 staff-text">
+                    <h2 className="font-['Playfair_Display'] text-4xl md:text-5xl lg:text-6xl font-medium text-[#334a89] leading-[1.1] mb-10 staff-text">
                         Safeguarding Is Everyone's Responsibility
                     </h2>
                     
@@ -91,7 +91,7 @@ export function SafeguardingStaff() {
                 <div className="w-full lg:w-1/2 staff-img">
                     <div className="relative h-[500px] md:h-[680px] w-full rounded-none shadow-none overflow-hidden bg-gray-50">
                         <img 
-                            src="https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=1200&auto=format&fit=crop" 
+                            src="https://res.cloudinary.com/lpxp5l3a/image/upload/v1783261994/1000555027_mulx0h.jpg" 
                             alt="Our Responsible Staff" 
                             className="parallax-img w-full h-full object-cover"
                         />

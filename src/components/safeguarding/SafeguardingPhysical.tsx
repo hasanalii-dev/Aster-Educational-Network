@@ -14,9 +14,9 @@ const measures = [
 ]
 
 const physicalImages = [
-    'https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=1200&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=1200&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=1200&auto=format&fit=crop'
+    'https://res.cloudinary.com/lpxp5l3a/image/upload/v1783261897/1000555036_xnqrsl.jpg',
+    'https://res.cloudinary.com/lpxp5l3a/image/upload/v1783261907/1000555066_hrvaeb.jpg',
+    'https://res.cloudinary.com/lpxp5l3a/image/upload/v1783261892/1000555034_phaqfv.jpg'
 ]
 
 export function SafeguardingPhysical() {

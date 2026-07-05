@@ -78,7 +78,7 @@ export function SafeguardingCommitment() {
                         <div className="relative h-[500px] md:h-[680px] w-full rounded-none shadow-none overflow-hidden bg-[#15283D]">
                             <div className="absolute inset-0 w-full h-[120%] -top-[10%]">
                                 <img
-                                    src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=1200&auto=format&fit=crop"
+                                    src="https://res.cloudinary.com/lpxp5l3a/image/upload/v1783261842/1000555008_rhc9hm.jpg"
                                     alt="Safe Learning Environments"
                                     className="commit-img-inner w-full h-full object-cover contrast-[1.05] opacity-90 will-change-transform"
                                 />

@@ -57,7 +57,7 @@ export function SafeguardingFamilies() {
                 <div className="w-full lg:w-1/2 family-img">
                     <div className="relative h-[500px] md:h-[680px] w-full rounded-none shadow-none overflow-hidden bg-gray-50">
                         <img 
-                            src="https://images.unsplash.com/photo-1543269865-cbf427effbad?q=80&w=1200&auto=format&fit=crop" 
+                            src="https://res.cloudinary.com/lpxp5l3a/image/upload/v1783262066/493802865_1231231339010467_6402077431719669692_n_m0lqkw.jpg" 
                             alt="Working in Partnership with Families" 
                             className="parallax-img w-full h-full object-cover"
                         />
