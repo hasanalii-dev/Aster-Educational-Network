@@ -67,7 +67,7 @@ export function CareersWorkMatters() {
                 <div className="w-full lg:w-1/2 work-text">
                     <div className="relative h-[500px] md:h-[680px] w-full overflow-hidden bg-gray-50">
                         <img
-                            src="https://images.unsplash.com/photo-1560785496-3c9d27877182?q=80&w=1200&auto=format&fit=crop"
+                            src="https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783263354/classroom-5_vtox5t.jpg"
                             alt="Aster educators"
                             className="parallax-img w-full h-full object-cover"
                         />
@@ -77,3 +77,4 @@ export function CareersWorkMatters() {
         </section>
     )
 }
+

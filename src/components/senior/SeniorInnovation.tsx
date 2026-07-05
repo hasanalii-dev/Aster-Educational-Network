@@ -156,8 +156,8 @@ export function SeniorInnovation() {
                             style={{ borderRadius: '0px' }}
                         >
                             <ImageWithSkeleton
-                                src="https://images.unsplash.com/photo-1581092921461-eab62e97a780?q=80&w=1200&auto=format&fit=crop"
-                                alt="Innovation and Technology"
+                                src="https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783271036/image00016_rlwwu8.jpg"
+                                alt="Project-based Learning"
                                 className="w-full h-full"
                             />
                         </div>
@@ -168,7 +168,7 @@ export function SeniorInnovation() {
                             style={{ borderRadius: '0px' }}
                         >
                             <ImageWithSkeleton
-                                src="https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=800&auto=format&fit=crop"
+                                src="https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783270626/image00026_znlnek.jpg"
                                 alt="Entrepreneurship Workshop"
                                 className="w-full h-full"
                             />
@@ -180,3 +180,4 @@ export function SeniorInnovation() {
         </>
     )
 }
+

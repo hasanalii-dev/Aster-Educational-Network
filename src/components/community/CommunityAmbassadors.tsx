@@ -100,9 +100,9 @@ export function CommunityAmbassadors() {
                     >
                         <div className="w-full h-full transition-transform duration-[1.5s] ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-[1.04]">
                             <img
-                                src="https://images.unsplash.com/photo-1543269865-cbf427effbad?q=80&w=1200&auto=format&fit=crop"
+                                src="https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783274972/493896117_1231231472343787_963477596723003388_n_uyvjoo.jpg"
                                 alt="Parents as Partners"
-                                className="ambassador-parallax-img absolute h-[120%] -top-[10%] w-full object-cover will-change-transform contrast-[1.05]"
+                                className="ambassador-parallax-img absolute h-[120%] -top-[10%] w-full object-cover will-change-transform"
                             />
                         </div>
                         <div className="absolute inset-0 pointer-events-none shadow-[inset_0_0_80px_rgba(0,0,0,0.2)] mix-blend-multiply" />
@@ -124,7 +124,7 @@ export function CommunityAmbassadors() {
                             Building Connections Between <em className="italic text-[#334a89] !text-[#334a89] block mt-2">Families & School</em>
                         </h3>
 
-                        <div className="gsap-stagger-item w-16 h-[2px] bg-[#334a89] mb-10 shadow-sm" />
+                        <Users className="gsap-stagger-item w-8 h-8 text-[#334a89] mb-10" />
 
                         <p className="gsap-stagger-item font-['Quicksand'] text-[#5C5C61] !text-[#5C5C61] text-base md:text-lg leading-[1.65] font-medium mb-10">
                             Our parent community plays an active role in school life. Through our Parent Ambassador Program, each class is represented by a parent ambassador who helps strengthen communication, encourage collaboration, and foster a sense of connection among families.
@@ -160,7 +160,7 @@ export function CommunityAmbassadors() {
                             Becoming Part of Your <em className="italic text-[#ffc715] !text-[#ffc715] block mt-2">Child's World</em>
                         </h3>
 
-                        <div className="gsap-stagger-item w-16 h-[2px] bg-[#ffc715] mb-10 shadow-sm" />
+                        <Star className="gsap-stagger-item w-8 h-8 text-[#ffc715] mb-10" fill="currentColor" />
 
                         <p className="gsap-stagger-item font-['Quicksand'] text-white/90 !text-white/90 text-base md:text-lg leading-[1.65] font-medium mb-10">
                             One of the most cherished experiences within our Early Years program is Star Parent Day. Each week, a parent is invited into the classroom to participate in engaging activities alongside students and educators.
@@ -180,9 +180,9 @@ export function CommunityAmbassadors() {
                     >
                         <div className="w-full h-full transition-transform duration-[1.5s] ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-[1.04]">
                             <img
-                                src="https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=1200&auto=format&fit=crop"
+                                src="https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783275012/493802865_1231231339010467_6402077431719669692_n_xzfdgc.jpg"
                                 alt="Star Parent Day"
-                                className="ambassador-parallax-img absolute h-[120%] -top-[10%] w-full object-cover will-change-transform contrast-[1.05]"
+                                className="ambassador-parallax-img absolute h-[120%] -top-[10%] w-full object-cover will-change-transform"
                             />
                         </div>
                         <div className="absolute inset-0 pointer-events-none shadow-[inset_0_0_80px_rgba(0,0,0,0.2)] mix-blend-multiply" />

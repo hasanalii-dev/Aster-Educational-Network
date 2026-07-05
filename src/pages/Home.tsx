@@ -64,32 +64,32 @@ const differenceData = [
     {
         title: "Robotics & Digital Literacy",
         desc: "Students learn to think critically, solve problems, and engage confidently with technology through coding, robotics, and digital exploration.",
-        image: "https://res.cloudinary.com/lpxp5l3a/image/upload/v1783169976/DSC03243_bvvzmf.jpg"
+        image: "https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783169976/DSC03243_bvvzmf.jpg"
     },
     {
         title: "Sports & Discipline",
         desc: "From swimming and football to gymnastics and taekwondo, sports help students develop resilience, teamwork, focus, and self-belief.",
-        image: "https://res.cloudinary.com/lpxp5l3a/image/upload/v1783170082/496200395_1242109967922604_7907344747179719709_n_ut5v1l.jpg"
+        image: "https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783170082/496200395_1242109967922604_7907344747179719709_n_ut5v1l.jpg"
     },
     {
         title: "Social Emotional Learning",
         desc: "We intentionally nurture emotional intelligence, confidence, empathy, and communication helping students understand themselves and others.",
-        image: "https://res.cloudinary.com/lpxp5l3a/image/upload/v1783170199/As_part_of_Mental_Health_week_our_students_practiced_mindfulness_through_yoga_explored_emotion_vub6lj.jpg"
+        image: "https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783170199/As_part_of_Mental_Health_week_our_students_practiced_mindfulness_through_yoga_explored_emotion_vub6lj.jpg"
     },
     {
         title: "Islamic Learning",
         desc: "Students develop strong values rooted in humility, integrity, respect, and purposeful living.",
-        image: "https://res.cloudinary.com/lpxp5l3a/image/upload/v1783170305/495188560_1242587767874824_655110840629499397_n_yofyut.jpg"
+        image: "https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783170305/495188560_1242587767874824_655110840629499397_n_yofyut.jpg"
     },
     {
         title: "Sustainability & Green Goals",
         desc: "Through hands-on environmental initiatives, students learn responsibility, awareness, and care for the world around them.",
-        image: "https://res.cloudinary.com/lpxp5l3a/image/upload/v1783170377/473127865_1676555299592329_7824417284584904866_n_tmd7uc.jpg"
+        image: "https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783170377/473127865_1676555299592329_7824417284584904866_n_tmd7uc.jpg"
     },
     {
         title: "Passion Projects & Entrepreneurship",
         desc: "Students are encouraged to think independently, take initiative, solve problems creatively, and confidently present their ideas.",
-        image: "https://res.cloudinary.com/lpxp5l3a/image/upload/v1783170483/MEP04640_qkhjcw.jpg"
+        image: "https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783170483/MEP04640_qkhjcw.jpg"
     }
 ]
 
@@ -194,7 +194,7 @@ export default function Home() {
 
                         <div ref={wcuImgLargeRef} className="wcu-parallax-wrap wcu-img-large">
                             <ImageWithSkeleton
-                                src="https://res.cloudinary.com/lpxp5l3a/image/upload/v1783169370/1000555006_ptbiit.jpg"
+                                src="https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783169370/1000555006_ptbiit.jpg"
                                 alt="Students collaborating at Aster"
                                 className="wcu-img-fill rounded-[4px]"
                                 priority={true}
@@ -203,7 +203,7 @@ export default function Home() {
 
                         <div ref={wcuImgSmallRef} className="wcu-parallax-wrap wcu-img-small">
                             <ImageWithSkeleton
-                                src="https://res.cloudinary.com/lpxp5l3a/image/upload/v1783169602/1000555000_qvecon.jpg"
+                                src="https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783169602/1000555000_qvecon.jpg"
                                 alt="Aster student working on a project"
                                 className="wcu-img-fill rounded-[4px]"
                                 priority={true}

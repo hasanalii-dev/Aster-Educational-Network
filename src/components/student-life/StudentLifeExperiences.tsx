@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { Compass } from 'lucide-react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
@@ -8,17 +9,17 @@ const experiences = [
     {
         title: 'Swimming',
         desc: 'For many students, swimming is one of the most anticipated parts of the week. Beyond developing physical fitness and confidence in the water, students learn discipline, perseverance, and the importance of consistent effort.',
-        image: 'https://images.unsplash.com/photo-1519315901367-f34f927e698e?q=80&w=1000&auto=format&fit=crop',
+        image: '',
     },
     {
         title: 'Sports',
         desc: 'Whether on the football field, gymnastics floor, taekwondo mat, or during team competitions, students develop resilience, teamwork, leadership, and sportsmanship while enjoying the excitement of healthy competition.',
-        image: 'https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=1000&auto=format&fit=crop',
+        image: 'https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783273516/472812802_1675941452987047_403031076935867847_n_rxx545.jpg',
     },
     {
         title: 'Robotics',
         desc: 'Students love the opportunity to build, create, experiment, and solve problems through Robotics. These hands-on experiences encourage creativity, innovation, and critical thinking while making learning engaging and enjoyable.',
-        image: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=1000&auto=format&fit=crop',
+        image: 'https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783273516/472812802_1675941452987047_403031076935867847_n_rxx545.jpg',
     }
 ]
 
@@ -36,16 +37,18 @@ export function StudentLifeExperiences() {
             )
 
             const cards = gsap.utils.toArray('.exp-card') as HTMLElement[]
-            cards.forEach((card, i) => {
+            cards.forEach((card) => {
                 const imgContainer = card.querySelector('.exp-img-wrapper')
                 
-                // Horizontal Image Reveal
+                // Fade up instead of clip-path for better compatibility
                 gsap.fromTo(imgContainer,
-                    { clipPath: i % 2 === 0 ? 'inset(0 100% 0 0)' : 'inset(0 0 0 100%)' },
+                    { opacity: 0, y: 40, scale: 0.95 },
                     {
-                        clipPath: 'inset(0 0% 0 0)',
-                        duration: 1.5,
-                        ease: 'power3.inOut',
+                        opacity: 1,
+                        y: 0,
+                        scale: 1,
+                        duration: 1.2,
+                        ease: 'power3.out',
                         scrollTrigger: {
                             trigger: card,
                             start: 'top 80%',
@@ -76,11 +79,10 @@ export function StudentLifeExperiences() {
                 {/* Intro Block */}
                 <div className="max-w-[900px] mx-auto text-center mb-24 md:mb-32">
                     <div className="flex items-center justify-center gap-3 mb-6 exp-intro">
-                        <span className="w-8 h-[2px] bg-[#ffc715]"></span>
-                        <span className="font-['Quicksand'] font-bold text-xs tracking-[0.25em] text-[#ffc715] uppercase">
+                        <Compass className="w-5 h-5 text-[#ffc715] shrink-0" strokeWidth={2.5} />
+                        <span className="font-['Quicksand'] font-bold text-xs tracking-[0.25em] text-[#ffc715] uppercase mt-0.5">
                             MORE THAN A CLASSROOM
                         </span>
-                        <span className="w-8 h-[2px] bg-[#ffc715]"></span>
                     </div>
 
                     <h2 className="font-['Playfair_Display'] text-4xl md:text-5xl lg:text-6xl leading-[1.1] mb-8 exp-intro !text-white">
@@ -103,6 +105,11 @@ export function StudentLifeExperiences() {
                     </div>
                 </div>
 
+                {/* More Than A Classroom Image */}
+                <div className="w-full h-[300px] md:h-[500px] lg:h-[600px] rounded-[24px] overflow-hidden shadow-2xl relative mb-24 md:mb-32 exp-intro border-4 border-white/10">
+                    <img src="https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783273457/1000555042_ajkadi.jpg" alt="More than a classroom" className="w-full h-full object-cover" />
+                </div>
+
                 {/* The Experiences They Love */}
                 <div className="text-center mb-16 exp-intro">
                     <h3 className="font-['Playfair_Display'] text-3xl md:text-4xl mb-4 !text-white">The Experiences Students Love Most</h3>
@@ -114,7 +121,13 @@ export function StudentLifeExperiences() {
                         <div key={idx} className={`exp-card flex flex-col ${idx % 2 !== 0 ? 'lg:flex-row-reverse' : 'lg:flex-row'} items-center gap-10 lg:gap-20`}>
                             
                             <div className="w-full lg:w-1/2 h-[350px] md:h-[500px] rounded-[24px] overflow-hidden shadow-2xl relative exp-img-wrapper border-4 border-white/10">
-                                <img src={exp.image} alt={exp.title} className="w-full h-full object-cover" />
+                                {exp.title === 'Swimming' ? (
+                                    <div className="w-full h-full bg-[#e2e8f0] flex flex-col items-center justify-center text-[#64748b] font-['Quicksand'] p-6 text-center">
+                                        <span className="font-bold tracking-[0.2em] uppercase text-sm">Swimming</span>
+                                    </div>
+                                ) : (
+                                    <img src={exp.image} alt={exp.title} className="w-full h-full object-cover" />
+                                )}
                             </div>
 
                             <div className="w-full lg:w-1/2 flex flex-col justify-center">
@@ -143,3 +156,4 @@ export function StudentLifeExperiences() {
         </section>
     )
 }
+

@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { Star, Users } from 'lucide-react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
@@ -41,7 +42,7 @@ export function StudentLifeGrowth() {
                 <div ref={topBlockRef} className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
                     <div className="w-full h-[400px] md:h-[500px] rounded-[24px] overflow-hidden shadow-xl">
                         <img 
-                            src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=1200&auto=format&fit=crop" 
+                            src="https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783273592/494165341_1231596345640633_3336781102535438460_n_h8ianz.jpg" 
                             alt="Building Confidence"
                             className="w-full h-full object-cover"
                         />
@@ -49,8 +50,8 @@ export function StudentLifeGrowth() {
                     
                     <div className="flex flex-col justify-center">
                         <div className="flex items-center gap-3 mb-6">
-                            <span className="w-8 h-[2px] bg-[#e97f7b]"></span>
-                            <span className="font-['Quicksand'] font-bold text-xs tracking-[0.25em] text-[#e97f7b] uppercase">
+                            <Star className="w-5 h-5 text-[#e97f7b] shrink-0" strokeWidth={2.5} />
+                            <span className="font-['Quicksand'] font-bold text-xs tracking-[0.25em] text-[#e97f7b] uppercase mt-0.5">
                                 BUILDING CONFIDENCE THROUGH PARTICIPATION
                             </span>
                         </div>
@@ -78,8 +79,8 @@ export function StudentLifeGrowth() {
                     
                     <div className="flex flex-col justify-center order-2 lg:order-1">
                         <div className="flex items-center gap-3 mb-6">
-                            <span className="w-8 h-[2px] bg-[#6ab39d]"></span>
-                            <span className="font-['Quicksand'] font-bold text-xs tracking-[0.25em] text-[#6ab39d] uppercase">
+                            <Users className="w-5 h-5 text-[#6ab39d] shrink-0" strokeWidth={2.5} />
+                            <span className="font-['Quicksand'] font-bold text-xs tracking-[0.25em] text-[#6ab39d] uppercase mt-0.5">
                                 FRIENDSHIPS THAT LAST
                             </span>
                         </div>
@@ -103,9 +104,9 @@ export function StudentLifeGrowth() {
 
                     <div className="w-full h-[400px] md:h-[500px] rounded-[24px] overflow-hidden shadow-xl order-1 lg:order-2">
                         <img 
-                            src="https://images.unsplash.com/photo-1529156069898-49953eb1b5ce?q=80&w=1200&auto=format&fit=crop" 
+                            src="https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783273687/471697961_1668720523709140_5630244526300117415_n_pyhlpz.jpg" 
                             alt="Friendships That Last"
-                            className="w-full h-full object-cover filter brightness-[0.95]"
+                            className="w-full h-full object-cover"
                         />
                     </div>
                 </div>
@@ -114,3 +115,4 @@ export function StudentLifeGrowth() {
         </section>
     )
 }
+

@@ -90,7 +90,7 @@ export function ElementarySports() {
 
     const renderWords = (text: string) => {
         return text.split(' ').map((word, i) => (
-            <span key={i} className="gsap-oneshot-word inline-block mr-[0.25em] will-change-transform">
+            <span key={i} className="gsap-oneshot-word inline-block mr-[0.25em]">
                 {word}
             </span>
         ))
@@ -168,9 +168,9 @@ export function ElementarySports() {
                         {/* Nested wrapper for CSS hover scale, protecting the GSAP Y-axis scrub */}
                         <div className="w-full h-full transition-transform duration-[1.5s] ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-[1.04]">
                             <img
-                                src="https://images.unsplash.com/photo-1526676037598-31744bc7bb06?q=80&w=1200&auto=format&fit=crop"
+                                src="https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783270480/490533054_1216868483780086_7902214002359124603_n_xgk1jy.jpg"
                                 alt="Sports Excellence"
-                                className="absolute h-[120%] -top-[10%] w-full object-cover will-change-transform contrast-[1.05]"
+                                className="absolute h-[120%] -top-[10%] w-full object-cover will-change-transform"
                             />
                         </div>
                     </div>

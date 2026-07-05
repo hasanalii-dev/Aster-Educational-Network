@@ -65,11 +65,11 @@ export function PreschoolPace() {
                         ease: 'elastic.out(1, 0.5)',
                         scrollTrigger: { trigger: clotheslineRef.current, start: 'top 80%' },
                         onComplete: function() {
-                            // Infinite subtle sway physics after drop-in
+                            // Infinite subtle sway physics after drop-in (simplified to reduce CPU)
                             this.targets().forEach((target: any) => {
                                 gsap.to(target, {
-                                    rotation: "+=4",
-                                    duration: 2.5 + Math.random(),
+                                    rotation: 3,
+                                    duration: 3 + Math.random(),
                                     ease: "sine.inOut",
                                     yoyo: true,
                                     repeat: -1
@@ -91,9 +91,9 @@ export function PreschoolPace() {
     ]
 
     const clotheslineImages = [
-        { src: 'https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=600&auto=format&fit=crop', alt: 'Child learning at own pace' },
-        { src: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=600&auto=format&fit=crop', alt: 'Student exploring independently' },
-        { src: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=600&auto=format&fit=crop', alt: 'Child discovering through play' },
+        { src: 'https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783268123/1000555029_nahmce.jpg', alt: 'Child learning at own pace' },
+        { src: 'https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783268136/1000555032_jcl5td.jpg', alt: 'Student exploring independently' },
+        { src: 'https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783268166/1000555039_rua52l.jpg', alt: 'Child discovering through play' },
     ]
 
     // Helper for One-Shot Typesetting
@@ -181,7 +181,7 @@ export function PreschoolPace() {
                             {clotheslineImages.map((img, i) => (
                                 <div
                                     key={i}
-                                    className="clothesline-photo relative flex flex-col items-center transform-gpu cursor-pointer group"
+                                    className="clothesline-photo relative flex flex-col items-center will-change-transform"
                                     style={{ transformOrigin: 'top center' }}
                                 >
                                     {/* Clothespin */}
@@ -191,7 +191,7 @@ export function PreschoolPace() {
                                     </div>
 
                                     {/* Photo Container */}
-                                    <div className={`relative w-48 sm:w-56 md:w-56 aspect-[3/4] rounded-lg bg-white border-[4px] border-white shadow-[0_12px_30px_rgba(21,40,61,0.12)] overflow-hidden transition-all duration-500 group-hover:shadow-[0_20px_40px_rgba(21,40,61,0.2)] group-hover:scale-[1.03] ${i !== 0 ? 'mt-0 md:-mt-1' : '-mt-1'}`}>
+                                    <div className={`relative w-48 sm:w-56 md:w-56 aspect-[3/4] rounded-lg bg-white border-[4px] border-white shadow-[0_12px_30px_rgba(21,40,61,0.12)] overflow-hidden cursor-pointer group transition-transform duration-500 hover:shadow-[0_20px_40px_rgba(21,40,61,0.2)] hover:scale-[1.03] ${i !== 0 ? 'mt-0 md:-mt-1' : '-mt-1'}`}>
                                         <img
                                             src={img.src}
                                             alt={img.alt}

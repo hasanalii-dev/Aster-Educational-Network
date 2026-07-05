@@ -64,7 +64,7 @@ export function CareersHero() {
                 <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none" style={{ borderRadius: 'inherit' }}>
                     <img
                         ref={imageRef}
-                        src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=2000&auto=format&fit=crop"
+                        src="https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783253673/imageye___-_imgi_120_image_p6jnss.webp"
                         alt="Careers at The Aster School"
                         className="w-full h-full object-cover filter brightness-[0.75] contrast-105 will-change-transform"
                     />
@@ -78,13 +78,14 @@ export function CareersHero() {
                     className="absolute left-1/2 -translate-x-1/2 bg-[#3A53A4] w-fit min-w-[85%] md:min-w-[700px] py-10 px-8 md:py-12 md:px-16 z-20 pointer-events-auto top-1/2 -translate-y-1/2 flex flex-col items-center text-center"
                 >
                     <span className="font-['Quicksand'] font-bold text-xs tracking-[0.3em] text-[#FBBB21] uppercase block mb-4">
-                        CAREERS AT THE ASTER SCHOOL
+                        CAREERS
                     </span>
                     <h1 className="font-['Playfair_Display'] text-4xl md:text-6xl font-medium text-white tracking-tight leading-none">
-                        Build the Future. <em className="italic text-[#FBBB21]">Transform Lives.</em>
+                        Careers at Aster
                     </h1>
                 </div>
             </div>
         </section>
     )
 }
+

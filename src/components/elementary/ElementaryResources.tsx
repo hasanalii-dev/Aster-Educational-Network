@@ -17,17 +17,17 @@ export function ElementaryResources() {
         {
             title: "Clarity & Understanding",
             text: "Workbooks designed to break down complex concepts into accessible steps.",
-            image: "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?q=80&w=1200&auto=format&fit=crop"
+            image: "https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783269710/IMG_0153_cp7fg6.jpg"
         },
         {
             title: "Guided Practice",
             text: "Structured exercises that build confidence without overwhelming the student.",
-            image: "https://images.unsplash.com/photo-1456735190827-d1262f71b8a3?q=80&w=1200&auto=format&fit=crop"
+            image: "https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783269941/1000555027_mneccz.jpg"
         },
         {
             title: "Meaningful Application",
             text: "Real-world problems that encourage students to apply what they learn.",
-            image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=1200&auto=format&fit=crop"
+            image: "https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783269996/494470437_1233498812117053_8680063396234529913_n_gbw9kx.jpg"
         }
     ]
 

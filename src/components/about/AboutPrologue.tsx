@@ -9,19 +9,19 @@ const carouselCards = [
         bg: 'bg-[#e97f7b]',
         title: 'Developing Character & Competence',
         text: 'Our mission is to nurture confident, capable, and compassionate individuals through meaningful learning experiences that develop both character and competence.',
-        image: 'https://res.cloudinary.com/lpxp5l3a/image/upload/v1783253218/500036594_1251017057031895_7179780475084031344_n_ilxlck.jpg',
+        image: 'https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783253218/500036594_1251017057031895_7179780475084031344_n_ilxlck.jpg',
     },
     {
         bg: 'bg-[#6ab39d]',
         title: 'Environments Built for Purpose',
         text: 'From the earliest years to senior school, we intentionally create environments where students are encouraged to think independently, lead with empathy, communicate confidently, and grow with purpose.',
-        image: 'https://res.cloudinary.com/lpxp5l3a/image/upload/v1783253316/499487982_1251017437031857_8533168766544290791_n_tuaxmy.jpg',
+        image: 'https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783253316/499487982_1251017437031857_8533168766544290791_n_tuaxmy.jpg',
     },
     {
         bg: 'bg-[#9765d1]',
         title: 'Learning Beyond Textbooks',
         text: 'At Aster, learning is not limited to textbooks or memorization. We believe children learn best when they actively explore, question, create, collaborate, and apply their understanding to the world around them.',
-        image: 'https://res.cloudinary.com/lpxp5l3a/image/upload/v1783253084/494165045_1231231425677125_872399796167294069_n_kg6ljz.jpg',
+        image: 'https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783253084/494165045_1231231425677125_872399796167294069_n_kg6ljz.jpg',
     }
 ]
 

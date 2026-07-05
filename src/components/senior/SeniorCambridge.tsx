@@ -51,13 +51,13 @@ export function SeniorCambridge() {
         <section ref={sectionRef} className="relative w-full min-h-[800px] flex items-center overflow-hidden bg-[#15283D]">
             
             {/* Absolute Full-width Video Background */}
-            <div className="absolute top-0 left-0 w-full h-full z-0 overflow-hidden pointer-events-none">
+            <div className="absolute inset-0 w-full h-full z-0 overflow-hidden pointer-events-none bg-[#15283D]">
                 <video
                     autoPlay
                     loop
                     muted
                     playsInline
-                    className="w-full h-full object-cover object-center"
+                    className="absolute top-1/2 left-1/2 w-[120vw] h-[120vh] min-w-full min-h-full object-cover -translate-x-1/2 -translate-y-1/2 scale-[1.3]"
                 >
                     <source src="https://res.cloudinary.com/lpxp5l3a/video/upload/q_auto,f_auto,w_1920/ASTER_SCHOOL__2_3_ldqbk5.mp4" type="video/mp4" />
                 </video>

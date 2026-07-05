@@ -1,16 +1,14 @@
 import { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 
-type CursorState = 'default' | 'hover' | 'text' | 'image' | 'scroll' | 'selection' | 'grab' | 'grabbing' | 'indicator' | 'video'
+type CursorState = 'default' | 'hover' | 'text' | 'scroll' | 'selection' | 'grab' | 'grabbing' | 'indicator' | 'video'
 
 export function CustomCursor() {
     const cursorRef = useRef<HTMLDivElement>(null)
-    const imageContainerRef = useRef<HTMLDivElement>(null)
     const indicatorRef = useRef<HTMLDivElement>(null)
     const [cursorState, setCursorState] = useState<CursorState>('default')
     const [cursorTheme, setCursorTheme] = useState<'blue' | 'yellow' | 'white'>('blue')
     const stateRef = useRef<CursorState>('default')
-    const [bgImage, setBgImage] = useState<string | null>(null)
     const [videoPlaying, setVideoPlaying] = useState(false)
     
     useEffect(() => {
@@ -26,19 +24,13 @@ export function CustomCursor() {
         if (window.matchMedia("(pointer: coarse)").matches) return
 
         const cursor = cursorRef.current
-        const imgContainer = imageContainerRef.current
         const indicator = indicatorRef.current
-        if (!cursor || !imgContainer || !indicator) return
+        if (!cursor || !indicator) return
 
         gsap.set(cursor, { xPercent: -50, yPercent: -50 })
-        gsap.set(imgContainer, { xPercent: -50, yPercent: -50 })
 
-        // Super reactive, near-zero latency trailing (duration lowered to 0.05)
         const xTo = gsap.quickTo(cursor, "x", { duration: 0.05, ease: "power3.out" })
         const yTo = gsap.quickTo(cursor, "y", { duration: 0.05, ease: "power3.out" })
-        
-        const imgXTo = gsap.quickTo(imgContainer, "x", { duration: 0.2, ease: "power3.out" })
-        const imgYTo = gsap.quickTo(imgContainer, "y", { duration: 0.2, ease: "power3.out" })
 
         const updateStateFromTarget = (target: HTMLElement | null) => {
             if (!target) return
@@ -93,12 +85,7 @@ export function CustomCursor() {
                 return
             }
 
-            const imageEl = target.closest('[data-cursor-image]') as HTMLElement
-            if (imageEl) {
-                setBgImage(imageEl.dataset.cursorImage || null)
-                setCursorState('image')
-                return
-            }
+
 
             const videoEl = target.closest('video, [data-cursor-video]') as HTMLVideoElement
             if (videoEl) {
@@ -134,14 +121,11 @@ export function CustomCursor() {
             }
 
             setCursorState('default')
-            setBgImage(null)
         }
 
         const onMouseMove = (e: MouseEvent) => {
             xTo(e.clientX)
             yTo(e.clientY)
-            imgXTo(e.clientX)
-            imgYTo(e.clientY)
             lastPos.current = { x: e.clientX, y: e.clientY }
 
             // Instantly react to the target under the mouse
@@ -236,9 +220,8 @@ export function CustomCursor() {
 
     useEffect(() => {
         const cursor = cursorRef.current
-        const imgContainer = imageContainerRef.current
         const indicator = indicatorRef.current
-        if (!cursor || !imgContainer || !indicator) return
+        if (!cursor || !indicator) return
 
         let mainColor = '#334a89'
         let mainColorAlpha = 'rgba(51, 74, 137, 0.4)'
@@ -263,67 +246,50 @@ export function CustomCursor() {
         switch (cursorState) {
             case 'default':
                 gsap.to(cursor, { width: 16, height: 16, borderRadius: '50%', backgroundColor: mainColorAlpha, border: `2px solid ${mainColor}`, scale: 1, rotation: 0, duration: dur })
-                gsap.to(imgContainer, { opacity: 0, scale: 0.5, duration: dur })
                 gsap.to(indicator, { opacity: 0, scale: 0, duration: dur })
                 break;
             case 'hover':
                 gsap.to(cursor, { width: 36, height: 36, borderRadius: '50%', backgroundColor: mainColorLight, border: `2px solid ${mainColor}`, scale: 1, rotation: 0, duration: 0.3, ease: 'power3.out' })
-                gsap.to(imgContainer, { opacity: 0, scale: 0.5, duration: dur })
                 gsap.to(indicator, { opacity: 0, scale: 0, duration: dur })
                 break;
             case 'text':
                 gsap.to(cursor, { width: 4, height: 32, borderRadius: '2px', backgroundColor: mainColor, border: 'none', scale: 1, rotation: 0, duration: dur })
-                gsap.to(imgContainer, { opacity: 0, scale: 0.5, duration: dur })
                 gsap.to(indicator, { opacity: 0, scale: 0, duration: dur })
                 break;
             case 'scroll':
                 gsap.to(cursor, { width: 24, height: 24, borderRadius: '50%', backgroundColor: mainColorLight, border: `3px solid ${mainColor}`, scale: 1.1, rotation: 0, duration: dur })
-                gsap.to(imgContainer, { opacity: 0, scale: 0.5, duration: dur })
                 gsap.to(indicator, { opacity: 0, scale: 0, duration: dur })
                 break;
             case 'selection':
                 gsap.to(cursor, { width: 40, height: 40, borderRadius: '4px', backgroundColor: 'transparent', border: `2px dashed ${mainColor}`, scale: 1.1, rotation: 0, duration: dur })
-                gsap.to(imgContainer, { opacity: 0, scale: 0.5, duration: dur })
                 gsap.to(indicator, { opacity: 0, scale: 0, duration: dur })
                 break;
             case 'grab':
                 gsap.to(cursor, { width: 60, height: 60, borderRadius: '50%', backgroundColor: mainColor, border: 'none', scale: 1, rotation: 0, duration: dur })
-                gsap.to(imgContainer, { opacity: 0, scale: 0.5, duration: dur })
                 gsap.to(indicator, { opacity: 1, scale: 1, duration: dur })
                 if (indicator) indicator.innerHTML = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="${indicatorColor}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M12 5l-4 4M12 5l4 4M12 19l-4-4M12 19l4-4"/></svg>`
                 break;
             case 'grabbing':
                 gsap.to(cursor, { width: 50, height: 50, borderRadius: '50%', backgroundColor: mainColor, border: 'none', scale: 0.9, rotation: 0, duration: dur })
-                gsap.to(imgContainer, { opacity: 0, scale: 0.5, duration: dur })
                 gsap.to(indicator, { opacity: 1, scale: 0.9, duration: dur })
                 if (indicator) indicator.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="${indicatorColor}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M12 5l-4 4M12 5l4 4M12 19l-4-4M12 19l4-4"/></svg>`
                 break;
             case 'indicator':
                 gsap.to(cursor, { width: 70, height: 70, borderRadius: '50%', backgroundColor: mainColor, border: 'none', scale: 1, rotation: 0, duration: dur })
-                gsap.to(imgContainer, { opacity: 0, scale: 0.5, duration: dur })
                 gsap.to(indicator, { opacity: 1, scale: 1, duration: dur })
                 if (indicator) indicator.innerHTML = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="${indicatorColor}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>`
                 break;
             case 'video':
                 gsap.to(cursor, { width: 90, height: 60, borderRadius: '30px', backgroundColor: mainColor, border: 'none', scale: 1, rotation: 0, duration: 0.2, ease: "back.out(2)" })
-                gsap.to(imgContainer, { opacity: 0, scale: 0.5, duration: dur })
                 gsap.to(indicator, { opacity: 1, scale: 1, duration: dur })
-                // Custom Pause or Play Icon Based on State
                 const iconPath = videoPlaying 
-                    ? `<path d="M12 10h5v20h-5zM23 10h5v20h-5z"/>` // Pause Icon
-                    : `<path d="M14 10l16 10-16 10V10z"/>` // Play Icon
+                    ? `<path d="M12 10h5v20h-5zM23 10h5v20h-5z"/>` 
+                    : `<path d="M14 10l16 10-16 10V10z"/>`
                 if (indicator) indicator.innerHTML = `<svg width="40" height="40" viewBox="0 0 40 40" fill="${indicatorColor}">${iconPath}</svg>`
-                break;
-            case 'image':
-                gsap.to(cursor, { opacity: 0, scale: 0, duration: dur })
-                gsap.to(indicator, { opacity: 0, scale: 0, duration: dur })
-                gsap.to(imgContainer, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(1.5)" })
                 break;
         }
 
-        if (cursorState !== 'image') {
-            gsap.to(cursor, { opacity: 1, duration: dur, overwrite: 'auto' })
-        }
+        gsap.to(cursor, { opacity: 1, duration: dur, overwrite: 'auto' })
     }, [cursorState, cursorTheme, videoPlaying])
 
     return (
@@ -340,25 +306,6 @@ export function CustomCursor() {
                     justify-content: center;
                 }
                 
-                .cursor-image-reveal {
-                    position: fixed;
-                    top: 0; left: 0;
-                    width: 200px;
-                    height: 140px;
-                    pointer-events: none;
-                    z-index: 999998;
-                    border-radius: 16px;
-                    overflow: hidden;
-                    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-                    will-change: transform, opacity;
-                }
-
-                .cursor-image-reveal img {
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
-                }
-
                 .cursor-indicator {
                     position: absolute;
                     inset: 0;
@@ -377,10 +324,6 @@ export function CustomCursor() {
 
             <div ref={cursorRef} className="trailing-cursor-base">
                 <div ref={indicatorRef} className="cursor-indicator" />
-            </div>
-            
-            <div ref={imageContainerRef} className="cursor-image-reveal">
-                {bgImage && <img src={bgImage} alt="" />}
             </div>
         </>
     )

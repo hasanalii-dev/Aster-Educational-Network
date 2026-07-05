@@ -61,7 +61,7 @@ export function ElementaryLiteracy() {
             <div className="w-full lg:w-1/2 h-[500px] lg:h-full relative overflow-hidden" style={{ borderRadius: '0px' }}>
                 <img 
                     ref={imgRef}
-                    src="https://images.unsplash.com/photo-1512820790803-83ca734da794?q=80&w=1200&auto=format&fit=crop" 
+                    src="https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783270148/493886413_1229984639135137_8049021980507870553_n_jwuerv.jpg" 
                     alt="Culture of Literacy"
                     className="absolute inset-0 w-full h-full object-cover"
                     style={{ borderRadius: '0px' }}
@@ -69,7 +69,7 @@ export function ElementaryLiteracy() {
             </div>
 
             {/* Right: Stark Content Panel */}
-            <div className="w-full lg:w-1/2 flex items-center justify-center p-12 md:p-20 lg:p-24 bg-[#edad0c]" style={{ borderRadius: '0px' }}>
+            <div className="w-full lg:w-1/2 flex items-center justify-center p-12 md:p-20 lg:p-24 bg-[#2D5A40]" style={{ borderRadius: '0px' }}>
                 <div ref={contentRef} className="max-w-[500px] flex flex-col">
                     
                     <div className="literacy-reveal flex items-center gap-3 mb-8">
@@ -80,10 +80,10 @@ export function ElementaryLiteracy() {
                     </div>
 
                     <h2 className="literacy-reveal font-['Playfair_Display'] text-5xl md:text-6xl font-medium text-white leading-[1.05] mb-8">
-                        A Culture of <em className="italic block mt-2 text-[#334a89]">Literacy.</em>
+                        A Culture of <em className="italic block mt-2 text-[#ffc715]">Literacy.</em>
                     </h2>
 
-                    <div className="literacy-reveal w-16 h-[3px] bg-[#334a89] mb-8" />
+                    <div className="literacy-reveal w-16 h-[3px] bg-[#ffc715] mb-8" />
 
                     <div className="literacy-reveal font-['Quicksand'] text-lg md:text-xl text-white space-y-6 font-medium leading-[1.6]">
                         <p>

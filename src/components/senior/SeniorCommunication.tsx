@@ -78,7 +78,7 @@ export function SeniorCommunication() {
                 <div className="w-full h-[40vh] min-h-[300px] max-h-[500px] relative overflow-hidden shadow-2xl" style={{ borderRadius: '0px' }}>
                     <img 
                         ref={imgRef}
-                        src="https://images.unsplash.com/photo-1475721027785-f74eccf877e2?q=80&w=1600&auto=format&fit=crop" 
+                        src="https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783270687/image00012_q6hyt9.jpg" 
                         alt="Public Speaking and Communication"
                         className="absolute inset-0 w-full h-full object-cover origin-top"
                         style={{ borderRadius: '0px' }}
@@ -135,3 +135,4 @@ export function SeniorCommunication() {
         </section>
     )
 }
+

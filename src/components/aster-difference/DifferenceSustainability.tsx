@@ -57,31 +57,31 @@ export function DifferenceSustainability() {
 
     const fanImages = [
         {
-            src: 'https://res.cloudinary.com/lpxp5l3a/image/upload/v1783258319/image00015_q82wyx.jpg',
+            src: 'https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783258319/image00015_q82wyx.jpg',
             // Far Left
             transform: '-translate-x-[75%] md:-translate-x-[85%] translate-y-4 md:translate-y-8 -rotate-[12deg] md:-rotate-[16deg] scale-[0.88]',
             zIndex: 10
         },
         {
-            src: 'https://res.cloudinary.com/lpxp5l3a/image/upload/v1783258323/image00014_mteeio.jpg',
+            src: 'https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783258323/image00014_mteeio.jpg',
             // Middle Left
             transform: '-translate-x-[40%] md:-translate-x-[45%] translate-y-1 md:translate-y-3 -rotate-[6deg] md:-rotate-[8deg] scale-[0.94]',
             zIndex: 20
         },
         {
-            src: 'https://res.cloudinary.com/lpxp5l3a/image/upload/v1783258300/473133803_1676556136258912_62972387182665487_n_gc9kv9.jpg',
+            src: 'https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783258300/473133803_1676556136258912_62972387182665487_n_gc9kv9.jpg',
             // Center
             transform: 'translate-x-0 translate-y-0 rotate-0 scale-100',
             zIndex: 30
         },
         {
-            src: 'https://res.cloudinary.com/lpxp5l3a/image/upload/v1783258280/1000555096_hgxher.jpg',
+            src: 'https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783258280/1000555096_hgxher.jpg',
             // Middle Right
             transform: 'translate-x-[40%] md:translate-x-[45%] translate-y-1 md:translate-y-3 rotate-[6deg] md:rotate-[8deg] scale-[0.94]',
             zIndex: 20
         },
         {
-            src: 'https://res.cloudinary.com/lpxp5l3a/image/upload/v1783258295/473127865_1676555299592329_7824417284584904866_n_nmlh5r.jpg',
+            src: 'https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783258295/473127865_1676555299592329_7824417284584904866_n_nmlh5r.jpg',
             // Far Right
             transform: 'translate-x-[75%] md:translate-x-[85%] translate-y-4 md:translate-y-8 rotate-[12deg] md:rotate-[16deg] scale-[0.88]',
             zIndex: 10
@@ -161,3 +161,4 @@ export function DifferenceSustainability() {
         </section>
     )
 }
+

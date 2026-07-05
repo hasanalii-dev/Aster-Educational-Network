@@ -108,7 +108,7 @@ export function ApproachSocialEmotional() {
                             <div className="absolute inset-0 bg-gray-300 animate-pulse z-10" />
                         )}
                         <img
-                            src="https://images.unsplash.com/photo-1511629091441-ee46146481b6?q=80&w=1200&auto=format&fit=crop"
+                            src="https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783266496/As_part_of_Mental_Health_week_our_students_practiced_mindfulness_through_yoga_explored_emotion_3_vmvvn4.jpg"
                             alt="Students collaborating and smiling"
                             onLoad={() => setImgLoaded(true)}
                             className={`parallax-img w-full h-full object-cover transition-opacity duration-700 ${imgLoaded ? 'opacity-100' : 'opacity-0'}`}
@@ -120,3 +120,4 @@ export function ApproachSocialEmotional() {
         </section>
     )
 }
+

@@ -68,7 +68,7 @@ export function PreschoolMath() {
                     className="order-2 lg:order-1 relative h-[500px] md:h-[640px] w-full overflow-hidden shadow-2xl"
                 >
                     <img
-                        src="https://images.unsplash.com/photo-1596495577886-d920f1fb7238?q=80&w=1200&auto=format&fit=crop"
+                        src="https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783268262/1000555031_brwcww.jpg"
                         alt="Children learning mathematics with hands-on materials"
                         className="w-full h-full object-cover will-change-transform contrast-[1.02]"
                     />
@@ -131,3 +131,4 @@ export function PreschoolMath() {
         </section>
     )
 }
+

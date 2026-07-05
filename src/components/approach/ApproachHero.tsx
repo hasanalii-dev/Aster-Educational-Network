@@ -53,8 +53,8 @@ export function ApproachHero() {
 
                 tl.fromTo(
                     imageRef.current,
-                    { yPercent: -10, scale: 1.15 },
-                    { yPercent: 10, scale: 1.05, ease: 'none' },
+                    { yPercent: -10, scale: 1.25 },
+                    { yPercent: 10, scale: 1.25, ease: 'none' },
                     0
                 )
             })
@@ -111,10 +111,11 @@ export function ApproachHero() {
                         )}
                         <img
                             ref={imageRef}
-                            src="https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=1600&auto=format&fit=crop"
+                            src="https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783253673/imageye___-_imgi_120_image_p6jnss.webp"
                             alt="Students actively learning"
                             onLoad={() => setImgLoaded(true)}
                             className={`w-full h-full object-cover filter brightness-[0.85] contrast-105 will-change-transform transition-opacity duration-700 ${imgLoaded ? 'opacity-100' : 'opacity-0'}`}
+                            style={{ transform: 'scale(1.2)' }}
                         />
                         <div className="absolute inset-0 bg-black/15 z-10 pointer-events-none" />
                     </div>
@@ -149,3 +150,4 @@ export function ApproachHero() {
         </section>
     )
 }
+

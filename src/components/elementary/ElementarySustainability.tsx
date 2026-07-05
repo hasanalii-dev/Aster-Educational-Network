@@ -100,7 +100,7 @@ export function ElementarySustainability() {
 
     const renderWords = (text: string) => {
         return text.split(' ').map((word, i) => (
-            <span key={i} className="gsap-oneshot-word inline-block mr-[0.25em] will-change-transform">
+            <span key={i} className="gsap-oneshot-word inline-block mr-[0.25em]">
                 {word}
             </span>
         ))
@@ -177,10 +177,8 @@ export function ElementarySustainability() {
                         <div className="w-full h-full transition-transform duration-[1.5s] ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-[1.04]">
                             <img
                                 // Reliable Unsplash image URL
-                                src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=1200&auto=format&fit=crop"
-                                alt="Student engaging with nature"
-                                // The Container Trick: 120% height, negative top offset for physical scrub room
-                                className="absolute h-[120%] -top-[10%] w-full object-cover will-change-transform contrast-[1.05]"
+                                src="https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783270372/473127865_1676555299592329_7824417284584904866_n_atdak9.jpg"
+                                className="absolute h-[120%] -top-[10%] w-full object-cover will-change-transform"
                             />
                         </div>
 

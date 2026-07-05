@@ -120,7 +120,6 @@ export function AboutPhilosophy() {
           --------------------------------------------------------- */}
                     <div
                         ref={visionCardRef}
-                        data-cursor-image="https://images.unsplash.com/photo-1532012197267-da84d127e765?q=80&w=400&auto=format&fit=crop"
                         className="gsap-mobile-step bg-white p-10 md:p-14 shadow-[0_20px_50px_rgba(21,40,61,0.06)] border border-[#334a89]/15 flex flex-col justify-between relative group hover:border-[#6ab39d]/60 transition-colors duration-500"
                     >
                         <div>
@@ -174,7 +173,6 @@ export function AboutPhilosophy() {
           --------------------------------------------------------- */}
                     <div
                         ref={missionCardRef}
-                        data-cursor-image="https://images.unsplash.com/photo-1511629091441-ee46146481b6?q=80&w=400&auto=format&fit=crop"
                         className="gsap-mobile-step bg-white p-10 md:p-14 shadow-[0_20px_50px_rgba(21,40,61,0.06)] border border-[#334a89]/15 flex flex-col justify-between relative group hover:border-[#e97f7b]/60 transition-colors duration-500"
                     >
                         <div>

@@ -99,9 +99,9 @@ export function PreschoolSocialEmotional() {
             backColor: 'bg-[#E5B018]',
             textColor: 'text-white',
             images: [
-                'https://images.unsplash.com/photo-1511629091441-ee46146481b6?q=80&w=600&auto=format&fit=crop',
-                'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=600&auto=format&fit=crop',
-                'https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=600&auto=format&fit=crop',
+                'https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783269031/As_part_of_Mental_Health_week_our_students_practiced_mindfulness_through_yoga_explored_emotion_1_oburge.jpg',
+                'https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783269031/As_part_of_Mental_Health_week_our_students_practiced_mindfulness_through_yoga_explored_emotion_1_oburge.jpg',
+                'https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783269031/As_part_of_Mental_Health_week_our_students_practiced_mindfulness_through_yoga_explored_emotion_1_oburge.jpg',
             ]
         },
         {
@@ -111,9 +111,9 @@ export function PreschoolSocialEmotional() {
             backColor: 'bg-[#f0f0f0]',
             textColor: 'text-[#334a89]',
             images: [
-                'https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=600&auto=format&fit=crop',
-                'https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=600&auto=format&fit=crop',
-                'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=600&auto=format&fit=crop',
+                'https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783269109/496001618_1242587781208156_8439262704987161252_n_daq90g.jpg',
+                'https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783269102/495521719_1242587797874821_275921054221488265_n_pmpxzy.jpg',
+                'https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783269124/496116467_1242588547874746_4810518838398113060_n_rtrhuv.jpg',
             ]
         }
     ]
@@ -297,3 +297,4 @@ export function PreschoolSocialEmotional() {
         </section>
     )
 }
+

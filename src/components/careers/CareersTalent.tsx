@@ -54,7 +54,7 @@ export function CareersTalent() {
 
                 <div className="flex justify-center mt-12 talent-text">
                     <Link
-                        to="#"
+                        to="/open-roles"
                         className="btn-aster btn-aster-blue rounded-full hover-shimmer relative overflow-hidden px-10 py-4 text-base"
                     >
                         Submit Your CV

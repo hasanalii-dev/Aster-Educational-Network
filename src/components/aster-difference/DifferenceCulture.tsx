@@ -109,7 +109,7 @@ export function DifferenceCulture() {
                     className="order-2 lg:order-1 relative h-[500px] md:h-[640px] w-full rounded-none shadow-none overflow-hidden"
                 >
                     <img
-                        src="https://res.cloudinary.com/lpxp5l3a/image/upload/v1783257232/1000555097_ixbubi.jpg"
+                        src="https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783257232/1000555097_ixbubi.jpg"
                         alt="Culture of Reading"
                         className="w-full h-full object-cover will-change-transform contrast-[1.02]"
                     />

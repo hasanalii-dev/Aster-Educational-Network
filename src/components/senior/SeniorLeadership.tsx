@@ -125,7 +125,7 @@ export function SeniorLeadership() {
                     <div className="w-full lg:w-1/2 flex justify-center lg:justify-end">
                         <div ref={imgRef} className="w-full max-w-[550px] aspect-[4/5] bg-gray-200 shadow-2xl relative" style={{ borderRadius: '0px' }}>
                             <img 
-                                src="https://images.unsplash.com/photo-1573497620053-ea5300f94f21?q=80&w=1200&auto=format&fit=crop" 
+                                src="https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783270728/image00019_f0wnh7.jpg" 
                                 alt="Student Leadership"
                                 className="w-full h-full object-cover filter contrast-[1.05]"
                                 style={{ borderRadius: '0px' }}
@@ -142,3 +142,4 @@ export function SeniorLeadership() {
         </section>
     )
 }
+

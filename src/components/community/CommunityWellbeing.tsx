@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { Smile } from 'lucide-react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
@@ -46,7 +47,7 @@ export function CommunityWellbeing() {
                 
                 <div className="flex flex-col justify-center order-2 lg:order-1" ref={contentRef}>
                     <div className="flex items-center gap-3 mb-6">
-                        <span className="w-8 h-[2px] bg-[#e97f7b]"></span>
+                        <Smile className="w-6 h-6 text-[#e97f7b]" />
                         <span className="font-['Quicksand'] font-bold text-xs tracking-[0.25em] text-[#e97f7b] uppercase">
                             WELLBEING FOR THE WHOLE FAMILY
                         </span>
@@ -70,11 +71,10 @@ export function CommunityWellbeing() {
                 </div>
 
                 <div className="w-full h-[500px] md:h-[700px] rounded-none overflow-hidden shadow-2xl relative order-1 lg:order-2 border-4 border-white">
-                    <img 
-                        src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?q=80&w=1200&auto=format&fit=crop" 
-                        alt="Family Wellbeing"
-                        className="wellbeing-img absolute inset-0 w-full h-[130%] object-cover will-change-transform"
-                    />
+                    <div className="wellbeing-img absolute inset-0 w-full h-[130%] bg-gray-200 flex flex-col items-center justify-center text-gray-500">
+                        <Smile className="w-12 h-12 mb-4 opacity-50" />
+                        <span className="font-['Quicksand'] font-bold tracking-widest text-sm uppercase text-center px-4">Wellbeing for the Whole Family</span>
+                    </div>
                 </div>
             </div>
         </section>

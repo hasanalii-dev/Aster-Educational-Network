@@ -81,21 +81,21 @@ export function DifferenceSports() {
         },
         {
             title: 'Football',
-            image: 'https://res.cloudinary.com/lpxp5l3a/image/upload/v1783257289/1000555044_tkmbgu.jpg',
+            image: 'https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783257289/1000555044_tkmbgu.jpg',
             rotation: '4deg',
             x: 38,
             y: 37.57
         },
         {
             title: 'Gymnastics',
-            image: 'https://res.cloudinary.com/lpxp5l3a/image/upload/v1783257321/1000555041_cqpjc4.jpg',
+            image: 'https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783257321/1000555041_cqpjc4.jpg',
             rotation: '-3deg',
             x: 62,
             y: 37.57
         },
         {
             title: 'Taekwondo',
-            image: 'https://res.cloudinary.com/lpxp5l3a/image/upload/v1783257386/1000555007_ughvco.jpg',
+            image: 'https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783257386/1000555007_ughvco.jpg',
             rotation: '5deg',
             x: 85,
             y: 24.9
@@ -194,3 +194,4 @@ export function DifferenceSports() {
         </section>
     )
 }
+

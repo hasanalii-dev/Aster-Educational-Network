@@ -88,7 +88,7 @@ export function ElementaryIslamic() {
 
     const renderWords = (text: string) => {
         return text.split(' ').map((word, i) => (
-            <span key={i} className="gsap-oneshot-word inline-block mr-[0.25em] will-change-transform">
+            <span key={i} className="gsap-oneshot-word inline-block mr-[0.25em]">
                 {word}
             </span>
         ))

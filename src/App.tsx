@@ -34,6 +34,7 @@ const {
   ProfileDashboard,
   Apply,
   BookTour,
+  JobOpenings,
 } = pageComponents
 
 // Admin pages (lazy-loaded, separate bundle)
@@ -44,9 +45,14 @@ const SiteSettings = lazy(() => import('@/pages/admin/sections/SiteSettings'))
 const JournalManager = lazy(() => import('@/pages/admin/sections/JournalManager'))
 const TestimonialsManager = lazy(() => import('@/pages/admin/sections/TestimonialsManager'))
 const FAQManager = lazy(() => import('@/pages/admin/sections/FAQManager'))
+const ParentStoriesManager = lazy(() => import('@/pages/admin/sections/ParentStoriesManager'))
+const NewsletterManager = lazy(() => import('@/pages/admin/sections/NewsletterManager'))
+const JobOpeningsManager = lazy(() => import('@/pages/admin/sections/JobOpeningsManager'))
+const JobApplicationsManager = lazy(() => import('@/pages/admin/sections/JobApplicationsManager'))
 const InquiriesManager = lazy(() => import('@/pages/admin/sections/InquiriesManager'))
 const AdmissionsManager = lazy(() => import('@/pages/admin/sections/AdmissionsManager'))
 const CampusToursManager = lazy(() => import('@/pages/admin/sections/CampusToursManager'))
+const UsersManager = lazy(() => import('@/pages/admin/sections/UsersManager'))
 
 const AdminSuspense = ({ children }: { children: React.ReactNode }) => (
   <Suspense fallback={
@@ -80,6 +86,7 @@ const router = createBrowserRouter([
       { path: 'parent-stories', element: <ParentStories /> },
       { path: 'faqs', element: <FAQs /> },
       { path: 'careers', element: <Careers /> },
+      { path: 'open-roles', element: <JobOpenings /> },
       { path: 'journal', element: <Journal /> },
       { path: 'journal/:slug', element: <JournalArticle /> },
       { path: 'contact', element: <Contact /> },
@@ -104,9 +111,14 @@ const router = createBrowserRouter([
       { path: 'journal', element: <AdminSuspense><JournalManager /></AdminSuspense> },
       { path: 'testimonials', element: <AdminSuspense><TestimonialsManager /></AdminSuspense> },
       { path: 'faqs', element: <AdminSuspense><FAQManager /></AdminSuspense> },
+      { path: 'parent-stories', element: <AdminSuspense><ParentStoriesManager /></AdminSuspense> },
+      { path: 'newsletter', element: <AdminSuspense><NewsletterManager /></AdminSuspense> },
+      { path: 'job-openings', element: <AdminSuspense><JobOpeningsManager /></AdminSuspense> },
+      { path: 'job-applications', element: <AdminSuspense><JobApplicationsManager /></AdminSuspense> },
       { path: 'inquiries', element: <AdminSuspense><InquiriesManager /></AdminSuspense> },
       { path: 'admissions', element: <AdminSuspense><AdmissionsManager /></AdminSuspense> },
       { path: 'campus-tours', element: <AdminSuspense><CampusToursManager /></AdminSuspense> },
+      { path: 'users', element: <AdminSuspense><UsersManager /></AdminSuspense> },
     ],
   },
 ])

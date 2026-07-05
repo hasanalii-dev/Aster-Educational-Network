@@ -127,7 +127,7 @@ export function PreschoolLanguage() {
                     className="relative h-[500px] md:h-[640px] w-full overflow-hidden shadow-2xl"
                 >
                     <img
-                        src="https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=1200&auto=format&fit=crop"
+                        src="https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783268219/1000554765_n2ezp8.jpg"
                         alt="Children engaged in storytelling and language activities"
                         className="w-full h-full object-cover will-change-transform contrast-[1.02]"
                     />
@@ -147,3 +147,4 @@ export function PreschoolLanguage() {
         </section>
     )
 }
+

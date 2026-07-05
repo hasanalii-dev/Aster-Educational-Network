@@ -10,19 +10,38 @@ import type { User } from '@supabase/supabase-js'
  */
 export function useAuth() {
     const [user, setUser] = useState<User | null>(null)
+    const [role, setRole] = useState<'super_admin' | 'moderator' | 'content_writer' | 'user' | null>(null)
     const [loading, setLoading] = useState(true)
+
+    const fetchRole = async (userId: string) => {
+        const { data } = await supabase.from('profiles').select('role').eq('id', userId).single()
+        setRole(data?.role || 'user')
+    }
 
     useEffect(() => {
         // Get initial session
         supabase.auth.getSession().then(({ data: { session } }) => {
-            setUser(session?.user ?? null)
-            setLoading(false)
+            const currentUser = session?.user ?? null
+            setUser(currentUser)
+            if (currentUser) {
+                fetchRole(currentUser.id).finally(() => setLoading(false))
+            } else {
+                setRole(null)
+                setLoading(false)
+            }
         })
 
         // Listen for auth changes
         const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-            setUser(session?.user ?? null)
-            setLoading(false)
+            const currentUser = session?.user ?? null
+            setUser(currentUser)
+            if (currentUser) {
+                setLoading(true)
+                fetchRole(currentUser.id).finally(() => setLoading(false))
+            } else {
+                setRole(null)
+                setLoading(false)
+            }
         })
 
         return () => subscription.unsubscribe()
@@ -31,7 +50,8 @@ export function useAuth() {
     const signOut = async () => {
         await supabase.auth.signOut()
         setUser(null)
+        setRole(null)
     }
 
-    return { user, loading, signOut }
+    return { user, role, loading, signOut }
 }

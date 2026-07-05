@@ -153,7 +153,7 @@ export function SeniorFaculty() {
                         {/* Nested wrapper for CSS hover scale, protecting the GSAP Y-axis scrub */}
                         <div className="w-full h-full transition-transform duration-[1.5s] ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-[1.04]">
                             <img
-                                src="https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=1200&auto=format&fit=crop"
+                                src="https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783270739/image00021_n01slb.jpg"
                                 alt="Expert Faculty"
                                 className="absolute h-[120%] -top-[10%] w-full object-cover will-change-transform contrast-[1.05]"
                             />

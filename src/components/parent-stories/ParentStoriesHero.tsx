@@ -70,7 +70,7 @@ export function ParentStoriesHero() {
     return (
         <section
             ref={sectionRef}
-            className="w-full pt-28 md:pt-32 pb-16 md:pb-24 relative z-10 flex flex-col items-center bg-[#FAFAF9] select-none"
+            className="w-full pt-20 md:pt-24 pb-32 md:pb-48 relative z-10 flex flex-col items-center bg-[#F4F6F8] select-none"
         >
             <div
                 ref={bannerFrameRef}
@@ -81,9 +81,9 @@ export function ParentStoriesHero() {
                 <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none" style={{ borderRadius: 'inherit' }}>
                     <img
                         ref={imageRef}
-                        src="https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=1600&auto=format&fit=crop"
+                        src="https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_1200,q_auto,f_auto/v1783259891/imageye___-_imgi_132_image_crrae4.webp"
                         alt="The Aster School Community"
-                        className="w-full h-full object-cover filter brightness-[0.85] contrast-105 will-change-transform"
+                        className="w-full h-full object-cover will-change-transform"
                     />
                     {/* LOW OPACITY DARK OVERLAY */}
                     <div className="absolute inset-0 bg-black/15 z-10 pointer-events-none" />
@@ -91,11 +91,11 @@ export function ParentStoriesHero() {
             </div>
 
             {/* Stationary Card Container (matches initial banner size so it stays fixed relative to the page while image expands) */}
-            <div className="absolute top-28 md:top-32 w-[calc(100%-3rem)] md:w-[calc(100%-6rem)] max-w-[1360px] h-[35vh] md:h-[50vh] min-h-[300px] pointer-events-none">
+            <div className="absolute top-20 md:top-24 w-[calc(100%-3rem)] md:w-[calc(100%-6rem)] max-w-[1360px] h-[35vh] md:h-[50vh] min-h-[300px] pointer-events-none">
                 {/* Overlapping Blue Rectangle */}
                 <div
                     ref={textStackRef}
-                    className="absolute -bottom-8 md:-bottom-12 left-1/2 -translate-x-1/2 bg-[#334a89] w-fit min-w-[85%] md:min-w-[700px] py-10 px-8 md:py-12 md:px-16 text-center md:text-left z-20 pointer-events-auto shadow-2xl rounded-sm"
+                    className="absolute -bottom-8 md:-bottom-12 left-1/2 -translate-x-1/2 bg-[#334a89] w-fit min-w-[85%] md:min-w-[700px] py-10 px-8 md:py-12 md:px-16 text-center md:text-left z-20 pointer-events-auto rounded-sm"
                 >
                     <span className="font-['Quicksand'] font-bold text-xs tracking-[0.3em] text-[#ffc715] uppercase block mb-4">
                         PARENT STORIES

@@ -127,9 +127,9 @@ export function StudentLifeTraditions() {
                     <div className="relative w-full h-[300px] md:h-[400px] overflow-hidden bg-gray-100 group-hover:shadow-[inset_0_20px_40px_rgba(0,0,0,0.1)] transition-shadow duration-700">
                         <div className="w-full h-full transition-transform duration-[1.5s] ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-[1.05]">
                             <img
-                                src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=1200&auto=format&fit=crop"
+                                src="https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783273567/471686142_1668721670375692_3663108195164684668_n_mzwxu0.jpg"
                                 alt="School Spirit"
-                                className="card-parallax-img absolute h-[120%] -top-[10%] w-full object-cover will-change-transform contrast-[1.05]"
+                                className="card-parallax-img absolute h-[120%] -top-[10%] w-full object-cover will-change-transform"
                             />
                         </div>
                         {/* Inner Vignette to ground the image */}
@@ -176,9 +176,9 @@ export function StudentLifeTraditions() {
                     <div className="relative w-full h-[300px] md:h-[400px] overflow-hidden bg-gray-100 group-hover:shadow-[inset_0_20px_40px_rgba(0,0,0,0.1)] transition-shadow duration-700">
                         <div className="w-full h-full transition-transform duration-[1.5s] ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-[1.05]">
                             <img
-                                src="https://images.unsplash.com/photo-1593113545331-419b626e2553?q=80&w=1200&auto=format&fit=crop"
+                                src="https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783273638/495188560_1242587767874824_655110840629499397_n_voioq3.jpg"
                                 alt="Values and Community"
-                                className="card-parallax-img absolute h-[120%] -top-[10%] w-full object-cover will-change-transform contrast-[1.05]"
+                                className="card-parallax-img absolute h-[120%] -top-[10%] w-full object-cover will-change-transform"
                             />
                         </div>
                         {/* Inner Vignette to ground the image */}

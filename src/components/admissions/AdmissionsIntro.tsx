@@ -26,7 +26,7 @@ export function AdmissionsIntro() {
 
                     <div className="gsap-fade relative rounded-[24px] overflow-hidden aspect-[4/5] shadow-2xl">
                         <img 
-                            src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=1200&auto=format&fit=crop" 
+                            src="https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_1200,q_auto,f_auto/v1783254166/As_part_of_Mental_Health_week_our_students_practiced_mindfulness_through_yoga_explored_emotion_4_s1s0dh.jpg" 
                             alt="Aster School Students"
                             className="w-full h-full object-cover"
                         />

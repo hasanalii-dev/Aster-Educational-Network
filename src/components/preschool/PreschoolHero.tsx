@@ -53,8 +53,8 @@ export function PreschoolHero() {
 
                 tl.fromTo(
                     imageRef.current,
-                    { yPercent: -10, scale: 1.15 },
-                    { yPercent: 10, scale: 1.05, ease: 'none' },
+                    { yPercent: -15, scale: 1.4 },
+                    { yPercent: 15, scale: 1.3, ease: 'none' },
                     0
                 )
             })
@@ -98,7 +98,7 @@ export function PreschoolHero() {
     }, [])
 
     return (
-        <section ref={sectionRef} className="w-full pt-28 md:pt-32 pb-16 md:pb-24 relative z-10 flex flex-col items-center bg-white select-none">
+        <section ref={sectionRef} className="w-full pt-20 md:pt-24 pb-16 md:pb-24 relative z-10 flex flex-col items-center bg-white select-none">
             <div className="flex justify-center w-full">
                 <div
                     ref={bannerFrameRef}
@@ -111,16 +111,16 @@ export function PreschoolHero() {
                         )}
                         <img
                             ref={imageRef}
-                            src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?q=80&w=1600&auto=format&fit=crop"
+                            src="https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783261770/montessori-v2_qnqjbe.png"
                             alt="Preschool children exploring and learning"
                             onLoad={() => setImgLoaded(true)}
-                            className={`w-full h-full object-cover filter brightness-[0.85] contrast-105 will-change-transform transition-opacity duration-700 ${imgLoaded ? 'opacity-100' : 'opacity-0'}`}
+                            className={`w-full h-full object-cover will-change-transform transition-opacity duration-700 ${imgLoaded ? 'opacity-100' : 'opacity-0'}`}
                         />
-                        <div className="absolute inset-0 bg-black/15 z-10 pointer-events-none" />
+                        <div className="absolute inset-0 bg-black/30 z-10 pointer-events-none" />
                     </div>
                 </div>
 
-                <div className="absolute top-28 md:top-32 w-[calc(100%-3rem)] md:w-[calc(100%-6rem)] max-w-[1360px] h-[35vh] md:h-[50vh] min-h-[300px] pointer-events-none">
+                <div className="absolute top-20 md:top-24 w-[calc(100%-3rem)] md:w-[calc(100%-6rem)] max-w-[1360px] h-[35vh] md:h-[50vh] min-h-[300px] pointer-events-none">
                     <div
                         ref={textStackRef}
                         className="absolute -bottom-8 md:-bottom-12 left-1/2 -translate-x-1/2 bg-[#394EA2] w-fit min-w-[85%] md:min-w-[700px] py-10 px-8 md:py-12 md:px-16 text-left z-20 pointer-events-auto"
@@ -146,3 +146,4 @@ export function PreschoolHero() {
         </section>
     )
 }
+

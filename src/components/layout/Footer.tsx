@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ArrowUp } from 'lucide-react'
+import { supabase } from '@/lib/supabase'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -188,10 +189,29 @@ export function Footer() {
         }
     }, [])
 
-    const handleSubscribe = (e: React.FormEvent) => {
+    const handleSubscribe = async (e: React.FormEvent) => {
         e.preventDefault()
         if (!email) return
-        setSubscribed(true)
+
+        try {
+            const { error } = await supabase.from('newsletter_subscribers').insert([
+                { email: email, status: 'subscribed' }
+            ])
+            if (error) {
+                if (error.code === '23505') {
+                    // Already subscribed
+                    setSubscribed(true)
+                } else {
+                    console.error('Newsletter error:', error)
+                    alert('An error occurred. Please try again.')
+                }
+            } else {
+                setSubscribed(true)
+            }
+        } catch (err) {
+            console.error('Newsletter error:', err)
+        }
+
         setEmail('')
         setTimeout(() => setSubscribed(false), 5000)
     }

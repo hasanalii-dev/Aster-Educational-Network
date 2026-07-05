@@ -1,28 +1,44 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { supabase } from '@/lib/supabase'
 
 /* ----------------------------------------
- * Verified Parent Feedback Data
+ * Verified Parent Feedback Data (Fallback)
  * ---------------------------------------- */
-const testimonialsData = [
+const fallbackTestimonials = [
     {
         quote: "The balance between academics, character-building, and practical learning is what truly sets Aster apart. I can’t explain how much joy it brings to see my child working on his own ventures and succeeding in it.",
-        author: "Parent of Senior School Student",
-        tier: "Senior School"
+        parent_name: "Parent of Senior School Student",
+        child_program: "Senior School"
     },
     {
         quote: "We’ve seen remarkable growth in our child’s confidence and communication. Aster creates an environment where children genuinely enjoy learning while developing important life skills.",
-        author: "Parent of Elementary Student",
-        tier: "Elementary School"
+        parent_name: "Parent of Elementary Student",
+        child_program: "Elementary School"
     },
     {
         quote: "Alyan has become far more independent, expressive, and confident since joining Aster. The confidence in doing things on his own and doing it well is definitely the wow factor for me.",
-        author: "Parent of Early Years Student",
-        tier: "Early Years"
+        parent_name: "Parent of Early Years Student",
+        child_program: "Early Years"
     }
 ]
 
 export function TestimonialsSection() {
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
+    const [testimonialsData, setTestimonialsData] = useState<any[]>([])
+    const [, setLoading] = useState(true)
+
+    useEffect(() => {
+        const fetchTestimonials = async () => {
+            const { data } = await supabase.from('parent_stories').select('*').eq('is_active', true).limit(3)
+            if (data && data.length > 0) {
+                setTestimonialsData(data)
+            } else {
+                setTestimonialsData(fallbackTestimonials)
+            }
+            setLoading(false)
+        }
+        fetchTestimonials()
+    }, [])
 
     return (
         <>
@@ -59,7 +75,7 @@ export function TestimonialsSection() {
                             const isHovered = hoveredIndex === index;
 
                             return (
-                                <div
+                                <div 
                                     key={index}
                                     className={`architectural-feedback-card ${isHovered ? 'is-elevated' : ''}`}
                                     onMouseEnter={() => setHoveredIndex(index)}
@@ -67,7 +83,7 @@ export function TestimonialsSection() {
                                 >
                                     {/* Top Row: School Tier Badge & Gold Stars */}
                                     <div className="card-top-meta">
-                                        <span className="campus-tier-badge">{item.tier}</span>
+                                        <span className="campus-tier-badge">{item.role || item.child_program}</span>
                                         <div className="rating-stars" aria-label="5 out of 5 stars">
                                             ★★★★★
                                         </div>
@@ -81,7 +97,7 @@ export function TestimonialsSection() {
                                     {/* Footer Row: Sitewide Blue Rule & Author Attribution */}
                                     <div className="card-attribution-footer">
                                         <div className="attribution-blue-rule"></div>
-                                        <cite className="parent-author-name">{item.author}</cite>
+                                        <cite className="parent-author-name">{item.name || item.parent_name}</cite>
                                     </div>
 
                                 </div>

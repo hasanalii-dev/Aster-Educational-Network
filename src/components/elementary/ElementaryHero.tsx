@@ -43,8 +43,8 @@ export function ElementaryHero() {
 
                 tl.fromTo(
                     imageRef.current,
-                    { yPercent: -10, scale: 1.15 },
-                    { yPercent: 10, scale: 1.05, ease: 'none' },
+                    { yPercent: -15, scale: 1.4 },
+                    { yPercent: 15, scale: 1.3, ease: 'none' },
                     0
                 )
             })
@@ -70,7 +70,7 @@ export function ElementaryHero() {
     return (
         <section
             ref={sectionRef}
-            className="w-full pt-40 md:pt-48 pb-16 md:pb-24 relative z-10 flex flex-col items-center overflow-x-hidden overflow-y-visible bg-white select-none"
+            className="w-full pt-20 md:pt-24 pb-16 md:pb-24 relative z-10 flex flex-col items-center overflow-x-hidden overflow-y-visible bg-white select-none"
         >
             <div
                 ref={bannerFrameRef}
@@ -80,18 +80,18 @@ export function ElementaryHero() {
                 <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none" style={{ borderRadius: 'inherit' }}>
                     <img
                         ref={imageRef}
-                        src="https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=1600&auto=format&fit=crop"
+                        src="https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783269348/glimpse-4_jcy5yy.jpg"
                         alt="Elementary Students"
-                        className="w-full h-full object-cover filter brightness-[0.85] contrast-105 will-change-transform"
+                        className="w-full h-full object-cover will-change-transform"
                     />
-                    <div className="absolute inset-0 bg-black/15 z-10 pointer-events-none" />
+                    <div className="absolute inset-0 bg-black/30 z-10 pointer-events-none" />
                 </div>
             </div>
 
-            <div className="absolute top-40 md:top-48 w-[calc(100%-3rem)] md:w-[calc(100%-6rem)] max-w-[1360px] h-[35vh] md:h-[50vh] min-h-[300px] pointer-events-none">
+            <div className="absolute top-20 md:top-24 w-[calc(100%-3rem)] md:w-[calc(100%-6rem)] max-w-[1360px] h-[35vh] md:h-[50vh] min-h-[300px] pointer-events-none">
                 <div
                     ref={textStackRef}
-                    className="absolute left-1/2 -translate-x-1/2 bg-[#334a89] w-fit min-w-[85%] md:min-w-[700px] py-10 px-8 md:py-12 md:px-16 z-20 pointer-events-auto shadow-2xl top-0 -translate-y-1/2 flex flex-col items-center text-center"
+                    className="absolute -bottom-8 md:-bottom-12 left-1/2 -translate-x-1/2 bg-[#334a89] w-fit min-w-[85%] md:min-w-[700px] py-10 px-8 md:py-12 md:px-16 z-20 pointer-events-auto flex flex-col items-center text-center"
                 >
                     <span className="font-['Quicksand'] font-bold text-xs tracking-[0.3em] text-[#ffc715] uppercase block mb-4">
                         ACADEMICS

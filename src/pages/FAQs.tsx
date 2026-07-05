@@ -233,10 +233,10 @@ export default function FAQs() {
                             )}
                             <img
                                 ref={imageRef}
-                                src="https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=1600&auto=format&fit=crop"
+                                src="https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_1200,q_auto,f_auto/v1783269348/glimpse-4_jcy5yy.jpg"
                                 alt="Parents and students"
                                 onLoad={() => setImgLoaded(true)}
-                                className={`w-full h-full object-cover filter brightness-[0.85] contrast-105 will-change-transform transition-opacity duration-700 ${imgLoaded ? 'opacity-100' : 'opacity-0'}`}
+                                className={`w-full h-full object-cover will-change-transform transition-opacity duration-700 ${imgLoaded ? 'opacity-100' : 'opacity-0'}`}
                             />
                             <div className="absolute inset-0 bg-black/20 z-10 pointer-events-none" />
                         </div>

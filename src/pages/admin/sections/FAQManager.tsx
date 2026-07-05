@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react'
 import { supabase } from '@/lib/supabase'
+import { useAuth } from '@/hooks/useAuth'
 
 interface FAQ { id: string; category: string; question: string; answer: string; sort_order: number }
 
 export default function FAQManager() {
+    const { role } = useAuth()
     const [items, setItems] = useState<FAQ[]>([])
     const [ed, setEd] = useState<Partial<FAQ> | null>(null)
     const [sv, setSv] = useState(false)
@@ -90,7 +92,9 @@ export default function FAQManager() {
                                         <td style={{ textAlign: 'right', whiteSpace: 'nowrap' }}>
                                             <div style={{ display: 'flex', gap: 8, justifyContent: 'flex-end' }}>
                                                 <button className="adm-btn-s" style={{ padding: '6px 12px' }} onClick={() => setEd(faq)}>Edit</button>
-                                                <button className="adm-btn-d" style={{ padding: '6px 12px' }} onClick={() => del(faq.id)}>Delete</button>
+                                                {role !== 'moderator' && (
+                                                    <button className="adm-btn-d" style={{ padding: '6px 12px' }} onClick={() => del(faq.id)}>Delete</button>
+                                                )}
                                             </div>
                                         </td>
                                     </tr>

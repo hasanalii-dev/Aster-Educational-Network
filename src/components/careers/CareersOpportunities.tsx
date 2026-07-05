@@ -103,7 +103,7 @@ export function CareersOpportunities() {
 
                 <div className="flex justify-center opp-text">
                     <Link
-                        to="#"
+                        to="/open-roles"
                         className="btn-aster btn-aster-blue rounded-full hover-shimmer relative overflow-hidden px-10 py-4 text-base"
                     >
                         View Current Openings

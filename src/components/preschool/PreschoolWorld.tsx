@@ -102,19 +102,19 @@ export function PreschoolWorld() {
                 {/* Photo Card Gallery (Fan spread from DifferenceIntro) */}
                 <div ref={galleryRef} className="flex justify-center items-center w-full mb-20 md:mb-24 -space-x-8 md:-space-x-12 lg:-space-x-16 perspective-[1000px] px-4">
                     <div className="gsap-world-card relative z-10 w-28 sm:w-40 md:w-56 lg:w-64 aspect-[3/4] rounded-2xl bg-gray-200 border-[6px] border-white shadow-[0_15px_40px_rgba(21,40,61,0.12)] overflow-hidden mt-12 md:mt-16 transform-gpu cursor-pointer">
-                        <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=800&auto=format&fit=crop" alt="Children exploring nature" className="w-full h-full object-cover" />
+                        <img src="https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783258319/image00015_q82wyx.jpg" alt="Children exploring nature" className="w-full h-full object-cover" />
                     </div>
                     <div className="gsap-world-card relative z-20 w-28 sm:w-40 md:w-56 lg:w-64 aspect-[3/4] rounded-2xl bg-gray-200 border-[6px] border-white shadow-[0_20px_45px_rgba(21,40,61,0.14)] overflow-hidden mt-4 md:mt-6 transform-gpu cursor-pointer">
-                        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=800&auto=format&fit=crop" alt="Cultural studies" className="w-full h-full object-cover" />
+                        <img src="https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783258323/image00014_mteeio.jpg" alt="Cultural studies" className="w-full h-full object-cover" />
                     </div>
                     <div className="gsap-world-card relative z-30 w-32 sm:w-44 md:w-60 lg:w-72 aspect-[3/4] rounded-2xl bg-gray-200 border-[6px] border-white shadow-[0_25px_50px_rgba(21,40,61,0.18)] overflow-hidden -mt-4 transform-gpu cursor-pointer">
-                        <img src="https://images.unsplash.com/photo-1546410531-b4cafc7e1fb2?q=80&w=800&auto=format&fit=crop" alt="Children in nature" className="w-full h-full object-cover" />
+                        <img src="https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783268319/473133803_1676556136258912_62972387182665487_n_ig23ai.jpg" alt="Children in nature" className="w-full h-full object-cover" />
                     </div>
                     <div className="gsap-world-card relative z-20 w-28 sm:w-40 md:w-56 lg:w-64 aspect-[3/4] rounded-2xl bg-gray-200 border-[6px] border-white shadow-[0_20px_45px_rgba(21,40,61,0.14)] overflow-hidden mt-4 md:mt-6 transform-gpu cursor-pointer hidden sm:block">
-                        <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=800&auto=format&fit=crop" alt="Science exploration" className="w-full h-full object-cover" />
+                        <img src="https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783258280/1000555096_hgxher.jpg" alt="Science exploration" className="w-full h-full object-cover" />
                     </div>
                     <div className="gsap-world-card relative z-10 w-28 sm:w-40 md:w-56 lg:w-64 aspect-[3/4] rounded-2xl bg-gray-200 border-[6px] border-white shadow-[0_15px_40px_rgba(21,40,61,0.12)] overflow-hidden mt-12 md:mt-16 transform-gpu cursor-pointer hidden sm:block">
-                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=800&auto=format&fit=crop" alt="Geography learning" className="w-full h-full object-cover" />
+                        <img src="https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783258295/473127865_1676555299592329_7824417284584904866_n_nmlh5r.jpg" alt="Geography learning" className="w-full h-full object-cover" />
                     </div>
                 </div>
 
@@ -151,3 +151,4 @@ export function PreschoolWorld() {
         </section>
     )
 }
+

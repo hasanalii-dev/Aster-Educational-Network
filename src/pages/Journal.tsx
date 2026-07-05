@@ -210,9 +210,9 @@ export default function Journal() {
                     <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none" style={{ borderRadius: 'inherit' }}>
                         <img 
                             ref={imageRef}
-                            src="https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=2000&auto=format&fit=crop" 
+                            src="https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_1200,q_auto,f_auto/v1783261770/montessori-v2_qnqjbe.png" 
                             alt="Students in discussion" 
-                            className="w-full h-full object-cover filter brightness-[0.85] contrast-105 will-change-transform"
+                            className="w-full h-full object-cover will-change-transform"
                         />
                         <div className="absolute inset-0 bg-black/15 z-10 pointer-events-none" />
                     </div>

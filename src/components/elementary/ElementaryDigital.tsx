@@ -31,7 +31,7 @@ export function ElementaryDigital() {
     const textRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
-        let updateSkew: () => void;
+        // updateSkew();
 
         const ctx = gsap.context(() => {
             // 1. Content Staggered Fade-Up
@@ -74,44 +74,8 @@ export function ElementaryDigital() {
                 )
             }
 
-            // 3. Cinematic Parallax & Velocity Skew Physics (GSAP Native)
+            // 3. High-Travel Y-Axis Parallax (Scrubbed)
             if (sectionRef.current) {
-                const velocityElements = [
-                    imgLargeRef.current,
-                    imgSmallRef.current,
-                ].filter(Boolean) as HTMLElement[]
-
-                let velocitySkew = 0
-
-                // Track scroll velocity and calculate target skew
-                ScrollTrigger.create({
-                    trigger: sectionRef.current,
-                    start: 'top bottom',
-                    end: 'bottom top',
-                    onUpdate: (self) => {
-                        const currentVelocity = self.getVelocity()
-                        // Clamp to prevent extreme bending, divide by 400 for sensitivity
-                        velocitySkew = gsap.utils.clamp(-6, 6, currentVelocity / 400)
-                    },
-                })
-
-                // Ticker intelligently applies skew physics smoothly over time
-                updateSkew = () => {
-                    velocityElements.forEach(el => {
-                        const currentSkew = gsap.getProperty(el, "skewY") as number || 0;
-                        const nextSkew = gsap.utils.interpolate(currentSkew, velocitySkew, 0.1);
-
-                        // Let GSAP natively handle the transform so it doesn't fight the Y-parallax
-                        gsap.set(el, { skewY: nextSkew, force3D: true });
-                    })
-
-                    // Friction
-                    velocitySkew *= 0.9
-                }
-
-                gsap.ticker.add(updateSkew)
-
-                // High-Travel Y-Axis Parallax (Scrubbed)
                 gsap.fromTo(imgLargeRef.current,
                     { y: 100 },
                     { y: -100, ease: 'none', scrollTrigger: { trigger: sectionRef.current, start: 'top bottom', end: 'bottom top', scrub: 1 } }
@@ -125,14 +89,13 @@ export function ElementaryDigital() {
         }, sectionRef)
 
         return () => {
-            if (updateSkew) gsap.ticker.remove(updateSkew);
             ctx.revert();
         }
     }, [])
 
     const renderWords = (text: string) => {
         return text.split(' ').map((word, i) => (
-            <span key={i} className="gsap-oneshot-word inline-block mr-[0.25em] will-change-transform">
+            <span key={i} className="gsap-oneshot-word inline-block mr-[0.25em]">
                 {word}
             </span>
         ))
@@ -210,7 +173,7 @@ export function ElementaryDigital() {
                         className="absolute right-0 top-0 w-[80%] md:w-[75%] h-[400px] md:h-[550px] lg:h-[650px] z-10 shadow-[0_20px_50px_rgba(21,40,61,0.12)] will-change-transform"
                     >
                         <ImageWithSkeleton
-                            src="https://images.unsplash.com/photo-1587831990711-23ca6441447b?q=80&w=1200&auto=format&fit=crop"
+                            src="https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783270040/DSC03571_nb6lp8.jpg"
                             alt="Robotics class"
                             className="w-full h-full"
                         />
@@ -222,7 +185,7 @@ export function ElementaryDigital() {
                         className="absolute left-0 bottom-0 md:bottom-10 lg:bottom-16 w-[70%] md:w-[55%] h-[300px] md:h-[400px] lg:h-[450px] z-20 shadow-[0_30px_60px_rgba(21,40,61,0.2)] will-change-transform"
                     >
                         <ImageWithSkeleton
-                            src="https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=800&auto=format&fit=crop"
+                            src="https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783270074/DSC03930_o4xi5f.jpg"
                             alt="Digital Literacy"
                             className="w-full h-full"
                         />

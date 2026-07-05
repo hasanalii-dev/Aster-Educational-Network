@@ -1,9 +1,15 @@
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 export function HeroSection() {
     const videoRef = useRef<HTMLVideoElement>(null)
     const [isVideoLoaded, setIsVideoLoaded] = useState(false)
+
+    useEffect(() => {
+        if (videoRef.current && videoRef.current.readyState >= 2) {
+            setIsVideoLoaded(true)
+        }
+    }, [])
 
     return (
         <>
@@ -102,7 +108,6 @@ export function HeroSection() {
                             <Link 
                                 to="/campuses" 
                                 className="btn-aster btn-aster-white"
-                                data-cursor-image="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=800&auto=format&fit=crop"
                             >
                                 <span>Book a Campus Visit</span>
                             </Link>

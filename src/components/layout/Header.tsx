@@ -83,7 +83,7 @@ const navItems: NavItem[] = [
         featured: {
             title: 'Discover Aster',
             desc: 'A vibrant community dedicated to building future-ready learners.',
-            img: 'https://images.unsplash.com/photo-1577896851231-70ef18881754?w=800&q=80',
+            img: 'https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783261770/montessori-v2_qnqjbe.png',
             href: '/about',
             action: 'Read our story'
         },
@@ -93,6 +93,7 @@ const navItems: NavItem[] = [
             { label: 'Our Campuses', href: '/campuses', description: 'Clifton, PECHS, & Riyadh' },
             { label: 'Safeguarding', href: '/safeguarding', description: 'Every child deserves to feel safe' },
             { label: 'Careers', href: '/careers', description: 'Build the future with us' },
+            { label: 'Open Roles', href: '/open-roles', description: 'Apply for a position' },
         ],
     },
     {
@@ -101,7 +102,7 @@ const navItems: NavItem[] = [
         featured: {
             title: 'Academic Excellence',
             desc: 'Child-centered, inquiry-based learning frameworks for all ages.',
-            img: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&q=80',
+            img: 'https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783265854/As_part_of_Mental_Health_week_our_students_practiced_mindfulness_through_yoga_explored_emotion_4_u2ixpy.jpg',
             href: '/our-approach',
             action: 'Explore academics'
         },
@@ -118,7 +119,7 @@ const navItems: NavItem[] = [
         featured: {
             title: 'Campus Life',
             desc: 'Fostering creativity, wellness, and global citizenship every day.',
-            img: 'https://images.unsplash.com/photo-1427504494785-319ce8372ac0?w=800&q=80',
+            img: 'https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783171182/500077944_1251016823698585_2689627082250163943_n_bmhohl.jpg',
             href: '/student-life',
             action: 'See campus life'
         },
@@ -134,12 +135,14 @@ const navItems: NavItem[] = [
         featured: {
             title: 'Join Our Community',
             desc: 'Admissions for the 2026-2027 academic year are now open.',
-            img: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?w=800&q=80',
+            img: 'https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783170082/496200395_1242109967922604_7907344747179719709_n_ut5v1l.jpg',
             href: '/admissions',
             action: 'Apply today'
         },
         children: [
             { label: 'How to Apply', href: '/admissions', description: 'Begin your Aster journey' },
+            { label: 'Apply Now', href: '/apply', description: 'Submit your application form' },
+            { label: 'Book a Tour', href: '/book-tour', description: 'Schedule a campus visit' },
             { label: 'Parent Stories', href: '/parent-stories', description: 'The growth parents see' },
             { label: 'FAQs', href: '/faqs', description: 'Everything you need to know' },
             { label: 'Contact Us', href: '/contact', description: 'We’d love to hear from you' },
@@ -243,6 +246,7 @@ function MobileHugeLink({ item, isOpen, onToggle, onLinkClick, animDelay }: { it
 interface HeaderProps {
     marqueeText?: string
     marqueeLink?: string
+    marqueeIsActive?: boolean
 }
 
 /* ----------------------------------------
@@ -250,7 +254,8 @@ interface HeaderProps {
  * ---------------------------------------- */
 export function Header({
                            marqueeText = "Admissions for the 2026-2027 academic year are now open.",
-                           marqueeLink = "/admissions"
+                           marqueeLink = "/admissions",
+                           marqueeIsActive = true
                        }: HeaderProps) {
     const location = useLocation()
     const { user, signOut } = useAuth()
@@ -336,63 +341,65 @@ export function Header({
             <header id="site-header" ref={headerRef} className={`site-header ${scrolledClass}`}>
 
                 {/* === TOP MARQUEE STRIP === */}
-                {location.pathname.startsWith('/journal') ? (
-                    <div className="header-marquee-wrapper" style={{ backgroundColor: '#15283D', justifyContent: 'center' }}>
-                        <span className="header-marquee-link" style={{ pointerEvents: 'none', color: '#ffc715', fontSize: '12px', letterSpacing: '0.2em', fontWeight: 'bold' }}>
-                            Ideas, Insights & Conversations That Shape Better Futures
-                        </span>
-                    </div>
-                ) : location.pathname.includes('/admissions') ? (
-                    <div className="header-marquee-wrapper" style={{ backgroundColor: '#15283D' }}>
-                        <div className="header-marquee-track">
-                            <div className="header-marquee-group" style={{ animationDuration: '30s' }}>
-                                {[
-                                    "Licensed Cambridge School", "100% Cambridge Success Rate", "3 Campuses", "International Expansion to Riyadh",
-                                    "Licensed Cambridge School", "100% Cambridge Success Rate", "3 Campuses", "International Expansion to Riyadh",
-                                    "Licensed Cambridge School", "100% Cambridge Success Rate", "3 Campuses", "International Expansion to Riyadh"
-                                ].map((item, i) => (
-                                    <div className="header-marquee-item" key={`m1-adm-${i}`}>
-                                        <span className="header-marquee-link" style={{ pointerEvents: 'none', color: '#FFF' }}>{item}</span>
-                                        <span className="header-marquee-separator" style={{ color: '#ffc715', fontSize: '18px' }}>•</span>
-                                    </div>
-                                ))}
-                            </div>
-                            <div className="header-marquee-group" aria-hidden="true" style={{ animationDuration: '30s' }}>
-                                {[
-                                    "Licensed Cambridge School", "100% Cambridge Success Rate", "3 Campuses", "International Expansion to Riyadh",
-                                    "Licensed Cambridge School", "100% Cambridge Success Rate", "3 Campuses", "International Expansion to Riyadh",
-                                    "Licensed Cambridge School", "100% Cambridge Success Rate", "3 Campuses", "International Expansion to Riyadh"
-                                ].map((item, i) => (
-                                    <div className="header-marquee-item" key={`m2-adm-${i}`}>
-                                        <span className="header-marquee-link" style={{ pointerEvents: 'none', color: '#FFF' }}>{item}</span>
-                                        <span className="header-marquee-separator" style={{ color: '#ffc715', fontSize: '18px' }}>•</span>
-                                    </div>
-                                ))}
+                {marqueeIsActive && (
+                    location.pathname.startsWith('/journal') ? (
+                        <div className="header-marquee-wrapper" style={{ backgroundColor: '#15283D', justifyContent: 'center' }}>
+                            <span className="header-marquee-link" style={{ pointerEvents: 'none', color: '#ffc715', fontSize: '12px', letterSpacing: '0.2em', fontWeight: 'bold' }}>
+                                Ideas, Insights & Conversations That Shape Better Futures
+                            </span>
+                        </div>
+                    ) : location.pathname.includes('/admissions') ? (
+                        <div className="header-marquee-wrapper" style={{ backgroundColor: '#15283D' }}>
+                            <div className="header-marquee-track">
+                                <div className="header-marquee-group" style={{ animationDuration: '30s' }}>
+                                    {[
+                                        marqueeText, "100% Cambridge Success Rate", "3 Campuses", "International Expansion to Riyadh",
+                                        marqueeText, "100% Cambridge Success Rate", "3 Campuses", "International Expansion to Riyadh",
+                                        marqueeText, "100% Cambridge Success Rate", "3 Campuses", "International Expansion to Riyadh"
+                                    ].map((item, i) => (
+                                        <div className="header-marquee-item" key={`m1-adm-${i}`}>
+                                            <span className="header-marquee-link" style={{ pointerEvents: 'none', color: '#FFF' }}>{item}</span>
+                                            <span className="header-marquee-separator" style={{ color: '#ffc715', fontSize: '18px' }}>•</span>
+                                        </div>
+                                    ))}
+                                </div>
+                                <div className="header-marquee-group" aria-hidden="true" style={{ animationDuration: '30s' }}>
+                                    {[
+                                        marqueeText, "100% Cambridge Success Rate", "3 Campuses", "International Expansion to Riyadh",
+                                        marqueeText, "100% Cambridge Success Rate", "3 Campuses", "International Expansion to Riyadh",
+                                        marqueeText, "100% Cambridge Success Rate", "3 Campuses", "International Expansion to Riyadh"
+                                    ].map((item, i) => (
+                                        <div className="header-marquee-item" key={`m2-adm-${i}`}>
+                                            <span className="header-marquee-link" style={{ pointerEvents: 'none', color: '#FFF' }}>{item}</span>
+                                            <span className="header-marquee-separator" style={{ color: '#ffc715', fontSize: '18px' }}>•</span>
+                                        </div>
+                                    ))}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                ) : marqueeText ? (
-                    <div className="header-marquee-wrapper">
-                        <div className="header-marquee-track">
-                            <div className="header-marquee-group">
-                                {marqueeItems.map((_, i) => (
-                                    <div className="header-marquee-item" key={`m1-${i}`}>
-                                        <Link to={marqueeLink} className="header-marquee-link">{marqueeText}</Link>
-                                        <span className="header-marquee-separator">✦</span>
-                                    </div>
-                                ))}
-                            </div>
-                            <div className="header-marquee-group" aria-hidden="true">
-                                {marqueeItems.map((_, i) => (
-                                    <div className="header-marquee-item" key={`m2-${i}`}>
-                                        <Link to={marqueeLink} className="header-marquee-link">{marqueeText}</Link>
-                                        <span className="header-marquee-separator">✦</span>
-                                    </div>
-                                ))}
+                    ) : marqueeText ? (
+                        <div className="header-marquee-wrapper">
+                            <div className="header-marquee-track">
+                                <div className="header-marquee-group">
+                                    {marqueeItems.map((_, i) => (
+                                        <div className="header-marquee-item" key={`m1-${i}`}>
+                                            <Link to={marqueeLink} className="header-marquee-link">{marqueeText}</Link>
+                                            <span className="header-marquee-separator">✦</span>
+                                        </div>
+                                    ))}
+                                </div>
+                                <div className="header-marquee-group" aria-hidden="true">
+                                    {marqueeItems.map((_, i) => (
+                                        <div className="header-marquee-item" key={`m2-${i}`}>
+                                            <Link to={marqueeLink} className="header-marquee-link">{marqueeText}</Link>
+                                            <span className="header-marquee-separator">✦</span>
+                                        </div>
+                                    ))}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                ) : null}
+                    ) : null
+                )}
 
                 {/* === MAIN NAVBAR === */}
                 <div className="header-nav-container">
@@ -1002,3 +1009,4 @@ const headerStyles = `
   .mobile-action-desc { font-size: 13px; }
 }
 `
+

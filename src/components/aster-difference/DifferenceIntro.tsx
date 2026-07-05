@@ -153,27 +153,27 @@ export function DifferenceIntro() {
 
                     {/* Card 1: Far Left */}
                     <div className="gsap-photo-card relative z-10 w-28 sm:w-40 md:w-56 lg:w-64 aspect-[3/4] rounded-2xl bg-gray-200 border-[6px] border-white shadow-[0_15px_40px_rgba(21,40,61,0.12)] overflow-hidden mt-12 md:mt-16 transform-gpu cursor-pointer">
-                        <img src="https://res.cloudinary.com/lpxp5l3a/image/upload/v1783256421/495542888_1242817027851898_4199234393083474583_n_ioruhy.jpg" alt="Students collaborating" className="w-full h-full object-cover" />
+                        <img src="https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783256421/495542888_1242817027851898_4199234393083474583_n_ioruhy.jpg" alt="Students collaborating" className="w-full h-full object-cover" />
                     </div>
 
                     {/* Card 2: Mid Left */}
                     <div className="gsap-photo-card relative z-20 w-28 sm:w-40 md:w-56 lg:w-64 aspect-[3/4] rounded-2xl bg-gray-200 border-[6px] border-white shadow-[0_20px_45px_rgba(21,40,61,0.14)] overflow-hidden mt-4 md:mt-6 transform-gpu cursor-pointer">
-                        <img src="https://res.cloudinary.com/lpxp5l3a/image/upload/v1783256509/DSC03306_ddidu3.jpg" alt="Classroom learning" className="w-full h-full object-cover" />
+                        <img src="https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783256509/DSC03306_ddidu3.jpg" alt="Classroom learning" className="w-full h-full object-cover" />
                     </div>
 
                     {/* Card 3: Center (Hero) */}
                     <div className="gsap-photo-card relative z-30 w-32 sm:w-44 md:w-60 lg:w-72 aspect-[3/4] rounded-2xl bg-gray-200 border-[6px] border-white shadow-[0_25px_50px_rgba(21,40,61,0.18)] overflow-hidden -mt-4 transform-gpu cursor-pointer">
-                        <img src="https://res.cloudinary.com/lpxp5l3a/image/upload/v1783256528/As_part_of_Mental_Health_week_our_students_practiced_mindfulness_through_yoga_explored_emotion_3_kbavat.jpg" alt="Technology and Robotics" className="w-full h-full object-cover" />
+                        <img src="https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783256528/As_part_of_Mental_Health_week_our_students_practiced_mindfulness_through_yoga_explored_emotion_3_kbavat.jpg" alt="Technology and Robotics" className="w-full h-full object-cover" />
                     </div>
 
                     {/* Card 4: Mid Right */}
                     <div className="gsap-photo-card relative z-20 w-28 sm:w-40 md:w-56 lg:w-64 aspect-[3/4] rounded-2xl bg-gray-200 border-[6px] border-white shadow-[0_20px_45px_rgba(21,40,61,0.14)] overflow-hidden mt-4 md:mt-6 transform-gpu cursor-pointer hidden sm:block">
-                        <img src="https://res.cloudinary.com/lpxp5l3a/image/upload/v1783256560/image00014_wodc9g.jpg" alt="Campus life" className="w-full h-full object-cover" />
+                        <img src="https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783256560/image00014_wodc9g.jpg" alt="Campus life" className="w-full h-full object-cover" />
                     </div>
 
                     {/* Card 5: Far Right */}
                     <div className="gsap-photo-card relative z-10 w-28 sm:w-40 md:w-56 lg:w-64 aspect-[3/4] rounded-2xl bg-gray-200 border-[6px] border-white shadow-[0_15px_40px_rgba(21,40,61,0.12)] overflow-hidden mt-12 md:mt-16 transform-gpu cursor-pointer hidden sm:block">
-                        <img src="https://res.cloudinary.com/lpxp5l3a/image/upload/v1783256567/image00016_m2wzsq.jpg" alt="Student in deep focus" className="w-full h-full object-cover" />
+                        <img src="https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783256567/image00016_m2wzsq.jpg" alt="Student in deep focus" className="w-full h-full object-cover" />
                     </div>
 
                 </div>

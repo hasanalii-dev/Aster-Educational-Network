@@ -16,32 +16,32 @@ export function DifferenceCharacter() {
     const listItems = [
         {
             title: 'Lead with integrity',
-            image: 'https://res.cloudinary.com/lpxp5l3a/image/upload/v1783257572/image00008_vn8pfo.jpg',
+            image: 'https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783257572/image00008_vn8pfo.jpg',
             icon: Shield
         },
         {
             title: 'Show empathy and respect',
-            image: 'https://res.cloudinary.com/lpxp5l3a/image/upload/v1783257760/image00021_sqi4tp.jpg',
+            image: 'https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783257760/image00021_sqi4tp.jpg',
             icon: Heart
         },
         {
             title: 'Demonstrate humility',
-            image: 'https://res.cloudinary.com/lpxp5l3a/image/upload/v1783257947/500077944_1251016823698585_2689627082250163943_n_yg43mm.jpg',
+            image: 'https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783257947/500077944_1251016823698585_2689627082250163943_n_yg43mm.jpg',
             icon: Anchor
         },
         {
             title: 'Build resilience',
-            image: 'https://res.cloudinary.com/lpxp5l3a/image/upload/v1783256925/image00028_qncjsj.jpg',
+            image: 'https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783256925/image00028_qncjsj.jpg',
             icon: Mountain
         },
         {
             title: 'Take responsibility for their actions',
-            image: 'https://res.cloudinary.com/lpxp5l3a/image/upload/v1783258175/1000555102_fvuszl.jpg',
+            image: 'https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783258175/1000555102_fvuszl.jpg',
             icon: Scale
         },
         {
             title: 'Contribute positively to their communities',
-            image: 'https://res.cloudinary.com/lpxp5l3a/image/upload/v1783258241/1000555095_acxhca.jpg',
+            image: 'https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783258241/1000555095_acxhca.jpg',
             icon: Users
         }
     ]
@@ -198,3 +198,4 @@ export function DifferenceCharacter() {
         </section>
     )
 }
+

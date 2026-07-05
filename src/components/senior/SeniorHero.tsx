@@ -43,8 +43,8 @@ export function SeniorHero() {
 
                 tl.fromTo(
                     imageRef.current,
-                    { yPercent: -10, scale: 1.15 },
-                    { yPercent: 10, scale: 1.05, ease: 'none' },
+                    { yPercent: -15, scale: 1.4 },
+                    { yPercent: 15, scale: 1.3, ease: 'none' },
                     0
                 )
             })
@@ -70,7 +70,7 @@ export function SeniorHero() {
     return (
         <section
             ref={sectionRef}
-            className="w-full pt-28 md:pt-32 pb-16 md:pb-24 relative z-10 flex flex-col items-center overflow-x-hidden overflow-y-visible bg-white select-none"
+            className="w-full pt-20 md:pt-24 pb-16 md:pb-24 relative z-10 flex flex-col items-center overflow-x-hidden overflow-y-visible bg-white select-none"
         >
             <div
                 ref={bannerFrameRef}
@@ -80,7 +80,7 @@ export function SeniorHero() {
                 <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none" style={{ borderRadius: 'inherit' }}>
                     <img
                         ref={imageRef}
-                        src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=1600&auto=format&fit=crop"
+                        src="https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783270693/image00013_rgdedc.jpg"
                         alt="Senior School Campus"
                         className="w-full h-full object-cover filter brightness-[0.8] contrast-110 will-change-transform"
                         style={{ borderRadius: '0px' }}
@@ -89,10 +89,10 @@ export function SeniorHero() {
                 </div>
             </div>
 
-            <div className="absolute top-28 md:top-32 w-[calc(100%-3rem)] md:w-[calc(100%-6rem)] max-w-[1360px] h-[35vh] md:h-[50vh] min-h-[300px] pointer-events-none">
+            <div className="absolute top-20 md:top-24 w-[calc(100%-3rem)] md:w-[calc(100%-6rem)] max-w-[1360px] h-[35vh] md:h-[50vh] min-h-[300px] pointer-events-none">
                 <div
                     ref={textStackRef}
-                    className="absolute left-1/2 -translate-x-1/2 bg-[#15283D] w-fit min-w-[85%] md:min-w-[700px] py-10 px-8 md:py-12 md:px-16 z-20 pointer-events-auto shadow-2xl top-1/2 -translate-y-1/2 flex flex-col items-center text-center"
+                    className="absolute -bottom-8 md:-bottom-12 left-1/2 -translate-x-1/2 bg-[#15283D] w-fit min-w-[85%] md:min-w-[700px] py-10 px-8 md:py-12 md:px-16 z-20 pointer-events-auto shadow-2xl flex flex-col items-center text-center"
                 >
                     <span className="font-['Quicksand'] font-bold text-xs tracking-[0.3em] text-[#edad0c] uppercase block mb-4">
                         ACADEMICS
@@ -105,3 +105,4 @@ export function SeniorHero() {
         </section>
     )
 }
+

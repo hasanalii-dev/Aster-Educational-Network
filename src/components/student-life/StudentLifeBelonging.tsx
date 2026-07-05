@@ -1,3 +1,4 @@
+import { Heart } from 'lucide-react'
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -45,8 +46,8 @@ export function StudentLifeBelonging() {
                 {/* Left Content */}
                 <div className="flex flex-col justify-center order-2 lg:order-1">
                     <div className="flex items-center gap-3 mb-6 belonging-text">
-                        <span className="w-8 h-[2px] bg-[#ffc715]"></span>
-                        <span className="font-['Quicksand'] font-bold text-xs tracking-[0.25em] text-[#ffc715] uppercase">
+                        <Heart className="w-5 h-5 text-[#ffc715] shrink-0" strokeWidth={2.5} />
+                        <span className="font-['Quicksand'] font-bold text-xs tracking-[0.25em] text-[#ffc715] uppercase mt-0.5">
                             A PLACE WHERE CHILDREN BELONG
                         </span>
                     </div>
@@ -74,9 +75,9 @@ export function StudentLifeBelonging() {
                 {/* Right Image */}
                 <div className="order-1 lg:order-2 w-full h-[400px] md:h-[600px] lg:h-[700px] relative rounded-[24px] overflow-hidden shadow-2xl" ref={imageContainerRef}>
                     <img 
-                        src="https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=1200&auto=format&fit=crop" 
+                        src="https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783273398/image00003_fu1fvp.jpg" 
                         alt="Children laughing and belonging together"
-                        className="w-full h-full object-cover filter brightness-[0.95]"
+                        className="w-full h-full object-cover"
                     />
                 </div>
 
@@ -84,3 +85,4 @@ export function StudentLifeBelonging() {
         </section>
     )
 }
+

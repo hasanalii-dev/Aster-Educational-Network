@@ -47,7 +47,7 @@ export function ElementaryFinale() {
                     </div>
                     <h2 className="font-['Playfair_Display'] text-3xl md:text-4xl font-medium text-[#334a89] mb-6 prose-reveal-container">
                         {`The Elementary years are about far more than completing assignments or passing assessments.`.split(' ').map((word, i) => (
-                            <span key={i} className="gsap-scrub-word inline-block mr-[0.25em] opacity-20 will-change-transform">{word}</span>
+                            <span key={i} className="gsap-scrub-word inline-block mr-[0.25em] opacity-20">{word}</span>
                         ))}
                     </h2>
                     <p className="font-['Quicksand'] font-medium text-base md:text-lg text-[#5C5C61] leading-relaxed mb-6">

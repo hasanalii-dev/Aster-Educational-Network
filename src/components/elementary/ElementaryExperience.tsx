@@ -77,21 +77,8 @@ export function ElementaryExperience() {
                         ease: 'back.out(1.8)',
                         scrollTrigger: { trigger: board, start: 'top 75%' },
                         onComplete: function() {
-                            // Infinite GSAP Wind Physics (Pendulum Sway)
-                            this.targets().forEach((target: any, i: number) => {
-                                const baseRot = [-6, 4, -3][i % 3];
-                                const windForce = Math.random() * 3 + 1.5; // Random wind gust strength (1.5 to 4.5 deg)
-                                const speed = Math.random() * 0.8 + 1.5; // Random swing interval (1.5s to 2.3s)
-
-                                gsap.to(target, {
-                                    rotation: baseRot + windForce, // Card gets pushed by the wind
-                                    duration: speed,
-                                    ease: "sine.inOut", // Smooth acceleration/deceleration at the peaks of the swing
-                                    yoyo: true, // Gravity pulls it back
-                                    repeat: -1, // Infinite loop
-                                    delay: Math.random() * 0.5 // Offset start times so they don't swing perfectly together
-                                });
-                            });
+                            // Removed infinite GSAP Wind Physics loop to improve performance
+                            // Instead, relying solely on the CSS hover effects which are hardware accelerated
                         }
                     }
                 );
@@ -116,9 +103,9 @@ export function ElementaryExperience() {
     }, [])
 
     const softboardImages = [
-        { src: 'https://images.unsplash.com/photo-1511649475669-e288648b2339?q=80&w=800&auto=format&fit=crop', title: 'Performances' },
-        { src: 'https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=800&auto=format&fit=crop', title: 'Reading Carnival' },
-        { src: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=800&auto=format&fit=crop', title: 'Project-Based Learning' },
+        { src: 'https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783270261/648199744_1519242356876029_5716534411369876124_n_pxkxeq.jpg', title: 'Performances' },
+        { src: 'https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783270281/499711629_1251023857031215_8399418256028210795_n_qaflzs.jpg', title: 'Reading Carnival' },
+        { src: 'https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783270296/496003952_1242816021185332_8452547634888452440_n_m470e3.jpg', title: 'Project-Based Learning' },
     ]
 
     const badges = [
@@ -132,7 +119,7 @@ export function ElementaryExperience() {
 
     const renderWords = (text: string) => {
         return text.split(' ').map((word, i) => (
-            <span key={i} className="gsap-oneshot-word inline-block mr-[0.25em] will-change-transform">
+            <span key={i} className="gsap-oneshot-word inline-block mr-[0.25em]">
                 {word}
             </span>
         ))
@@ -230,8 +217,7 @@ export function ElementaryExperience() {
                                         <div className="w-full aspect-square bg-gray-100 overflow-hidden shadow-inner border border-black/5">
                                             <img
                                                 src={img.src}
-                                                alt={img.title}
-                                                className="w-full h-full object-cover contrast-[1.05]"
+                                                className="w-full h-full object-cover"
                                             />
                                         </div>
 

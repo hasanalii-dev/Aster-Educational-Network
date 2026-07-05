@@ -81,7 +81,7 @@ export function SafeguardingHero() {
                 <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none" style={{ borderRadius: 'inherit' }}>
                     <img
                         ref={imageRef}
-                        src="https://res.cloudinary.com/lpxp5l3a/image/upload/v1783261770/montessori-v2_qnqjbe.png"
+                        src="https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783261770/montessori-v2_qnqjbe.png"
                         alt="Safeguarding at Aster"
                         className="w-full h-full object-cover filter brightness-[0.80] contrast-105 will-change-transform"
                     />
@@ -108,3 +108,4 @@ export function SafeguardingHero() {
         </section>
     )
 }
+

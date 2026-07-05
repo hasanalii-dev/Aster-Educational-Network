@@ -42,14 +42,14 @@ const ImageWithSkeleton = ({ src, alt, className }: { src: string, alt: string, 
  * High-Reliability Pexels CDN Image Data
  * ---------------------------------------- */
 const learnerData = [
-  { title: "Annual plays and performances", image: "https://res.cloudinary.com/lpxp5l3a/image/upload/v1783170587/647867463_1519242336876031_2472216514536120184_n_rqsshg.jpg" },
-  { title: "Robotics competitions", image: "https://res.cloudinary.com/lpxp5l3a/image/upload/v1783170629/DSC03571_xhi0f1.jpg" },
-  { title: "Sports tournaments", image: "https://res.cloudinary.com/lpxp5l3a/image/upload/v1783170666/490848489_1216868750446726_890053301611107485_n_1_tcdxil.jpg" },
-  { title: "Passion Projects", image: "https://res.cloudinary.com/lpxp5l3a/image/upload/v1783170702/494206368_1231093142357620_4404713336800911290_n_s2wfdt.jpg" },
-  { title: "Student-led initiatives", image: "https://res.cloudinary.com/lpxp5l3a/image/upload/v1783170735/image00002_onmsna.jpg" },
-  { title: "Entrepreneurship experiences", image: "https://res.cloudinary.com/lpxp5l3a/image/upload/v1783170868/image00016_s28yly.jpg" },
-  { title: "Community and fundraising events", image: "https://res.cloudinary.com/lpxp5l3a/image/upload/v1783170911/image00028_yjfnfc.jpg" },
-  { title: "Field trips and experiential learning", image: "https://res.cloudinary.com/lpxp5l3a/image/upload/v1783170968/471264397_1668017843779408_2247922833050165345_n_kmaaqh.jpg" },
+  { title: "Annual plays and performances", image: "https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783170587/647867463_1519242336876031_2472216514536120184_n_rqsshg.jpg" },
+  { title: "Robotics competitions", image: "https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783170629/DSC03571_xhi0f1.jpg" },
+  { title: "Sports tournaments", image: "https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783170666/490848489_1216868750446726_890053301611107485_n_1_tcdxil.jpg" },
+  { title: "Passion Projects", image: "https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783170702/494206368_1231093142357620_4404713336800911290_n_s2wfdt.jpg" },
+  { title: "Student-led initiatives", image: "https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783170735/image00002_onmsna.jpg" },
+  { title: "Entrepreneurship experiences", image: "https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783170868/image00016_s28yly.jpg" },
+  { title: "Community and fundraising events", image: "https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783170911/image00028_yjfnfc.jpg" },
+  { title: "Field trips and experiential learning", image: "https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783170968/471264397_1668017843779408_2247922833050165345_n_kmaaqh.jpg" },
 ]
 
 export function ProgramsSection() {

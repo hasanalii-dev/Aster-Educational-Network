@@ -139,7 +139,7 @@ export function CommunityWorkshops() {
                         Workshops That Support Modern <em className="italic text-[#ffc715] !text-[#ffc715]">Parenting</em>
                     </h2>
 
-                    <div className="gsap-stagger-item w-16 h-[2px] bg-[#ffc715] mb-10 shadow-sm" />
+                    <BookOpen className="gsap-stagger-item w-8 h-8 text-[#ffc715] mb-10" />
 
                     <div className="gsap-stagger-item font-['Quicksand'] font-medium text-lg text-white/90 !text-white/90 leading-[1.65] space-y-6">
                         <p>
@@ -187,7 +187,7 @@ export function CommunityWorkshops() {
                                     <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-12 h-5 bg-white/40 backdrop-blur-md shadow-sm border border-white/20 rotate-[6deg] z-20" />
                                     <div className="w-full aspect-[3/4] overflow-hidden bg-gray-100 relative">
                                         <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500 z-10" />
-                                        <img src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?q=80&w=600&auto=format&fit=crop" alt="Parent Support 1" className="w-full h-full object-cover" />
+                                        <img src="https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783274972/493896117_1231231472343787_963477596723003388_n_uyvjoo.jpg" alt="Parent Support 1" className="w-full h-full object-cover" />
                                     </div>
                                 </div>
                             </div>
@@ -202,7 +202,7 @@ export function CommunityWorkshops() {
                                     <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-14 h-5 bg-white/30 backdrop-blur-md shadow-sm border border-white/20 rotate-[-4deg] z-20" />
                                     <div className="w-full aspect-[4/5] overflow-hidden bg-gray-100 relative">
                                         <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500 z-10" />
-                                        <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=600&auto=format&fit=crop" alt="Parent Support 2" className="w-full h-full object-cover" />
+                                        <img src="https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783275070/493931497_1231418262325108_3929573455326795932_n_aaautu.jpg" alt="Parent Support 2" className="w-full h-full object-cover" />
                                     </div>
                                 </div>
                             </div>
@@ -218,7 +218,7 @@ export function CommunityWorkshops() {
                                         <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
                                     </svg>
                                     <div className="w-full aspect-[3/4] overflow-hidden bg-gray-100 relative">
-                                        <img src="https://images.unsplash.com/photo-1543269664-56d5d5148afb?q=80&w=800&auto=format&fit=crop" alt="Main Workshop" className="w-full h-full object-cover" />
+                                        <img src="https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783275077/494446741_1231230515677216_4742606727133253107_n_hsetky.jpg" alt="Main Workshop" className="w-full h-full object-cover" />
                                     </div>
                                 </div>
                             </div>
@@ -233,7 +233,7 @@ export function CommunityWorkshops() {
                                     <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-10 h-5 bg-white/60 backdrop-blur-md shadow-sm border border-white/20 rotate-[-8deg] z-20" />
                                     <div className="w-full aspect-[2/3] overflow-hidden bg-gray-100 relative">
                                         <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500 z-10" />
-                                        <img src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?q=80&w=600&auto=format&fit=crop" alt="Parent Support 4" className="w-full h-full object-cover" />
+                                        <img src="https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783275110/494165045_1231231425677125_872399796167294069_n_1_fsydvh.jpg" alt="Parent Support 4" className="w-full h-full object-cover" />
                                     </div>
                                 </div>
                             </div>
@@ -248,7 +248,7 @@ export function CommunityWorkshops() {
                                     <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-16 h-5 bg-white/50 backdrop-blur-md shadow-sm border border-white/20 rotate-[5deg] z-20" />
                                     <div className="w-full aspect-[3/4] overflow-hidden bg-gray-100 relative">
                                         <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500 z-10" />
-                                        <img src="https://images.unsplash.com/photo-1529390079861-591de354faf5?q=80&w=600&auto=format&fit=crop" alt="Parent Support 5" className="w-full h-full object-cover" />
+                                        <img src="https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783275173/1000555027_rqalro.jpg" alt="Parent Support 5" className="w-full h-full object-cover" />
                                     </div>
                                 </div>
                             </div>

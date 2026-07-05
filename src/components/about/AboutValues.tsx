@@ -79,7 +79,7 @@ export function AboutValues() {
 
                     <div className="w-full h-64 md:h-72 rounded-none overflow-hidden shadow-2xl border-2 border-white/15 relative z-10 bg-[#394da1]">
                         <img
-                            src="https://res.cloudinary.com/lpxp5l3a/image/upload/v1783254096/image00019_gad7g7.jpg"
+                            src="https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783254096/image00019_gad7g7.jpg"
                             alt="Aster Students Collaborating"
                             className="w-full h-full object-cover contrast-105"
                         />

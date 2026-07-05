@@ -92,27 +92,27 @@ export function PreschoolMaterials() {
         {
             text: 'Develop deeper understanding',
             icon: Eye,
-            image: 'https://images.unsplash.com/photo-1516627145497-ae6968895b74?q=80&w=1200&auto=format&fit=crop'
+            image: 'https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783267904/1000554989_pdbnjp.jpg'
         },
         {
             text: 'Strengthen concentration',
             icon: Brain,
-            image: 'https://images.unsplash.com/photo-1587654780799-5e2f2e6a57d1?q=80&w=1200&auto=format&fit=crop'
+            image: 'https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783267939/1000555018_peotkr.jpg'
         },
         {
             text: 'Build problem-solving skills',
             icon: Lightbulb,
-            image: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=1200&auto=format&fit=crop'
+            image: 'https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783268005/1000555025_glxv1y.jpg'
         },
         {
             text: 'Learn independently',
             icon: Blocks,
-            image: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=1200&auto=format&fit=crop'
+            image: 'https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783268044/1000555031_d6mnhx.jpg'
         },
         {
             text: 'Gain confidence through mastery',
             icon: Award,
-            image: 'https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=1200&auto=format&fit=crop'
+            image: 'https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783268073/1000555028_cmocry.jpg'
         },
     ]
 
@@ -223,7 +223,7 @@ export function PreschoolMaterials() {
                                 src={item.image}
                                 alt={`Learning through ${item.text}`}
                                 // Layered absolutely. Only the active index gets full opacity and top z-index.
-                                className={`parallax-img absolute h-[120%] -top-[10%] left-0 w-full object-cover will-change-transform contrast-[1.05] transition-opacity duration-700 ease-in-out ${activeIndex === i ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
+                                className={`parallax-img absolute h-[120%] -top-[10%] left-0 w-full object-cover will-change-transform transition-opacity duration-700 ease-in-out ${activeIndex === i ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
                             />
                         ))}
                     </div>

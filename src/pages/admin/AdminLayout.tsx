@@ -1,134 +1,297 @@
 import { Outlet, NavLink, useNavigate, useLocation } from 'react-router-dom'
 import { useAuth } from '@/hooks/useAuth'
 import { useEffect, useState } from 'react'
-import { LayoutDashboard, Settings, PenTool, MessageSquareQuote, HelpCircle, Map, GraduationCap, Mail, LogOut, Menu } from 'lucide-react'
+import {
+    LayoutDashboard, Settings, PenTool, MessageSquareQuote,
+    HelpCircle, Map, GraduationCap, Mail, LogOut, Menu,
+    Briefcase, FileText, X, ChevronRight, Sparkles, Users, Globe
+} from 'lucide-react'
 import { LogoutModal } from '@/components/ui/LogoutModal'
+import { ToastProvider } from '@/components/admin/ToastProvider'
 
 type NavItem = { label: string; path: string; icon: React.ReactNode; end?: boolean };
 type NavSection = { title: string; items: NavItem[] };
 
 const navSections: NavSection[] = [
-    { title: 'Overview', items: [{ label: 'Dashboard', path: '/admin', icon: <LayoutDashboard size={18} />, end: true }] },
-    { title: 'Content', items: [
-        { label: 'Site Settings', path: '/admin/settings', icon: <Settings size={18} /> },
-        { label: 'Journal', path: '/admin/journal', icon: <PenTool size={18} /> },
-        { label: 'Testimonials', path: '/admin/testimonials', icon: <MessageSquareQuote size={18} /> },
-        { label: 'FAQs', path: '/admin/faqs', icon: <HelpCircle size={18} /> },
+    { title: 'Overview', items: [
+        { label: 'Dashboard', path: '/admin', icon: <LayoutDashboard size={18} />, end: true },
+        { label: 'Return to Website', path: '/', icon: <Globe size={18} /> }
     ]},
-    { title: 'Engagement', items: [
-        { label: 'Campus Tours', path: '/admin/campus-tours', icon: <Map size={18} /> },
-        { label: 'Admissions', path: '/admin/admissions', icon: <GraduationCap size={18} /> },
-        { label: 'Inquiries', path: '/admin/inquiries', icon: <Mail size={18} /> }
-    ] },
+    { title: 'Content Management', items: [
+            { label: 'Site Settings', path: '/admin/settings', icon: <Settings size={18} /> },
+            { label: 'Journal & News', path: '/admin/journal', icon: <PenTool size={18} /> },
+            { label: 'Parent Stories', path: '/admin/parent-stories', icon: <MessageSquareQuote size={18} /> },
+            { label: 'Newsletter', path: '/admin/newsletter', icon: <Mail size={18} /> },
+            { label: 'Job Openings', path: '/admin/job-openings', icon: <Briefcase size={18} /> },
+            { label: 'Job Applications', path: '/admin/job-applications', icon: <FileText size={18} /> },
+            { label: 'FAQs', path: '/admin/faqs', icon: <HelpCircle size={18} /> },
+        ]},
+    { title: 'Admissions & Engagement', items: [
+            { label: 'Campus Tours', path: '/admin/campus-tours', icon: <Map size={18} /> },
+            { label: 'Admissions', path: '/admin/admissions', icon: <GraduationCap size={18} /> },
+            { label: 'Inquiries', path: '/admin/inquiries', icon: <Mail size={18} /> }
+        ] },
+    { title: 'System', items: [
+            { label: 'User Management', path: '/admin/users', icon: <Users size={18} /> }
+        ] }
 ]
 
 export default function AdminLayout() {
-    const { user, loading, signOut } = useAuth()
+    const { user, role, loading, signOut } = useAuth()
     const navigate = useNavigate()
     const location = useLocation()
     const [sidebarOpen, setSidebarOpen] = useState(false)
     const [showLogoutModal, setShowLogoutModal] = useState(false)
 
     useEffect(() => {
-        if (!loading && !user) navigate('/admin/login', { replace: true })
-    }, [user, loading, navigate])
+        if (!loading && (!user || role === 'user')) navigate('/admin/login', { replace: true })
+    }, [user, role, loading, navigate])
 
-    if (loading) return (<div style={{minHeight:'100vh',display:'flex',alignItems:'center',justifyContent:'center',background:'#F3F4F6'}}><div className="adm-spin" /></div>)
-    if (!user) return null
+    // Prevent body scroll when mobile menu is open
+    useEffect(() => {
+        if (sidebarOpen) document.body.style.overflow = 'hidden'
+        else document.body.style.overflow = 'unset'
+        return () => { document.body.style.overflow = 'unset' }
+    }, [sidebarOpen])
 
-    const currentTitle = navSections.flatMap(s => s.items).find(i => i.end ? location.pathname === i.path : location.pathname.startsWith(i.path))?.label || 'Dashboard'
+    if (loading) return (
+        <div className="min-h-screen flex flex-col items-center justify-center bg-[#F8F9FA] gap-4">
+            <div className="w-12 h-12 border-[3px] border-[#334a89]/20 border-t-[#334a89] rounded-full animate-spin" />
+            <p className="font-['Quicksand'] font-bold text-[12px] tracking-widest text-[#334a89] uppercase">Authenticating...</p>
+        </div>
+    )
+    if (!user || role === 'user') return null
+
+    const filteredSections = navSections.map(section => {
+        if (role === 'content_writer') {
+            if (section.title === 'Overview') return section
+            if (section.title === 'Content Management') {
+                return {
+                    ...section,
+                    items: section.items.filter(item => item.label !== 'Site Settings')
+                }
+            }
+            return null
+        }
+        if (role === 'moderator' || role === 'super_admin') {
+            if (section.title === 'System' && role !== 'super_admin') return null
+            return section
+        }
+        return null
+    }).filter(Boolean) as NavSection[]
+
+    const currentTitle = filteredSections.flatMap(s => s.items).find(i => i.end ? location.pathname === i.path : location.pathname.startsWith(i.path))?.label || 'Dashboard'
 
     return (
-        <>
+        <ToastProvider>
+
+            {/* Global Legacy Class Overrides & Scrollbars */}
             <style>{styles}</style>
-            <div className="adm-shell">
-                {sidebarOpen && <div className="adm-sov" onClick={() => setSidebarOpen(false)} />}
-                <aside className={`adm-sb ${sidebarOpen ? 'open' : ''}`}>
-                    <div className="adm-sb-hd"><img src="/logo.jpg" alt="Aster" className="adm-sb-logo" /><div><span className="adm-sb-brand">Aster CMS</span><span className="adm-sb-ver">v1.0</span></div></div>
-                    <nav className="adm-sb-nav">
-                        {navSections.map(s => (
-                            <div key={s.title} className="adm-ns"><span className="adm-nst">{s.title}</span>
-                                {s.items.map(i => (<NavLink key={i.path} to={i.path} end={i.end} className={({isActive}) => `adm-ni ${isActive?'active':''}`} onClick={() => setSidebarOpen(false)}><span className="adm-nic">{i.icon}</span><span>{i.label}</span></NavLink>))}
+
+            <div className="admin-container flex min-h-screen font-['Quicksand'] bg-[#F8F9FA] selection:bg-[#334a89]/20 selection:text-[#334a89]">
+
+                {/* =========================================================
+                    MOBILE OVERLAY
+                ========================================================= */}
+                <div
+                    className={`fixed inset-0 bg-[#15283D]/40 backdrop-blur-sm z-[90] transition-opacity duration-300 lg:hidden ${sidebarOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
+                    onClick={() => setSidebarOpen(false)}
+                />
+
+                {/* =========================================================
+                    OBSIDIAN SIDEBAR
+                ========================================================= */}
+                <aside className={`fixed lg:sticky top-0 left-0 h-screen w-[280px] bg-gradient-to-b from-[#15283D] to-[#0a131d] flex flex-col shrink-0 z-[100] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] shadow-2xl lg:shadow-none ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
+
+                    {/* Sidebar Header */}
+                    <div className="flex items-center justify-between px-8 py-8 shrink-0">
+                        <div className="flex items-center gap-4">
+                            <div className="w-10 h-10 bg-white/5 border border-white/10 flex items-center justify-center overflow-hidden shadow-inner">
+                                <img src="https://aster.edu.pk/wp-content/uploads/2023/07/cropped-aster.630c94b050f560.07593532.jpg" alt="Aster" className="w-full h-full object-cover opacity-90" />
+                            </div>
+                            <div>
+                                <span className="block font-bold text-[16px] text-white tracking-tight">Aster CMS</span>
+                                <span className="block font-bold text-[10px] uppercase tracking-widest text-[#ffc715]">System v2.0</span>
+                            </div>
+                        </div>
+                        <button className="lg:hidden text-white/50 hover:text-white transition-colors" onClick={() => setSidebarOpen(false)}>
+                            <X className="w-6 h-6" />
+                        </button>
+                    </div>
+
+                    {/* Navigation Links */}
+                    <nav className="flex-1 overflow-y-auto px-4 py-6 space-y-8 custom-scrollbar-sidebar">
+                        {filteredSections.map((s) => (
+                            <div key={s.title} className="flex flex-col gap-1">
+                                <span className="font-bold text-[10px] uppercase tracking-[0.2em] text-white/40 pl-4 mb-2">
+                                    {s.title}
+                                </span>
+                                {s.items.map(i => (
+                                    <NavLink
+                                        key={i.path}
+                                        to={i.path}
+                                        end={i.end}
+                                        onClick={() => setSidebarOpen(false)}
+                                        className={({isActive}) => `
+                                            flex items-center justify-between px-4 py-3 rounded-[14px] font-bold text-[13px] tracking-wide transition-all duration-300 group
+                                            ${isActive
+                                            ? 'bg-[#334a89] text-white shadow-[0_8px_16px_rgba(51,74,137,0.4)]'
+                                            : 'text-white/60 hover:text-white hover:bg-white/5'
+                                        }
+                                        `}
+                                    >
+                                        <div className="flex items-center gap-3">
+                                            <span className={`transition-transform duration-300 ${/* isActive logic handled by react-router implicitly via class string */ ''} group-hover:scale-110`}>
+                                                {i.icon}
+                                            </span>
+                                            <span>{i.label}</span>
+                                        </div>
+                                        {/* Subtle active indicator arrow */}
+                                        <ChevronRight className="w-4 h-4 opacity-0 -ml-4 transition-all duration-300 group-[.active]:opacity-100 group-[.active]:ml-0 text-[#ffc715]" />
+                                    </NavLink>
+                                ))}
                             </div>
                         ))}
                     </nav>
-                    <div className="adm-sb-ft"><button className="adm-ni adm-so" onClick={() => setShowLogoutModal(true)}><span className="adm-nic"><LogOut size={18} /></span><span>Sign Out</span></button></div>
+
+                    {/* Sidebar Footer */}
+                    <div className="p-4 shrink-0 border-t border-white/5 bg-black/10">
+                        <button
+                            className="w-full flex items-center justify-between px-4 py-3 rounded-[14px] font-bold text-[13px] tracking-wide text-rose-400/70 hover:text-rose-400 hover:bg-rose-400/10 transition-all duration-300 group"
+                            onClick={() => setShowLogoutModal(true)}
+                        >
+                            <div className="flex items-center gap-3">
+                                <LogOut size={18} className="transition-transform group-hover:-translate-x-1" />
+                                <span>Terminate Session</span>
+                            </div>
+                        </button>
+                    </div>
                 </aside>
-                <div className="adm-main">
-                    <header className="adm-tb">
-                        <div className="adm-tb-l"><button className="adm-hb" onClick={()=>setSidebarOpen(!sidebarOpen)}><Menu size={24} /></button><h1 className="adm-tb-t">{currentTitle}</h1></div>
-                        <div className="adm-tb-r"><span className="adm-tb-em">{user.email}</span><div className="adm-tb-av">{user.email?.[0]?.toUpperCase()||'A'}</div></div>
+
+                {/* =========================================================
+                    MAIN CANVAS
+                ========================================================= */}
+                <div className="flex-1 flex flex-col min-w-0 h-screen overflow-y-auto bg-[#F8F9FA] custom-scrollbar relative">
+
+                    {/* Glassmorphic Topbar */}
+                    <header className="sticky top-0 z-40 h-[80px] bg-white/80 backdrop-blur-xl border-b border-[#E5E7EB] px-6 md:px-12 flex items-center justify-between shrink-0">
+                        <div className="flex items-center gap-4">
+                            <button
+                                className="lg:hidden w-10 h-10 bg-[#F4F6F8] hover:bg-[#E5E7EB] text-[#15283D] rounded-full flex items-center justify-center transition-colors"
+                                onClick={() => setSidebarOpen(true)}
+                            >
+                                <Menu size={20} />
+                            </button>
+                            <div className="hidden md:flex items-center gap-3 px-4 py-2 bg-[#F4F6F8] rounded-full border border-[#E5E7EB]">
+                                <Sparkles className="w-4 h-4 text-[#334a89]" />
+                                <span className="font-bold text-[12px] uppercase tracking-widest text-[#5C5C61]">
+                                    {currentTitle}
+                                </span>
+                            </div>
+                        </div>
+
+                        {/* Admin Profile Pill */}
+                        <div className="flex items-center gap-3 pl-4 py-2 pr-2 bg-white rounded-full border border-[#E5E7EB] shadow-sm hover:shadow-md transition-shadow cursor-default">
+                            <div className="flex flex-col items-end hidden sm:flex">
+                                <span className="font-bold text-[13px] text-[#15283D] leading-tight capitalize">{role?.replace('_', ' ') || 'Admin'}</span>
+                                <span className="font-medium text-[11px] text-[#A0AEC0]">{user.email}</span>
+                            </div>
+                            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#15283D] to-[#334a89] text-white flex items-center justify-center font-bold text-[14px] shadow-inner shrink-0">
+                                {user.email?.[0]?.toUpperCase() || 'A'}
+                            </div>
+                        </div>
                     </header>
-                    <div className="adm-ct"><Outlet /></div>
+
+                    {/* Main Content Area */}
+                    <main className="flex-1 p-6 md:p-12">
+                        <div className="max-w-[1600px] mx-auto">
+                            <Outlet />
+                        </div>
+                    </main>
+
                 </div>
             </div>
 
-            <LogoutModal 
-                isOpen={showLogoutModal} 
-                onClose={() => setShowLogoutModal(false)} 
+            <LogoutModal
+                isOpen={showLogoutModal}
+                onClose={() => setShowLogoutModal(false)}
                 onConfirm={async () => {
                     await signOut();
                     setShowLogoutModal(false);
                     navigate('/admin/login');
-                }} 
+                }}
             />
-        </>
+        </ToastProvider>
     )
 }
 
+// =========================================================
+// GLOBAL FALLBACK STYLES (For Legacy Pages) & SCROLLBARS
+// =========================================================
 const styles = `
-.adm-shell{display:flex;min-height:100vh;font-family:'Quicksand',sans-serif;background:#F3F4F6}
-.adm-spin{width:36px;height:36px;border:3px solid #E7E5E4;border-top-color:#394da1;border-radius:50%;animation:aspin .6s linear infinite}
-@keyframes aspin{to{transform:rotate(360deg)}}
-.adm-sb{width:260px;background:#1C1F37;display:flex;flex-direction:column;flex-shrink:0;position:sticky;top:0;height:100vh;overflow-y:auto;z-index:100}
-.adm-sb-hd{display:flex;align-items:center;gap:12px;padding:24px 24px 20px;border-bottom:1px solid rgba(255,255,255,.08)}
-.adm-sb-logo{width:36px;height:36px;border-radius:0!important}
-.adm-sb-brand{display:block;font-size:16px;font-weight:700;color:#FFF;letter-spacing:-.01em}
-.adm-sb-ver{display:block;font-size:11px;color:rgba(255,255,255,.35);font-weight:500}
-.adm-sb-nav{flex:1;padding:16px 12px;display:flex;flex-direction:column;gap:8px}
-.adm-ns{display:flex;flex-direction:column;gap:2px}
-.adm-nst{font-size:11px;font-weight:600;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:.08em;padding:12px 12px 6px}
-.adm-ni{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;font-size:14px;font-weight:500;color:rgba(255,255,255,.6);text-decoration:none;transition:all 200ms;cursor:pointer;border:none;background:none;width:100%;text-align:left;font-family:'Quicksand',sans-serif}
-.adm-ni:hover{color:#FFF;background:rgba(255,255,255,.06)}
-.adm-ni.active{color:#ffc715;background:rgba(255,199,21,.08);font-weight:600;border-left:3px solid #ffc715;padding-left:9px}
-.adm-nic{font-size:16px;width:20px;text-align:center;flex-shrink:0}
-.adm-sb-ft{padding:12px;border-top:1px solid rgba(255,255,255,.08)}
-.adm-so{color:rgba(255,255,255,.4)!important}.adm-so:hover{color:#e97f7b!important;background:rgba(233,127,123,.08)!important}
-.adm-main{flex:1;display:flex;flex-direction:column;min-width:0}
-.adm-tb{display:flex;align-items:center;justify-content:space-between;height:64px;padding:0 32px;background:#FFF;border-bottom:1px solid #E7E5E4;flex-shrink:0}
-.adm-tb-l{display:flex;align-items:center;gap:16px}
-.adm-hb{display:none;align-items:center;justify-content:center;width:40px;height:40px;border:none;background:none;color:#44403C;cursor:pointer;border-radius:8px;transition:background 200ms}.adm-hb:hover{background:#F3F4F6}
-.adm-tb-t{font-size:20px;font-weight:700;color:#1C1917;margin:0;letter-spacing:-.02em}
-.adm-tb-r{display:flex;align-items:center;gap:12px}
-.adm-tb-em{font-size:13px;color:#78716C;font-weight:500}
-.adm-tb-av{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#394da1,#334a89);color:#FFF;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700}
-.adm-ct{flex:1;padding:32px;overflow-y:auto}
-.adm-sov{display:none}
-@media(max-width:900px){
-.adm-sb{position:fixed;left:0;top:0;bottom:0;transform:translateX(-100%);transition:transform 300ms cubic-bezier(.16,1,.3,1);z-index:200}
-.adm-sb.open{transform:translateX(0)}
-.adm-sov{display:block;position:fixed;inset:0;background:rgba(28,31,55,.5);backdrop-filter:blur(4px);z-index:199}
-.adm-hb{display:flex}.adm-tb{padding:0 20px}.adm-ct{padding:20px}.adm-tb-em{display:none}
+/* Custom Premium Scrollbars */
+.custom-scrollbar::-webkit-scrollbar { width: 14px; height: 14px; }
+.custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+.custom-scrollbar::-webkit-scrollbar-thumb { 
+    background-color: #CBD5E1; 
+    border-radius: 100px; 
+    border: 4px solid #F8F9FA; /* Matches the canvas background to float */
+    background-clip: padding-box; 
+    transition: background-color 0.3s ease;
 }
-/* Shared admin UI */
-.adm-card{background:#FFF;border-radius:16px;border:1px solid #E7E5E4;padding:24px}
-.adm-card-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
-.adm-card-t{font-size:16px;font-weight:700;color:#1C1917;margin:0}
-.adm-btn{display:inline-flex;align-items:center;gap:6px;padding:10px 20px;background:#394da1;color:#FFF;border:none;border-radius:10px;font-family:'Quicksand',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all 200ms}.adm-btn:hover{background:#2e4091;transform:translateY(-1px)}
-.adm-btn-s{display:inline-flex;align-items:center;gap:6px;padding:10px 20px;background:#FFF;color:#44403C;border:1.5px solid #E7E5E4;border-radius:10px;font-family:'Quicksand',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all 200ms}.adm-btn-s:hover{background:#F3F4F6}
-.adm-btn-d{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:#FEF2F2;color:#DC2626;border:1px solid #FCA5A5;border-radius:8px;font-family:'Quicksand',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all 200ms}.adm-btn-d:hover{background:#FEE2E2}
-.adm-inp{width:100%;height:44px;padding:0 14px;border:1.5px solid #E7E5E4;border-radius:10px;font-family:'Quicksand',sans-serif;font-size:14px;color:#1C1917;background:#FFF;outline:none;transition:border-color 200ms,box-shadow 200ms;box-sizing:border-box}.adm-inp:focus{border-color:#394da1;box-shadow:0 0 0 3px rgba(57,77,161,.1)}
-.adm-ta{width:100%;min-height:120px;padding:12px 14px;border:1.5px solid #E7E5E4;border-radius:10px;font-family:'Quicksand',sans-serif;font-size:14px;color:#1C1917;background:#FFF;outline:none;resize:vertical;transition:border-color 200ms,box-shadow 200ms;box-sizing:border-box}.adm-ta:focus{border-color:#394da1;box-shadow:0 0 0 3px rgba(57,77,161,.1)}
-.adm-lbl{display:block;font-size:13px;font-weight:600;color:#44403C;margin-bottom:6px}
-.adm-tbl{width:100%;border-collapse:collapse}
-.adm-tbl th{text-align:left;font-size:12px;font-weight:600;color:#78716C;text-transform:uppercase;letter-spacing:.05em;padding:12px 16px;border-bottom:1px solid #E7E5E4}
-.adm-tbl td{padding:14px 16px;font-size:14px;color:#44403C;border-bottom:1px solid #F3F4F6}
-.adm-tbl tr:hover td{background:#FAFAF9}
-.adm-bdg{display:inline-flex;align-items:center;padding:3px 10px;border-radius:9999px;font-size:12px;font-weight:600}
-.adm-bdg-g{background:#DCFCE7;color:#16A34A}.adm-bdg-y{background:#FEF9C3;color:#CA8A04}.adm-bdg-gr{background:#F3F4F6;color:#6B7280}.adm-bdg-b{background:#DBEAFE;color:#2563EB}
-.adm-empty{text-align:center;padding:48px 24px;color:#A8A29E;font-size:14px}
-.adm-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
-.adm-stat{background:#FFF;border-radius:16px;border:1px solid #E7E5E4;padding:24px;display:flex;flex-direction:column;gap:8px}
-.adm-stat-v{font-size:32px;font-weight:800;color:#1C1917;letter-spacing:-.02em}
-.adm-stat-l{font-size:13px;font-weight:500;color:#78716C}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover { background-color: #94A3B8; border-width: 3px; }
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Custom Sidebar Scrollbar */
+.custom-scrollbar-sidebar::-webkit-scrollbar { width: 6px; }
+.custom-scrollbar-sidebar::-webkit-scrollbar-track { background: transparent; }
+.custom-scrollbar-sidebar::-webkit-scrollbar-thumb { 
+    background-color: rgba(255,255,255,0.2); 
+    border-radius: 100px; 
+}
+.custom-scrollbar-sidebar::-webkit-scrollbar-thumb:hover { background-color: rgba(255,255,255,0.4); }
+
+/* Force Quicksand on all headings in Admin Panel */
+.admin-container h1, .admin-container h2, .admin-container h3, .admin-container h4, .admin-container h5, .admin-container h6 {
+    font-family: 'Quicksand', sans-serif !important;
+}
+
+/* 
+   LEGACY .adm-* CLASSES 
+   (Upgraded to match the new Awwwards-tier design so older pages don't look broken)
+*/
+.adm-card { background: #FFF; border-radius: 32px; border: 1px solid #E5E7EB; padding: 32px; box-shadow: 0 20px 40px rgba(21,40,61,0.04); }
+.adm-card-hd { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
+.adm-card-t { font-size: 20px; font-weight: 800; color: #15283D; margin: 0; letter-spacing: -0.02em; }
+
+.adm-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 24px; background: #334a89; color: #FFF; border: none; border-radius: 100px; font-family: 'Quicksand', sans-serif; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; cursor: pointer; transition: all 300ms; }
+.adm-btn:hover { background: #15283D; box-shadow: 0 10px 20px rgba(51,74,137,0.2); transform: translateY(-1px); }
+
+.adm-btn-s { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 24px; background: #F4F6F8; color: #5C5C61; border: border: transparent; border-radius: 100px; font-family: 'Quicksand', sans-serif; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; cursor: pointer; transition: all 300ms; }
+.adm-btn-s:hover { background: #E5E7EB; color: #15283D; }
+
+.adm-btn-d { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; background: rgba(244, 63, 94, 0.1); color: #F43F5E; border: none; border-radius: 100px; font-family: 'Quicksand', sans-serif; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; cursor: pointer; transition: all 300ms; }
+.adm-btn-d:hover { background: rgba(244, 63, 94, 0.15); color: #E11D48; }
+
+.adm-inp { width: 100%; height: 52px; padding: 0 20px; border: 1px solid transparent; border-radius: 20px; font-family: 'Quicksand', sans-serif; font-size: 15px; font-weight: 500; color: #15283D; background: #F4F6F8; outline: none; transition: all 300ms; box-sizing: border-box; }
+.adm-inp:focus { background: #FFF; border-color: rgba(51,74,137,0.3); box-shadow: 0 0 0 4px rgba(51,74,137,0.1); }
+
+.adm-ta { width: 100%; min-height: 140px; padding: 20px; border: 1px solid transparent; border-radius: 24px; font-family: 'Quicksand', sans-serif; font-size: 15px; font-weight: 500; color: #15283D; background: #F4F6F8; outline: none; resize: vertical; transition: all 300ms; box-sizing: border-box; }
+.adm-ta:focus { background: #FFF; border-color: rgba(51,74,137,0.3); box-shadow: 0 0 0 4px rgba(51,74,137,0.1); }
+
+.adm-lbl { display: block; font-size: 11px; font-weight: 700; color: rgba(21,40,61,0.6); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 8px; padding-left: 4px; }
+
+.adm-tbl { width: 100%; border-collapse: collapse; min-width: 800px; }
+.adm-tbl th { text-align: left; font-size: 11px; font-weight: 700; color: #A0AEC0; text-transform: uppercase; letter-spacing: 0.15em; padding: 20px 24px; border-bottom: 1px solid #E5E7EB; background: #F8F9FA; }
+.adm-tbl td { padding: 20px 24px; font-size: 14px; font-weight: 500; color: #5C5C61; border-bottom: 1px solid #F4F6F8; transition: background 200ms; }
+.adm-tbl tr:hover td { background: rgba(248,249,250,0.5); }
+
+.adm-bdg { display: inline-flex; align-items: center; padding: 6px 12px; border-radius: 100px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; }
+.adm-bdg-g { background: #DCFCE7; color: #16A34A; }
+.adm-bdg-y { background: rgba(255,199,21,0.1); color: #b38b0f; }
+.adm-bdg-gr { background: #F4F6F8; color: #A0AEC0; }
+.adm-bdg-b { background: #DBEAFE; color: #2563EB; }
+
+.adm-empty { text-align: center; padding: 64px 24px; color: #A0AEC0; font-size: 15px; font-weight: 500; }
 `

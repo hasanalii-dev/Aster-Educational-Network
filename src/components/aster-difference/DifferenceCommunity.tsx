@@ -70,7 +70,7 @@ export function DifferenceCommunity() {
                 <div className="order-2 lg:order-1 relative h-[500px] md:h-[600px] w-full overflow-hidden">
                     <img
                         ref={imageRef}
-                        src="https://res.cloudinary.com/lpxp5l3a/image/upload/v1783258386/image00019_ipiwys.jpg"
+                        src="https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783258386/image00019_ipiwys.jpg"
                         alt="Community"
                         className="absolute top-0 left-0 w-full h-[120%] object-cover"
                     />
@@ -114,3 +114,4 @@ export function DifferenceCommunity() {
         </section>
     )
 }
+

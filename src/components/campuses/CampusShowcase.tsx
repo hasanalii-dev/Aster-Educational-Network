@@ -22,7 +22,7 @@ const campuses = [
             'A supportive and family-oriented community',
         ],
         finaleText: 'A place where curiosity is encouraged, confidence grows, and learning comes to life.',
-        image: 'https://res.cloudinary.com/lpxp5l3a/image/upload/v1783171083/1000555027_lxuh4i.jpg', // Reel aspect ratio
+        image: 'https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783171083/1000555027_lxuh4i.jpg', // Reel aspect ratio
         video: 'https://alpha.edu.pk/img/hero.mp4',
         mapQuery: 'Plot+D%2C+97%2C+Block+4%2C+Block+2+Clifton%2C+Karachi%2C+Pakistan',
     },
@@ -41,7 +41,7 @@ const campuses = [
             'Individual attention and guidance',
         ],
         finaleText: 'A place where children develop independence, confidence, and a genuine love for learning.',
-        image: 'https://res.cloudinary.com/lpxp5l3a/image/upload/v1783171182/500077944_1251016823698585_2689627082250163943_n_bmhohl.jpg', // Reel aspect ratio
+        image: 'https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783171182/500077944_1251016823698585_2689627082250163943_n_bmhohl.jpg', // Reel aspect ratio
         video: 'https://alpha.edu.pk/img/hero.mp4',
         mapQuery: 'Plot+37+C%2C+Block-6+PECHS%2C+Karachi+City%2C+Sindh%2C+Pakistan%2C+75500',
     },
@@ -62,7 +62,7 @@ const campuses = [
             'Community engagement and service',
         ],
         finaleText: 'A learning environment where students are challenged to think critically, lead confidently, and contribute meaningfully.',
-        image: 'https://res.cloudinary.com/lpxp5l3a/image/upload/v1783171285/image00022_pbq3wd.jpg', // Reel aspect ratio
+        image: 'https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783171285/image00022_pbq3wd.jpg', // Reel aspect ratio
         video: 'https://alpha.edu.pk/img/hero.mp4',
         mapQuery: '33-D%2C+Block+6%2C+PECHS%2C+Shahrah-e-Faisal+Road%2C+Karachi%2C+Pakistan%2C+75500',
     }
@@ -241,3 +241,4 @@ function CampusCard({ campus, isEven }: { campus: any, isEven: boolean }) {
         </div>
     )
 }
+

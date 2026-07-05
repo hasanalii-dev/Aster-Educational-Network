@@ -93,7 +93,7 @@ export function SeniorBeyond() {
 
                 <div ref={imgRef} className="w-full max-w-[1000px] aspect-[21/9] bg-gray-200 shadow-2xl relative" style={{ borderRadius: '0px' }}>
                     <img 
-                        src="https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?q=80&w=1600&auto=format&fit=crop" 
+                        src="https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783270677/image00008_ikyl54.jpg" 
                         alt="Learning Beyond The Classroom" 
                         className="w-full h-full object-cover"
                         style={{ borderRadius: '0px' }}
@@ -104,3 +104,4 @@ export function SeniorBeyond() {
         </section>
     )
 }
+

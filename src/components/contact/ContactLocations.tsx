@@ -83,7 +83,7 @@ export function ContactLocations() {
             address: "Plot 37 C, Block-6 PECHS, Karachi City, Sindh, Pakistan, 75500",
             phone: "+92 336 882 7837",
             email: "info@aster.edu.pk",
-            mapImage: "https://res.cloudinary.com/lpxp5l3a/image/upload/v1783163524/junior_b24khc.png",
+            mapImage: "https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_600,q_auto,f_auto/v1783163524/junior_b24khc.png",
             mapLink: "https://maps.google.com/?q=Plot+37+C%2C+Block-6+PECHS%2C+Karachi+City%2C+Sindh%2C+Pakistan%2C+75500"
         },
         {
@@ -91,7 +91,7 @@ export function ContactLocations() {
             address: "33-D, Block 6, PECHS, Shahrah-e-Faisal Road, Karachi, Pakistan, 75500",
             phone: "+92 327 362 9321",
             email: "info.seniorcampus@aster.edu.pk",
-            mapImage: "https://res.cloudinary.com/lpxp5l3a/image/upload/v1783163524/pechs_fl1lew.png",
+            mapImage: "https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_600,q_auto,f_auto/v1783163524/pechs_fl1lew.png",
             mapLink: "https://maps.google.com/?q=33-D%2C+Block+6%2C+PECHS%2C+Shahrah-e-Faisal+Road%2C+Karachi%2C+Pakistan%2C+75500"
         },
         {
@@ -99,7 +99,7 @@ export function ContactLocations() {
             address: "Plot D, 97, Block 4, Block 2 Clifton, Karachi, Pakistan",
             phone: "+92 306 222 7837",
             email: "info.clifton@aster.edu.pk",
-            mapImage: "https://res.cloudinary.com/lpxp5l3a/image/upload/v1783163524/clifton_xr243t.png",
+            mapImage: "https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_600,q_auto,f_auto/v1783163524/clifton_xr243t.png",
             mapLink: "https://maps.google.com/?q=Plot+D%2C+97%2C+Block+4%2C+Block+2+Clifton%2C+Karachi%2C+Pakistan"
         },
         {

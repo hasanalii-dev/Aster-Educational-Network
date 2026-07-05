@@ -81,7 +81,7 @@ export function AboutHero() {
                 <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none" style={{ borderRadius: 'inherit' }}>
                     <img
                         ref={mediaRef}
-                        src="https://res.cloudinary.com/lpxp5l3a/image/upload/v1783253673/imageye___-_imgi_120_image_p6jnss.webp"
+                        src="https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783253673/imageye___-_imgi_120_image_p6jnss.webp"
                         alt="Aster School Students"
                         className="absolute -top-[15%] left-0 w-full h-[130%] object-cover filter brightness-[0.85] contrast-105 will-change-transform"
                     />

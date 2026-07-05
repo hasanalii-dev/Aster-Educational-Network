@@ -141,3 +141,44 @@ export interface PageProps {
   title?: string
   description?: string
 }
+
+// ----------------------------------------
+// Job Types (CMS)
+// ----------------------------------------
+export interface JobOpening {
+    id: string
+    title: string
+    department: string
+    location: string
+    type: string
+    description: string
+    requirements: string
+    is_active: boolean
+    created_at: string
+}
+
+export interface JobApplication {
+    id: string
+    job_id: string
+    first_name: string
+    last_name: string
+    email: string
+    phone: string
+    resume_link: string
+    cover_letter: string
+    status: string
+    created_at: string
+}
+
+// ----------------------------------------
+// Parent Stories Types (CMS)
+// ----------------------------------------
+export interface ParentStory {
+    id: string
+    quote: string
+    name: string
+    role: string
+    image?: string
+    is_active: boolean
+    created_at: string
+}

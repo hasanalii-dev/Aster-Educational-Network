@@ -91,7 +91,7 @@ export function SafeguardingStaff() {
                 <div className="w-full lg:w-1/2 staff-img">
                     <div className="relative h-[500px] md:h-[680px] w-full rounded-none shadow-none overflow-hidden bg-gray-50">
                         <img 
-                            src="https://res.cloudinary.com/lpxp5l3a/image/upload/v1783261994/1000555027_mulx0h.jpg" 
+                            src="https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783261994/1000555027_mulx0h.jpg" 
                             alt="Our Responsible Staff" 
                             className="parallax-img w-full h-full object-cover"
                         />
@@ -102,3 +102,4 @@ export function SafeguardingStaff() {
         </section>
     )
 }
+

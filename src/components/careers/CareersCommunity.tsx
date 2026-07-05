@@ -39,7 +39,7 @@ export function CareersCommunity() {
                 <div className="w-full lg:w-1/2 community-text">
                     <div className="relative h-[500px] md:h-[680px] w-full overflow-hidden bg-gray-50">
                         <img
-                            src="https://images.unsplash.com/photo-1523050854058-8df90110c476?q=80&w=1200&auto=format&fit=crop"
+                            src="https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783253218/500036594_1251017057031895_7179780475084031344_n_ilxlck.jpg"
                             alt="Growing Aster community"
                             className="parallax-img w-full h-full object-cover"
                         />
@@ -80,3 +80,4 @@ export function CareersCommunity() {
         </section>
     )
 }
+

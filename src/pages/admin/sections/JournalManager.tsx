@@ -5,6 +5,7 @@ import 'react-quill-new/dist/quill.snow.css'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronDown, Plus, Edit2, Trash2, Image as ImageIcon, Check } from 'lucide-react'
 import Toast, { type ToastType } from '@/components/ui/Toast'
+import { useAuth } from '@/hooks/useAuth'
 
 interface Article { 
     id: string; 
@@ -41,6 +42,7 @@ const CATEGORIES = [
 ];
 
 export default function JournalManager() {
+    const { role } = useAuth()
     const [articles, setArticles] = useState<Article[]>([])
     const [editing, setEditing] = useState<Partial<Article> | null>(null)
     const [saving, setSaving] = useState(false)
@@ -368,13 +370,15 @@ export default function JournalManager() {
                                         >
                                             <Edit2 size={16} />
                                         </button>
-                                        <button 
-                                            className="p-2 text-[#78716C] hover:text-[#DC2626] hover:bg-[#FEF2F2] rounded-lg transition-colors"
-                                            onClick={() => handleDelete(a.id)}
-                                            title="Delete Article"
-                                        >
-                                            <Trash2 size={16} />
-                                        </button>
+                                        {role !== 'moderator' && (
+                                            <button 
+                                                className="p-2 text-[#78716C] hover:text-[#DC2626] hover:bg-[#FEF2F2] rounded-lg transition-colors"
+                                                onClick={() => handleDelete(a.id)}
+                                                title="Delete Article"
+                                            >
+                                                <Trash2 size={16} />
+                                            </button>
+                                        )}
                                     </div>
                                 </div>
                             </div>
