@@ -43,8 +43,8 @@ export function SafeguardingHero() {
 
                 tl.fromTo(
                     imageRef.current,
-                    { yPercent: -10, scale: 1.15 },
-                    { yPercent: 10, scale: 1.05, ease: 'none' },
+                    { yPercent: -15, scale: 1.4 },
+                    { yPercent: 15, scale: 1.3, ease: 'none' },
                     0
                 )
             })
