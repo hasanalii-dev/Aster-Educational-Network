@@ -152,7 +152,7 @@ export function DifferenceCharacter() {
                         </span>
                     </div>
 
-                    <h2 className="gsap-stagger-item font-['Playfair_Display'] text-4xl md:text-5xl lg:text-[56px] font-medium tracking-tight text-[#0C0C13] mb-6 leading-[1.05]">
+                    <h2 className="gsap-stagger-item font-['Playfair_Display'] text-4xl md:text-5xl lg:text-[56px] font-medium tracking-tight text-[#334a89] mb-6 leading-[1.05]">
                         Developing Individuals Who Lead with Purpose
                     </h2>
                     
