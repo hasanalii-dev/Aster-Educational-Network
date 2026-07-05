@@ -133,7 +133,7 @@ export function DifferenceCulture() {
                     </div>
 
                     <h2 className="gsap-stagger-item font-['Playfair_Display'] text-4xl md:text-5xl lg:text-[56px] font-medium tracking-tight text-[#334a89] !text-[#334a89] mb-8 leading-[1.05]">
-                        Building Confident Thinkers and <em className="font-medium italic text-[#FFC51B] !text-[#FFC51B]">Communicators</em>
+                        Building Confident Thinkers and <span className="font-['Quicksand'] font-bold text-[#FFC51B] !text-[#FFC51B]">Communicators</span>
                     </h2>
 
                     <div className="gsap-stagger-item w-16 h-[2px] bg-[#FFC51B] mb-10" />
