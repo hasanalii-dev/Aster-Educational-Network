@@ -74,28 +74,28 @@ export function DifferenceSports() {
     const polaroids = [
         {
             title: 'Swimming',
-            image: 'https://images.unsplash.com/photo-1519315901367-f34bf9150f5c?q=80&w=600&auto=format&fit=crop',
+            image: 'https://placehold.co/600x800/f3f4f6/4b5563?text=Swimming+Excellence&font=Montserrat',
             rotation: '-6deg',
             x: 15,
             y: 24.9
         },
         {
             title: 'Football',
-            image: 'https://images.unsplash.com/photo-1518605368461-1ee7a964a38d?q=80&w=600&auto=format&fit=crop',
+            image: 'https://res.cloudinary.com/lpxp5l3a/image/upload/v1783257289/1000555044_tkmbgu.jpg',
             rotation: '4deg',
             x: 38,
             y: 37.57
         },
         {
             title: 'Gymnastics',
-            image: 'https://images.unsplash.com/photo-1566351540899-74cbdf99fcb6?q=80&w=600&auto=format&fit=crop',
+            image: 'https://res.cloudinary.com/lpxp5l3a/image/upload/v1783257321/1000555041_cqpjc4.jpg',
             rotation: '-3deg',
             x: 62,
             y: 37.57
         },
         {
             title: 'Taekwondo',
-            image: 'https://images.unsplash.com/photo-1555597673-b21d5c935865?q=80&w=600&auto=format&fit=crop',
+            image: 'https://res.cloudinary.com/lpxp5l3a/image/upload/v1783257386/1000555007_ughvco.jpg',
             rotation: '5deg',
             x: 85,
             y: 24.9

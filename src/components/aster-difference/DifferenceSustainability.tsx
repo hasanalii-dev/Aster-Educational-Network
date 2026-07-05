@@ -57,31 +57,31 @@ export function DifferenceSustainability() {
 
     const fanImages = [
         {
-            src: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?q=80&w=600&auto=format&fit=crop',
+            src: 'https://res.cloudinary.com/lpxp5l3a/image/upload/v1783258319/image00015_q82wyx.jpg',
             // Far Left
             transform: '-translate-x-[75%] md:-translate-x-[85%] translate-y-4 md:translate-y-8 -rotate-[12deg] md:-rotate-[16deg] scale-[0.88]',
             zIndex: 10
         },
         {
-            src: 'https://images.unsplash.com/photo-1530836369250-ef71a3f5e439?q=80&w=600&auto=format&fit=crop',
+            src: 'https://res.cloudinary.com/lpxp5l3a/image/upload/v1783258323/image00014_mteeio.jpg',
             // Middle Left
             transform: '-translate-x-[40%] md:-translate-x-[45%] translate-y-1 md:translate-y-3 -rotate-[6deg] md:-rotate-[8deg] scale-[0.94]',
             zIndex: 20
         },
         {
-            src: 'https://images.unsplash.com/photo-1466692476868-aef1dfb1e736?q=80&w=600&auto=format&fit=crop',
+            src: 'https://res.cloudinary.com/lpxp5l3a/image/upload/v1783258300/473133803_1676556136258912_62972387182665487_n_gc9kv9.jpg',
             // Center
             transform: 'translate-x-0 translate-y-0 rotate-0 scale-100',
             zIndex: 30
         },
         {
-            src: 'https://images.unsplash.com/photo-1599940824399-b87987ceb72a?q=80&w=600&auto=format&fit=crop',
+            src: 'https://res.cloudinary.com/lpxp5l3a/image/upload/v1783258280/1000555096_hgxher.jpg',
             // Middle Right
             transform: 'translate-x-[40%] md:translate-x-[45%] translate-y-1 md:translate-y-3 rotate-[6deg] md:rotate-[8deg] scale-[0.94]',
             zIndex: 20
         },
         {
-            src: 'https://images.unsplash.com/photo-1574682782414-07f9c8f1f1bb?q=80&w=600&auto=format&fit=crop',
+            src: 'https://res.cloudinary.com/lpxp5l3a/image/upload/v1783258295/473127865_1676555299592329_7824417284584904866_n_nmlh5r.jpg',
             // Far Right
             transform: 'translate-x-[75%] md:translate-x-[85%] translate-y-4 md:translate-y-8 rotate-[12deg] md:rotate-[16deg] scale-[0.88]',
             zIndex: 10

@@ -131,13 +131,17 @@ export default function UnifiedAuth() {
             })
 
             if (signUpError) {
-                setError(signUpError.message)
+                if (signUpError.message.toLowerCase().includes('already registered')) {
+                    setError('An account with this email address already exists. Please sign in instead.')
+                } else {
+                    setError(signUpError.message)
+                }
                 setLoading(false)
                 return
             }
 
             // Supabase returns an empty identities array if the user already exists and email confirmations are enabled
-            if (signUpData?.user?.identities && signUpData.user.identities.length === 0) {
+            if (signUpData?.user && (!signUpData.user.identities || signUpData.user.identities.length === 0)) {
                 setError('An account with this email address already exists. Please sign in instead.')
                 setLoading(false)
                 return

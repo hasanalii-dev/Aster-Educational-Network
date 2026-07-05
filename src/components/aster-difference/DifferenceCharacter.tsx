@@ -16,32 +16,32 @@ export function DifferenceCharacter() {
     const listItems = [
         {
             title: 'Lead with integrity',
-            image: 'https://images.unsplash.com/photo-1529390079861-591de354faf5?q=80&w=800&auto=format&fit=crop',
+            image: 'https://res.cloudinary.com/lpxp5l3a/image/upload/v1783257572/image00008_vn8pfo.jpg',
             icon: Shield
         },
         {
             title: 'Show empathy and respect',
-            image: 'https://images.unsplash.com/photo-1511632765486-a01980e01a18?q=80&w=800&auto=format&fit=crop',
+            image: 'https://res.cloudinary.com/lpxp5l3a/image/upload/v1783257760/image00021_sqi4tp.jpg',
             icon: Heart
         },
         {
             title: 'Demonstrate humility',
-            image: 'https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?q=80&w=800&auto=format&fit=crop',
+            image: 'https://res.cloudinary.com/lpxp5l3a/image/upload/v1783257947/500077944_1251016823698585_2689627082250163943_n_yg43mm.jpg',
             icon: Anchor
         },
         {
             title: 'Build resilience',
-            image: 'https://images.unsplash.com/photo-1506869640319-baa1f38e3e4a?q=80&w=800&auto=format&fit=crop',
+            image: 'https://res.cloudinary.com/lpxp5l3a/image/upload/v1783256925/image00028_qncjsj.jpg',
             icon: Mountain
         },
         {
             title: 'Take responsibility for their actions',
-            image: 'https://images.unsplash.com/photo-1427504494785-319ce8372ac0?q=80&w=800&auto=format&fit=crop',
+            image: 'https://res.cloudinary.com/lpxp5l3a/image/upload/v1783258175/1000555102_fvuszl.jpg',
             icon: Scale
         },
         {
             title: 'Contribute positively to their communities',
-            image: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=800&auto=format&fit=crop',
+            image: 'https://res.cloudinary.com/lpxp5l3a/image/upload/v1783258241/1000555095_acxhca.jpg',
             icon: Users
         }
     ]
