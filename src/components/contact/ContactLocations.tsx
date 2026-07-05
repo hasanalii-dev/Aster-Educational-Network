@@ -30,13 +30,12 @@ export function ContactLocations() {
 
             // 1. General Enquiries Banner Animation
             gsap.fromTo('.enquiries-banner',
-                { opacity: 0, y: 60, scale: 0.98 },
+                { opacity: 0, y: 40 },
                 {
                     opacity: 1,
                     y: 0,
-                    scale: 1,
-                    duration: 1.2,
-                    ease: 'expo.out',
+                    duration: 1,
+                    ease: 'power3.out',
                     scrollTrigger: { trigger: '.enquiries-banner', start: 'top 85%' }
                 }
             )
@@ -119,11 +118,11 @@ export function ContactLocations() {
                 {/* =========================================================
                     GENERAL ENQUIRIES BANNER (Cinematic Gradient)
                 ========================================================= */}
-                <div className="enquiries-banner bg-gradient-to-br from-[#15283D] to-[#2a3c82] rounded-[40px] p-10 md:p-14 shadow-[0_30px_60px_rgba(21,40,61,0.15)] relative overflow-hidden mb-20 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-10">
+                <div className="enquiries-banner will-change-transform bg-gradient-to-br from-[#15283D] to-[#2a3c82] rounded-[40px] p-10 md:p-14 shadow-[0_30px_60px_rgba(21,40,61,0.15)] relative overflow-hidden mb-20 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-10">
 
                     {/* Ambient Glow Effects */}
-                    <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-white/5 rounded-full filter blur-[80px] pointer-events-none translate-x-1/3 -translate-y-1/3" />
-                    <div className="absolute bottom-0 left-1/4 w-[300px] h-[300px] bg-[#ffc715]/5 rounded-full filter blur-[60px] pointer-events-none translate-y-1/2" />
+                    <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-white/5 rounded-full filter blur-[80px] pointer-events-none translate-x-1/3 -translate-y-1/3" style={{ willChange: 'transform' }} />
+                    <div className="absolute bottom-0 left-1/4 w-[300px] h-[300px] bg-[#ffc715]/5 rounded-full filter blur-[60px] pointer-events-none translate-y-1/2" style={{ willChange: 'transform' }} />
 
                     <div className="relative z-10 max-w-xl">
                         <span className="font-['Quicksand'] font-bold text-[11px] tracking-[0.2em] text-[#ffc715] uppercase mb-4 block">

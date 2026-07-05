@@ -85,7 +85,11 @@ export function TestimonialsSection() {
                                     <div className="card-top-meta">
                                         <span className="campus-tier-badge">{item.role || item.child_program}</span>
                                         <div className="rating-stars" aria-label="5 out of 5 stars">
-                                            ★★★★★
+                                            <span className="star">★</span>
+                                            <span className="star">★</span>
+                                            <span className="star">★</span>
+                                            <span className="star">★</span>
+                                            <span className="star">★</span>
                                         </div>
                                     </div>
 
@@ -225,8 +229,9 @@ const bookendTestimonialsStyles = `
 /* Card Top Metadata */
 .card-top-meta {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
   margin-bottom: 32px;
 }
 
@@ -244,9 +249,31 @@ const bookendTestimonialsStyles = `
 
 .rating-stars {
   color: #FFC51B;
-  font-size: 16px;
-  letter-spacing: 0.1em;
+  font-size: 18px;
+  letter-spacing: 0.15em;
+  display: flex;
 }
+
+.star {
+  display: inline-block;
+  will-change: transform;
+}
+
+@keyframes star-pulse {
+  0% { transform: scale(1) translateY(0); }
+  40% { transform: scale(1.3) translateY(-2px); color: #FFF; }
+  100% { transform: scale(1) translateY(0); }
+}
+
+.architectural-feedback-card:hover .star {
+  animation: star-pulse 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.architectural-feedback-card:hover .star:nth-child(1) { animation-delay: 0.0s; }
+.architectural-feedback-card:hover .star:nth-child(2) { animation-delay: 0.05s; }
+.architectural-feedback-card:hover .star:nth-child(3) { animation-delay: 0.1s; }
+.architectural-feedback-card:hover .star:nth-child(4) { animation-delay: 0.15s; }
+.architectural-feedback-card:hover .star:nth-child(5) { animation-delay: 0.2s; }
 
 /* Card Prose */
 .card-quote-prose {
