@@ -141,7 +141,7 @@ export function DifferenceIntro() {
                     </div>
 
                     <h2 className="font-['Playfair_Display'] text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight text-[#15283D] leading-[1.1]">
-                        The world our children are growing into will demand far more than <em className="font-medium italic text-[#334a89]">academic knowledge.</em>
+                        The world our children are growing into will demand far more than <span className="font-['Quicksand'] font-bold text-[#334a89]">academic knowledge.</span>
                     </h2>
                 </div>
 

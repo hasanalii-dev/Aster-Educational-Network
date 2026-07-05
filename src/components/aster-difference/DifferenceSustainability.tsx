@@ -118,11 +118,11 @@ export function DifferenceSustainability() {
                 {fanImages.map((img, i) => (
                     <div 
                         key={i} 
-                        className="fan-card-wrapper absolute w-[100px] sm:w-[130px] md:w-[160px] lg:w-[200px] aspect-[3/4] pointer-events-auto"
+                        className="fan-card-wrapper absolute w-[100px] sm:w-[130px] md:w-[160px] lg:w-[200px] aspect-[3/4] pointer-events-auto hover:!z-50 transition-[z-index] duration-0 delay-0 hover:delay-0"
                         style={{ zIndex: img.zIndex }}
                     >
                         <div 
-                            className={`group w-full h-full rounded-[16px] md:rounded-[20px] overflow-hidden shadow-[0_15px_30px_rgba(0,0,0,0.15)] border-[2px] md:border-[3px] border-white/60 transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] origin-bottom cursor-pointer transform ${img.transform} hover:!z-50 hover:!-translate-y-8 hover:!rotate-0 hover:!scale-[1.15] hover:border-white`}
+                            className={`group w-full h-full rounded-[16px] md:rounded-[20px] overflow-hidden shadow-[0_15px_30px_rgba(0,0,0,0.15)] border-[2px] md:border-[3px] border-white/60 transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] origin-bottom cursor-pointer transform ${img.transform} hover:!-translate-y-8 hover:!rotate-0 hover:!scale-[1.15] hover:border-white`}
                         >
                             {!loadedImages[i] && (
                                 <div className="absolute inset-0 bg-[#143d2c]/10 animate-pulse" />

@@ -179,7 +179,7 @@ export function DifferenceWhyAster() {
                     </span>
                 </div>
 
-                <h2 className="font-['Playfair_Display'] text-3xl md:text-4xl lg:text-5xl font-medium tracking-tight text-[#0C0C13] mb-6">
+                <h2 className="font-['Playfair_Display'] text-3xl md:text-4xl lg:text-5xl font-medium tracking-tight text-[#334a89] mb-6">
                     The Aster Difference
                 </h2>
 

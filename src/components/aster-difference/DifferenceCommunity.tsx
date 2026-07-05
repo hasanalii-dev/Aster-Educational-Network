@@ -70,7 +70,7 @@ export function DifferenceCommunity() {
                 <div className="order-2 lg:order-1 relative h-[500px] md:h-[600px] w-full overflow-hidden">
                     <img
                         ref={imageRef}
-                        src="https://res.cloudinary.com/lpxp5l3a/image/upload/v1783258525/473133803_1676556136258912_62972387182665487_n_cswzow.jpg"
+                        src="https://res.cloudinary.com/lpxp5l3a/image/upload/v1783258386/image00019_ipiwys.jpg"
                         alt="Community"
                         className="absolute top-0 left-0 w-full h-[120%] object-cover"
                     />
@@ -89,7 +89,7 @@ export function DifferenceCommunity() {
                         </span>
                     </div>
 
-                    <h2 className="prose-reveal-container font-['Playfair_Display'] text-4xl md:text-5xl font-medium tracking-tight text-[#0C0C13] mb-6">
+                    <h2 className="prose-reveal-container font-['Playfair_Display'] text-4xl md:text-5xl font-medium tracking-tight text-[#334a89] mb-6">
                         {`Strong Partnerships. Shared Purpose.`.split(' ').map((word, i) => (
                             <span key={i} className="gsap-scrub-word inline-block mr-[0.25em] opacity-20 will-change-transform">{word}</span>
                         ))}
