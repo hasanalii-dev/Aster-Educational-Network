@@ -1,7 +1,8 @@
-import { useEffect, useRef } from 'react'
+import { useRef } from 'react'
 import { Link } from 'react-router-dom'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useGSAP } from '@gsap/react'
 import { Calendar, UserPlus, Info } from 'lucide-react'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -9,10 +10,11 @@ gsap.registerPlugin(ScrollTrigger)
 export function AdmissionsFinale() {
     const sectionRef = useRef<HTMLElement>(null)
 
-    useEffect(() => {
-        const ctx = gsap.context(() => {
-            // Overhanging warning card entrance
-            gsap.fromTo('.gsap-warning-banner',
+    useGSAP(() => {
+        // Overhanging warning card entrance
+        const banner = gsap.utils.toArray('.gsap-warning-banner')
+        if (banner.length > 0) {
+            gsap.fromTo(banner,
                 { opacity: 0, y: 40 },
                 {
                     opacity: 1,
@@ -25,9 +27,12 @@ export function AdmissionsFinale() {
                     }
                 }
             )
+        }
 
-            // Original blue card entrance
-            gsap.fromTo('.finale-blue-card',
+        // Original blue card entrance
+        const card = gsap.utils.toArray('.finale-blue-card')
+        if (card.length > 0) {
+            gsap.fromTo(card,
                 { opacity: 0, y: 60 },
                 {
                     opacity: 1,
@@ -40,9 +45,12 @@ export function AdmissionsFinale() {
                     }
                 }
             )
+        }
 
-            // Original blue card content stagger
-            gsap.fromTo('.finale-stagger',
+        // Original blue card content stagger
+        const staggerElems = gsap.utils.toArray('.finale-stagger')
+        if (staggerElems.length > 0) {
+            gsap.fromTo(staggerElems,
                 { opacity: 0, y: 30 },
                 {
                     opacity: 1,
@@ -56,9 +64,8 @@ export function AdmissionsFinale() {
                     }
                 }
             )
-        }, sectionRef)
-        return () => ctx.revert()
-    }, [])
+        }
+    }, { scope: sectionRef })
 
     return (
         <section ref={sectionRef} className="bg-white py-24 pb-32">

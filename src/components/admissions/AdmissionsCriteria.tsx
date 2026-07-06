@@ -1,6 +1,7 @@
-import { useEffect, useRef } from 'react'
+import { useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useGSAP } from '@gsap/react'
 import { FileText, CheckCircle2, Sparkles, TrendingUp, Users, Heart, Compass } from 'lucide-react'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -11,85 +12,82 @@ export function AdmissionsCriteria() {
     const cardRef = useRef<HTMLDivElement>(null)
     const textRef = useRef<HTMLDivElement>(null)
 
-    useEffect(() => {
-        const ctx = gsap.context(() => {
-            // 1. Staggered Content Fade-Up (Left Side)
-            if (contentRef.current) {
-                const items = contentRef.current.querySelectorAll('.gsap-stagger-item')
-                gsap.fromTo(items,
-                    { opacity: 0, y: 40 },
-                    {
-                        opacity: 1,
-                        y: 0,
-                        duration: 1.2,
-                        stagger: 0.12,
-                        ease: 'power3.out',
-                        scrollTrigger: {
-                            trigger: contentRef.current,
-                            start: 'top 80%'
-                        }
+    useGSAP(() => {
+        // 1. Staggered Content Fade-Up (Left Side)
+        if (contentRef.current) {
+            const items = contentRef.current.querySelectorAll('.gsap-stagger-item')
+            gsap.fromTo(items,
+                { opacity: 0, y: 40 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1.2,
+                    stagger: 0.12,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: contentRef.current,
+                        start: 'top 80%'
                     }
-                )
-            }
+                }
+            )
+        }
 
-            // 2. The Dossier Card Entrance (Right Side)
-            if (cardRef.current) {
-                gsap.fromTo(cardRef.current,
-                    { opacity: 0, scale: 0.95, y: 60 },
-                    {
-                        opacity: 1,
-                        scale: 1,
-                        y: 0,
-                        duration: 1.2,
-                        ease: 'back.out(1.05)',
-                        scrollTrigger: {
-                            trigger: cardRef.current,
-                            start: 'top 80%'
-                        }
+        // 2. The Dossier Card Entrance (Right Side)
+        if (cardRef.current) {
+            gsap.fromTo(cardRef.current,
+                { opacity: 0, scale: 0.95, y: 60 },
+                {
+                    opacity: 1,
+                    scale: 1,
+                    y: 0,
+                    duration: 1.2,
+                    ease: 'back.out(1.05)',
+                    scrollTrigger: {
+                        trigger: cardRef.current,
+                        start: 'top 80%'
                     }
-                )
+                }
+            )
 
-                // Stagger the document list items inside the card
-                const docItems = cardRef.current.querySelectorAll('.doc-item')
-                gsap.fromTo(docItems,
-                    { opacity: 0, x: -20 },
-                    {
-                        opacity: 1,
-                        x: 0,
-                        duration: 0.8,
-                        stagger: 0.1,
-                        ease: 'power3.out',
-                        scrollTrigger: {
-                            trigger: cardRef.current,
-                            start: 'top 75%'
-                        }
+            // Stagger the document list items inside the card
+            const docItems = cardRef.current.querySelectorAll('.doc-item')
+            gsap.fromTo(docItems,
+                { opacity: 0, x: -20 },
+                {
+                    opacity: 1,
+                    x: 0,
+                    duration: 0.8,
+                    stagger: 0.1,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: cardRef.current,
+                        start: 'top 75%'
                     }
-                )
-            }
+                }
+            )
+        }
 
-            // 3. One-Shot Mechanical Typesetting (Thesis Statement)
-            const words = gsap.utils.toArray<HTMLElement>('.gsap-oneshot-word')
-            if (words.length > 0) {
-                gsap.fromTo(words,
-                    { opacity: 0, y: 8 },
-                    {
-                        opacity: 1,
-                        y: 0,
-                        duration: 0.6,
-                        stagger: 0.04,
-                        ease: 'power3.out',
-                        scrollTrigger: {
-                            trigger: textRef.current,
-                            start: 'top 85%',
-                            once: true,
-                        }
+        // 3. One-Shot Mechanical Typesetting (Thesis Statement)
+        const words = gsap.utils.toArray<HTMLElement>('.gsap-oneshot-word')
+        if (words.length > 0) {
+            gsap.fromTo(words,
+                { opacity: 0, y: 8 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.6,
+                    stagger: 0.04,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: textRef.current,
+                        start: 'top 85%',
+                        once: true,
                     }
-                )
-            }
-        }, sectionRef)
+                }
+            )
+        }
+    }, { scope: sectionRef })
 
-        return () => ctx.revert()
-    }, [])
 
     const qualities = [
         { text: "Curiosity and a willingness to learn", icon: Sparkles },
