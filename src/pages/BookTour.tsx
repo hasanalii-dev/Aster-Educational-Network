@@ -140,9 +140,9 @@ function InteractiveMap({ selectedCampus, onSelectCampus }: { selectedCampus: st
             <div className="absolute bottom-[-10%] left-[-10%] w-[60%] h-[60%] bg-[#ffc715] rounded-full filter blur-[120px] opacity-10 pointer-events-none" />
 
             {/* SVG Flight Line (Riyadh to Karachi) */}
-            <svg className="absolute inset-0 w-full h-full pointer-events-none" preserveAspectRatio="none">
+            <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 100 100" preserveAspectRatio="none">
                 <path
-                    d="M 20% 35% Q 45% 15% 70% 25%"
+                    d="M 20 35 Q 45 15 70 25"
                     fill="none"
                     stroke="rgba(255,199,21,0.3)"
                     strokeWidth="2"

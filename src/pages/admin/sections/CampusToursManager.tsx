@@ -8,9 +8,9 @@ import {
 } from 'lucide-react'
 
 // =========================================================
-// CUSTOM SAAS DROPDOWN COMPONENT (TOUR SPECIFIC)
+// CUSTOM SAAS DROPDOWN COMPONENT (Spatial Awareness)
 // =========================================================
-function CustomStatusSelect({ value, onChange, rowZIndex }: { value: string, onChange: (val: string) => void, rowZIndex: number }) {
+function CustomStatusSelect({ value, onChange, rowZIndex, dropUp }: { value: string, onChange: (val: string) => void, rowZIndex: number, dropUp: boolean }) {
     const [isOpen, setIsOpen] = useState(false)
     const dropdownRef = useRef<HTMLDivElement>(null)
 
@@ -32,27 +32,28 @@ function CustomStatusSelect({ value, onChange, rowZIndex }: { value: string, onC
     }
 
     const activeConfig = config[value] || config['pending']
+    const originClasses = dropUp ? 'bottom-[calc(100%+8px)] origin-bottom' : 'top-[calc(100%+8px)] origin-top'
 
     return (
-        <div className="relative w-40" ref={dropdownRef} style={{ zIndex: isOpen ? 50 : rowZIndex }}>
+        <div className="relative w-full max-w-[160px]" ref={dropdownRef} style={{ zIndex: isOpen ? 50 : rowZIndex }}>
             <button
                 type="button"
                 onClick={() => setIsOpen(!isOpen)}
-                className={`w-full flex items-center justify-between px-4 py-2.5 rounded-full border transition-all duration-300 font-['Quicksand'] font-bold text-[11px] uppercase tracking-widest outline-none ${activeConfig.color} ${isOpen ? 'ring-4 ring-[#334a89]/10 shadow-md' : 'hover:shadow-sm'}`}
+                className={`w-full flex items-center justify-between px-4 py-2.5 rounded-full border transition-all duration-300 font-['Quicksand'] font-bold text-[10px] uppercase tracking-widest outline-none ${activeConfig.color} ${isOpen ? 'ring-4 ring-[#334a89]/10 shadow-md' : 'hover:shadow-sm'}`}
             >
-                <div className="flex items-center gap-2.5">
-                    <span className={`w-1.5 h-1.5 rounded-full ${activeConfig.dot}`} />
-                    {activeConfig.label}
+                <div className="flex items-center gap-2.5 truncate pr-2">
+                    <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${activeConfig.dot}`} />
+                    <span className="truncate">{activeConfig.label}</span>
                 </div>
-                <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
+                <ChevronDown className={`w-3.5 h-3.5 shrink-0 transition-transform duration-300 ${isOpen ? (dropUp ? 'rotate-0' : 'rotate-180') : (dropUp ? 'rotate-180' : '')}`} />
             </button>
 
             <div
-                className={`absolute left-0 right-0 top-[calc(100%+8px)] bg-white border border-[#E5E7EB] rounded-[20px] shadow-[0_20px_40px_rgba(21,40,61,0.12)] overflow-hidden transition-all duration-300 origin-top ${
+                className={`absolute left-0 right-0 ${originClasses} bg-white border border-[#E5E7EB] rounded-[20px] shadow-[0_20px_40px_rgba(21,40,61,0.12)] overflow-hidden transition-all duration-300 ${
                     isOpen ? 'opacity-100 scale-y-100 pointer-events-auto' : 'opacity-0 scale-y-95 pointer-events-none'
                 }`}
             >
-                <div className="py-2 flex flex-col max-h-[240px] overflow-y-auto custom-scrollbar">
+                <div className="py-2 flex flex-col">
                     {Object.entries(config).map(([key, item]) => {
                         const isSelected = value === key;
                         return (
@@ -60,15 +61,12 @@ function CustomStatusSelect({ value, onChange, rowZIndex }: { value: string, onC
                                 key={key}
                                 type="button"
                                 onClick={() => { onChange(key); setIsOpen(false); }}
-                                className={`w-full flex items-center justify-between px-4 py-3 font-['Quicksand'] text-[12px] font-bold uppercase tracking-widest transition-colors ${
+                                className={`w-full flex items-center justify-between px-4 py-3 font-['Quicksand'] text-[11px] font-bold uppercase tracking-widest transition-colors ${
                                     isSelected ? 'bg-[#F8F9FA] text-[#15283D]' : 'text-[#A0AEC0] hover:bg-[#F4F6F8] hover:text-[#15283D]'
                                 }`}
                             >
-                                <div className="flex items-center gap-2.5">
-                                    <span className={`w-1.5 h-1.5 rounded-full ${item.dot} ${isSelected ? '' : 'opacity-50'}`} />
-                                    {item.label}
-                                </div>
-                                {isSelected && <Check className="w-3.5 h-3.5 text-[#334a89]" />}
+                                {item.label}
+                                {isSelected && <Check className="w-3.5 h-3.5 text-[#334a89] shrink-0" />}
                             </button>
                         )
                     })}
@@ -154,41 +152,26 @@ export default function CampusToursManager() {
     return (
         <div className="font-['Quicksand'] selection:bg-[#334a89]/20 selection:text-[#334a89] pb-24">
 
-            {/* =========================================================
-                PREMIUM FLOATING SCROLLBAR ENGINE (X & Y Axis)
-            ========================================================= */}
             <style>{`
-                /* Vertical & Horizontal Scrollbar Sizes */
-                .custom-scrollbar::-webkit-scrollbar { 
-                    width: 14px;  
-                    height: 14px; 
-                }
+                .custom-scrollbar::-webkit-scrollbar { width: 14px; height: 14px; }
                 .custom-scrollbar::-webkit-scrollbar-track { 
                     background: rgba(244, 246, 248, 0.4); 
                     border-radius: 20px;
+                    margin-top: 32px; 
+                    margin-bottom: 32px;
                 }
-                /* The Floating Pill Design */
                 .custom-scrollbar::-webkit-scrollbar-thumb { 
                     background-color: #CBD5E1; 
                     border-radius: 100px; 
-                    border: 4px solid #FFFFFF; /* Pure white border simulates a float */
+                    border: 4px solid #FFFFFF; 
                     background-clip: padding-box; 
                     transition: background-color 0.3s ease;
                 }
-                .custom-scrollbar::-webkit-scrollbar-thumb:hover { 
-                    background-color: #94A3B8; 
-                    border: 3px solid #FFFFFF; 
-                }
-                /* Clean corner intersection */
-                .custom-scrollbar::-webkit-scrollbar-corner { 
-                    background: transparent; 
-                }
-                
+                .custom-scrollbar::-webkit-scrollbar-thumb:hover { background-color: #94A3B8; }
                 .scrollbar-hide::-webkit-scrollbar { display: none; }
                 .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
             `}</style>
 
-            {/* Header Area */}
             <div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
                 <div>
                     <h1 className="text-3xl md:text-4xl font-bold text-[#15283D] tracking-tight mb-2">Campus Tours Queue</h1>
@@ -196,7 +179,6 @@ export default function CampusToursManager() {
                 </div>
             </div>
 
-            {/* Filter Command Bar */}
             <div className="bg-white p-2 rounded-[20px] shadow-[0_8px_30px_rgba(21,40,61,0.03)] border border-[#E5E7EB] mb-8 flex flex-nowrap gap-2 items-center overflow-x-auto scrollbar-hide">
                 <div className="px-5 border-r border-[#E5E7EB] hidden lg:flex items-center gap-2 text-[#A0AEC0] shrink-0">
                     <SlidersHorizontal className="w-4 h-4" />
@@ -217,16 +199,13 @@ export default function CampusToursManager() {
                 ))}
             </div>
 
-            {/* =========================================================
-                MAIN DATA TABLE (Strict Clipping Enforced)
-            ========================================================= */}
             <div
-                className="bg-white rounded-[32px] shadow-[0_20px_60px_rgba(21,40,61,0.04)] border border-[#E5E7EB] flex flex-col relative transform-gpu pb-2"
+                className="bg-white rounded-[32px] shadow-[0_20px_60px_rgba(21,40,61,0.04)] border border-[#E5E7EB] flex flex-col relative transform-gpu pb-2 min-h-[500px]"
                 style={{ clipPath: 'inset(0 round 32px)' }}
             >
                 {loading ? (
-                    <div className="w-full overflow-x-auto scrollbar-hide p-6 min-h-[500px]">
-                        <div className="min-w-[1000px] space-y-4">
+                    <div className="w-full flex-1 overflow-x-auto scrollbar-hide p-6 min-h-[500px]">
+                        <div className="space-y-4">
                             {[1, 2, 3, 4, 5].map((i) => (
                                 <div key={i} className="flex items-center gap-6 p-4 rounded-[20px] border border-[#F4F6F8] animate-pulse">
                                     <div className="w-12 h-12 rounded-[12px] bg-[#F4F6F8]" />
@@ -234,7 +213,7 @@ export default function CampusToursManager() {
                                         <div className="h-4 bg-[#F4F6F8] rounded-full w-1/3" />
                                         <div className="h-3 bg-[#F4F6F8] rounded-full w-1/4" />
                                     </div>
-                                    <div className="w-40 h-10 rounded-full bg-[#F4F6F8]" />
+                                    <div className="w-40 h-10 rounded-full bg-[#F4F6F8] hidden md:block" />
                                     <div className="w-32 h-10 rounded-full bg-[#F4F6F8]" />
                                 </div>
                             ))}
@@ -251,91 +230,95 @@ export default function CampusToursManager() {
                         </p>
                     </div>
                 ) : (
+                    /* MASTERCLASS FIX: Added flex-1 and min-h-[500px] to force the scroll container to be deep enough for dropdowns */
+                    <div className="w-full flex-1 min-h-[500px] max-h-[700px] overflow-y-auto overflow-x-auto custom-scrollbar">
+                        <table className="w-full text-left border-collapse">
 
-                    /* The Inner Scrolling Container with Horizontal & Vertical Custom Scrollbars */
-                    <div className="w-full max-h-[700px] overflow-y-auto overflow-x-auto custom-scrollbar">
-                        <table className="w-full text-left border-collapse min-w-[1000px]">
-
-                            {/* Sticky Header */}
                             <thead className="sticky top-0 z-30 shadow-sm">
                             <tr>
-                                <th className="bg-[#F8F9FA] px-8 py-6 text-[11px] font-bold text-[#A0AEC0] uppercase tracking-widest border-b border-[#E5E7EB] whitespace-nowrap">Parent Contact</th>
-                                <th className="bg-[#F8F9FA] px-6 py-6 text-[11px] font-bold text-[#A0AEC0] uppercase tracking-widest border-b border-[#E5E7EB] whitespace-nowrap">Tour Schedule</th>
-                                <th className="bg-[#F8F9FA] px-6 py-6 text-[11px] font-bold text-[#A0AEC0] uppercase tracking-widest border-b border-[#E5E7EB] whitespace-nowrap">Status Workflow</th>
-                                <th className="bg-[#F8F9FA] px-6 py-6 text-[11px] font-bold text-[#A0AEC0] uppercase tracking-widest border-b border-[#E5E7EB] whitespace-nowrap">Requested Stamp</th>
-                                <th className="bg-[#F8F9FA] px-8 py-6 text-[11px] font-bold text-[#A0AEC0] uppercase tracking-widest border-b border-[#E5E7EB] text-right whitespace-nowrap">Admin Actions</th>
+                                <th className="bg-[#F8F9FA] px-6 md:px-8 py-6 text-[11px] font-bold text-[#A0AEC0] uppercase tracking-widest border-b border-[#E5E7EB]">Parent Contact</th>
+                                <th className="bg-[#F8F9FA] px-6 py-6 text-[11px] font-bold text-[#A0AEC0] uppercase tracking-widest border-b border-[#E5E7EB] hidden md:table-cell">Tour Schedule</th>
+                                <th className="bg-[#F8F9FA] px-4 md:px-6 py-6 text-[11px] font-bold text-[#A0AEC0] uppercase tracking-widest border-b border-[#E5E7EB]">Status</th>
+                                <th className="bg-[#F8F9FA] px-6 py-6 text-[11px] font-bold text-[#A0AEC0] uppercase tracking-widest border-b border-[#E5E7EB] hidden lg:table-cell">Received</th>
+                                <th className="bg-[#F8F9FA] px-6 md:px-8 py-6 text-[11px] font-bold text-[#A0AEC0] uppercase tracking-widest border-b border-[#E5E7EB] text-right">Actions</th>
                             </tr>
                             </thead>
 
                             <tbody ref={tableRef} className="bg-white relative z-0">
-                            {tours.map((tour, index) => (
-                                <tr key={tour.id} className="adm-row group hover:bg-[#F8F9FA]/50 transition-colors border-b border-[#F4F6F8] last:border-0 relative">
+                            {tours.map((tour, index) => {
+                                // Only drop up if the table is crowded (5+ items) AND it's in the last 3 rows
+                                const shouldDropUp = tours.length >= 5 && index >= tours.length - 3;
 
-                                    <td className="px-8 py-6">
-                                        <div className="space-y-1.5 whitespace-nowrap">
-                                            <div className="flex items-center gap-2 text-[#15283D] font-bold text-[15px]">
-                                                <User className="w-4 h-4 text-[#A0AEC0]" />
-                                                {tour.parent_name}
+                                return (
+                                    <tr key={tour.id} className="adm-row group hover:bg-[#F8F9FA]/50 transition-colors border-b border-[#F4F6F8] last:border-0 relative">
+
+                                        <td className="px-6 md:px-8 py-6">
+                                            <div className="space-y-1.5">
+                                                <div className="flex items-center gap-2 text-[#15283D] font-bold text-[15px]">
+                                                    <User className="w-4 h-4 text-[#A0AEC0] shrink-0" />
+                                                    <span className="truncate max-w-[120px] md:max-w-[200px]">{tour.parent_name}</span>
+                                                </div>
+                                                <div className="flex items-center gap-2 text-[#5C5C61] font-medium text-[13px]">
+                                                    <Mail className="w-3.5 h-3.5 text-[#A0AEC0] shrink-0" />
+                                                    <span className="truncate max-w-[120px] md:max-w-[200px]">{tour.email}</span>
+                                                </div>
+                                                <div className="flex items-center gap-2 text-[#5C5C61] font-medium text-[13px]">
+                                                    <Phone className="w-3.5 h-3.5 text-[#A0AEC0] shrink-0" />
+                                                    {tour.phone}
+                                                </div>
                                             </div>
+                                        </td>
+
+                                        <td className="px-6 py-6 hidden md:table-cell">
+                                            <div className="flex items-center gap-4">
+                                                <div className="w-12 h-12 rounded-[14px] bg-[#ffc715]/10 border border-[#ffc715]/20 flex items-center justify-center text-[#b38b0f] shrink-0 transition-transform group-hover:scale-105">
+                                                    <MapPin className="w-6 h-6" />
+                                                </div>
+                                                <div>
+                                                    <p className="font-bold text-[15px] text-[#15283D] mb-1">
+                                                        {new Date(tour.preferred_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                                                    </p>
+                                                    <p className="flex items-center gap-1.5 font-bold text-[11px] uppercase tracking-wider text-[#A0AEC0]">
+                                                        <Clock className="w-3.5 h-3.5 text-[#334a89]" />
+                                                        {tour.preferred_time_slot}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </td>
+
+                                        <td className="px-4 md:px-6 py-6 relative">
+                                            <CustomStatusSelect
+                                                value={tour.status}
+                                                onChange={(newStatus) => updateStatus(tour.id, newStatus)}
+                                                rowZIndex={tours.length - index}
+                                                dropUp={shouldDropUp}
+                                            />
+                                        </td>
+
+                                        <td className="px-6 py-6 hidden lg:table-cell">
                                             <div className="flex items-center gap-2 text-[#5C5C61] font-medium text-[13px]">
-                                                <Mail className="w-3.5 h-3.5 text-[#A0AEC0]" />
-                                                {tour.email}
+                                                <Calendar className="w-4 h-4 text-[#A0AEC0]" />
+                                                {new Date(tour.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
                                             </div>
-                                            <div className="flex items-center gap-2 text-[#5C5C61] font-medium text-[13px]">
-                                                <Phone className="w-3.5 h-3.5 text-[#A0AEC0]" />
-                                                {tour.phone}
-                                            </div>
-                                        </div>
-                                    </td>
+                                        </td>
 
-                                    <td className="px-6 py-6">
-                                        <div className="flex items-center gap-4">
-                                            <div className="w-12 h-12 rounded-[14px] bg-[#ffc715]/10 border border-[#ffc715]/20 flex items-center justify-center text-[#b38b0f] shrink-0 transition-transform group-hover:scale-105">
-                                                <MapPin className="w-6 h-6" />
-                                            </div>
-                                            <div className="whitespace-nowrap">
-                                                <p className="font-bold text-[16px] text-[#15283D] mb-1">
-                                                    {new Date(tour.preferred_date).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' })}
-                                                </p>
-                                                <p className="flex items-center gap-1.5 font-bold text-[12px] uppercase tracking-wider text-[#A0AEC0]">
-                                                    <Clock className="w-3.5 h-3.5 text-[#334a89]" />
-                                                    {tour.preferred_time_slot}
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </td>
+                                        <td className="px-6 md:px-8 py-6 text-right">
+                                            <button
+                                                onClick={() => { setSelectedTour(tour); setNote(tour.admin_outcome_note || '') }}
+                                                className={`inline-flex items-center justify-center gap-2 p-2.5 md:px-5 md:py-2.5 rounded-full font-bold text-[11px] uppercase tracking-widest transition-all ${
+                                                    tour.admin_outcome_note
+                                                        ? 'bg-[#334a89]/10 text-[#334a89] hover:bg-[#334a89]/20 border border-[#334a89]/20'
+                                                        : 'bg-[#F4F6F8] text-[#5C5C61] hover:bg-[#E5E7EB] hover:text-[#15283D] border border-transparent'
+                                                }`}
+                                            >
+                                                <MessageSquare className="w-4 h-4 md:w-3.5 md:h-3.5" />
+                                                <span className="hidden md:inline">{tour.admin_outcome_note ? 'Edit Note' : 'Add Note'}</span>
+                                            </button>
+                                        </td>
 
-                                    <td className="px-6 py-6 relative">
-                                        <CustomStatusSelect
-                                            value={tour.status}
-                                            onChange={(newStatus) => updateStatus(tour.id, newStatus)}
-                                            rowZIndex={tours.length - index}
-                                        />
-                                    </td>
-
-                                    <td className="px-6 py-6 whitespace-nowrap">
-                                        <div className="flex items-center gap-2 text-[#5C5C61] font-medium text-[14px]">
-                                            <Calendar className="w-4 h-4 text-[#A0AEC0]" />
-                                            {new Date(tour.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-                                        </div>
-                                    </td>
-
-                                    <td className="px-8 py-6 text-right whitespace-nowrap">
-                                        <button
-                                            onClick={() => { setSelectedTour(tour); setNote(tour.admin_outcome_note || '') }}
-                                            className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full font-bold text-[11px] uppercase tracking-widest transition-all ${
-                                                tour.admin_outcome_note
-                                                    ? 'bg-[#334a89]/10 text-[#334a89] hover:bg-[#334a89]/20 border border-[#334a89]/20'
-                                                    : 'bg-[#F4F6F8] text-[#5C5C61] hover:bg-[#E5E7EB] hover:text-[#15283D] border border-transparent'
-                                            }`}
-                                        >
-                                            <MessageSquare className="w-3.5 h-3.5" />
-                                            {tour.admin_outcome_note ? 'Edit Note' : 'Add Note'}
-                                        </button>
-                                    </td>
-
-                                </tr>
-                            ))}
+                                    </tr>
+                                )
+                            })}
                             </tbody>
                         </table>
                     </div>

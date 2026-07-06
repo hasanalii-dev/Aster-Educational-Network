@@ -1,19 +1,110 @@
-import { useEffect, useState, Fragment } from 'react'
+import { useEffect, useState, useRef, Fragment } from 'react'
 import { supabase } from '@/lib/supabase'
 import type { JobOpening } from '@/types'
 import { useToast } from '@/components/admin/ToastProvider'
-import { AdminSelect } from '@/components/admin/AdminSelect'
-import { motion } from 'framer-motion'
-import { FileText, Mail, Phone, ChevronDown } from 'lucide-react'
+import gsap from 'gsap'
+import {
+    FileText, Mail, Phone, ChevronDown, Check,
+    SlidersHorizontal, FileBadge
+} from 'lucide-react'
 
+// =========================================================
+// CUSTOM SAAS DROPDOWN COMPONENT (Z-Index Optimized for Tables)
+// =========================================================
+function CustomStatusSelect({ value, onChange, rowZIndex }: { value: string, onChange: (val: string) => void, rowZIndex: number }) {
+    const [isOpen, setIsOpen] = useState(false)
+    const dropdownRef = useRef<HTMLDivElement>(null)
+
+    useEffect(() => {
+        function handleClickOutside(event: MouseEvent) {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+                setIsOpen(false)
+            }
+        }
+        document.addEventListener("mousedown", handleClickOutside)
+        return () => document.removeEventListener("mousedown", handleClickOutside)
+    }, [])
+
+    const config: Record<string, { label: string, color: string, dot: string }> = {
+        'New': { label: 'New Arrival', color: 'bg-[#ffc715]/10 text-[#b38b0f] border-[#ffc715]/30', dot: 'bg-[#ffc715] animate-pulse' },
+        'Reviewed': { label: 'Reviewed', color: 'bg-indigo-50 text-indigo-700 border-indigo-200', dot: 'bg-indigo-500' },
+        'Interviewing': { label: 'Interviewing', color: 'bg-emerald-50 text-emerald-700 border-emerald-200', dot: 'bg-emerald-500' },
+        'Rejected': { label: 'Rejected', color: 'bg-rose-50 text-rose-700 border-rose-200', dot: 'bg-rose-500' }
+    }
+
+    // Default to 'New' if the status is somehow missing
+    const activeConfig = config[value] || config['New']
+
+    return (
+        <div className="relative w-48" ref={dropdownRef} style={{ zIndex: isOpen ? 50 : rowZIndex }}>
+            <button
+                type="button"
+                onClick={() => setIsOpen(!isOpen)}
+                className={`w-full flex items-center justify-between px-4 py-2.5 rounded-full border transition-all duration-300 font-['Quicksand'] font-bold text-[11px] uppercase tracking-widest outline-none ${activeConfig.color} ${isOpen ? 'ring-4 ring-[#334a89]/10 shadow-md' : 'hover:shadow-sm'}`}
+            >
+                <div className="flex items-center gap-2.5">
+                    <span className={`w-1.5 h-1.5 rounded-full ${activeConfig.dot}`} />
+                    {activeConfig.label}
+                </div>
+                <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
+            </button>
+
+            <div
+                className={`absolute left-0 right-0 top-[calc(100%+8px)] bg-white border border-[#E5E7EB] rounded-[20px] shadow-[0_20px_40px_rgba(21,40,61,0.12)] overflow-hidden transition-all duration-300 origin-top ${
+                    isOpen ? 'opacity-100 scale-y-100 pointer-events-auto' : 'opacity-0 scale-y-95 pointer-events-none'
+                }`}
+            >
+                <div className="py-2 flex flex-col max-h-[240px] overflow-y-auto custom-scrollbar">
+                    {Object.entries(config).map(([key, item]) => {
+                        const isSelected = value === key;
+                        return (
+                            <button
+                                key={key}
+                                type="button"
+                                onClick={() => { onChange(key); setIsOpen(false); }}
+                                className={`w-full flex items-center justify-between px-4 py-3 font-['Quicksand'] text-[12px] font-bold uppercase tracking-widest transition-colors ${
+                                    isSelected ? 'bg-[#F8F9FA] text-[#15283D]' : 'text-[#A0AEC0] hover:bg-[#F4F6F8] hover:text-[#15283D]'
+                                }`}
+                            >
+                                <div className="flex items-center gap-2.5">
+                                    <span className={`w-1.5 h-1.5 rounded-full ${item.dot} ${isSelected ? '' : 'opacity-50'}`} />
+                                    {item.label}
+                                </div>
+                                {isSelected && <Check className="w-3.5 h-3.5 text-[#334a89]" />}
+                            </button>
+                        )
+                    })}
+                </div>
+            </div>
+        </div>
+    )
+}
+
+// =========================================================
+// MAIN MANAGER COMPONENT
+// =========================================================
 export default function JobApplicationsManager() {
     const [applications, setApplications] = useState<any[]>([])
     const [jobsMap, setJobsMap] = useState<Record<string, JobOpening>>({})
     const [filter, setFilter] = useState('all')
     const [expandedId, setExpandedId] = useState<string | null>(null)
+    const [loading, setLoading] = useState(true)
     const { showToast } = useToast()
 
+    const tableRef = useRef<HTMLTableSectionElement>(null)
+
+    const filters = [
+        { id: 'all', label: 'All Applications' },
+        { id: 'New', label: 'New Arrivals' },
+        { id: 'Reviewed', label: 'Reviewed' },
+        { id: 'Interviewing', label: 'Interviewing' },
+        { id: 'Rejected', label: 'Rejected' }
+    ]
+
     const fetchData = async () => {
+        setLoading(true)
+
+        // Fetch jobs map
         const { data: jobsData } = await supabase.from('job_openings').select('*')
         if (jobsData) {
             const map: Record<string, JobOpening> = {}
@@ -21,136 +112,267 @@ export default function JobApplicationsManager() {
             setJobsMap(map)
         }
 
+        // Fetch applications based on filter
         let q = supabase.from('job_applications').select('*').order('created_at', { ascending: false })
         if (filter !== 'all') q = q.eq('status', filter)
         const { data: appsData } = await q
+
         if (appsData) setApplications(appsData)
+        setLoading(false)
     }
 
-    useEffect(() => { fetchData() }, [filter])
+    useEffect(() => {
+        fetchData()
+    }, [filter])
+
+    // GSAP Row Stagger Animation
+    useEffect(() => {
+        if (!loading && applications.length > 0 && tableRef.current) {
+            const ctx = gsap.context(() => {
+                gsap.fromTo('.adm-row',
+                    { opacity: 0, y: 20 },
+                    { opacity: 1, y: 0, duration: 0.6, stagger: 0.05, ease: 'power2.out', clearProps: 'transform' }
+                )
+            }, tableRef)
+            return () => ctx.revert()
+        }
+    }, [applications, loading])
 
     const updateStatus = async (id: string, status: string) => {
+        // Optimistic UI update
+        setApplications(prev => prev.map(app => app.id === id ? { ...app, status } : app))
+
         const { error } = await supabase.from('job_applications').update({ status }).eq('id', id)
         if (error) {
             showToast('Failed to update status', 'error')
-        } else {
-            showToast('Status updated successfully', 'success')
+            // Revert on error
             fetchData()
         }
     }
 
-    const STATUS_OPTIONS = [
-        { label: 'New', value: 'New' },
-        { label: 'Reviewed', value: 'Reviewed' },
-        { label: 'Interviewing', value: 'Interviewing' },
-        { label: 'Rejected', value: 'Rejected' }
-    ]
-
-    const containerVariants = {
-        hidden: { opacity: 0 },
-        visible: { opacity: 1, transition: { staggerChildren: 0.05 } }
-    }
-
-    const itemVariants = {
-        hidden: { opacity: 0, y: 10 },
-        visible: { opacity: 1, y: 0 }
-    }
-
     return (
-        <motion.div variants={containerVariants} initial="hidden" animate="visible">
-            <div className="flex flex-wrap gap-2 mb-6">
-                {['all', 'New', 'Reviewed', 'Interviewing', 'Rejected'].map(s => (
-                    <button 
-                        key={s} 
-                        className={`px-4 py-2 rounded-full text-sm font-bold capitalize transition-all ${
-                            filter === s 
-                                ? 'bg-[#394ea2] text-white shadow-md transform scale-105' 
-                                : 'bg-white text-[#64748B] border border-[#E2E8F0] hover:border-[#CBD5E1] hover:bg-[#F8FAFC]'
-                        }`} 
-                        onClick={() => setFilter(s)}
+        <div className="font-['Quicksand'] selection:bg-[#334a89]/20 selection:text-[#334a89] pb-24">
+
+            {/* =========================================================
+                PREMIUM FLOATING SCROLLBAR ENGINE
+            ========================================================= */}
+            <style>{`
+                .custom-scrollbar::-webkit-scrollbar { width: 14px; height: 14px; }
+                .custom-scrollbar::-webkit-scrollbar-track { background: rgba(244, 246, 248, 0.4); border-radius: 20px; }
+                .custom-scrollbar::-webkit-scrollbar-thumb { 
+                    background-color: #CBD5E1; 
+                    border-radius: 100px; 
+                    border: 4px solid #FFFFFF; 
+                    background-clip: padding-box; 
+                    transition: background-color 0.3s ease;
+                }
+                .custom-scrollbar::-webkit-scrollbar-thumb:hover { background-color: #94A3B8; border: 3px solid #FFFFFF; }
+                .custom-scrollbar::-webkit-scrollbar-corner { background: transparent; }
+                .scrollbar-hide::-webkit-scrollbar { display: none; }
+                .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+            `}</style>
+
+            {/* Header Area */}
+            <div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
+                <div>
+                    <h1 className="text-3xl md:text-4xl font-bold text-[#15283D] tracking-tight mb-2">Job Applications</h1>
+                    <p className="text-[#5C5C61] font-medium text-[15px]">Review resumes, track hiring progress, and manage talent pipelines.</p>
+                </div>
+            </div>
+
+            {/* Filter Command Bar */}
+            <div className="bg-white p-2 rounded-[20px] shadow-[0_8px_30px_rgba(21,40,61,0.03)] border border-[#E5E7EB] mb-8 flex flex-nowrap gap-2 items-center overflow-x-auto scrollbar-hide">
+                <div className="px-5 border-r border-[#E5E7EB] hidden lg:flex items-center gap-2 text-[#A0AEC0] shrink-0">
+                    <SlidersHorizontal className="w-4 h-4" />
+                    <span className="text-[11px] font-bold uppercase tracking-widest">Pipeline</span>
+                </div>
+                {filters.map(f => (
+                    <button
+                        key={f.id}
+                        onClick={() => setFilter(f.id)}
+                        className={`px-5 py-2.5 rounded-[14px] text-[13px] font-bold tracking-wide transition-all duration-300 shrink-0 whitespace-nowrap ${
+                            filter === f.id
+                                ? 'bg-[#334a89] text-white shadow-md'
+                                : 'bg-transparent text-[#5C5C61] hover:bg-[#F4F6F8] hover:text-[#15283D]'
+                        }`}
                     >
-                        {s}
+                        {f.label}
                     </button>
                 ))}
             </div>
-            
-            <div className="bg-white rounded-[20px] border border-[#E7E5E4] shadow-sm overflow-visible">
-                {applications.length === 0 ? (
-                    <div className="p-16 text-center text-[#A8A29E] font-medium">No applications found.</div>
+
+            {/* =========================================================
+                MAIN DATA TABLE
+            ========================================================= */}
+            <div
+                className="bg-white rounded-[32px] shadow-[0_20px_60px_rgba(21,40,61,0.04)] border border-[#E5E7EB] flex flex-col relative transform-gpu pb-2 min-h-[500px]"
+                style={{ clipPath: 'inset(0 round 32px)' }}
+            >
+                {loading ? (
+                    <div className="w-full overflow-x-auto scrollbar-hide p-6 min-h-[500px]">
+                        <div className="min-w-[1000px] space-y-4">
+                            {[1, 2, 3, 4, 5].map((i) => (
+                                <div key={i} className="flex items-center gap-6 p-4 rounded-[20px] border border-[#F4F6F8] animate-pulse">
+                                    <div className="w-12 h-12 rounded-[12px] bg-[#F4F6F8]" />
+                                    <div className="flex-1 space-y-2">
+                                        <div className="h-4 bg-[#F4F6F8] rounded-full w-1/3" />
+                                        <div className="h-3 bg-[#F4F6F8] rounded-full w-1/4" />
+                                    </div>
+                                    <div className="w-48 h-10 rounded-full bg-[#F4F6F8]" />
+                                    <div className="w-32 h-10 rounded-full bg-[#F4F6F8]" />
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                ) : applications.length === 0 ? (
+                    <div className="flex-1 flex flex-col items-center justify-center p-16 text-center min-h-[500px]">
+                        <div className="w-24 h-24 bg-[#F8F9FA] rounded-[24px] flex items-center justify-center mb-6 border border-[#E5E7EB] shadow-inner">
+                            <FileBadge className="w-8 h-8 text-[#A0AEC0]" />
+                        </div>
+                        <h3 className="text-2xl font-bold text-[#15283D] mb-3">No applications found</h3>
+                        <p className="text-[#5C5C61] font-medium text-[16px] max-w-sm leading-relaxed">
+                            There are currently no candidates in the "{filters.find(f => f.id === filter)?.label}" pipeline.
+                        </p>
+                    </div>
                 ) : (
-                    <table className="w-full text-left border-collapse">
-                        <thead>
-                            <tr className="bg-[#F8FAFC] border-b border-[#E2E8F0]">
-                                <th className="py-4 px-6 text-[12px] font-bold text-[#64748B] uppercase tracking-wider">Applicant</th>
-                                <th className="py-4 px-6 text-[12px] font-bold text-[#64748B] uppercase tracking-wider">Position</th>
-                                <th className="py-4 px-6 text-[12px] font-bold text-[#64748B] uppercase tracking-wider">Contact</th>
-                                <th className="py-4 px-6 text-[12px] font-bold text-[#64748B] uppercase tracking-wider">Status</th>
-                                <th className="py-4 px-6 text-[12px] font-bold text-[#64748B] uppercase tracking-wider text-right">Date</th>
+
+                    <div className="w-full max-h-[700px] overflow-y-auto overflow-x-auto custom-scrollbar">
+                        <table className="w-full text-left border-collapse min-w-[1100px]">
+
+                            {/* Sticky Header */}
+                            <thead className="sticky top-0 z-30 shadow-sm">
+                            <tr>
+                                <th className="bg-[#F8F9FA] px-8 py-6 text-[11px] font-bold text-[#A0AEC0] uppercase tracking-widest border-b border-[#E5E7EB] whitespace-nowrap">Candidate</th>
+                                <th className="bg-[#F8F9FA] px-6 py-6 text-[11px] font-bold text-[#A0AEC0] uppercase tracking-widest border-b border-[#E5E7EB] whitespace-nowrap">Role Applied For</th>
+                                <th className="bg-[#F8F9FA] px-6 py-6 text-[11px] font-bold text-[#A0AEC0] uppercase tracking-widest border-b border-[#E5E7EB] whitespace-nowrap">Contact Data</th>
+                                <th className="bg-[#F8F9FA] px-6 py-6 text-[11px] font-bold text-[#A0AEC0] uppercase tracking-widest border-b border-[#E5E7EB] whitespace-nowrap">Pipeline Status</th>
+                                <th className="bg-[#F8F9FA] px-8 py-6 text-[11px] font-bold text-[#A0AEC0] uppercase tracking-widest border-b border-[#E5E7EB] text-right whitespace-nowrap">Submission Date</th>
                             </tr>
-                        </thead>
-                        <tbody>
+                            </thead>
+
+                            <tbody ref={tableRef} className="bg-white relative z-0">
                             {applications.map((app, index) => {
                                 const job = jobsMap[app.job_id]
+                                const isExpanded = expandedId === app.id
+
                                 return (
                                     <Fragment key={app.id}>
-                                        <motion.tr 
-                                            variants={itemVariants}
-                                            className={`border-b border-[#F1F5F9] hover:bg-[#F8FAFC] transition-colors ${index === applications.length - 1 && expandedId !== app.id ? 'border-b-0' : ''} ${expandedId === app.id ? 'bg-[#F8FAFC]' : ''}`}
-                                        >
-                                            <td className="py-4 px-6">
-                                                <div className="font-semibold text-[#1E293B] mb-1">{app.first_name} {app.last_name}</div>
-                                                <button 
-                                                    className={`text-xs font-bold px-2 py-1 rounded border flex items-center gap-1 transition-colors mt-2 ${expandedId === app.id ? 'bg-[#F1F5F9] border-[#CBD5E1] text-[#0F172A]' : 'bg-white border-[#E2E8F0] text-[#64748B] hover:bg-[#F8FAFC]'}`}
-                                                    onClick={() => setExpandedId(expandedId === app.id ? null : app.id)}
-                                                >
-                                                    Cover Letter & Resume
-                                                    <ChevronDown size={12} className={`transform transition-transform ${expandedId === app.id ? 'rotate-180' : ''}`} />
-                                                </button>
-                                            </td>
-                                            <td className="py-4 px-6">
-                                                {!app.job_id ? (
-                                                    <div className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-[#DCFCE7] text-[#16A34A] border border-[#16A34A]/20">
-                                                        General Application
+                                        <tr className={`adm-row group transition-colors relative ${isExpanded ? 'bg-[#F8F9FA]' : 'hover:bg-[#F8F9FA]/50'} ${index === applications.length - 1 && !isExpanded ? '' : 'border-b border-[#F4F6F8]'}`}>
+
+                                            {/* Candidate Profile */}
+                                            <td className="px-8 py-6 whitespace-nowrap">
+                                                <div className="flex items-center gap-4">
+                                                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#15283D] to-[#334a89] text-white flex items-center justify-center font-bold text-[14px] shadow-sm shrink-0">
+                                                        {app.first_name?.[0]}{app.last_name?.[0]}
                                                     </div>
-                                                ) : job ? (
-                                                    <div className="flex flex-col gap-1">
-                                                        <div className="text-[13px] font-bold text-[#394ea2]">{job.title}</div>
-                                                        <div className="text-[11px] font-semibold text-[#64748B] bg-[#F1F5F9] px-2 py-0.5 rounded w-fit">{job.location}</div>
+                                                    <div>
+                                                        <p className="font-bold text-[16px] text-[#15283D] mb-1">{app.first_name} {app.last_name}</p>
+                                                        <button
+                                                            onClick={() => setExpandedId(isExpanded ? null : app.id)}
+                                                            className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full font-bold text-[11px] uppercase tracking-wider transition-all duration-300 ${isExpanded ? 'bg-[#334a89] text-white shadow-md' : 'bg-[#F4F6F8] text-[#5C5C61] hover:bg-[#E5E7EB] hover:text-[#15283D]'}`}
+                                                        >
+                                                            Cover Letter & CV
+                                                            <ChevronDown className={`w-3 h-3 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`} />
+                                                        </button>
                                                     </div>
-                                                ) : (
-                                                    <span className="text-[12px] font-bold text-[#DC2626] bg-[#FEF2F2] px-2 py-1 rounded">Deleted Job</span>
-                                                )}
-                                            </td>
-                                            <td className="py-4 px-6">
-                                                <div className="flex flex-col gap-1.5">
-                                                    <a href={`mailto:${app.email}`} className="text-[13px] text-[#394ea2] hover:underline flex items-center gap-1.5"><Mail size={12} /> {app.email}</a>
-                                                    <a href={`tel:${app.phone}`} className="text-[12px] text-[#64748B] hover:text-[#1E293B] flex items-center gap-1.5"><Phone size={12} /> {app.phone}</a>
                                                 </div>
                                             </td>
-                                            <td className="py-4 px-6" style={{ width: 180 }}>
-                                                <AdminSelect 
-                                                    value={app.status} 
-                                                    options={STATUS_OPTIONS} 
-                                                    onChange={(val) => updateStatus(app.id, val)} 
+
+                                            {/* Role Applied For */}
+                                            <td className="px-6 py-6">
+                                                {!app.job_id ? (
+                                                    <span className="inline-flex items-center px-3 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-widest bg-gray-100 text-gray-600 border border-gray-200">
+                                                            General Application
+                                                        </span>
+                                                ) : job ? (
+                                                    <div className="space-y-1.5">
+                                                        <div className="font-bold text-[14px] text-[#334a89] truncate max-w-[250px]">{job.title}</div>
+                                                        <div className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-widest bg-[#334a89]/10 text-[#334a89]">
+                                                            {job.location}
+                                                        </div>
+                                                    </div>
+                                                ) : (
+                                                    <span className="inline-flex items-center px-3 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-widest bg-rose-50 text-rose-600 border border-rose-200">
+                                                            Deleted Job Listing
+                                                        </span>
+                                                )}
+                                            </td>
+
+                                            {/* Contact Information */}
+                                            <td className="px-6 py-6 whitespace-nowrap">
+                                                <div className="space-y-2">
+                                                    <a href={`mailto:${app.email}`} className="flex items-center gap-2 text-[#5C5C61] hover:text-[#334a89] font-medium text-[13px] transition-colors group/link">
+                                                        <Mail className="w-3.5 h-3.5 text-[#A0AEC0] group-hover/link:text-[#334a89]" />
+                                                        {app.email}
+                                                    </a>
+                                                    <a href={`tel:${app.phone}`} className="flex items-center gap-2 text-[#5C5C61] hover:text-[#15283D] font-medium text-[13px] transition-colors group/link">
+                                                        <Phone className="w-3.5 h-3.5 text-[#A0AEC0] group-hover/link:text-[#15283D]" />
+                                                        {app.phone}
+                                                    </a>
+                                                </div>
+                                            </td>
+
+                                            {/* Status Dropdown */}
+                                            <td className="px-6 py-6 relative">
+                                                <CustomStatusSelect
+                                                    value={app.status}
+                                                    onChange={(newStatus) => updateStatus(app.id, newStatus)}
+                                                    rowZIndex={applications.length - index}
                                                 />
                                             </td>
-                                            <td className="py-4 px-6 text-right text-[#64748B] text-sm whitespace-nowrap">
-                                                {new Date(app.created_at).toLocaleDateString()}
+
+                                            {/* Date */}
+                                            <td className="px-8 py-6 text-right whitespace-nowrap">
+                                                    <span className="font-bold text-[13px] text-[#A0AEC0]">
+                                                        {new Date(app.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                                                    </span>
                                             </td>
-                                        </motion.tr>
-                                        {expandedId === app.id && (
-                                            <tr className="bg-[#F8FAFC] border-b border-[#F1F5F9]">
-                                                <td colSpan={5} className="py-4 px-6">
-                                                    <div className="bg-white border border-[#E2E8F0] rounded-xl p-5 shadow-sm">
-                                                        <div className="flex items-center justify-between mb-4 pb-4 border-b border-[#F1F5F9]">
-                                                            <h5 className="text-[12px] font-bold text-[#64748B] uppercase tracking-wider m-0">Cover Letter</h5>
-                                                            <a href={app.resume_link} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 px-4 py-2 bg-[#EFF6FF] text-[#394ea2] hover:bg-[#DBEAFE] font-bold text-xs rounded-lg transition-colors">
-                                                                <FileText size={14} /> Open Resume / CV
-                                                            </a>
+
+                                        </tr>
+
+                                        {/* Expandable Cover Letter Drawer */}
+                                        {isExpanded && (
+                                            <tr className="bg-[#F8F9FA] border-b border-[#E5E7EB]">
+                                                <td colSpan={5} className="p-0">
+                                                    <div className="px-8 py-8 animate-in fade-in slide-in-from-top-4 duration-300">
+                                                        <div className="bg-white border border-[#E5E7EB] rounded-[24px] p-8 shadow-sm">
+                                                            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-6 border-b border-[#F4F6F8]">
+                                                                <div className="flex items-center gap-3">
+                                                                    <div className="w-10 h-10 rounded-full bg-[#334a89]/10 flex items-center justify-center text-[#334a89]">
+                                                                        <FileText className="w-4 h-4" />
+                                                                    </div>
+                                                                    <h5 className="text-[13px] font-bold text-[#15283D] uppercase tracking-[0.15em] m-0">Cover Letter</h5>
+                                                                </div>
+
+                                                                {app.resume_link ? (
+                                                                    <a
+                                                                        href={app.resume_link}
+                                                                        target="_blank"
+                                                                        rel="noopener noreferrer"
+                                                                        className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#15283D] text-white hover:bg-[#334a89] font-bold text-[12px] uppercase tracking-widest rounded-full transition-all shadow-sm hover:shadow-md"
+                                                                    >
+                                                                        <FileBadge className="w-4 h-4" />
+                                                                        Open Resume File
+                                                                    </a>
+                                                                ) : (
+                                                                    <span className="inline-flex items-center gap-2 px-4 py-2 bg-gray-50 text-gray-400 font-bold text-[11px] uppercase tracking-widest rounded-full border border-gray-200">
+                                                                            No Resume Attached
+                                                                        </span>
+                                                                )}
+                                                            </div>
+
+                                                            <div className="prose prose-sm max-w-none">
+                                                                {app.cover_letter ? (
+                                                                    <p className="text-[#5C5C61] font-medium text-[15px] leading-[1.8] whitespace-pre-wrap">
+                                                                        {app.cover_letter}
+                                                                    </p>
+                                                                ) : (
+                                                                    <div className="py-8 text-center bg-[#F4F6F8] rounded-[16px] border border-dashed border-[#E5E7EB]">
+                                                                        <span className="italic font-medium text-[#A0AEC0]">Applicant did not provide a cover letter.</span>
+                                                                    </div>
+                                                                )}
+                                                            </div>
                                                         </div>
-                                                        <p className="text-[#334155] whitespace-pre-wrap text-[14px] leading-relaxed">
-                                                            {app.cover_letter || <span className="italic text-[#94A3B8]">No cover letter provided.</span>}
-                                                        </p>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -158,10 +380,11 @@ export default function JobApplicationsManager() {
                                     </Fragment>
                                 )
                             })}
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
                 )}
             </div>
-        </motion.div>
+        </div>
     )
 }
