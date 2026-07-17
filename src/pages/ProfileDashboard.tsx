@@ -33,17 +33,18 @@ export default function ProfileDashboard() {
     if (user) {
         setAvatarUrl(user.user_metadata?.custom_avatar_url || (['admin', 'super_admin', 'moderator'].includes(role || '') ? `https://api.dicebear.com/9.x/micah/svg?seed=${user.id}&backgroundColor=ffc715` : `https://api.dicebear.com/9.x/notionists/svg?seed=${user.id}`))
     }
-  }, [user])
+  }, [user, role])
 
   const handleRandomizeAvatar = async () => {
       setIsUpdatingAvatar(true)
-      const newSeed = Math.random().toString(36).substring(7)
       
       // Randomly select a color from Aster's primary and secondary palette
       const colors = ['ffc715', 'ffe373', '334a89', '6080cf', '15283D']
       const randomColor = colors[Math.floor(Math.random() * colors.length)]
       
-      const newUrl = `https://api.dicebear.com/9.x/notionists/svg?seed=${newSeed}&backgroundColor=${randomColor}`
+      const newUrl = ['admin', 'super_admin', 'moderator'].includes(role || '') 
+        ? `https://api.dicebear.com/9.x/micah/svg?seed=${Math.random().toString(36).substring(7)}&backgroundColor=ffc715`
+        : `https://api.dicebear.com/9.x/notionists/svg?seed=${Math.random().toString(36).substring(7)}&backgroundColor=${randomColor}`
       setAvatarUrl(newUrl)
       
       await supabase.auth.updateUser({
