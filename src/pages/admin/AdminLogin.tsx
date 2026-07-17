@@ -12,7 +12,7 @@ export default function UnifiedAuth() {
 
     // State Engine
     const [isSignUp, setIsSignUp] = useState(false)
-    const [authStep, setAuthStep] = useState<'credentials' | 'otp' | 'forgot_password'>('credentials')
+    const [authStep, setAuthStep] = useState<'credentials' | 'otp' | 'forgot_password' | 'update_password'>('credentials')
     const [welcomeScreen, setWelcomeScreen] = useState<{type: 'new' | 'existing' | 'admin', name: string} | null>(null)
     const [showPassword, setShowPassword] = useState(false)
     const [showConfirmPassword, setShowConfirmPassword] = useState(false)
@@ -36,6 +36,20 @@ export default function UnifiedAuth() {
             return () => clearTimeout(timer)
         }
     }, [resendTimer])
+
+    useEffect(() => {
+        // Intercept password recovery hash
+        if (window.location.hash.includes('type=recovery')) {
+            setAuthStep('update_password')
+        }
+
+        const { data: { subscription } } = supabase.auth.onAuthStateChange((event) => {
+            if (event === 'PASSWORD_RECOVERY') {
+                setAuthStep('update_password')
+            }
+        })
+        return () => subscription.unsubscribe()
+    }, [])
 
     // =========================================================
     // INITIAL GSAP PAGE ENTRANCE
@@ -236,7 +250,7 @@ export default function UnifiedAuth() {
         setLoading(true)
 
         const { error: resetError } = await supabase.auth.resetPasswordForEmail(email, {
-            redirectTo: window.location.origin,
+            redirectTo: window.location.origin + '/admin/login',
         })
 
         if (resetError) {
@@ -247,6 +261,43 @@ export default function UnifiedAuth() {
 
         setStatusMsg(`Password reset link sent to ${email}.`)
         setLoading(false)
+    }
+
+    const handleUpdatePasswordSubmit = async (e: FormEvent) => {
+        e.preventDefault()
+        setError('')
+        setStatusMsg('')
+        setLoading(true)
+
+        if (password !== confirmPassword) {
+            setError("Passwords do not match.")
+            setLoading(false)
+            return
+        }
+        if (password.length < 6) {
+            setError("Password must be at least 6 characters long.")
+            setLoading(false)
+            return
+        }
+
+        const { error: updateError } = await supabase.auth.updateUser({
+            password: password
+        })
+
+        if (updateError) {
+            setError(updateError.message)
+            setLoading(false)
+            return
+        }
+
+        setStatusMsg('Password successfully updated! Redirecting...')
+        
+        const { data: { user } } = await supabase.auth.getUser()
+        if (user) {
+            await routeUser(user.id)
+        } else {
+            setLoading(false)
+        }
     }
 
     const routeUser = async (userId: string) => {
@@ -612,16 +663,98 @@ export default function UnifiedAuth() {
                                         )}
                                     </button>
 
-                                    <button
-                                        type="button"
-                                        onClick={() => animateStepChange('credentials')}
-                                        className="mt-4 font-['Quicksand'] text-[13px] font-bold text-[#5C5C61] hover:text-[#334a89] transition-colors text-center underline underline-offset-4"
-                                    >
-                                        ← Back to Sign In
-                                    </button>
-                                </form>
-                            )}
-                        </div>
+                                        <button
+                                            type="button"
+                                            onClick={() => animateStepChange('credentials')}
+                                            className="mt-4 font-['Quicksand'] text-[13px] font-bold text-[#5C5C61] hover:text-[#334a89] transition-colors text-center underline underline-offset-4"
+                                        >
+                                            ← Back to Sign In
+                                        </button>
+                                    </form>
+                                )}
+
+                                {/* =========================================================
+                                    STEP 4: UPDATE PASSWORD
+                                ========================================================= */}
+                                {authStep === 'update_password' && (
+                                    <form onSubmit={handleUpdatePasswordSubmit} className="flex flex-col gap-4">
+                                        <div className="flex flex-col gap-2">
+                                            <label className="font-['Quicksand'] font-bold text-[11px] text-[#15283D]/60 uppercase tracking-[0.15em] pl-1">New Password</label>
+                                            <div className="relative group">
+                                                <Lock className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-[#A0AEC0] transition-colors group-focus-within:text-[#334a89]" />
+                                                <input
+                                                    type={showPassword ? "text" : "password"}
+                                                    value={password}
+                                                    onChange={(e) => setPassword(e.target.value)}
+                                                    placeholder="••••••••"
+                                                    className={`w-full pl-14 pr-14 py-4 bg-[#F4F6F8] rounded-[20px] font-['Quicksand'] font-bold text-[15px] text-[#15283D] placeholder-[#A0AEC0] border border-transparent focus:bg-white focus:ring-4 focus:ring-[#334a89]/15 outline-none transition-all duration-300 ${!showPassword ? 'tracking-[0.2em]' : 'tracking-normal'}`}
+                                                    required
+                                                    minLength={6}
+                                                />
+                                                <button 
+                                                    type="button" 
+                                                    onClick={() => setShowPassword(!showPassword)}
+                                                    className="absolute right-5 top-1/2 -translate-y-1/2 text-[#A0AEC0] hover:text-[#334a89] transition-colors focus:outline-none"
+                                                >
+                                                    <div className="relative w-5 h-5">
+                                                        <div className={`absolute inset-0 transition-all duration-300 ${showPassword ? 'opacity-100 scale-100 rotate-0' : 'opacity-0 scale-50 rotate-90'}`}>
+                                                            <EyeOff className="w-5 h-5" />
+                                                        </div>
+                                                        <div className={`absolute inset-0 transition-all duration-300 ${!showPassword ? 'opacity-100 scale-100 rotate-0' : 'opacity-0 scale-50 -rotate-90'}`}>
+                                                            <Eye className="w-5 h-5" />
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <div className="flex flex-col gap-2">
+                                            <label className="font-['Quicksand'] font-bold text-[11px] text-[#15283D]/60 uppercase tracking-[0.15em] pl-1">Confirm New Password</label>
+                                            <div className="relative group">
+                                                <Lock className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-[#A0AEC0] transition-colors group-focus-within:text-[#334a89]" />
+                                                <input
+                                                    type={showConfirmPassword ? "text" : "password"}
+                                                    value={confirmPassword}
+                                                    onChange={(e) => setConfirmPassword(e.target.value)}
+                                                    placeholder="••••••••"
+                                                    className={`w-full pl-14 pr-14 py-4 bg-[#F4F6F8] rounded-[20px] font-['Quicksand'] font-bold text-[15px] text-[#15283D] placeholder-[#A0AEC0] border border-transparent focus:bg-white focus:ring-4 focus:ring-[#334a89]/15 outline-none transition-all duration-300 ${!showConfirmPassword ? 'tracking-[0.2em]' : 'tracking-normal'}`}
+                                                    required
+                                                    minLength={6}
+                                                />
+                                                <button 
+                                                    type="button" 
+                                                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                                                    className="absolute right-5 top-1/2 -translate-y-1/2 text-[#A0AEC0] hover:text-[#334a89] transition-colors focus:outline-none"
+                                                >
+                                                    <div className="relative w-5 h-5">
+                                                        <div className={`absolute inset-0 transition-all duration-300 ${showConfirmPassword ? 'opacity-100 scale-100 rotate-0' : 'opacity-0 scale-50 rotate-90'}`}>
+                                                            <EyeOff className="w-5 h-5" />
+                                                        </div>
+                                                        <div className={`absolute inset-0 transition-all duration-300 ${!showConfirmPassword ? 'opacity-100 scale-100 rotate-0' : 'opacity-0 scale-50 -rotate-90'}`}>
+                                                            <Eye className="w-5 h-5" />
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <button
+                                            type="submit"
+                                            disabled={loading || !password || !confirmPassword}
+                                            className="w-full mt-2 flex items-center justify-center gap-3 bg-[#334a89] text-white px-8 py-5 rounded-[20px] font-['Quicksand'] font-bold text-[14px] tracking-[0.15em] uppercase transition-all duration-300 hover:bg-[#15283D] hover:shadow-[0_20px_40px_rgba(51,74,137,0.25)] disabled:opacity-70 disabled:cursor-not-allowed group/btn"
+                                        >
+                                            {loading ? (
+                                                <Loader2 className="w-5 h-5 animate-spin" />
+                                            ) : (
+                                                <>
+                                                    Update Password
+                                                    <CheckCircle2 className="w-5 h-5 transition-transform duration-300 group-hover/btn:scale-110" />
+                                                </>
+                                            )}
+                                        </button>
+                                    </form>
+                                )}
+                            </div>
 
                     </div>
                 </div>
