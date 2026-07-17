@@ -31,7 +31,7 @@ export default function ProfileDashboard() {
 
   useEffect(() => {
     if (user) {
-        setAvatarUrl(user.user_metadata?.custom_avatar_url || user.user_metadata?.avatar_url || `https://api.dicebear.com/9.x/notionists/svg?seed=${user.id}`)
+        setAvatarUrl(user.user_metadata?.custom_avatar_url || (['admin', 'super_admin', 'moderator'].includes(role || '') ? `https://api.dicebear.com/9.x/micah/svg?seed=${user.id}&backgroundColor=ffc715` : `https://api.dicebear.com/9.x/notionists/svg?seed=${user.id}`))
     }
   }, [user])
 
