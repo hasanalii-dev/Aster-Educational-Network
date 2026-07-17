@@ -7,4 +7,8 @@ const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || import.meta.en
 export const supabase = createClient(supabaseUrl, supabaseAnonKey)
 
 // Capture the hash before the Supabase client strips it from the URL
-export const isPasswordRecoveryOnLoad = typeof window !== 'undefined' && window.location.hash.includes('type=recovery')
+export let isPasswordRecoveryOnLoad = typeof window !== 'undefined' && window.location.hash.includes('type=recovery')
+
+export const clearPasswordRecoveryFlag = () => {
+    isPasswordRecoveryOnLoad = false
+}

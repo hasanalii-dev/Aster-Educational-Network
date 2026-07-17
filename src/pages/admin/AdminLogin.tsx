@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, type FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 import gsap from 'gsap'
-import { supabase, isPasswordRecoveryOnLoad } from '@/lib/supabase'
+import { supabase, isPasswordRecoveryOnLoad, clearPasswordRecoveryFlag } from '@/lib/supabase'
 import { Header } from '@/components/layout/Header'
 import { User, Mail, Lock, KeyRound, ArrowRight, ShieldCheck, Loader2, AlertCircle, CheckCircle2, Fingerprint, Bot, Eye, EyeOff } from 'lucide-react'
 
@@ -41,6 +41,7 @@ export default function UnifiedAuth() {
         // Use the flag captured before Supabase client stripped the hash
         if (isPasswordRecoveryOnLoad || window.location.hash.includes('type=recovery')) {
             setAuthStep('update_password')
+            clearPasswordRecoveryFlag()
         }
 
         const { data: { subscription } } = supabase.auth.onAuthStateChange((event) => {
@@ -375,7 +376,7 @@ export default function UnifiedAuth() {
                             <h1 className="font-['Quicksand'] text-3xl md:text-[34px] font-bold tracking-tight text-[#15283D] mb-3">
                                 {authStep === 'otp'
                                     ? 'Confirm Email'
-                                    : authStep === 'forgot_password'
+                                    : (authStep === 'forgot_password' || authStep === 'update_password')
                                     ? 'Reset Password'
                                     : isSignUp ? 'Create an Account' : 'Sign In'
                                 }
@@ -385,9 +386,11 @@ export default function UnifiedAuth() {
                                     ? 'Provide the 6-digit verification code token sent to your email address. (Check your spam/junk folder if you don\'t see it)'
                                     : authStep === 'forgot_password'
                                         ? 'Enter your email address and we will send you a link to reset your password.'
-                                        : isSignUp
-                                            ? 'Create an account to securely track your applications, forms, and admission updates.'
-                                            : 'Sign in to access your portal, forms, and events.'
+                                        : authStep === 'update_password'
+                                            ? 'Enter a new secure password for your account below.'
+                                            : isSignUp
+                                                ? 'Create an account to securely track your applications, forms, and admission updates.'
+                                                : 'Sign in to access your portal, forms, and events.'
                                 }
                             </p>
                         </div>
@@ -617,7 +620,7 @@ export default function UnifiedAuth() {
                                         </button>
                                     </div>
                                 </form>
-                            ) : (
+                            ) : authStep === 'forgot_password' ? (
                                 /* ── VIEW C: FORGOT PASSWORD ── */
                                 <form onSubmit={handleForgotPasswordSubmit} className="flex flex-col gap-6">
                                     {error && (
@@ -671,12 +674,8 @@ export default function UnifiedAuth() {
                                             ← Back to Sign In
                                         </button>
                                     </form>
-                                )}
-
-                                {/* =========================================================
-                                    STEP 4: UPDATE PASSWORD
-                                ========================================================= */}
-                                {authStep === 'update_password' && (
+                            ) : authStep === 'update_password' ? (
+                                /* ── VIEW D: UPDATE PASSWORD ── */
                                     <form onSubmit={handleUpdatePasswordSubmit} className="flex flex-col gap-4">
                                         <div className="flex flex-col gap-2">
                                             <label className="font-['Quicksand'] font-bold text-[11px] text-[#15283D]/60 uppercase tracking-[0.15em] pl-1">New Password</label>
@@ -753,8 +752,8 @@ export default function UnifiedAuth() {
                                             )}
                                         </button>
                                     </form>
-                                )}
-                            </div>
+                            ) : null}
+                        </div>
 
                     </div>
                 </div>
