@@ -288,6 +288,9 @@ export function Footer() {
                                 <p className="footer-slogan">
                                     Building Future-Ready Leaders <br/>
                                 </p>
+                                <p className="text-white/60 text-xs leading-relaxed mt-4 mb-6 max-w-[280px]">
+                                    The Aster School portal provides secure authentication for parents and students to access admissions, academic tracking, and enrollment services.
+                                </p>
                                 <div className="footer-contact">
                                     <a href="mailto:info@aster.edu.pk" className="footer-contact-link">info@aster.edu.pk</a>
                                     <a href="tel:+923368827837" className="footer-contact-link">+92 336 882 7837</a>
