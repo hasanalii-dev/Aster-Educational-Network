@@ -479,11 +479,11 @@ export default function UnifiedAuth() {
                                     )}
 
                                     {/* Google Identity Services Button */}
-                                    <div className="w-full flex justify-center min-h-[48px] overflow-hidden rounded-xl border border-transparent hover:border-[#E5E7EB] transition-all">
+                                    <div className="w-full flex justify-center py-2">
                                         <GoogleLogin
                                             onSuccess={handleGoogleSuccess}
                                             onError={handleGoogleError}
-                                            theme="outline"
+                                            theme="filled_blue"
                                             size="large"
                                             shape="rectangular"
                                             text={isSignUp ? "signup_with" : "continue_with"}

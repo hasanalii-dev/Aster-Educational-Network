@@ -288,6 +288,9 @@ export function Footer() {
                                 <p className="footer-slogan">
                                     Building Future-Ready Leaders <br/>
                                 </p>
+                                <p className="font-['Playfair_Display'] italic font-bold text-[28px] text-[#A0C4E8] mt-6 mb-2 tracking-wide">
+                                    Whatever It Takes!
+                                </p>
                                 <p className="text-white/60 text-xs leading-relaxed mt-4 mb-6 max-w-[280px]">
                                     The Aster School portal provides secure authentication for parents and students to access admissions, academic tracking, and enrollment services.
                                 </p>
