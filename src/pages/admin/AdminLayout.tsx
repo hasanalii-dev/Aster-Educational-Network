@@ -88,7 +88,7 @@ export default function AdminLayout() {
             {/* Global Legacy Class Overrides & Scrollbars */}
             <style>{styles}</style>
 
-            <div className="admin-container flex min-h-screen font-['Quicksand'] bg-[#F8F9FA] selection:bg-[#334a89]/20 selection:text-[#334a89]">
+            <div className={`admin-container flex min-h-screen font-['Quicksand'] selection:bg-[#00E559]/20 selection:text-[#00E559] ${location.pathname === '/admin' ? 'bg-[#050505]' : 'bg-[#F8F9FA]'}`}>
 
                 {/* =========================================================
                     MOBILE OVERLAY
@@ -101,7 +101,7 @@ export default function AdminLayout() {
                 {/* =========================================================
                     OBSIDIAN SIDEBAR
                 ========================================================= */}
-                <aside className={`fixed lg:sticky top-0 left-0 h-screen w-[280px] bg-gradient-to-b from-[#15283D] to-[#0a131d] flex flex-col shrink-0 z-[100] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] shadow-2xl lg:shadow-none ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
+                <aside className={`fixed lg:sticky top-0 left-0 h-screen w-[280px] bg-[#0A0A0A] border-r border-white/5 flex flex-col shrink-0 z-[100] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] shadow-2xl lg:shadow-none ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
 
                     {/* Sidebar Header */}
                     <div className="flex items-center justify-between px-8 py-8 shrink-0">
@@ -111,7 +111,7 @@ export default function AdminLayout() {
                             </div>
                             <div>
                                 <span className="block font-bold text-[16px] text-white tracking-tight">Aster CMS</span>
-                                <span className="block font-bold text-[10px] uppercase tracking-widest text-[#ffc715]">System v2.0</span>
+                                <span className="block font-bold text-[10px] uppercase tracking-widest text-[#00E559]">by Aster IT</span>
                             </div>
                         </div>
                         <button className="lg:hidden text-white/50 hover:text-white transition-colors" onClick={() => setSidebarOpen(false)}>
@@ -135,7 +135,7 @@ export default function AdminLayout() {
                                         className={({isActive}) => `
                                             flex items-center justify-between px-4 py-3 rounded-[14px] font-bold text-[13px] tracking-wide transition-all duration-300 group
                                             ${isActive
-                                            ? 'bg-[#334a89] text-white shadow-[0_8px_16px_rgba(51,74,137,0.4)]'
+                                            ? 'bg-[#00E559]/10 text-[#00E559] shadow-[0_8px_16px_rgba(0,229,89,0.05)]'
                                             : 'text-white/60 hover:text-white hover:bg-white/5'
                                         }
                                         `}
@@ -147,7 +147,7 @@ export default function AdminLayout() {
                                             <span>{i.label}</span>
                                         </div>
                                         {/* Subtle active indicator arrow */}
-                                        <ChevronRight className="w-4 h-4 opacity-0 -ml-4 transition-all duration-300 group-[.active]:opacity-100 group-[.active]:ml-0 text-[#ffc715]" />
+                                        <ChevronRight className="w-4 h-4 opacity-0 -ml-4 transition-all duration-300 group-[.active]:opacity-100 group-[.active]:ml-0 group-[.active]:text-[#00E559] text-white/20" />
                                     </NavLink>
                                 ))}
                             </div>
@@ -171,32 +171,32 @@ export default function AdminLayout() {
                 {/* =========================================================
                     MAIN CANVAS
                 ========================================================= */}
-                <div className="flex-1 flex flex-col min-w-0 h-screen overflow-y-auto bg-[#F8F9FA] custom-scrollbar relative">
+                <div className={`flex-1 flex flex-col min-w-0 h-screen overflow-y-auto custom-scrollbar relative ${location.pathname === '/admin' ? 'bg-[#050505]' : 'bg-[#F8F9FA]'}`}>
 
                     {/* Glassmorphic Topbar */}
-                    <header className="sticky top-0 z-40 h-[80px] bg-white/80 backdrop-blur-xl border-b border-[#E5E7EB] px-6 md:px-12 flex items-center justify-between shrink-0">
+                    <header className={`sticky top-0 z-40 h-[80px] backdrop-blur-xl border-b flex items-center justify-between shrink-0 px-6 md:px-12 transition-colors duration-300 ${location.pathname === '/admin' ? 'bg-[#0A0A0A]/80 border-white/5' : 'bg-white/80 border-[#E5E7EB]'}`}>
                         <div className="flex items-center gap-4">
                             <button
-                                className="lg:hidden w-10 h-10 bg-[#F4F6F8] hover:bg-[#E5E7EB] text-[#15283D] rounded-full flex items-center justify-center transition-colors"
+                                className={`lg:hidden w-10 h-10 rounded-full flex items-center justify-center transition-colors ${location.pathname === '/admin' ? 'bg-[#141414] hover:bg-[#1f1f1f] text-white' : 'bg-[#F4F6F8] hover:bg-[#E5E7EB] text-[#15283D]'}`}
                                 onClick={() => setSidebarOpen(true)}
                             >
                                 <Menu size={20} />
                             </button>
-                            <div className="hidden md:flex items-center gap-3 px-4 py-2 bg-[#F4F6F8] rounded-full border border-[#E5E7EB]">
-                                <Sparkles className="w-4 h-4 text-[#334a89]" />
-                                <span className="font-bold text-[12px] uppercase tracking-widest text-[#5C5C61]">
+                            <div className={`hidden md:flex items-center gap-3 px-4 py-2 rounded-full border ${location.pathname === '/admin' ? 'bg-[#141414] border-white/10' : 'bg-[#F4F6F8] border-[#E5E7EB]'}`}>
+                                <Sparkles className={`w-4 h-4 ${location.pathname === '/admin' ? 'text-[#00E559]' : 'text-[#334a89]'}`} />
+                                <span className={`font-bold text-[12px] uppercase tracking-widest ${location.pathname === '/admin' ? 'text-white/60' : 'text-[#5C5C61]'}`}>
                                     {currentTitle}
                                 </span>
                             </div>
                         </div>
 
                         {/* Admin Profile Pill */}
-                        <div className="flex items-center gap-3 pl-4 py-2 pr-2 bg-white rounded-full border border-[#E5E7EB] shadow-sm hover:shadow-md transition-shadow cursor-default">
+                        <div className={`flex items-center gap-3 pl-4 py-2 pr-2 rounded-full border shadow-sm hover:shadow-md transition-shadow cursor-default ${location.pathname === '/admin' ? 'bg-[#141414] border-white/10' : 'bg-white border-[#E5E7EB]'}`}>
                             <div className="flex flex-col items-end hidden sm:flex">
-                                <span className="font-bold text-[13px] text-[#15283D] leading-tight capitalize">{role?.replace('_', ' ') || 'Admin'}</span>
-                                <span className="font-medium text-[11px] text-[#A0AEC0]">{user.user_metadata?.full_name || user.email}</span>
+                                <span className={`font-bold text-[13px] leading-tight capitalize ${location.pathname === '/admin' ? 'text-white' : 'text-[#15283D]'}`}>{role?.replace('_', ' ') || 'Admin'}</span>
+                                <span className={`font-medium text-[11px] ${location.pathname === '/admin' ? 'text-white/50' : 'text-[#A0AEC0]'}`}>{user.user_metadata?.full_name || user.email}</span>
                             </div>
-                            <div className="w-10 h-10 rounded-full bg-[#15283D] flex items-center justify-center overflow-hidden shadow-inner shrink-0 border border-[#E5E7EB]">
+                            <div className="w-10 h-10 rounded-full bg-[#15283D] flex items-center justify-center overflow-hidden shadow-inner shrink-0 border border-white/10">
                                 <img src={user.user_metadata?.custom_avatar_url || user.user_metadata?.avatar_url || `https://api.dicebear.com/9.x/notionists/svg?seed=${user.id}`} alt="Admin Avatar" className="w-[120%] h-[120%] object-cover object-bottom" />
                             </div>
                         </div>
