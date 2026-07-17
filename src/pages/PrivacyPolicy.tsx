@@ -2,17 +2,17 @@ import { Helmet } from 'react-helmet-async'
 
 export default function PrivacyPolicy() {
     return (
-        <main className="pt-40 pb-32 bg-[#F4F6F8] min-h-screen font-['Quicksand']">
+        <main className="pt-40 pb-32 bg-white min-h-screen font-['Quicksand']">
             <Helmet>
                 <title>Privacy Policy | The Aster School</title>
                 <meta name="description" content="Privacy Policy for The Aster School." />
             </Helmet>
 
-            <div className="max-w-4xl mx-auto px-6 md:px-12 bg-white rounded-[32px] p-8 md:p-16 shadow-[0_4px_24px_rgba(21,40,61,0.04)] border border-[#E5E7EB]">
+            <div className="max-w-4xl mx-auto px-6 md:px-12">
                 <h1 className="text-4xl md:text-5xl font-extrabold text-[#15283D] mb-4 tracking-tight">Privacy Policy</h1>
                 <p className="text-[#A0AEC0] font-bold tracking-wide uppercase text-sm mb-12 border-b border-[#E5E7EB] pb-8">Last updated: July 2026</p>
                 
-                <div className="flex flex-col gap-10 text-[#5C5C61] font-medium text-[17px] leading-[1.8]">
+                <div className="flex flex-col gap-10 text-[#5C5C61] font-medium text-[17px] leading-[1.8] [&_h2]:font-['Quicksand'] [&_h3]:font-['Quicksand'] [&_p]:font-['Quicksand'] [&_li]:font-['Quicksand']">
                     <section>
                         <p>
                             The Aster School ("we", "our", or "us") respects your privacy and is committed to protecting the personal data of our students, parents, staff, and visitors. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website (aster.edu.pk) and use our online portals and services.
@@ -41,7 +41,7 @@ export default function PrivacyPolicy() {
                         </ul>
                     </section>
 
-                    <section className="bg-[#F4F6F8] p-8 rounded-[24px]">
+                    <section className="bg-transparent border border-[#E5E7EB] p-8 rounded-[24px]">
                         <h2 className="text-2xl font-bold text-[#334a89] mb-4">3. Google User Data and Third-Party Authentication</h2>
                         <p className="mb-3">
                             To provide a secure and convenient login experience, our portal utilizes Google Authentication (OAuth). When you choose to "Continue with Google," we receive basic profile information required to authenticate your identity.
@@ -51,7 +51,7 @@ export default function PrivacyPolicy() {
                             <li><strong>How we use it:</strong> This information is used exclusively to verify your identity, secure your session, and link you to your specific student/parent records in our database.</li>
                             <li><strong>Storage & Sharing:</strong> Your Google data is securely stored within our encrypted database. We <strong>do not</strong> share, sell, or distribute your Google user data to any third-party marketing, advertising, or external organizations under any circumstances.</li>
                         </ul>
-                        <p className="text-sm font-bold text-[#15283D]/70 bg-white p-4 rounded-xl border border-[#E5E7EB]">
+                        <p className="text-sm font-bold text-[#15283D]/70 bg-[#F4F6F8] p-4 rounded-xl">
                             The Aster School's use and transfer of information received from Google APIs to any other app will adhere to the <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noreferrer" className="text-[#334a89] underline">Google API Services User Data Policy</a>, including the Limited Use requirements.
                         </p>
                     </section>
