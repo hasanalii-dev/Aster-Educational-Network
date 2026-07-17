@@ -107,7 +107,7 @@ export default function AdminLayout() {
                     <div className="flex items-center justify-between px-8 py-8 shrink-0">
                         <div className="flex items-center gap-4">
                             <div className="w-10 h-10 bg-white/5 border border-white/10 flex items-center justify-center overflow-hidden shadow-inner">
-                                <img src="https://aster.edu.pk/wp-content/uploads/2023/07/cropped-aster.630c94b050f560.07593532.jpg" alt="Aster" className="w-full h-full object-cover opacity-90" />
+                                <img src="https://aster.edu.pk/logo.jpg" alt="Aster" className="w-full h-full object-cover opacity-90" />
                             </div>
                             <div>
                                 <span className="block font-bold text-[16px] text-white tracking-tight">Aster CMS</span>
