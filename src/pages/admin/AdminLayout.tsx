@@ -88,7 +88,7 @@ export default function AdminLayout() {
             {/* Global Legacy Class Overrides & Scrollbars */}
             <style>{styles}</style>
 
-            <div className={`admin-container flex min-h-screen font-['Quicksand'] selection:bg-[#00E559]/20 selection:text-[#00E559] ${location.pathname === '/admin' ? 'bg-[#050505]' : 'bg-[#F8F9FA]'}`}>
+            <div className={`admin-container flex min-h-screen font-['Quicksand'] selection:bg-[#ffc715]/20 selection:text-[#ffc715] ${location.pathname === '/admin' ? 'bg-[#050505]' : 'bg-[#F8F9FA]'}`}>
 
                 {/* =========================================================
                     MOBILE OVERLAY
@@ -111,7 +111,7 @@ export default function AdminLayout() {
                             </div>
                             <div>
                                 <span className="block font-bold text-[16px] text-white tracking-tight">Aster CMS</span>
-                                <span className="block font-bold text-[10px] uppercase tracking-widest text-[#00E559]">by Aster IT</span>
+                                <span className="block font-bold text-[10px] uppercase tracking-widest text-[#ffc715]">System v2.0</span>
                             </div>
                         </div>
                         <button className="lg:hidden text-white/50 hover:text-white transition-colors" onClick={() => setSidebarOpen(false)}>
@@ -135,7 +135,7 @@ export default function AdminLayout() {
                                         className={({isActive}) => `
                                             flex items-center justify-between px-4 py-3 rounded-[14px] font-bold text-[13px] tracking-wide transition-all duration-300 group
                                             ${isActive
-                                            ? 'bg-[#00E559]/10 text-[#00E559] shadow-[0_8px_16px_rgba(0,229,89,0.05)]'
+                                            ? 'bg-[#ffc715]/10 text-[#ffc715] shadow-[0_8px_16px_rgba(255,199,21,0.05)]'
                                             : 'text-white/60 hover:text-white hover:bg-white/5'
                                         }
                                         `}
@@ -147,7 +147,7 @@ export default function AdminLayout() {
                                             <span>{i.label}</span>
                                         </div>
                                         {/* Subtle active indicator arrow */}
-                                        <ChevronRight className="w-4 h-4 opacity-0 -ml-4 transition-all duration-300 group-[.active]:opacity-100 group-[.active]:ml-0 group-[.active]:text-[#00E559] text-white/20" />
+                                        <ChevronRight className="w-4 h-4 opacity-0 -ml-4 transition-all duration-300 group-[.active]:opacity-100 group-[.active]:ml-0 group-[.active]:text-[#ffc715] text-white/20" />
                                     </NavLink>
                                 ))}
                             </div>
@@ -183,7 +183,7 @@ export default function AdminLayout() {
                                 <Menu size={20} />
                             </button>
                             <div className={`hidden md:flex items-center gap-3 px-4 py-2 rounded-full border ${location.pathname === '/admin' ? 'bg-[#141414] border-white/10' : 'bg-[#F4F6F8] border-[#E5E7EB]'}`}>
-                                <Sparkles className={`w-4 h-4 ${location.pathname === '/admin' ? 'text-[#00E559]' : 'text-[#334a89]'}`} />
+                                <Sparkles className={`w-4 h-4 ${location.pathname === '/admin' ? 'text-[#ffc715]' : 'text-[#334a89]'}`} />
                                 <span className={`font-bold text-[12px] uppercase tracking-widest ${location.pathname === '/admin' ? 'text-white/60' : 'text-[#5C5C61]'}`}>
                                     {currentTitle}
                                 </span>

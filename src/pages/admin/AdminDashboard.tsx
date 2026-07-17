@@ -68,12 +68,12 @@ export default function AdminDashboard() {
             label: 'Admission Forms',
             value: stats.admissions,
             icon: GraduationCap,
-            color: 'text-[#00E559]',
-            bg: 'bg-[#00E559]/10',
-            border: 'hover:border-[#00E559]/30 border-white/5',
-            glow: '0 229 89',
-            hex: '#00E559',
-            valueColor: 'text-[#00E559]'
+            color: 'text-[#ffc715]',
+            bg: 'bg-[#ffc715]/10',
+            border: 'hover:border-[#ffc715]/30 border-white/5',
+            glow: '255 199 21',
+            hex: '#ffc715',
+            valueColor: 'text-[#ffc715]'
         },
         {
             label: 'Contact Inquiries',
@@ -181,7 +181,7 @@ export default function AdminDashboard() {
             <div className="action-plinth bg-[#111111] border border-white/5 rounded-[32px] p-8 md:p-12 relative overflow-hidden shadow-2xl">
 
                 {/* Cinematic Ambient Glows */}
-                <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[#00E559] rounded-full filter blur-[120px] opacity-[0.03] translate-x-1/3 -translate-y-1/3 pointer-events-none" />
+                <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[#ffc715] rounded-full filter blur-[120px] opacity-[0.05] translate-x-1/3 -translate-y-1/3 pointer-events-none" />
 
                 <div className="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-10">
 
@@ -195,7 +195,7 @@ export default function AdminDashboard() {
                     <div className="grid grid-cols-2 gap-3 w-full lg:w-[320px] shrink-0">
                         <Link
                             to="/admin/journal"
-                            className="col-span-2 flex items-center justify-center gap-2 px-6 py-4 bg-[#00E559]/10 hover:bg-[#00E559]/20 text-[#00E559] border border-[#00E559]/20 rounded-xl font-bold text-[13px] tracking-widest transition-all duration-300 shadow-none group"
+                            className="col-span-2 flex items-center justify-center gap-2 px-6 py-4 bg-[#ffc715]/10 hover:bg-[#ffc715]/20 text-[#ffc715] border border-[#ffc715]/20 rounded-xl font-bold text-[13px] tracking-widest transition-all duration-300 shadow-none group"
                         >
                             <Plus className="w-4 h-4 transition-transform group-hover:rotate-90" />
                             New Article
