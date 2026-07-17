@@ -4,7 +4,7 @@ import { supabase } from '@/lib/supabase'
 import { Link, Navigate } from 'react-router-dom'
 import { SEO } from '@/components/seo/SEO'
 import gsap from 'gsap'
-import { GraduationCap, Map, ArrowRight, FileText, CheckCircle2, Clock, XCircle, MessageSquareQuote, LayoutDashboard, ChevronRight } from 'lucide-react'
+import { GraduationCap, Map, ArrowRight, FileText, CheckCircle2, Clock, XCircle, MessageSquareQuote, LayoutDashboard, ChevronRight, RefreshCw } from 'lucide-react'
 
 // Avatar Style Generator based on account name
 const getAvatarStyle = (char: string) => {
@@ -25,7 +25,27 @@ export default function ProfileDashboard() {
   const [tours, setTours] = useState<any[]>([])
   const [admissions, setAdmissions] = useState<any[]>([])
   const [fetching, setFetching] = useState(true)
+  const [avatarUrl, setAvatarUrl] = useState('')
+  const [isUpdatingAvatar, setIsUpdatingAvatar] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (user) {
+        setAvatarUrl(user.user_metadata?.avatar_url || `https://api.dicebear.com/9.x/notionists/svg?seed=${user.id}`)
+    }
+  }, [user])
+
+  const handleRandomizeAvatar = async () => {
+      setIsUpdatingAvatar(true)
+      const newSeed = Math.random().toString(36).substring(7)
+      const newUrl = `https://api.dicebear.com/9.x/notionists/svg?seed=${newSeed}`
+      setAvatarUrl(newUrl)
+      
+      await supabase.auth.updateUser({
+          data: { avatar_url: newUrl }
+      })
+      setIsUpdatingAvatar(false)
+  }
 
   useEffect(() => {
     async function fetchData() {
@@ -102,11 +122,24 @@ export default function ProfileDashboard() {
             <div className="relative z-10 px-8 py-12 md:px-14 md:py-16 flex flex-col md:flex-row items-center md:items-start gap-8">
                 {/* Custom Profile Icon with Hash Gradient */}
                 <div className="shrink-0 relative group perspective-1000">
-                    <div className={`w-28 h-28 md:w-32 md:h-32 ${avatarStyle.bg} rounded-3xl flex items-center justify-center shadow-[0_20px_40px_rgba(0,0,0,0.2)] border border-white/20 transition-all duration-700 group-hover:rotate-y-12 group-hover:scale-105 group-hover:shadow-[0_30px_60px_rgba(0,0,0,0.3)] rotate-3`}>
-                        <span className={`${avatarStyle.text} text-5xl md:text-6xl font-extrabold font-['Quicksand'] tracking-tight`}>
-                            {userInitial}
-                        </span>
+                    <div className={`w-28 h-28 md:w-32 md:h-32 ${avatarStyle.bg} rounded-3xl flex items-center justify-center shadow-[0_20px_40px_rgba(0,0,0,0.2)] border border-white/20 transition-all duration-700 group-hover:rotate-y-12 group-hover:scale-105 group-hover:shadow-[0_30px_60px_rgba(0,0,0,0.3)] rotate-3 overflow-hidden`}>
+                        {avatarUrl ? (
+                            <img src={avatarUrl} alt="Avatar" className="w-[120%] h-[120%] object-cover object-bottom" />
+                        ) : (
+                            <span className={`${avatarStyle.text} text-5xl md:text-6xl font-extrabold font-['Quicksand'] tracking-tight`}>
+                                {userInitial}
+                            </span>
+                        )}
                     </div>
+                    {/* Randomize Button */}
+                    <button 
+                        onClick={handleRandomizeAvatar}
+                        disabled={isUpdatingAvatar}
+                        className="absolute -bottom-3 -right-3 bg-white text-[#15283D] p-2.5 rounded-full shadow-lg border border-[#E5E7EB] hover:bg-[#F4F6F8] transition-all duration-300 z-20 hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed group-hover:rotate-12"
+                        title="Randomize Avatar"
+                    >
+                        <RefreshCw className={`w-5 h-5 ${isUpdatingAvatar ? 'animate-spin' : ''}`} />
+                    </button>
                 </div>
                 
                 <div className="text-center md:text-left flex-1 flex flex-col justify-center pt-2">
