@@ -3,7 +3,7 @@ import { supabase } from '@/lib/supabase'
 import gsap from 'gsap'
 import {
     SlidersHorizontal, MessageSquare,
-    ChevronDown, Check, FileText, GraduationCap, User, Mail, Calendar, X, CheckCircle2
+    ChevronDown, Check, FileText, GraduationCap, User, Mail, Calendar, X, CheckCircle2, Download
 } from 'lucide-react'
 
 // =========================================================
@@ -152,6 +152,51 @@ export default function AdmissionsManager() {
         })
     }
 
+    const exportToCSV = () => {
+        if (admissions.length === 0) return
+
+        const headers = [
+            "ID",
+            "Child Name",
+            "Child DOB",
+            "Grade Applying For",
+            "Current School",
+            "Parent Name",
+            "Parent Email",
+            "Parent Phone",
+            "Status",
+            "Created At",
+            "Admin Feedback"
+        ]
+
+        const csvContent = [
+            headers.join(','),
+            ...admissions.map(adm => [
+                `"${adm.id}"`,
+                `"${adm.child_full_name || ''}"`,
+                `"${adm.child_dob || ''}"`,
+                `"${adm.grade_applying_for || ''}"`,
+                `"${adm.current_school || ''}"`,
+                `"${adm.parent_name || ''}"`,
+                `"${adm.parent_email || ''}"`,
+                `"${(adm.country_code || '') + (adm.parent_phone || '')}"`,
+                `"${adm.status || ''}"`,
+                `"${new Date(adm.created_at).toLocaleString()}"`,
+                `"${(adm.admin_feedback || '').replace(/"/g, '""')}"`
+            ].join(','))
+        ].join('\n')
+
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' })
+        const link = document.createElement('a')
+        const url = URL.createObjectURL(blob)
+        link.setAttribute('href', url)
+        link.setAttribute('download', `admissions_export_${new Date().toISOString().split('T')[0]}.csv`)
+        link.style.visibility = 'hidden'
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)
+    }
+
     return (
         <div className="font-['Quicksand'] selection:bg-[#334a89]/20 selection:text-[#334a89] pb-24">
 
@@ -195,6 +240,13 @@ export default function AdmissionsManager() {
                     <h1 className="text-3xl md:text-4xl font-bold text-[#15283D] tracking-tight mb-2">Admissions Queue</h1>
                     <p className="text-[#5C5C61] font-medium text-[15px]">Manage, review, and update prospective student applications.</p>
                 </div>
+                <button
+                    onClick={exportToCSV}
+                    className="flex items-center gap-2 px-6 py-3 bg-[#334a89]/10 text-[#334a89] rounded-full font-bold text-[13px] uppercase tracking-widest hover:bg-[#334a89]/20 transition-colors shrink-0"
+                >
+                    <Download className="w-4 h-4" />
+                    Export CSV
+                </button>
             </div>
 
             {/* Filter Command Bar */}
@@ -288,7 +340,7 @@ export default function AdmissionsManager() {
                                             </div>
                                             <div className="flex items-center gap-2 text-[#5C5C61] font-medium text-[13px]">
                                                 <Mail className="w-3.5 h-3.5 text-[#A0AEC0]" />
-                                                {adm.email}
+                                                {adm.parent_email}
                                             </div>
                                         </div>
                                     </td>
