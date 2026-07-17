@@ -4,7 +4,7 @@ import gsap from 'gsap'
 import {
     SlidersHorizontal, MessageSquare,
     Mail, Phone, Calendar, MapPin, User, X,
-    ChevronDown, CheckCircle2, Check, Clock
+    ChevronDown, CheckCircle2, Check, Clock, Download
 } from 'lucide-react'
 
 // =========================================================
@@ -149,6 +149,47 @@ export default function CampusToursManager() {
         })
     }
 
+    const exportToCSV = () => {
+        if (tours.length === 0) return
+
+        const headers = [
+            "ID",
+            "Parent Name",
+            "Email",
+            "Phone",
+            "Preferred Date",
+            "Preferred Time",
+            "Status",
+            "Created At",
+            "Admin Note"
+        ]
+
+        const csvContent = [
+            headers.join(','),
+            ...tours.map(tour => [
+                `"${tour.id}"`,
+                `"${tour.parent_name || ''}"`,
+                `"${tour.email || ''}"`,
+                `"${tour.phone || ''}"`,
+                `"${tour.preferred_date || ''}"`,
+                `"${tour.preferred_time_slot || ''}"`,
+                `"${tour.status || ''}"`,
+                `"${new Date(tour.created_at).toLocaleString()}"`,
+                `"${(tour.admin_outcome_note || '').replace(/"/g, '""')}"`
+            ].join(','))
+        ].join('\n')
+
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' })
+        const link = document.createElement('a')
+        const url = URL.createObjectURL(blob)
+        link.setAttribute('href', url)
+        link.setAttribute('download', `campus_tours_export_${new Date().toISOString().split('T')[0]}.csv`)
+        link.style.visibility = 'hidden'
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)
+    }
+
     return (
         <div className="font-['Quicksand'] selection:bg-[#334a89]/20 selection:text-[#334a89] pb-24">
 
@@ -177,6 +218,13 @@ export default function CampusToursManager() {
                     <h1 className="text-3xl md:text-4xl font-bold text-[#15283D] tracking-tight mb-2">Campus Tours Queue</h1>
                     <p className="text-[#5C5C61] font-medium text-[15px]">Manage, schedule, and review prospective parent campus visits.</p>
                 </div>
+                <button
+                    onClick={exportToCSV}
+                    className="flex items-center gap-2 px-6 py-3 bg-[#334a89]/10 text-[#334a89] rounded-full font-bold text-[13px] uppercase tracking-widest hover:bg-[#334a89]/20 transition-colors shrink-0"
+                >
+                    <Download className="w-4 h-4" />
+                    Export CSV
+                </button>
             </div>
 
             <div className="bg-white p-2 rounded-[20px] shadow-[0_8px_30px_rgba(21,40,61,0.03)] border border-[#E5E7EB] mb-8 flex flex-nowrap gap-2 items-center overflow-x-auto scrollbar-hide">

@@ -12,14 +12,16 @@ export default function UnifiedAuth() {
 
     // State Engine
     const [isSignUp, setIsSignUp] = useState(false)
-    const [authStep, setAuthStep] = useState<'credentials' | 'otp'>('credentials')
+    const [authStep, setAuthStep] = useState<'credentials' | 'otp' | 'forgot_password'>('credentials')
     const [welcomeScreen, setWelcomeScreen] = useState<{type: 'new' | 'existing' | 'admin', name: string} | null>(null)
     const [showPassword, setShowPassword] = useState(false)
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false)
 
     // Form Payload
     const [fullName, setFullName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [confirmPassword, setConfirmPassword] = useState('')
     const [otpCode, setOtpCode] = useState('')
 
     // Feedback Engine
@@ -87,9 +89,9 @@ export default function UnifiedAuth() {
     }
 
     // =========================================================
-    // ANIMATED VIEW CHANGE (Credentials <-> OTP)
+    // ANIMATED VIEW CHANGE
     // =========================================================
-    const animateStepChange = (nextStep: 'credentials' | 'otp') => {
+    const animateStepChange = (nextStep: 'credentials' | 'otp' | 'forgot_password') => {
         if (!formStageRef.current) {
             setAuthStep(nextStep)
             return
@@ -124,6 +126,17 @@ export default function UnifiedAuth() {
         setLoading(true)
 
         if (isSignUp) {
+            if (password !== confirmPassword) {
+                setError("Passwords do not match.")
+                setLoading(false)
+                return
+            }
+            if (password.length < 6) {
+                setError("Password must be at least 6 characters long.")
+                setLoading(false)
+                return
+            }
+
             const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
                 email,
                 password,
@@ -186,6 +199,26 @@ export default function UnifiedAuth() {
         if (data.user) {
             await routeUser(data.user.id)
         }
+    }
+
+    const handleForgotPasswordSubmit = async (e: FormEvent) => {
+        e.preventDefault()
+        setError('')
+        setStatusMsg('')
+        setLoading(true)
+
+        const { error: resetError } = await supabase.auth.resetPasswordForEmail(email, {
+            redirectTo: window.location.origin,
+        })
+
+        if (resetError) {
+            setError(resetError.message)
+            setLoading(false)
+            return
+        }
+
+        setStatusMsg(`Password reset link sent to ${email}.`)
+        setLoading(false)
     }
 
     const routeUser = async (userId: string) => {
@@ -263,15 +296,19 @@ export default function UnifiedAuth() {
                             <h1 className="font-['Quicksand'] text-3xl md:text-[34px] font-bold tracking-tight text-[#15283D] mb-3">
                                 {authStep === 'otp'
                                     ? 'Confirm Email'
+                                    : authStep === 'forgot_password'
+                                    ? 'Reset Password'
                                     : isSignUp ? 'Create an Account' : 'Sign In'
                                 }
                             </h1>
                             <p className="font-['Quicksand'] text-[15px] font-medium text-[#5C5C61] leading-relaxed">
                                 {authStep === 'otp'
                                     ? 'Provide the 6-digit verification code token sent to your email address. (Check your spam/junk folder if you don\'t see it)'
-                                    : isSignUp
-                                        ? 'Create an account to securely track your applications, forms, and admission updates.'
-                                        : 'Sign in to access your portal, forms, and events.'
+                                    : authStep === 'forgot_password'
+                                        ? 'Enter your email address and we will send you a link to reset your password.'
+                                        : isSignUp
+                                            ? 'Create an account to securely track your applications, forms, and admission updates.'
+                                            : 'Sign in to access your portal, forms, and events.'
                                 }
                             </p>
                         </div>
@@ -371,6 +408,38 @@ export default function UnifiedAuth() {
                                         </div>
                                     </div>
 
+                                    {isSignUp && (
+                                        <div className="flex flex-col gap-2">
+                                            <label className="font-['Quicksand'] font-bold text-[11px] text-[#15283D]/60 uppercase tracking-[0.15em] pl-1">Confirm Password</label>
+                                            <div className="relative group">
+                                                <Lock className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-[#A0AEC0] transition-colors group-focus-within:text-[#334a89]" />
+                                                <input
+                                                    type={showConfirmPassword ? "text" : "password"}
+                                                    value={confirmPassword}
+                                                    onChange={(e) => setConfirmPassword(e.target.value)}
+                                                    placeholder="••••••••"
+                                                    className={`w-full pl-14 pr-14 py-4 bg-[#F4F6F8] rounded-[20px] font-['Quicksand'] font-bold text-[15px] text-[#15283D] placeholder-[#A0AEC0] border border-transparent focus:bg-white focus:ring-4 focus:ring-[#334a89]/15 outline-none transition-all duration-300 ${!showConfirmPassword ? 'tracking-[0.2em]' : 'tracking-normal'}`}
+                                                    required
+                                                    minLength={6}
+                                                />
+                                                <button 
+                                                    type="button" 
+                                                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                                                    className="absolute right-5 top-1/2 -translate-y-1/2 text-[#A0AEC0] hover:text-[#334a89] transition-colors focus:outline-none"
+                                                >
+                                                    <div className="relative w-5 h-5">
+                                                        <div className={`absolute inset-0 transition-all duration-300 ${showConfirmPassword ? 'opacity-100 scale-100 rotate-0' : 'opacity-0 scale-50 rotate-90'}`}>
+                                                            <EyeOff className="w-5 h-5" />
+                                                        </div>
+                                                        <div className={`absolute inset-0 transition-all duration-300 ${!showConfirmPassword ? 'opacity-100 scale-100 rotate-0' : 'opacity-0 scale-50 -rotate-90'}`}>
+                                                            <Eye className="w-5 h-5" />
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    )}
+
                                     <button
                                         type="submit"
                                         disabled={loading}
@@ -385,8 +454,20 @@ export default function UnifiedAuth() {
                                             </>
                                         )}
                                     </button>
+
+                                    {!isSignUp && (
+                                        <div className="text-center mt-2">
+                                            <button
+                                                type="button"
+                                                onClick={() => animateStepChange('forgot_password')}
+                                                className="font-['Quicksand'] text-[13px] font-bold text-[#5C5C61] hover:text-[#334a89] transition-colors underline underline-offset-4"
+                                            >
+                                                Forgot your password?
+                                            </button>
+                                        </div>
+                                    )}
                                 </form>
-                            ) : (
+                            ) : authStep === 'otp' ? (
 
                                 /* ── VIEW B: 6-DIGIT OTP VAULT ── */
                                 <form onSubmit={handleOtpSubmit} className="flex flex-col gap-6">
@@ -444,6 +525,60 @@ export default function UnifiedAuth() {
                                         className="mt-4 font-['Quicksand'] text-[13px] font-bold text-[#5C5C61] hover:text-[#334a89] transition-colors text-center underline underline-offset-4"
                                     >
                                         ← Modify Email Address
+                                    </button>
+                                </form>
+                            ) : (
+                                /* ── VIEW C: FORGOT PASSWORD ── */
+                                <form onSubmit={handleForgotPasswordSubmit} className="flex flex-col gap-6">
+                                    {error && (
+                                        <div className="p-4 bg-red-50/80 border border-red-100 rounded-2xl flex items-start gap-3">
+                                            <AlertCircle className="w-5 h-5 text-red-600 shrink-0 mt-0.5" />
+                                            <p className="font-['Quicksand'] text-sm font-bold text-red-700 leading-relaxed">{typeof error === 'string' ? error : JSON.stringify(error)}</p>
+                                        </div>
+                                    )}
+                                    {statusMsg && (
+                                        <div className="p-4 bg-[#334a89]/5 border border-[#334a89]/20 rounded-2xl flex items-start gap-3">
+                                            <CheckCircle2 className="w-5 h-5 text-[#334a89] shrink-0 mt-0.5" />
+                                            <p className="font-['Quicksand'] text-sm font-bold text-[#334a89] leading-relaxed">{statusMsg}</p>
+                                        </div>
+                                    )}
+
+                                    <div className="flex flex-col gap-2">
+                                        <label className="font-['Quicksand'] font-bold text-[11px] text-[#15283D]/60 uppercase tracking-[0.15em] pl-1">Email Address</label>
+                                        <div className="relative group">
+                                            <Mail className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-[#A0AEC0] transition-colors group-focus-within:text-[#334a89]" />
+                                            <input
+                                                type="email"
+                                                value={email}
+                                                onChange={(e) => setEmail(e.target.value)}
+                                                placeholder="parent@example.com"
+                                                className="w-full pl-14 pr-5 py-4 bg-[#F4F6F8] rounded-[20px] font-['Quicksand'] font-bold text-[15px] text-[#15283D] placeholder-[#A0AEC0] border border-transparent focus:bg-white focus:ring-4 focus:ring-[#334a89]/15 outline-none transition-all duration-300"
+                                                required
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <button
+                                        type="submit"
+                                        disabled={loading || !email}
+                                        className="w-full mt-2 flex items-center justify-center gap-3 bg-[#334a89] text-white px-8 py-5 rounded-[20px] font-['Quicksand'] font-bold text-[14px] tracking-[0.15em] uppercase transition-all duration-300 hover:bg-[#15283D] hover:shadow-[0_20px_40px_rgba(51,74,137,0.25)] disabled:opacity-70 disabled:cursor-not-allowed group/btn"
+                                    >
+                                        {loading ? (
+                                            <Loader2 className="w-5 h-5 animate-spin" />
+                                        ) : (
+                                            <>
+                                                Send Reset Link
+                                                <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover/btn:translate-x-1" />
+                                            </>
+                                        )}
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        onClick={() => animateStepChange('credentials')}
+                                        className="mt-4 font-['Quicksand'] text-[13px] font-bold text-[#5C5C61] hover:text-[#334a89] transition-colors text-center underline underline-offset-4"
+                                    >
+                                        ← Back to Sign In
                                     </button>
                                 </form>
                             )}
