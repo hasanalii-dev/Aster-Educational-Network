@@ -31,7 +31,7 @@ export default function ProfileDashboard() {
 
   useEffect(() => {
     if (user) {
-        setAvatarUrl(user.user_metadata?.avatar_url || `https://api.dicebear.com/9.x/notionists/svg?seed=${user.id}`)
+        setAvatarUrl(user.user_metadata?.custom_avatar_url || user.user_metadata?.avatar_url || `https://api.dicebear.com/9.x/notionists/svg?seed=${user.id}`)
     }
   }, [user])
 
@@ -47,7 +47,7 @@ export default function ProfileDashboard() {
       setAvatarUrl(newUrl)
       
       await supabase.auth.updateUser({
-          data: { avatar_url: newUrl }
+          data: { custom_avatar_url: newUrl }
       })
       setIsUpdatingAvatar(false)
   }

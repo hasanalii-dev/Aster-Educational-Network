@@ -197,7 +197,7 @@ export default function AdminLayout() {
                                 <span className="font-medium text-[11px] text-[#A0AEC0]">{user.user_metadata?.full_name || user.email}</span>
                             </div>
                             <div className="w-10 h-10 rounded-full bg-[#15283D] flex items-center justify-center overflow-hidden shadow-inner shrink-0 border border-[#E5E7EB]">
-                                <img src={user.user_metadata?.avatar_url || `https://api.dicebear.com/9.x/notionists/svg?seed=${user.id}`} alt="Admin Avatar" className="w-[120%] h-[120%] object-cover object-bottom" />
+                                <img src={user.user_metadata?.custom_avatar_url || user.user_metadata?.avatar_url || `https://api.dicebear.com/9.x/notionists/svg?seed=${user.id}`} alt="Admin Avatar" className="w-[120%] h-[120%] object-cover object-bottom" />
                             </div>
                         </div>
                     </header>

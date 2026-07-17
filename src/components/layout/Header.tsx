@@ -460,10 +460,10 @@ export function Header({
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
                                     <TransitionLink to="/profile" className="flex items-center gap-2 !no-underline">
                                         <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: '#ffc715', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }} title={user.email || 'Profile'}>
-                                            <img src={user.user_metadata?.avatar_url || `https://api.dicebear.com/9.x/notionists/svg?seed=${user.id}`} alt="Avatar" style={{ width: '120%', height: '120%', objectFit: 'cover' }} />
+                                            <img src={user.user_metadata?.custom_avatar_url || user.user_metadata?.avatar_url || `https://api.dicebear.com/9.x/notionists/svg?seed=${user.id}`} alt="Avatar" style={{ width: '120%', height: '120%', objectFit: 'cover' }} />
                                         </div>
                                         <span className="nav-link" style={{ padding: 0, textTransform: 'none' }}>
-                                            {user.email?.split('@')[0]}
+                                            {user.user_metadata?.full_name || user.email?.split('@')[0]}
                                         </span>
                                     </TransitionLink>
                                     <button onClick={() => setShowLogoutModal(true)} className="nav-link" style={{ padding: 0 }} aria-label="Sign out" title="Sign Out">
@@ -555,10 +555,10 @@ export function Header({
                                     <Link to="/profile" className="mobile-action-card card-transparent" onClick={closeMobile} style={{ background: 'rgba(255, 255, 255, 0.1)' }}>
                                         <div className="mobile-action-content overflow-hidden">
                                             <span className="mobile-action-title">My Profile</span>
-                                            <span className="mobile-action-desc truncate block">{user.email}</span>
+                                            <span className="mobile-action-desc truncate block">{user.user_metadata?.full_name || user.email}</span>
                                         </div>
                                         <div className="mobile-action-icon" style={{ flexShrink: 0, borderRadius: '50%', background: '#ffc715', overflow: 'hidden', border: 'none' }}>
-                                            <img src={user.user_metadata?.avatar_url || `https://api.dicebear.com/9.x/notionists/svg?seed=${user.id}`} alt="Avatar" style={{ width: '120%', height: '120%', objectFit: 'cover' }} />
+                                            <img src={user.user_metadata?.custom_avatar_url || user.user_metadata?.avatar_url || `https://api.dicebear.com/9.x/notionists/svg?seed=${user.id}`} alt="Avatar" style={{ width: '120%', height: '120%', objectFit: 'cover' }} />
                                         </div>
                                     </Link>
                                     <button className="mobile-action-card card-transparent" onClick={() => setShowLogoutModal(true)} style={{ width: '100%', textAlign: 'left', cursor: 'pointer', border: 'none', background: 'rgba(255, 255, 255, 0.05)', padding: '12px 24px' }}>
