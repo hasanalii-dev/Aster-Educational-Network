@@ -35,7 +35,7 @@ function CustomSelect({ value, onChange, options, zIndex, placeholder = 'Select.
                 onClick={() => setIsOpen(!isOpen)}
                 className={`w-full flex items-center justify-between pl-4 pr-3 py-3.5 bg-[#F4F6F8] rounded-[20px] border transition-all duration-300 font-['Quicksand'] font-medium text-[15px] outline-none ${
                     isOpen
-                        ? 'bg-[#111111] border-[#334a89]/30 ring-4 ring-[#334a89]/10 text-[#15283D]'
+                        ? 'bg-white border-[#334a89]/30 ring-4 ring-[#334a89]/10 text-[#15283D]'
                         : 'border-transparent text-[#15283D] hover:bg-[#E5E7EB]'
                 }`}
             >
@@ -46,7 +46,7 @@ function CustomSelect({ value, onChange, options, zIndex, placeholder = 'Select.
             </button>
 
             <div
-                className={`absolute left-0 right-0 top-[calc(100%+8px)] bg-[#111111] border border-[#E5E7EB] rounded-[20px] shadow-[0_20px_40px_rgba(21,40,61,0.12)] overflow-hidden transition-all duration-300 origin-top ${
+                className={`absolute left-0 right-0 top-[calc(100%+8px)] bg-white border border-[#E5E7EB] rounded-[20px] shadow-[0_20px_40px_rgba(21,40,61,0.12)] overflow-hidden transition-all duration-300 origin-top ${
                     isOpen ? 'opacity-100 scale-y-100 pointer-events-auto' : 'opacity-0 scale-y-95 pointer-events-none'
                 }`}
             >
@@ -89,7 +89,7 @@ function CustomToggle({ enabled, onChange, label, description }: { enabled: bool
                 </div>
             </div>
             <div className={`relative inline-flex h-7 w-14 items-center rounded-full transition-colors duration-300 ease-in-out ${enabled ? 'bg-[#334a89]' : 'bg-[#E5E7EB]'}`}>
-                <span className={`inline-block h-5 w-5 transform rounded-full bg-[#111111] transition-transform duration-300 ease-in-out shadow-none ${enabled ? 'translate-x-8' : 'translate-x-1'}`} />
+                <span className={`inline-block h-5 w-5 transform rounded-full bg-white transition-transform duration-300 ease-in-out shadow-sm ${enabled ? 'translate-x-8' : 'translate-x-1'}`} />
             </div>
         </div>
     )
@@ -258,7 +258,7 @@ export default function JobOpeningsManager() {
                 MAIN DATA TABLE
             ========================================================= */}
             <div
-                className="bg-[#111111] rounded-[32px] shadow-[0_20px_60px_rgba(21,40,61,0.04)] border border-[#E5E7EB] flex flex-col relative transform-gpu pb-2 min-h-[400px]"
+                className="bg-white rounded-[32px] shadow-[0_20px_60px_rgba(21,40,61,0.04)] border border-[#E5E7EB] flex flex-col relative transform-gpu pb-2 min-h-[400px]"
                 style={{ clipPath: 'inset(0 round 32px)' }}
             >
                 {loading ? (
@@ -297,7 +297,7 @@ export default function JobOpeningsManager() {
                 ) : (
                     <div className="w-full max-h-[700px] overflow-y-auto overflow-x-auto custom-scrollbar">
                         <table className="w-full text-left border-collapse min-w-[1000px]">
-                            <thead className="sticky top-0 z-30 shadow-none">
+                            <thead className="sticky top-0 z-30 shadow-sm">
                             <tr>
                                 <th className="bg-[#F8F9FA] px-8 py-6 text-[11px] font-bold text-[#A0AEC0] uppercase tracking-widest border-b border-[#E5E7EB] whitespace-nowrap">Role</th>
                                 <th className="bg-[#F8F9FA] px-6 py-6 text-[11px] font-bold text-[#A0AEC0] uppercase tracking-widest border-b border-[#E5E7EB] whitespace-nowrap">Details</th>
@@ -305,7 +305,7 @@ export default function JobOpeningsManager() {
                                 <th className="bg-[#F8F9FA] px-8 py-6 text-[11px] font-bold text-[#A0AEC0] uppercase tracking-widest border-b border-[#E5E7EB] text-right whitespace-nowrap">Actions</th>
                             </tr>
                             </thead>
-                            <tbody ref={tableRef} className="bg-[#111111] relative z-0">
+                            <tbody ref={tableRef} className="bg-white relative z-0">
                             {jobs.map((job) => (
                                 <tr key={job.id} className="adm-row group hover:bg-[#F8F9FA]/50 transition-colors border-b border-[#F4F6F8] last:border-0 relative">
 
@@ -390,7 +390,7 @@ export default function JobOpeningsManager() {
                 <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 bg-[#15283D]/40 backdrop-blur-md">
                     <div className="absolute inset-0 cursor-pointer" onClick={() => setIsEditing(false)} />
 
-                    <div ref={modalRef} className="relative w-full max-w-2xl bg-[#111111] rounded-[40px] shadow-[0_40px_80px_rgba(21,40,61,0.2)] border border-[#E5E7EB] overflow-hidden flex flex-col max-h-[90vh]">
+                    <div ref={modalRef} className="relative w-full max-w-2xl bg-white rounded-[40px] shadow-[0_40px_80px_rgba(21,40,61,0.2)] border border-[#E5E7EB] overflow-hidden flex flex-col max-h-[90vh]">
 
                         {/* Modal Header */}
                         <div className="px-8 sm:px-10 py-6 sm:py-8 border-b border-[#F4F6F8] flex items-center justify-between bg-[#F8F9FA] shrink-0">
@@ -405,7 +405,7 @@ export default function JobOpeningsManager() {
                             </div>
                             <button
                                 onClick={() => setIsEditing(false)}
-                                className="w-10 h-10 rounded-full bg-[#111111] border border-[#E5E7EB] flex items-center justify-center text-[#A0AEC0] hover:text-[#15283D] hover:border-[#15283D] hover:bg-[#F8F9FA] transition-all"
+                                className="w-10 h-10 rounded-full bg-white border border-[#E5E7EB] flex items-center justify-center text-[#A0AEC0] hover:text-[#15283D] hover:border-[#15283D] hover:bg-[#F8F9FA] transition-all"
                             >
                                 <X className="w-4 h-4" />
                             </button>
@@ -424,7 +424,7 @@ export default function JobOpeningsManager() {
                                         value={currentJob.title || ''}
                                         onChange={e => setCurrentJob({ ...currentJob, title: e.target.value })}
                                         placeholder="E.g. Lead Math Teacher"
-                                        className="w-full pl-14 pr-5 py-4 bg-[#F4F6F8] rounded-[20px] font-bold text-[15px] text-[#15283D] placeholder-[#A0AEC0]/50 border border-transparent focus:bg-[#111111] focus:border-[#334a89]/30 focus:ring-4 focus:ring-[#334a89]/10 outline-none transition-all duration-300"
+                                        className="w-full pl-14 pr-5 py-4 bg-[#F4F6F8] rounded-[20px] font-bold text-[15px] text-[#15283D] placeholder-[#A0AEC0]/50 border border-transparent focus:bg-white focus:border-[#334a89]/30 focus:ring-4 focus:ring-[#334a89]/10 outline-none transition-all duration-300"
                                     />
                                 </div>
                             </div>
@@ -467,7 +467,7 @@ export default function JobOpeningsManager() {
                                     value={currentJob.description || ''}
                                     onChange={e => setCurrentJob({ ...currentJob, description: e.target.value })}
                                     placeholder="Role overview, responsibilities, qualifications..."
-                                    className="w-full h-40 bg-[#F4F6F8] rounded-[24px] p-6 font-medium text-[15px] text-[#15283D] placeholder-[#A0AEC0] border border-transparent focus:bg-[#111111] focus:border-[#334a89]/30 focus:ring-4 focus:ring-[#334a89]/10 outline-none transition-all duration-300 resize-none custom-scrollbar leading-relaxed"
+                                    className="w-full h-40 bg-[#F4F6F8] rounded-[24px] p-6 font-medium text-[15px] text-[#15283D] placeholder-[#A0AEC0] border border-transparent focus:bg-white focus:border-[#334a89]/30 focus:ring-4 focus:ring-[#334a89]/10 outline-none transition-all duration-300 resize-none custom-scrollbar leading-relaxed"
                                 />
                             </div>
 

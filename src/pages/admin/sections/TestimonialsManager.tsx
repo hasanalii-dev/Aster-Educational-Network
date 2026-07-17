@@ -28,7 +28,7 @@ function CustomToggle({ enabled, onChange, label }: { enabled: boolean, onChange
                 </div>
             </div>
             <div className={`relative inline-flex h-7 w-14 items-center rounded-full transition-colors duration-300 ease-in-out ${enabled ? 'bg-[#334a89]' : 'bg-[#E5E7EB]'}`}>
-                <span className={`inline-block h-5 w-5 transform rounded-full bg-[#111111] transition-transform duration-300 ease-in-out shadow-none ${enabled ? 'translate-x-8' : 'translate-x-1'}`} />
+                <span className={`inline-block h-5 w-5 transform rounded-full bg-white transition-transform duration-300 ease-in-out shadow-sm ${enabled ? 'translate-x-8' : 'translate-x-1'}`} />
             </div>
         </div>
     )
@@ -152,7 +152,7 @@ export default function TestimonialsManager() {
                 MAIN DATA TABLE
             ========================================================= */}
             <div
-                className="bg-[#111111] rounded-[32px] shadow-[0_20px_60px_rgba(21,40,61,0.04)] border border-[#E5E7EB] flex flex-col relative transform-gpu pb-2 min-h-[400px]"
+                className="bg-white rounded-[32px] shadow-[0_20px_60px_rgba(21,40,61,0.04)] border border-[#E5E7EB] flex flex-col relative transform-gpu pb-2 min-h-[400px]"
                 style={{ clipPath: 'inset(0 round 32px)' }}
             >
                 {loading ? (
@@ -191,7 +191,7 @@ export default function TestimonialsManager() {
                 ) : (
                     <div className="w-full max-h-[700px] overflow-y-auto overflow-x-auto custom-scrollbar">
                         <table className="w-full text-left border-collapse min-w-[1000px]">
-                            <thead className="sticky top-0 z-30 shadow-none">
+                            <thead className="sticky top-0 z-30 shadow-sm">
                             <tr>
                                 <th className="bg-[#F8F9FA] px-8 py-6 text-[11px] font-bold text-[#A0AEC0] uppercase tracking-widest border-b border-[#E5E7EB] whitespace-nowrap">Author</th>
                                 <th className="bg-[#F8F9FA] px-6 py-6 text-[11px] font-bold text-[#A0AEC0] uppercase tracking-widest border-b border-[#E5E7EB] whitespace-nowrap">Quote Snippet</th>
@@ -199,7 +199,7 @@ export default function TestimonialsManager() {
                                 <th className="bg-[#F8F9FA] px-8 py-6 text-[11px] font-bold text-[#A0AEC0] uppercase tracking-widest border-b border-[#E5E7EB] text-right whitespace-nowrap">Actions</th>
                             </tr>
                             </thead>
-                            <tbody ref={tableRef} className="bg-[#111111] relative z-0">
+                            <tbody ref={tableRef} className="bg-white relative z-0">
                             {items.map((t) => (
                                 <tr key={t.id} className="adm-row group hover:bg-[#F8F9FA]/50 transition-colors border-b border-[#F4F6F8] last:border-0 relative">
 
@@ -236,7 +236,7 @@ export default function TestimonialsManager() {
                                                     <Sparkles className="w-3 h-3" /> Featured
                                                 </span>
                                         ) : (
-                                            <span className="inline-flex items-center px-3 py-1.5 rounded-full bg-white/5 text-white/60 font-bold text-[11px] uppercase tracking-widest border border-white/5">
+                                            <span className="inline-flex items-center px-3 py-1.5 rounded-full bg-gray-50 text-gray-500 font-bold text-[11px] uppercase tracking-widest border border-gray-200">
                                                     Hidden
                                                 </span>
                                         )}
@@ -277,7 +277,7 @@ export default function TestimonialsManager() {
                 <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-[#15283D]/40 backdrop-blur-md">
                     <div className="absolute inset-0 cursor-pointer" onClick={() => setEd(null)} />
 
-                    <div ref={modalRef} className="relative w-full max-w-xl bg-[#111111] rounded-[40px] shadow-[0_40px_80px_rgba(21,40,61,0.2)] border border-[#E5E7EB] overflow-hidden flex flex-col max-h-[90vh]">
+                    <div ref={modalRef} className="relative w-full max-w-xl bg-white rounded-[40px] shadow-[0_40px_80px_rgba(21,40,61,0.2)] border border-[#E5E7EB] overflow-hidden flex flex-col max-h-[90vh]">
 
                         {/* Modal Header */}
                         <div className="px-10 py-8 border-b border-[#F4F6F8] flex items-center justify-between bg-[#F8F9FA] shrink-0">
@@ -292,7 +292,7 @@ export default function TestimonialsManager() {
                             </div>
                             <button
                                 onClick={() => setEd(null)}
-                                className="w-10 h-10 rounded-full bg-[#111111] border border-[#E5E7EB] flex items-center justify-center text-[#A0AEC0] hover:text-[#15283D] hover:border-[#15283D] hover:bg-[#F8F9FA] transition-all"
+                                className="w-10 h-10 rounded-full bg-white border border-[#E5E7EB] flex items-center justify-center text-[#A0AEC0] hover:text-[#15283D] hover:border-[#15283D] hover:bg-[#F8F9FA] transition-all"
                             >
                                 <X className="w-4 h-4" />
                             </button>
@@ -310,7 +310,7 @@ export default function TestimonialsManager() {
                                         value={ed.parent_name || ''}
                                         onChange={e => setEd({ ...ed, parent_name: e.target.value })}
                                         placeholder="E.g. Sarah Ahmed"
-                                        className="w-full pl-14 pr-5 py-4 bg-[#F4F6F8] rounded-[20px] font-bold text-[15px] text-[#15283D] placeholder-[#A0AEC0]/50 border border-transparent focus:bg-[#111111] focus:border-[#334a89]/30 focus:ring-4 focus:ring-[#334a89]/10 outline-none transition-all duration-300"
+                                        className="w-full pl-14 pr-5 py-4 bg-[#F4F6F8] rounded-[20px] font-bold text-[15px] text-[#15283D] placeholder-[#A0AEC0]/50 border border-transparent focus:bg-white focus:border-[#334a89]/30 focus:ring-4 focus:ring-[#334a89]/10 outline-none transition-all duration-300"
                                     />
                                 </div>
                             </div>
@@ -324,7 +324,7 @@ export default function TestimonialsManager() {
                                         value={ed.child_program || ''}
                                         onChange={e => setEd({ ...ed, child_program: e.target.value })}
                                         placeholder="E.g. Parent of Grade 3 Student"
-                                        className="w-full pl-14 pr-5 py-4 bg-[#F4F6F8] rounded-[20px] font-medium text-[15px] text-[#15283D] placeholder-[#A0AEC0]/50 border border-transparent focus:bg-[#111111] focus:border-[#334a89]/30 focus:ring-4 focus:ring-[#334a89]/10 outline-none transition-all duration-300"
+                                        className="w-full pl-14 pr-5 py-4 bg-[#F4F6F8] rounded-[20px] font-medium text-[15px] text-[#15283D] placeholder-[#A0AEC0]/50 border border-transparent focus:bg-white focus:border-[#334a89]/30 focus:ring-4 focus:ring-[#334a89]/10 outline-none transition-all duration-300"
                                     />
                                 </div>
                             </div>
@@ -335,7 +335,7 @@ export default function TestimonialsManager() {
                                     value={ed.quote || ''}
                                     onChange={e => setEd({ ...ed, quote: e.target.value })}
                                     placeholder="Their story..."
-                                    className="w-full h-32 bg-[#F4F6F8] rounded-[24px] p-6 font-medium text-[15px] text-[#15283D] placeholder-[#A0AEC0] border border-transparent focus:bg-[#111111] focus:border-[#334a89]/30 focus:ring-4 focus:ring-[#334a89]/10 outline-none transition-all duration-300 resize-none custom-scrollbar leading-relaxed"
+                                    className="w-full h-32 bg-[#F4F6F8] rounded-[24px] p-6 font-medium text-[15px] text-[#15283D] placeholder-[#A0AEC0] border border-transparent focus:bg-white focus:border-[#334a89]/30 focus:ring-4 focus:ring-[#334a89]/10 outline-none transition-all duration-300 resize-none custom-scrollbar leading-relaxed"
                                 />
                             </div>
 

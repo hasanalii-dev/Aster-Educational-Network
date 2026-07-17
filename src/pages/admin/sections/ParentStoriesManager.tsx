@@ -106,7 +106,7 @@ export default function ParentStoriesManager() {
                     <div className="flex items-center gap-6 p-4 bg-[#F8FAFC] rounded-xl border border-[#E2E8F0] w-fit">
                         <label className="flex items-center gap-3 cursor-pointer group">
                             <div className={`w-10 h-5 rounded-full transition-colors duration-300 relative ${currentStory.is_active ? 'bg-[#16A34A]' : 'bg-[#D6D3D1]'}`}>
-                                <div className={`absolute top-1 left-1 bg-[#111111] w-3 h-3 rounded-full transition-transform duration-300 ${currentStory.is_active ? 'translate-x-5' : 'translate-x-0'}`} />
+                                <div className={`absolute top-1 left-1 bg-white w-3 h-3 rounded-full transition-transform duration-300 ${currentStory.is_active ? 'translate-x-5' : 'translate-x-0'}`} />
                             </div>
                             <input type="checkbox" className="hidden" checked={currentStory.is_active || false} onChange={e => setCurrentStory({ ...currentStory, is_active: e.target.checked })} />
                             <span className="font-semibold text-sm text-[#44403C] group-hover:text-[#1C1917]">Story Active</span>
@@ -133,7 +133,7 @@ export default function ParentStoriesManager() {
                 </button>
             </div>
             
-            <div className="bg-[#111111] rounded-[20px] border border-[#E7E5E4] shadow-none overflow-x-auto">
+            <div className="bg-white rounded-[20px] border border-[#E7E5E4] shadow-sm overflow-x-auto">
                 {stories.length === 0 ? (
                     <div className="p-16 text-center text-[#A8A29E] font-medium">No parent stories found. Click "Add Story" to create one.</div>
                 ) : (

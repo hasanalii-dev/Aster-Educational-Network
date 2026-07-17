@@ -39,7 +39,7 @@ function CustomStatusSelect({ value, onChange, rowZIndex, dropUp }: { value: str
             <button
                 type="button"
                 onClick={() => setIsOpen(!isOpen)}
-                className={`w-full flex items-center justify-between px-4 py-2.5 rounded-full border transition-all duration-300 font-['Quicksand'] font-bold text-[10px] uppercase tracking-widest outline-none ${activeConfig.color} ${isOpen ? 'ring-4 ring-[#334a89]/10 shadow-none' : 'hover:shadow-none'}`}
+                className={`w-full flex items-center justify-between px-4 py-2.5 rounded-full border transition-all duration-300 font-['Quicksand'] font-bold text-[10px] uppercase tracking-widest outline-none ${activeConfig.color} ${isOpen ? 'ring-4 ring-[#334a89]/10 shadow-md' : 'hover:shadow-sm'}`}
             >
                 <div className="flex items-center gap-2.5 truncate pr-2">
                     <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${activeConfig.dot}`} />
@@ -49,7 +49,7 @@ function CustomStatusSelect({ value, onChange, rowZIndex, dropUp }: { value: str
             </button>
 
             <div
-                className={`absolute left-0 right-0 ${originClasses} bg-[#111111] border border-[#E5E7EB] rounded-[20px] shadow-[0_20px_40px_rgba(21,40,61,0.12)] overflow-hidden transition-all duration-300 ${
+                className={`absolute left-0 right-0 ${originClasses} bg-white border border-[#E5E7EB] rounded-[20px] shadow-[0_20px_40px_rgba(21,40,61,0.12)] overflow-hidden transition-all duration-300 ${
                     isOpen ? 'opacity-100 scale-y-100 pointer-events-auto' : 'opacity-0 scale-y-95 pointer-events-none'
                 }`}
             >
@@ -227,7 +227,7 @@ export default function CampusToursManager() {
                 </button>
             </div>
 
-            <div className="bg-[#111111] p-2 rounded-[20px] shadow-[0_8px_30px_rgba(21,40,61,0.03)] border border-[#E5E7EB] mb-8 flex flex-nowrap gap-2 items-center overflow-x-auto scrollbar-hide">
+            <div className="bg-white p-2 rounded-[20px] shadow-[0_8px_30px_rgba(21,40,61,0.03)] border border-[#E5E7EB] mb-8 flex flex-nowrap gap-2 items-center overflow-x-auto scrollbar-hide">
                 <div className="px-5 border-r border-[#E5E7EB] hidden lg:flex items-center gap-2 text-[#A0AEC0] shrink-0">
                     <SlidersHorizontal className="w-4 h-4" />
                     <span className="text-[11px] font-bold uppercase tracking-widest">Filter</span>
@@ -238,7 +238,7 @@ export default function CampusToursManager() {
                         onClick={() => setFilter(f.id)}
                         className={`px-5 py-2.5 rounded-[14px] text-[13px] font-bold tracking-wide transition-all duration-300 shrink-0 whitespace-nowrap ${
                             filter === f.id
-                                ? 'bg-[#334a89] text-white shadow-none'
+                                ? 'bg-[#334a89] text-white shadow-md'
                                 : 'bg-transparent text-[#5C5C61] hover:bg-[#F4F6F8] hover:text-[#15283D]'
                         }`}
                     >
@@ -248,7 +248,7 @@ export default function CampusToursManager() {
             </div>
 
             <div
-                className="bg-[#111111] rounded-[32px] shadow-[0_20px_60px_rgba(21,40,61,0.04)] border border-[#E5E7EB] flex flex-col relative transform-gpu pb-2 min-h-[500px]"
+                className="bg-white rounded-[32px] shadow-[0_20px_60px_rgba(21,40,61,0.04)] border border-[#E5E7EB] flex flex-col relative transform-gpu pb-2 min-h-[500px]"
                 style={{ clipPath: 'inset(0 round 32px)' }}
             >
                 {loading ? (
@@ -282,7 +282,7 @@ export default function CampusToursManager() {
                     <div className="w-full flex-1 min-h-[500px] max-h-[700px] overflow-y-auto overflow-x-auto custom-scrollbar">
                         <table className="w-full text-left border-collapse">
 
-                            <thead className="sticky top-0 z-30 shadow-none">
+                            <thead className="sticky top-0 z-30 shadow-sm">
                             <tr>
                                 <th className="bg-[#F8F9FA] px-6 md:px-8 py-6 text-[11px] font-bold text-[#A0AEC0] uppercase tracking-widest border-b border-[#E5E7EB]">Parent Contact</th>
                                 <th className="bg-[#F8F9FA] px-6 py-6 text-[11px] font-bold text-[#A0AEC0] uppercase tracking-widest border-b border-[#E5E7EB] hidden md:table-cell">Tour Schedule</th>
@@ -292,7 +292,7 @@ export default function CampusToursManager() {
                             </tr>
                             </thead>
 
-                            <tbody ref={tableRef} className="bg-[#111111] relative z-0">
+                            <tbody ref={tableRef} className="bg-white relative z-0">
                             {tours.map((tour, index) => {
                                 // Only drop up if the table is crowded (5+ items) AND it's in the last 3 rows
                                 const shouldDropUp = tours.length >= 5 && index >= tours.length - 3;
@@ -379,7 +379,7 @@ export default function CampusToursManager() {
             {selectedTour && (
                 <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-[#15283D]/40 backdrop-blur-md">
                     <div className="absolute inset-0 cursor-pointer" onClick={() => setSelectedTour(null)} />
-                    <div ref={modalRef} className="relative w-full max-w-lg bg-[#111111] rounded-[40px] shadow-[0_40px_80px_rgba(21,40,61,0.2)] border border-[#E5E7EB] overflow-hidden">
+                    <div ref={modalRef} className="relative w-full max-w-lg bg-white rounded-[40px] shadow-[0_40px_80px_rgba(21,40,61,0.2)] border border-[#E5E7EB] overflow-hidden">
 
                         <div className="px-10 py-8 border-b border-[#F4F6F8] flex items-center justify-between bg-[#F8F9FA]">
                             <div className="flex items-center gap-4">
@@ -393,7 +393,7 @@ export default function CampusToursManager() {
                             </div>
                             <button
                                 onClick={() => setSelectedTour(null)}
-                                className="w-10 h-10 rounded-full bg-[#111111] border border-[#E5E7EB] flex items-center justify-center text-[#A0AEC0] hover:text-[#15283D] hover:border-[#15283D] hover:bg-[#F8F9FA] transition-all"
+                                className="w-10 h-10 rounded-full bg-white border border-[#E5E7EB] flex items-center justify-center text-[#A0AEC0] hover:text-[#15283D] hover:border-[#15283D] hover:bg-[#F8F9FA] transition-all"
                             >
                                 <X className="w-4 h-4" />
                             </button>
@@ -404,7 +404,7 @@ export default function CampusToursManager() {
                                 This note will be instantly visible to <span className="font-bold text-[#334a89] px-2 py-1 bg-[#334a89]/5 rounded-md">{selectedTour.parent_name}</span> on their secure portal dashboard.
                             </p>
                             <textarea
-                                className="w-full h-40 bg-[#F4F6F8] rounded-[24px] p-6 font-medium text-[16px] text-[#15283D] placeholder-[#A0AEC0] border border-[#E5E7EB] focus:bg-[#111111] focus:border-[#334a89]/30 focus:ring-4 focus:ring-[#334a89]/10 outline-none transition-all duration-300 resize-none custom-scrollbar leading-relaxed"
+                                className="w-full h-40 bg-[#F4F6F8] rounded-[24px] p-6 font-medium text-[16px] text-[#15283D] placeholder-[#A0AEC0] border border-[#E5E7EB] focus:bg-white focus:border-[#334a89]/30 focus:ring-4 focus:ring-[#334a89]/10 outline-none transition-all duration-300 resize-none custom-scrollbar leading-relaxed"
                                 value={note}
                                 onChange={e => setNote(e.target.value)}
                                 placeholder="E.g. We have confirmed your tour for 10:00 AM. Please bring..."

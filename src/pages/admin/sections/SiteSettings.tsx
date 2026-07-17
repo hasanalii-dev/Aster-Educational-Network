@@ -22,7 +22,7 @@ function CustomToggle({ enabled, onChange }: { enabled: boolean, onChange: (val:
         <div className="flex items-center gap-4 cursor-pointer select-none" onClick={() => onChange(!enabled)}>
             <div className={`relative inline-flex h-7 w-14 items-center rounded-full transition-colors duration-300 ease-in-out ${enabled ? 'bg-[#334a89]' : 'bg-[#E5E7EB]'}`}>
                 <span
-                    className={`inline-block h-5 w-5 transform rounded-full bg-[#111111] transition-transform duration-300 ease-in-out shadow-none ${enabled ? 'translate-x-8' : 'translate-x-1'}`}
+                    className={`inline-block h-5 w-5 transform rounded-full bg-white transition-transform duration-300 ease-in-out shadow-sm ${enabled ? 'translate-x-8' : 'translate-x-1'}`}
                 />
             </div>
             <span className={`font-['Quicksand'] font-bold text-[13px] tracking-wide uppercase transition-colors duration-300 ${enabled ? 'text-[#334a89]' : 'text-[#A0AEC0]'}`}>
@@ -107,14 +107,14 @@ export default function SiteSettings() {
             {fetching ? (
                 /* Premium Skeleton Loader */
                 <div className="space-y-8">
-                    <div className="bg-[#111111] rounded-[32px] border border-[#F4F6F8] p-8 md:p-10 animate-pulse">
+                    <div className="bg-white rounded-[32px] border border-[#F4F6F8] p-8 md:p-10 animate-pulse">
                         <div className="h-6 bg-[#F4F6F8] rounded-full w-48 mb-8" />
                         <div className="space-y-6">
                             <div className="h-14 bg-[#F4F6F8] rounded-[20px] w-full" />
                             <div className="h-14 bg-[#F4F6F8] rounded-[20px] w-full" />
                         </div>
                     </div>
-                    <div className="bg-[#111111] rounded-[32px] border border-[#F4F6F8] p-8 md:p-10 animate-pulse">
+                    <div className="bg-white rounded-[32px] border border-[#F4F6F8] p-8 md:p-10 animate-pulse">
                         <div className="h-6 bg-[#F4F6F8] rounded-full w-48 mb-8" />
                         <div className="space-y-6">
                             <div className="h-14 bg-[#F4F6F8] rounded-[20px] w-full" />
@@ -128,7 +128,7 @@ export default function SiteSettings() {
                     {/* =========================================================
                         CARD 1: ANNOUNCEMENT BANNER
                     ========================================================= */}
-                    <div className="settings-card bg-[#111111] rounded-[32px] shadow-[0_20px_60px_rgba(21,40,61,0.04)] border border-[#E5E7EB] p-8 md:p-10 transition-all hover:shadow-[0_30px_80px_rgba(21,40,61,0.06)]">
+                    <div className="settings-card bg-white rounded-[32px] shadow-[0_20px_60px_rgba(21,40,61,0.04)] border border-[#E5E7EB] p-8 md:p-10 transition-all hover:shadow-[0_30px_80px_rgba(21,40,61,0.06)]">
 
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 mb-8 pb-6 border-b border-[#F4F6F8]">
                             <div>
@@ -152,7 +152,7 @@ export default function SiteSettings() {
                                         value={settings.marquee_text}
                                         onChange={e => setSettings({ ...settings, marquee_text: e.target.value })}
                                         placeholder="E.g. Admissions for 2026 are now open!"
-                                        className="w-full pl-14 pr-5 py-4 bg-[#F4F6F8] rounded-[20px] font-bold text-[15px] text-[#15283D] placeholder-[#A0AEC0]/50 border border-transparent focus:bg-[#111111] focus:border-[#334a89]/30 focus:ring-4 focus:ring-[#334a89]/10 outline-none transition-all duration-300"
+                                        className="w-full pl-14 pr-5 py-4 bg-[#F4F6F8] rounded-[20px] font-bold text-[15px] text-[#15283D] placeholder-[#A0AEC0]/50 border border-transparent focus:bg-white focus:border-[#334a89]/30 focus:ring-4 focus:ring-[#334a89]/10 outline-none transition-all duration-300"
                                     />
                                 </div>
                             </div>
@@ -166,7 +166,7 @@ export default function SiteSettings() {
                                         value={settings.marquee_link}
                                         onChange={e => setSettings({ ...settings, marquee_link: e.target.value })}
                                         placeholder="/admissions"
-                                        className="w-full pl-14 pr-5 py-4 bg-[#F4F6F8] rounded-[20px] font-medium text-[15px] text-[#15283D] placeholder-[#A0AEC0]/50 border border-transparent focus:bg-[#111111] focus:border-[#334a89]/30 focus:ring-4 focus:ring-[#334a89]/10 outline-none transition-all duration-300"
+                                        className="w-full pl-14 pr-5 py-4 bg-[#F4F6F8] rounded-[20px] font-medium text-[15px] text-[#15283D] placeholder-[#A0AEC0]/50 border border-transparent focus:bg-white focus:border-[#334a89]/30 focus:ring-4 focus:ring-[#334a89]/10 outline-none transition-all duration-300"
                                     />
                                 </div>
                             </div>
@@ -176,7 +176,7 @@ export default function SiteSettings() {
                     {/* =========================================================
                         CARD 2: CONTACT INFORMATION
                     ========================================================= */}
-                    <div className="settings-card bg-[#111111] rounded-[32px] shadow-[0_20px_60px_rgba(21,40,61,0.04)] border border-[#E5E7EB] p-8 md:p-10 transition-all hover:shadow-[0_30px_80px_rgba(21,40,61,0.06)]">
+                    <div className="settings-card bg-white rounded-[32px] shadow-[0_20px_60px_rgba(21,40,61,0.04)] border border-[#E5E7EB] p-8 md:p-10 transition-all hover:shadow-[0_30px_80px_rgba(21,40,61,0.06)]">
 
                         <div className="mb-8 pb-6 border-b border-[#F4F6F8]">
                             <h3 className="text-xl font-bold text-[#15283D] mb-1">Public Contact Info</h3>
@@ -193,7 +193,7 @@ export default function SiteSettings() {
                                         value={settings.contact_email || ''}
                                         onChange={e => setSettings({ ...settings, contact_email: e.target.value })}
                                         placeholder="info@aster.edu.pk"
-                                        className="w-full pl-14 pr-5 py-4 bg-[#F4F6F8] rounded-[20px] font-bold text-[15px] text-[#15283D] placeholder-[#A0AEC0]/50 border border-transparent focus:bg-[#111111] focus:border-[#334a89]/30 focus:ring-4 focus:ring-[#334a89]/10 outline-none transition-all duration-300"
+                                        className="w-full pl-14 pr-5 py-4 bg-[#F4F6F8] rounded-[20px] font-bold text-[15px] text-[#15283D] placeholder-[#A0AEC0]/50 border border-transparent focus:bg-white focus:border-[#334a89]/30 focus:ring-4 focus:ring-[#334a89]/10 outline-none transition-all duration-300"
                                     />
                                 </div>
                             </div>
@@ -207,7 +207,7 @@ export default function SiteSettings() {
                                         value={settings.contact_phone || ''}
                                         onChange={e => setSettings({ ...settings, contact_phone: e.target.value })}
                                         placeholder="+92 300 1234567"
-                                        className="w-full pl-14 pr-5 py-4 bg-[#F4F6F8] rounded-[20px] font-bold text-[15px] text-[#15283D] placeholder-[#A0AEC0]/50 border border-transparent focus:bg-[#111111] focus:border-[#334a89]/30 focus:ring-4 focus:ring-[#334a89]/10 outline-none transition-all duration-300"
+                                        className="w-full pl-14 pr-5 py-4 bg-[#F4F6F8] rounded-[20px] font-bold text-[15px] text-[#15283D] placeholder-[#A0AEC0]/50 border border-transparent focus:bg-white focus:border-[#334a89]/30 focus:ring-4 focus:ring-[#334a89]/10 outline-none transition-all duration-300"
                                     />
                                 </div>
                             </div>

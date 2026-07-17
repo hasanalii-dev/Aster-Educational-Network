@@ -72,7 +72,7 @@ export default function FAQManager() {
     return (
         <div>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 24 }}>
-                <p style={{ margin: 0, color: 'rgba(255,255,255,0.4)', fontSize: 14 }}>{items.length} FAQ{items.length !== 1 ? 's' : ''}</p>
+                <p style={{ margin: 0, color: '#78716C', fontSize: 14 }}>{items.length} FAQ{items.length !== 1 ? 's' : ''}</p>
                 <button className="adm-btn" onClick={() => setEd({ category: '', question: '', answer: '', sort_order: 0 })}>+ New FAQ</button>
             </div>
             {Object.keys(grouped).length === 0 ? (
@@ -80,15 +80,15 @@ export default function FAQManager() {
             ) : (
                 Object.entries(grouped).map(([cat, faqs]) => (
                     <div key={cat} className="adm-card" style={{ marginBottom: 16, padding: 0, overflow: 'hidden' }}>
-                        <div style={{ padding: '14px 20px', background: 'rgba(255,255,255,0.02)', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-                            <span style={{ fontSize: 13, fontWeight: 700, color: '#ffc715', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{cat}</span>
+                        <div style={{ padding: '14px 20px', background: '#FAFAF9', borderBottom: '1px solid #E7E5E4' }}>
+                            <span style={{ fontSize: 13, fontWeight: 700, color: '#394da1', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{cat}</span>
                         </div>
                         <table className="adm-tbl">
                             <tbody>
                                 {faqs.map(faq => (
                                     <tr key={faq.id}>
-                                        <td style={{ fontWeight: 600, color: '#FFFFFF' }}>{faq.question}</td>
-                                        <td style={{ maxWidth: 300, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', color: 'rgba(255,255,255,0.6)', fontSize: 13 }}>{faq.answer}</td>
+                                        <td style={{ fontWeight: 600, color: '#1C1917' }}>{faq.question}</td>
+                                        <td style={{ maxWidth: 300, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', color: '#78716C', fontSize: 13 }}>{faq.answer}</td>
                                         <td style={{ textAlign: 'right', whiteSpace: 'nowrap' }}>
                                             <div style={{ display: 'flex', gap: 8, justifyContent: 'flex-end' }}>
                                                 <button className="adm-btn-s" style={{ padding: '6px 12px' }} onClick={() => setEd(faq)}>Edit</button>

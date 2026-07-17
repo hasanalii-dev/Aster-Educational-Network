@@ -40,7 +40,7 @@ function CustomStatusSelect({ value, onChange, rowZIndex }: { value: string, onC
             <button
                 type="button"
                 onClick={() => setIsOpen(!isOpen)}
-                className={`w-full flex items-center justify-between px-4 py-2.5 rounded-full border transition-all duration-300 font-['Quicksand'] font-bold text-[11px] uppercase tracking-widest outline-none ${activeConfig.color} ${isOpen ? 'ring-4 ring-[#334a89]/10 shadow-none' : 'hover:shadow-none'}`}
+                className={`w-full flex items-center justify-between px-4 py-2.5 rounded-full border transition-all duration-300 font-['Quicksand'] font-bold text-[11px] uppercase tracking-widest outline-none ${activeConfig.color} ${isOpen ? 'ring-4 ring-[#334a89]/10 shadow-md' : 'hover:shadow-sm'}`}
             >
                 <div className="flex items-center gap-2.5">
                     <span className={`w-1.5 h-1.5 rounded-full ${activeConfig.dot}`} />
@@ -50,7 +50,7 @@ function CustomStatusSelect({ value, onChange, rowZIndex }: { value: string, onC
             </button>
 
             <div
-                className={`absolute left-0 right-0 top-[calc(100%+8px)] bg-[#111111] border border-[#E5E7EB] rounded-[20px] shadow-[0_20px_40px_rgba(21,40,61,0.12)] overflow-hidden transition-all duration-300 origin-top ${
+                className={`absolute left-0 right-0 top-[calc(100%+8px)] bg-white border border-[#E5E7EB] rounded-[20px] shadow-[0_20px_40px_rgba(21,40,61,0.12)] overflow-hidden transition-all duration-300 origin-top ${
                     isOpen ? 'opacity-100 scale-y-100 pointer-events-auto' : 'opacity-0 scale-y-95 pointer-events-none'
                 }`}
             >
@@ -181,7 +181,7 @@ export default function JobApplicationsManager() {
             </div>
 
             {/* Filter Command Bar */}
-            <div className="bg-[#111111] p-2 rounded-[20px] shadow-[0_8px_30px_rgba(21,40,61,0.03)] border border-[#E5E7EB] mb-8 flex flex-nowrap gap-2 items-center overflow-x-auto scrollbar-hide">
+            <div className="bg-white p-2 rounded-[20px] shadow-[0_8px_30px_rgba(21,40,61,0.03)] border border-[#E5E7EB] mb-8 flex flex-nowrap gap-2 items-center overflow-x-auto scrollbar-hide">
                 <div className="px-5 border-r border-[#E5E7EB] hidden lg:flex items-center gap-2 text-[#A0AEC0] shrink-0">
                     <SlidersHorizontal className="w-4 h-4" />
                     <span className="text-[11px] font-bold uppercase tracking-widest">Pipeline</span>
@@ -192,7 +192,7 @@ export default function JobApplicationsManager() {
                         onClick={() => setFilter(f.id)}
                         className={`px-5 py-2.5 rounded-[14px] text-[13px] font-bold tracking-wide transition-all duration-300 shrink-0 whitespace-nowrap ${
                             filter === f.id
-                                ? 'bg-[#334a89] text-white shadow-none'
+                                ? 'bg-[#334a89] text-white shadow-md'
                                 : 'bg-transparent text-[#5C5C61] hover:bg-[#F4F6F8] hover:text-[#15283D]'
                         }`}
                     >
@@ -205,7 +205,7 @@ export default function JobApplicationsManager() {
                 MAIN DATA TABLE
             ========================================================= */}
             <div
-                className="bg-[#111111] rounded-[32px] shadow-[0_20px_60px_rgba(21,40,61,0.04)] border border-[#E5E7EB] flex flex-col relative transform-gpu pb-2 min-h-[500px]"
+                className="bg-white rounded-[32px] shadow-[0_20px_60px_rgba(21,40,61,0.04)] border border-[#E5E7EB] flex flex-col relative transform-gpu pb-2 min-h-[500px]"
                 style={{ clipPath: 'inset(0 round 32px)' }}
             >
                 {loading ? (
@@ -240,7 +240,7 @@ export default function JobApplicationsManager() {
                         <table className="w-full text-left border-collapse min-w-[1100px]">
 
                             {/* Sticky Header */}
-                            <thead className="sticky top-0 z-30 shadow-none">
+                            <thead className="sticky top-0 z-30 shadow-sm">
                             <tr>
                                 <th className="bg-[#F8F9FA] px-8 py-6 text-[11px] font-bold text-[#A0AEC0] uppercase tracking-widest border-b border-[#E5E7EB] whitespace-nowrap">Candidate</th>
                                 <th className="bg-[#F8F9FA] px-6 py-6 text-[11px] font-bold text-[#A0AEC0] uppercase tracking-widest border-b border-[#E5E7EB] whitespace-nowrap">Role Applied For</th>
@@ -250,7 +250,7 @@ export default function JobApplicationsManager() {
                             </tr>
                             </thead>
 
-                            <tbody ref={tableRef} className="bg-[#111111] relative z-0">
+                            <tbody ref={tableRef} className="bg-white relative z-0">
                             {applications.map((app, index) => {
                                 const job = jobsMap[app.job_id]
                                 const isExpanded = expandedId === app.id
@@ -262,14 +262,14 @@ export default function JobApplicationsManager() {
                                             {/* Candidate Profile */}
                                             <td className="px-8 py-6 whitespace-nowrap">
                                                 <div className="flex items-center gap-4">
-                                                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#15283D] to-[#334a89] text-white flex items-center justify-center font-bold text-[14px] shadow-none shrink-0">
+                                                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#15283D] to-[#334a89] text-white flex items-center justify-center font-bold text-[14px] shadow-sm shrink-0">
                                                         {app.first_name?.[0]}{app.last_name?.[0]}
                                                     </div>
                                                     <div>
                                                         <p className="font-bold text-[16px] text-[#15283D] mb-1">{app.first_name} {app.last_name}</p>
                                                         <button
                                                             onClick={() => setExpandedId(isExpanded ? null : app.id)}
-                                                            className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full font-bold text-[11px] uppercase tracking-wider transition-all duration-300 ${isExpanded ? 'bg-[#334a89] text-white shadow-none' : 'bg-[#F4F6F8] text-[#5C5C61] hover:bg-[#E5E7EB] hover:text-[#15283D]'}`}
+                                                            className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full font-bold text-[11px] uppercase tracking-wider transition-all duration-300 ${isExpanded ? 'bg-[#334a89] text-white shadow-md' : 'bg-[#F4F6F8] text-[#5C5C61] hover:bg-[#E5E7EB] hover:text-[#15283D]'}`}
                                                         >
                                                             Cover Letter & CV
                                                             <ChevronDown className={`w-3 h-3 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`} />
@@ -281,7 +281,7 @@ export default function JobApplicationsManager() {
                                             {/* Role Applied For */}
                                             <td className="px-6 py-6">
                                                 {!app.job_id ? (
-                                                    <span className="inline-flex items-center px-3 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-widest bg-gray-100 text-gray-600 border border-white/5">
+                                                    <span className="inline-flex items-center px-3 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-widest bg-gray-100 text-gray-600 border border-gray-200">
                                                             General Application
                                                         </span>
                                                 ) : job ? (
@@ -335,7 +335,7 @@ export default function JobApplicationsManager() {
                                             <tr className="bg-[#F8F9FA] border-b border-[#E5E7EB]">
                                                 <td colSpan={5} className="p-0">
                                                     <div className="px-8 py-8 animate-in fade-in slide-in-from-top-4 duration-300">
-                                                        <div className="bg-[#111111] border border-[#E5E7EB] rounded-[24px] p-8 shadow-none">
+                                                        <div className="bg-white border border-[#E5E7EB] rounded-[24px] p-8 shadow-sm">
                                                             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-6 border-b border-[#F4F6F8]">
                                                                 <div className="flex items-center gap-3">
                                                                     <div className="w-10 h-10 rounded-full bg-[#334a89]/10 flex items-center justify-center text-[#334a89]">
@@ -349,13 +349,13 @@ export default function JobApplicationsManager() {
                                                                         href={app.resume_link}
                                                                         target="_blank"
                                                                         rel="noopener noreferrer"
-                                                                        className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#15283D] text-white hover:bg-[#334a89] font-bold text-[12px] uppercase tracking-widest rounded-full transition-all shadow-none hover:shadow-none"
+                                                                        className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#15283D] text-white hover:bg-[#334a89] font-bold text-[12px] uppercase tracking-widest rounded-full transition-all shadow-sm hover:shadow-md"
                                                                     >
                                                                         <FileBadge className="w-4 h-4" />
                                                                         Open Resume File
                                                                     </a>
                                                                 ) : (
-                                                                    <span className="inline-flex items-center gap-2 px-4 py-2 bg-white/5 text-white/40 font-bold text-[11px] uppercase tracking-widest rounded-full border border-white/5">
+                                                                    <span className="inline-flex items-center gap-2 px-4 py-2 bg-gray-50 text-gray-400 font-bold text-[11px] uppercase tracking-widest rounded-full border border-gray-200">
                                                                             No Resume Attached
                                                                         </span>
                                                                 )}
