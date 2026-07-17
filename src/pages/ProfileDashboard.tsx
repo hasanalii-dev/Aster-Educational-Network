@@ -21,7 +21,7 @@ const getAvatarStyle = (char: string) => {
 }
 
 export default function ProfileDashboard() {
-  const { user, loading } = useAuth()
+  const { user, role, loading } = useAuth()
   const [tours, setTours] = useState<any[]>([])
   const [admissions, setAdmissions] = useState<any[]>([])
   const [fetching, setFetching] = useState(true)
@@ -83,7 +83,7 @@ export default function ProfileDashboard() {
     return <Navigate to="/admin/login" replace />
   }
 
-  const isAdmin = user?.email && (user.email.includes('admin') || user.email.includes('hasan'))
+  const isAdmin = (role && role !== 'user') || (user?.email && (user.email.includes('admin') || user.email.includes('hasan')))
   const userInitial = user.email?.[0]?.toUpperCase() || 'U'
   const avatarStyle = getAvatarStyle(userInitial)
 

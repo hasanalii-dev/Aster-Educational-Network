@@ -28,6 +28,14 @@ export default function UnifiedAuth() {
     const [error, setError] = useState('')
     const [statusMsg, setStatusMsg] = useState('')
     const [loading, setLoading] = useState(false)
+    const [resendTimer, setResendTimer] = useState(0)
+
+    useEffect(() => {
+        if (resendTimer > 0) {
+            const timer = setTimeout(() => setResendTimer(resendTimer - 1), 1000)
+            return () => clearTimeout(timer)
+        }
+    }, [resendTimer])
 
     // =========================================================
     // INITIAL GSAP PAGE ENTRANCE
@@ -162,6 +170,7 @@ export default function UnifiedAuth() {
 
             animateStepChange('otp')
             setStatusMsg(`Verification code dispatched to ${email}. Please also check your spam/junk folder.`)
+            setResendTimer(30)
             setLoading(false)
         } else {
             const { data: authData, error: signInError } = await supabase.auth.signInWithPassword({
@@ -199,6 +208,25 @@ export default function UnifiedAuth() {
         if (data.user) {
             await routeUser(data.user.id)
         }
+    }
+
+    const handleResendOtp = async () => {
+        setError('')
+        setStatusMsg('')
+        setLoading(true)
+
+        const { error: resendError } = await supabase.auth.resend({
+            type: 'signup',
+            email,
+        })
+
+        if (resendError) {
+            setError(resendError.message)
+        } else {
+            setStatusMsg('Verification code resent! Please check your junk/spam folder as it often lands there.')
+            setResendTimer(30)
+        }
+        setLoading(false)
     }
 
     const handleForgotPasswordSubmit = async (e: FormEvent) => {
@@ -519,13 +547,24 @@ export default function UnifiedAuth() {
                                         )}
                                     </button>
 
-                                    <button
-                                        type="button"
-                                        onClick={() => animateStepChange('credentials')}
-                                        className="mt-4 font-['Quicksand'] text-[13px] font-bold text-[#5C5C61] hover:text-[#334a89] transition-colors text-center underline underline-offset-4"
-                                    >
-                                        ← Modify Email Address
-                                    </button>
+                                    <div className="flex flex-col items-center gap-3 mt-2">
+                                        <button
+                                            type="button"
+                                            onClick={handleResendOtp}
+                                            disabled={resendTimer > 0 || loading}
+                                            className="font-['Quicksand'] text-[13px] font-bold text-[#5C5C61] hover:text-[#334a89] transition-colors underline underline-offset-4 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:text-[#5C5C61]"
+                                        >
+                                            {resendTimer > 0 ? `Resend code in ${resendTimer}s` : 'Resend Code'}
+                                        </button>
+
+                                        <button
+                                            type="button"
+                                            onClick={() => animateStepChange('credentials')}
+                                            className="font-['Quicksand'] text-[13px] font-bold text-[#5C5C61] hover:text-[#334a89] transition-colors underline underline-offset-4"
+                                        >
+                                            ← Modify Email Address
+                                        </button>
+                                    </div>
                                 </form>
                             ) : (
                                 /* ── VIEW C: FORGOT PASSWORD ── */
