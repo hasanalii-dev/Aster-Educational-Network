@@ -194,10 +194,10 @@ export default function AdminLayout() {
                         <div className="flex items-center gap-3 pl-4 py-2 pr-2 bg-white rounded-full border border-[#E5E7EB] shadow-sm hover:shadow-md transition-shadow cursor-default">
                             <div className="flex flex-col items-end hidden sm:flex">
                                 <span className="font-bold text-[13px] text-[#15283D] leading-tight capitalize">{role?.replace('_', ' ') || 'Admin'}</span>
-                                <span className="font-medium text-[11px] text-[#A0AEC0]">{user.email}</span>
+                                <span className="font-medium text-[11px] text-[#A0AEC0]">{user.user_metadata?.full_name || user.email}</span>
                             </div>
-                            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#15283D] to-[#334a89] text-white flex items-center justify-center font-bold text-[14px] shadow-inner shrink-0">
-                                {user.email?.[0]?.toUpperCase() || 'A'}
+                            <div className="w-10 h-10 rounded-full bg-[#15283D] flex items-center justify-center overflow-hidden shadow-inner shrink-0 border border-[#E5E7EB]">
+                                <img src={user.user_metadata?.avatar_url || `https://api.dicebear.com/9.x/notionists/svg?seed=${user.id}`} alt="Admin Avatar" className="w-[120%] h-[120%] object-cover object-bottom" />
                             </div>
                         </div>
                     </header>
