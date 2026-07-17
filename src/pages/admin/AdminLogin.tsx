@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, type FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 import gsap from 'gsap'
-import { supabase } from '@/lib/supabase'
+import { supabase, isPasswordRecoveryOnLoad } from '@/lib/supabase'
 import { Header } from '@/components/layout/Header'
 import { User, Mail, Lock, KeyRound, ArrowRight, ShieldCheck, Loader2, AlertCircle, CheckCircle2, Fingerprint, Bot, Eye, EyeOff } from 'lucide-react'
 
@@ -38,8 +38,8 @@ export default function UnifiedAuth() {
     }, [resendTimer])
 
     useEffect(() => {
-        // Intercept password recovery hash
-        if (window.location.hash.includes('type=recovery')) {
+        // Use the flag captured before Supabase client stripped the hash
+        if (isPasswordRecoveryOnLoad || window.location.hash.includes('type=recovery')) {
             setAuthStep('update_password')
         }
 
