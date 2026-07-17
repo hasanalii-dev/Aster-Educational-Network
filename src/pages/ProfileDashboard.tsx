@@ -38,7 +38,12 @@ export default function ProfileDashboard() {
   const handleRandomizeAvatar = async () => {
       setIsUpdatingAvatar(true)
       const newSeed = Math.random().toString(36).substring(7)
-      const newUrl = `https://api.dicebear.com/9.x/notionists/svg?seed=${newSeed}`
+      
+      // Randomly select a color from Aster's primary and secondary palette
+      const colors = ['ffc715', 'ffe373', '334a89', '6080cf', '15283D']
+      const randomColor = colors[Math.floor(Math.random() * colors.length)]
+      
+      const newUrl = `https://api.dicebear.com/9.x/notionists/svg?seed=${newSeed}&backgroundColor=${randomColor}`
       setAvatarUrl(newUrl)
       
       await supabase.auth.updateUser({

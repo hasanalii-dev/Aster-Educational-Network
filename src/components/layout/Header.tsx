@@ -459,8 +459,8 @@ export function Header({
                             {user ? (
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
                                     <TransitionLink to="/profile" className="flex items-center gap-2 !no-underline">
-                                        <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: '#ffc715', color: '#334a89', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold' }} title={user.email || 'Profile'}>
-                                            {user.email?.[0]?.toUpperCase() || 'U'}
+                                        <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: '#ffc715', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }} title={user.email || 'Profile'}>
+                                            <img src={user.user_metadata?.avatar_url || `https://api.dicebear.com/9.x/notionists/svg?seed=${user.id}`} alt="Avatar" style={{ width: '120%', height: '120%', objectFit: 'cover' }} />
                                         </div>
                                         <span className="nav-link" style={{ padding: 0, textTransform: 'none' }}>
                                             {user.email?.split('@')[0]}
@@ -557,8 +557,8 @@ export function Header({
                                             <span className="mobile-action-title">My Profile</span>
                                             <span className="mobile-action-desc truncate block">{user.email}</span>
                                         </div>
-                                        <div className="mobile-action-icon" style={{ flexShrink: 0, borderRadius: '50%', background: '#ffc715', color: '#334a89', fontWeight: 'bold', fontSize: '18px', border: 'none' }}>
-                                            {user.email?.[0]?.toUpperCase() || 'U'}
+                                        <div className="mobile-action-icon" style={{ flexShrink: 0, borderRadius: '50%', background: '#ffc715', overflow: 'hidden', border: 'none' }}>
+                                            <img src={user.user_metadata?.avatar_url || `https://api.dicebear.com/9.x/notionists/svg?seed=${user.id}`} alt="Avatar" style={{ width: '120%', height: '120%', objectFit: 'cover' }} />
                                         </div>
                                     </Link>
                                     <button className="mobile-action-card card-transparent" onClick={() => setShowLogoutModal(true)} style={{ width: '100%', textAlign: 'left', cursor: 'pointer', border: 'none', background: 'rgba(255, 255, 255, 0.05)', padding: '12px 24px' }}>
