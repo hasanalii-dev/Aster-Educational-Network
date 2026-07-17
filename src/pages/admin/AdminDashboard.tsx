@@ -79,34 +79,34 @@ export default function AdminDashboard() {
             label: 'Contact Inquiries',
             value: stats.inquiries,
             icon: Mail,
-            color: 'text-white/60',
-            bg: 'bg-white/5',
-            border: 'hover:border-white/20 border-white/5',
-            glow: '255 255 255',
-            hex: '#ffffff',
-            valueColor: 'text-white'
+            color: 'text-[#60a5fa]',
+            bg: 'bg-[#60a5fa]/10',
+            border: 'hover:border-[#60a5fa]/30 border-white/5',
+            glow: '96 165 250',
+            hex: '#60a5fa',
+            valueColor: 'text-[#60a5fa]'
         },
         {
             label: 'Campus Tours',
             value: stats.campusTours,
             icon: MapPin,
-            color: 'text-white/60',
-            bg: 'bg-white/5',
-            border: 'hover:border-white/20 border-white/5',
-            glow: '255 255 255',
-            hex: '#ffffff',
-            valueColor: 'text-white'
+            color: 'text-[#10b981]',
+            bg: 'bg-[#10b981]/10',
+            border: 'hover:border-[#10b981]/30 border-white/5',
+            glow: '16 185 129',
+            hex: '#10b981',
+            valueColor: 'text-[#10b981]'
         },
         {
             label: 'Testimonials',
             value: stats.testimonials,
             icon: Quote,
-            color: 'text-white/60',
-            bg: 'bg-white/5',
-            border: 'hover:border-white/20 border-white/5',
-            glow: '255 255 255',
-            hex: '#ffffff',
-            valueColor: 'text-white'
+            color: 'text-[#a855f7]',
+            bg: 'bg-[#a855f7]/10',
+            border: 'hover:border-[#a855f7]/30 border-white/5',
+            glow: '168 85 247',
+            hex: '#a855f7',
+            valueColor: 'text-[#a855f7]'
         }
     ]
 

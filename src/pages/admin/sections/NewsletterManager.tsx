@@ -64,7 +64,7 @@ export default function NewsletterManager() {
 
     return (
         <motion.div variants={containerVariants} initial="hidden" animate="visible" className="flex flex-col gap-6">
-            <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between bg-white p-6 rounded-[24px] border border-[#E7E5E4] shadow-sm">
+            <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between bg-[#111111] p-6 rounded-[24px] border border-[#E7E5E4] shadow-none">
                 <div className="flex items-center gap-4">
                     <div className="w-12 h-12 bg-[#EFF6FF] rounded-full flex items-center justify-center text-[#394ea2]">
                         <Users size={24} />
@@ -76,14 +76,14 @@ export default function NewsletterManager() {
                 </div>
                 <div className="flex flex-wrap gap-3 w-full sm:w-auto">
                     <button 
-                        className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-6 py-3 bg-white border border-[#E2E8F0] text-[#475569] font-bold text-sm rounded-xl hover:bg-[#F8FAFC] transition-colors shadow-sm"
+                        className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-6 py-3 bg-[#111111] border border-[#E2E8F0] text-[#475569] font-bold text-sm rounded-xl hover:bg-[#F8FAFC] transition-colors shadow-none"
                         onClick={handleExportCSV}
                     >
                         <Download size={18} />
                         Export CSV
                     </button>
                     <button 
-                        className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-6 py-3 bg-[#394ea2] text-white font-bold text-sm rounded-xl hover:bg-[#2e3e80] transition-colors shadow-md transform hover:-translate-y-0.5"
+                        className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-6 py-3 bg-[#394ea2] text-white font-bold text-sm rounded-xl hover:bg-[#2e3e80] transition-colors shadow-none transform hover:-translate-y-0.5"
                         onClick={handleBroadcast}
                     >
                         <Mail size={18} />
@@ -92,7 +92,7 @@ export default function NewsletterManager() {
                 </div>
             </div>
             
-            <div className="bg-white rounded-[24px] border border-[#E7E5E4] shadow-sm overflow-hidden">
+            <div className="bg-[#111111] rounded-[24px] border border-[#E7E5E4] shadow-none overflow-hidden">
                 {loading ? (
                     <div className="p-16 text-center text-[#94A3B8] font-medium flex flex-col items-center gap-3">
                         <div className="w-8 h-8 border-4 border-[#E2E8F0] border-t-[#394ea2] rounded-full animate-spin"></div>

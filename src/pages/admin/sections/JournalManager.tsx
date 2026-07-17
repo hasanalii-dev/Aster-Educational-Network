@@ -67,7 +67,7 @@ function CustomCategorySelect({ value, onChange, zIndex }: { value: string, onCh
                 onClick={() => setIsOpen(!isOpen)}
                 className={`w-full flex items-center justify-between pl-5 pr-4 py-4 bg-[#F4F6F8] rounded-[20px] border transition-all duration-300 font-['Quicksand'] font-medium text-[15px] outline-none ${
                     isOpen
-                        ? 'bg-white border-[#334a89]/30 ring-4 ring-[#334a89]/10 text-[#15283D]'
+                        ? 'bg-[#111111] border-[#334a89]/30 ring-4 ring-[#334a89]/10 text-[#15283D]'
                         : 'border-transparent text-[#15283D] hover:bg-[#E5E7EB]'
                 }`}
             >
@@ -76,7 +76,7 @@ function CustomCategorySelect({ value, onChange, zIndex }: { value: string, onCh
             </button>
 
             <div
-                className={`absolute left-0 right-0 top-[calc(100%+8px)] bg-white border border-[#E5E7EB] rounded-[20px] shadow-[0_20px_40px_rgba(21,40,61,0.12)] overflow-hidden transition-all duration-300 origin-top ${
+                className={`absolute left-0 right-0 top-[calc(100%+8px)] bg-[#111111] border border-[#E5E7EB] rounded-[20px] shadow-[0_20px_40px_rgba(21,40,61,0.12)] overflow-hidden transition-all duration-300 origin-top ${
                     isOpen ? 'opacity-100 scale-y-100 pointer-events-auto' : 'opacity-0 scale-y-95 pointer-events-none'
                 }`}
             >
@@ -119,7 +119,7 @@ function CustomToggle({ enabled, onChange, label, description }: { enabled: bool
                 </div>
             </div>
             <div className={`relative inline-flex h-8 w-16 items-center rounded-full transition-colors duration-300 ease-in-out ${enabled ? 'bg-[#334a89]' : 'bg-[#E5E7EB]'}`}>
-                <span className={`inline-block h-6 w-6 transform rounded-full bg-white transition-transform duration-300 ease-in-out shadow-sm ${enabled ? 'translate-x-9' : 'translate-x-1.5'}`} />
+                <span className={`inline-block h-6 w-6 transform rounded-full bg-[#111111] transition-transform duration-300 ease-in-out shadow-none ${enabled ? 'translate-x-9' : 'translate-x-1.5'}`} />
             </div>
         </div>
     )
@@ -308,7 +308,7 @@ export default function JournalManager() {
                     {loading ? (
                         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
                             {[1, 2, 3].map(i => (
-                                <div key={i} className="bg-white rounded-[40px] p-4 border border-[#E5E7EB] animate-pulse h-[400px] flex flex-col">
+                                <div key={i} className="bg-[#111111] rounded-[40px] p-4 border border-[#E5E7EB] animate-pulse h-[400px] flex flex-col">
                                     <div className="w-full h-64 bg-[#F4F6F8] rounded-[32px] mb-6" />
                                     <div className="w-32 h-6 bg-[#F4F6F8] rounded-full mb-4 mx-4" />
                                     <div className="w-[80%] h-8 bg-[#F4F6F8] rounded-full mb-3 mx-4" />
@@ -317,7 +317,7 @@ export default function JournalManager() {
                             ))}
                         </div>
                     ) : articles.length === 0 ? (
-                        <div className="bg-white rounded-[40px] shadow-[0_20px_60px_rgba(21,40,61,0.04)] border border-[#E5E7EB] p-20 text-center">
+                        <div className="bg-[#111111] rounded-[40px] shadow-[0_20px_60px_rgba(21,40,61,0.04)] border border-[#E5E7EB] p-20 text-center">
                             <div className="w-24 h-24 bg-[#F8F9FA] rounded-[24px] flex items-center justify-center mb-6 mx-auto border border-[#E5E7EB] shadow-inner">
                                 <PenTool className="w-8 h-8 text-[#A0AEC0]" />
                             </div>
@@ -336,15 +336,15 @@ export default function JournalManager() {
                     ) : (
                         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
                             {articles.map((a) => (
-                                <div key={a.id} className="article-card opacity-0 bg-white rounded-[40px] shadow-[0_20px_60px_rgba(21,40,61,0.03)] border border-[#E5E7EB] overflow-hidden hover:shadow-[0_30px_80px_rgba(21,40,61,0.08)] transition-all duration-500 hover:-translate-y-1.5 flex flex-col group">
+                                <div key={a.id} className="article-card opacity-0 bg-[#111111] rounded-[40px] shadow-[0_20px_60px_rgba(21,40,61,0.03)] border border-[#E5E7EB] overflow-hidden hover:shadow-[0_30px_80px_rgba(21,40,61,0.08)] transition-all duration-500 hover:-translate-y-1.5 flex flex-col group">
 
                                     {/* Image Header */}
                                     <div className="relative h-64 w-full overflow-hidden bg-[#F4F6F8] p-2">
                                         <div className="absolute top-6 right-6 z-10">
-                                            <span className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-full font-bold text-[11px] uppercase tracking-widest shadow-sm backdrop-blur-md ${
+                                            <span className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-full font-bold text-[11px] uppercase tracking-widest shadow-none backdrop-blur-md ${
                                                 a.is_published
                                                     ? 'bg-emerald-500/90 text-white border border-emerald-400'
-                                                    : 'bg-white/90 text-[#5C5C61] border border-white'
+                                                    : 'bg-[#111111]/90 text-[#5C5C61] border border-white'
                                             }`}>
                                                 {a.is_published ? 'Published' : 'Draft'}
                                             </span>
@@ -381,7 +381,7 @@ export default function JournalManager() {
                                             </span>
                                             <div className="flex gap-2">
                                                 <button
-                                                    className="w-12 h-12 rounded-full bg-[#F4F6F8] text-[#5C5C61] hover:bg-[#334a89]/10 hover:text-[#334a89] flex items-center justify-center transition-colors shadow-sm"
+                                                    className="w-12 h-12 rounded-full bg-[#F4F6F8] text-[#5C5C61] hover:bg-[#334a89]/10 hover:text-[#334a89] flex items-center justify-center transition-colors shadow-none"
                                                     onClick={() => setEditing(a)}
                                                     title="Edit Article"
                                                 >
@@ -389,7 +389,7 @@ export default function JournalManager() {
                                                 </button>
                                                 {role !== 'moderator' && (
                                                     <button
-                                                        className="w-12 h-12 rounded-full bg-rose-50 text-rose-400 hover:bg-rose-100 hover:text-rose-600 flex items-center justify-center transition-colors shadow-sm"
+                                                        className="w-12 h-12 rounded-full bg-rose-50 text-rose-400 hover:bg-rose-100 hover:text-rose-600 flex items-center justify-center transition-colors shadow-none"
                                                         onClick={() => handleDelete(a.id)}
                                                         title="Delete Article"
                                                     >
@@ -441,7 +441,7 @@ export default function JournalManager() {
                     </div>
 
                     {/* Editor Main Canvas */}
-                    <div className="bg-white rounded-[40px] shadow-[0_20px_60px_rgba(21,40,61,0.04)] border border-[#E5E7EB] p-8 md:p-12 lg:p-16 flex flex-col gap-10">
+                    <div className="bg-[#111111] rounded-[40px] shadow-[0_20px_60px_rgba(21,40,61,0.04)] border border-[#E5E7EB] p-8 md:p-12 lg:p-16 flex flex-col gap-10">
 
                         {/* Title (Massive Input) */}
                         <div className="flex flex-col gap-2 relative z-30">
@@ -464,7 +464,7 @@ export default function JournalManager() {
                                     value={editing.slug || ''}
                                     onChange={e => setEditing({ ...editing, slug: e.target.value })}
                                     placeholder="auto-generated-from-title"
-                                    className="w-full px-5 py-4 bg-[#F4F6F8] rounded-[20px] font-medium text-[15px] text-[#15283D] placeholder-[#A0AEC0]/50 border border-transparent focus:bg-white focus:border-[#334a89]/30 focus:ring-4 focus:ring-[#334a89]/10 outline-none transition-all duration-300"
+                                    className="w-full px-5 py-4 bg-[#F4F6F8] rounded-[20px] font-medium text-[15px] text-[#15283D] placeholder-[#A0AEC0]/50 border border-transparent focus:bg-[#111111] focus:border-[#334a89]/30 focus:ring-4 focus:ring-[#334a89]/10 outline-none transition-all duration-300"
                                 />
                             </div>
                             <div className="flex flex-col gap-2 relative">
@@ -485,7 +485,7 @@ export default function JournalManager() {
                                 <input type="file" accept="image/*" ref={fileInputRef} onChange={handleImageUpload} className="hidden" />
 
                                 {uploadingImage ? (
-                                    <div className="absolute inset-0 flex flex-col items-center justify-center bg-white/80 backdrop-blur-sm z-20">
+                                    <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#111111]/80 backdrop-blur-sm z-20">
                                         <Loader2 className="w-10 h-10 animate-spin text-[#334a89] mb-4" />
                                         <span className="font-bold text-[13px] uppercase tracking-widest text-[#15283D]">Processing Image...</span>
                                     </div>
@@ -494,7 +494,7 @@ export default function JournalManager() {
                                         <img src={editing.cover_image_url} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.02]" alt="Cover" />
                                         <div className="absolute inset-0 bg-[#15283D]/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-10">
                                             <button
-                                                className="flex items-center gap-2 px-8 py-4 bg-white/20 hover:bg-white text-white hover:text-[#15283D] rounded-full font-bold text-[13px] uppercase tracking-widest backdrop-blur-md transition-all shadow-lg"
+                                                className="flex items-center gap-2 px-8 py-4 bg-[#111111]/20 hover:bg-[#111111] text-white hover:text-[#15283D] rounded-full font-bold text-[13px] uppercase tracking-widest backdrop-blur-md transition-all shadow-2xl shadow-black/50"
                                                 onClick={(e) => { e.preventDefault(); fileInputRef.current?.click(); }}
                                             >
                                                 <ImageIcon className="w-5 h-5" /> Replace Cover Image
@@ -503,10 +503,10 @@ export default function JournalManager() {
                                     </>
                                 ) : (
                                     <div
-                                        className="absolute inset-0 flex flex-col items-center justify-center cursor-pointer hover:bg-white transition-colors"
+                                        className="absolute inset-0 flex flex-col items-center justify-center cursor-pointer hover:bg-[#111111] transition-colors"
                                         onClick={() => fileInputRef.current?.click()}
                                     >
-                                        <div className="w-20 h-20 bg-white rounded-full shadow-sm flex items-center justify-center mb-6 group-hover:-translate-y-2 transition-transform duration-300">
+                                        <div className="w-20 h-20 bg-[#111111] rounded-full shadow-none flex items-center justify-center mb-6 group-hover:-translate-y-2 transition-transform duration-300">
                                             <ImageIcon className="w-8 h-8 text-[#A0AEC0] group-hover:text-[#334a89] transition-colors" />
                                         </div>
                                         <span className="font-bold text-[18px] text-[#15283D] mb-2">Click to Upload High-Res Cover</span>
@@ -516,7 +516,7 @@ export default function JournalManager() {
                             </div>
                             <div className="mt-2">
                                 <input
-                                    className="w-full px-5 py-4 bg-[#F4F6F8] rounded-[20px] font-medium text-[15px] text-[#15283D] placeholder-[#A0AEC0] border border-transparent focus:bg-white focus:border-[#334a89]/30 focus:ring-4 focus:ring-[#334a89]/10 outline-none transition-all duration-300"
+                                    className="w-full px-5 py-4 bg-[#F4F6F8] rounded-[20px] font-medium text-[15px] text-[#15283D] placeholder-[#A0AEC0] border border-transparent focus:bg-[#111111] focus:border-[#334a89]/30 focus:ring-4 focus:ring-[#334a89]/10 outline-none transition-all duration-300"
                                     placeholder="Or paste an external image URL directly here..."
                                     value={editing.cover_image_url || ''}
                                     onChange={e => setEditing({ ...editing, cover_image_url: e.target.value })}
@@ -531,14 +531,14 @@ export default function JournalManager() {
                                 value={editing.excerpt || ''}
                                 onChange={e => setEditing({ ...editing, excerpt: e.target.value })}
                                 placeholder="Write a compelling brief summary to hook readers on the main journal page..."
-                                className="w-full h-32 bg-[#F4F6F8] rounded-[24px] p-6 font-medium text-[16px] text-[#15283D] placeholder-[#A0AEC0] border border-transparent focus:bg-white focus:border-[#334a89]/30 focus:ring-4 focus:ring-[#334a89]/10 outline-none transition-all duration-300 resize-none custom-scrollbar leading-[1.8]"
+                                className="w-full h-32 bg-[#F4F6F8] rounded-[24px] p-6 font-medium text-[16px] text-[#15283D] placeholder-[#A0AEC0] border border-transparent focus:bg-[#111111] focus:border-[#334a89]/30 focus:ring-4 focus:ring-[#334a89]/10 outline-none transition-all duration-300 resize-none custom-scrollbar leading-[1.8]"
                             />
                         </div>
 
                         {/* Full Canvas Rich Text Editor */}
                         <div className="flex flex-col gap-2 relative z-0">
                             <label className="font-bold text-[12px] text-[#A0AEC0] uppercase tracking-[0.2em] pl-1">Article Body <span className="text-rose-500">*</span></label>
-                            <div className="bg-[#F4F6F8] rounded-[24px] border border-transparent focus-within:bg-white focus-within:border-[#334a89]/30 focus-within:ring-4 focus-within:ring-[#334a89]/10 transition-all duration-300 overflow-hidden shadow-inner">
+                            <div className="bg-[#F4F6F8] rounded-[24px] border border-transparent focus-within:bg-[#111111] focus-within:border-[#334a89]/30 focus-within:ring-4 focus-within:ring-[#334a89]/10 transition-all duration-300 overflow-hidden shadow-inner">
                                 <ReactQuill
                                     theme="snow"
                                     value={editing.content || ''}

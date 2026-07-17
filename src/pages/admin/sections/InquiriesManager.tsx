@@ -36,7 +36,7 @@ function CustomStatusSelect({ value, onChange, rowZIndex, dropUp }: { value: str
         'new': { label: 'New', color: 'bg-[#ffc715]/10 text-[#b38b0f] border-[#ffc715]/30', dot: 'bg-[#ffc715] animate-pulse' },
         'contacted': { label: 'Contacted', color: 'bg-indigo-50 text-indigo-700 border-indigo-200', dot: 'bg-indigo-500' },
         'enrolled': { label: 'Enrolled', color: 'bg-emerald-50 text-emerald-700 border-emerald-200', dot: 'bg-emerald-500' },
-        'archived': { label: 'Archived', color: 'bg-gray-50 text-gray-700 border-gray-200', dot: 'bg-gray-400' }
+        'archived': { label: 'Archived', color: 'bg-white/5 text-gray-700 border-white/5', dot: 'bg-gray-400' }
     }
 
     const activeConfig = config[value] || config['new']
@@ -49,7 +49,7 @@ function CustomStatusSelect({ value, onChange, rowZIndex, dropUp }: { value: str
             <button
                 type="button"
                 onClick={() => setIsOpen(!isOpen)}
-                className={`w-full flex items-center justify-between px-4 py-2.5 rounded-full border transition-all duration-300 font-['Quicksand'] font-bold text-[10px] uppercase tracking-widest outline-none ${activeConfig.color} ${isOpen ? 'ring-4 ring-[#334a89]/10 shadow-md' : 'hover:shadow-sm'}`}
+                className={`w-full flex items-center justify-between px-4 py-2.5 rounded-full border transition-all duration-300 font-['Quicksand'] font-bold text-[10px] uppercase tracking-widest outline-none ${activeConfig.color} ${isOpen ? 'ring-4 ring-[#334a89]/10 shadow-none' : 'hover:shadow-none'}`}
             >
                 <div className="flex items-center gap-2 truncate pr-2">
                     <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${activeConfig.dot}`} />
@@ -58,7 +58,7 @@ function CustomStatusSelect({ value, onChange, rowZIndex, dropUp }: { value: str
                 <ChevronDown className={`w-3.5 h-3.5 shrink-0 transition-transform duration-300 ${isOpen ? (dropUp ? 'rotate-0' : 'rotate-180') : (dropUp ? 'rotate-180' : '')}`} />
             </button>
 
-            <div className={`absolute left-0 right-0 ${originClasses} bg-white border border-[#E5E7EB] rounded-[20px] shadow-[0_20px_40px_rgba(21,40,61,0.12)] overflow-hidden transition-all duration-300 ${isOpen ? 'opacity-100 scale-y-100 pointer-events-auto' : 'opacity-0 scale-y-95 pointer-events-none'}`}>
+            <div className={`absolute left-0 right-0 ${originClasses} bg-[#111111] border border-[#E5E7EB] rounded-[20px] shadow-[0_20px_40px_rgba(21,40,61,0.12)] overflow-hidden transition-all duration-300 ${isOpen ? 'opacity-100 scale-y-100 pointer-events-auto' : 'opacity-0 scale-y-95 pointer-events-none'}`}>
                 <div className="py-2 flex flex-col">
                     {Object.entries(config).map(([key, item]) => (
                         <button
@@ -149,13 +149,13 @@ export default function InquiriesManager() {
             </div>
 
             {/* Filter Pill Bar */}
-            <div className="bg-white p-2 rounded-[20px] shadow-[0_8px_30px_rgba(21,40,61,0.03)] border border-[#E5E7EB] mb-8 flex items-center gap-2 overflow-x-auto scrollbar-hide">
+            <div className="bg-[#111111] p-2 rounded-[20px] shadow-[0_8px_30px_rgba(21,40,61,0.03)] border border-[#E5E7EB] mb-8 flex items-center gap-2 overflow-x-auto scrollbar-hide">
                 {filters.map(f => (
                     <button
                         key={f.id}
                         onClick={() => setFilter(f.id)}
                         className={`px-6 py-3 rounded-[14px] text-[12px] font-bold uppercase tracking-widest transition-all duration-300 whitespace-nowrap ${
-                            filter === f.id ? 'bg-[#334a89] text-white shadow-md' : 'text-[#5C5C61] hover:bg-[#F4F6F8]'
+                            filter === f.id ? 'bg-[#334a89] text-white shadow-none' : 'text-[#5C5C61] hover:bg-[#F4F6F8]'
                         }`}
                     >
                         {f.label}
@@ -163,7 +163,7 @@ export default function InquiriesManager() {
                 ))}
             </div>
 
-            <div className="bg-white rounded-[32px] shadow-[0_20px_60px_rgba(21,40,61,0.04)] border border-[#E5E7EB] overflow-hidden flex flex-col relative transform-gpu" style={{ clipPath: 'inset(0 round 32px)' }}>
+            <div className="bg-[#111111] rounded-[32px] shadow-[0_20px_60px_rgba(21,40,61,0.04)] border border-[#E5E7EB] overflow-hidden flex flex-col relative transform-gpu" style={{ clipPath: 'inset(0 round 32px)' }}>
                 {loading ? (
                     <div className="p-16 text-center animate-pulse text-[#A0AEC0] min-h-[450px]">Loading inquiries...</div>
                 ) : inquiries.length === 0 ? (
@@ -174,7 +174,7 @@ export default function InquiriesManager() {
                             The table now natively flows within the container width.
                         */}
                         <table className="w-full text-left border-collapse">
-                            <thead className="bg-[#F8F9FA] sticky top-0 z-30 shadow-sm">
+                            <thead className="bg-[#F8F9FA] sticky top-0 z-30 shadow-none">
                             <tr>
                                 <th className="px-8 py-6 text-[11px] font-bold text-[#A0AEC0] uppercase tracking-widest border-b border-[#E5E7EB]">Parent</th>
                                 <th className="px-6 py-6 text-[11px] font-bold text-[#A0AEC0] uppercase tracking-widest border-b border-[#E5E7EB] hidden md:table-cell">Contact</th>

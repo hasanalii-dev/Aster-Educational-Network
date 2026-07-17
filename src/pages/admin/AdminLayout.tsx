@@ -88,7 +88,7 @@ export default function AdminLayout() {
             {/* Global Legacy Class Overrides & Scrollbars */}
             <style>{styles}</style>
 
-            <div className={`admin-container flex min-h-screen font-['Quicksand'] selection:bg-[#ffc715]/20 selection:text-[#ffc715] ${location.pathname === '/admin' ? 'bg-[#050505]' : 'bg-[#F8F9FA]'}`}>
+            <div className={`admin-container flex min-h-screen font-['Quicksand'] selection:bg-[#ffc715]/20 selection:text-[#ffc715] bg-[#050505]`}>
 
                 {/* =========================================================
                     MOBILE OVERLAY
@@ -171,30 +171,30 @@ export default function AdminLayout() {
                 {/* =========================================================
                     MAIN CANVAS
                 ========================================================= */}
-                <div className={`flex-1 flex flex-col min-w-0 h-screen overflow-y-auto custom-scrollbar relative ${location.pathname === '/admin' ? 'bg-[#050505]' : 'bg-[#F8F9FA]'}`}>
+                <div className={`flex-1 flex flex-col min-w-0 h-screen overflow-y-auto custom-scrollbar relative bg-[#050505]`}>
 
                     {/* Glassmorphic Topbar */}
-                    <header className={`sticky top-0 z-40 h-[80px] backdrop-blur-xl border-b flex items-center justify-between shrink-0 px-6 md:px-12 transition-colors duration-300 ${location.pathname === '/admin' ? 'bg-[#0A0A0A]/80 border-white/5' : 'bg-white/80 border-[#E5E7EB]'}`}>
+                    <header className={`sticky top-0 z-40 h-[80px] backdrop-blur-xl border-b flex items-center justify-between shrink-0 px-6 md:px-12 transition-colors duration-300 bg-[#0A0A0A]/80 border-white/5`}>
                         <div className="flex items-center gap-4">
                             <button
-                                className={`lg:hidden w-10 h-10 rounded-full flex items-center justify-center transition-colors ${location.pathname === '/admin' ? 'bg-[#141414] hover:bg-[#1f1f1f] text-white' : 'bg-[#F4F6F8] hover:bg-[#E5E7EB] text-[#15283D]'}`}
+                                className={`lg:hidden w-10 h-10 rounded-full flex items-center justify-center transition-colors bg-[#141414] hover:bg-[#1f1f1f] text-white`}
                                 onClick={() => setSidebarOpen(true)}
                             >
                                 <Menu size={20} />
                             </button>
-                            <div className={`hidden md:flex items-center gap-3 px-4 py-2 rounded-full border ${location.pathname === '/admin' ? 'bg-[#141414] border-white/10' : 'bg-[#F4F6F8] border-[#E5E7EB]'}`}>
-                                <Sparkles className={`w-4 h-4 ${location.pathname === '/admin' ? 'text-[#ffc715]' : 'text-[#334a89]'}`} />
-                                <span className={`font-bold text-[12px] uppercase tracking-widest ${location.pathname === '/admin' ? 'text-white/60' : 'text-[#5C5C61]'}`}>
+                            <div className={`hidden md:flex items-center gap-3 px-4 py-2 rounded-full border bg-[#141414] border-white/10`}>
+                                <Sparkles className={`w-4 h-4 text-[#ffc715]`} />
+                                <span className={`font-bold text-[12px] uppercase tracking-widest text-white/60`}>
                                     {currentTitle}
                                 </span>
                             </div>
                         </div>
 
                         {/* Admin Profile Pill */}
-                        <div className={`flex items-center gap-3 pl-4 py-2 pr-2 rounded-full border shadow-sm hover:shadow-md transition-shadow cursor-default ${location.pathname === '/admin' ? 'bg-[#141414] border-white/10' : 'bg-white border-[#E5E7EB]'}`}>
+                        <div className={`flex items-center gap-3 pl-4 py-2 pr-2 rounded-full border shadow-sm hover:shadow-md transition-shadow cursor-default bg-[#141414] border-white/10`}>
                             <div className="flex flex-col items-end hidden sm:flex">
-                                <span className={`font-bold text-[13px] leading-tight capitalize ${location.pathname === '/admin' ? 'text-white' : 'text-[#15283D]'}`}>{role?.replace('_', ' ') || 'Admin'}</span>
-                                <span className={`font-medium text-[11px] ${location.pathname === '/admin' ? 'text-white/50' : 'text-[#A0AEC0]'}`}>{user.user_metadata?.full_name || user.email}</span>
+                                <span className={`font-bold text-[13px] leading-tight capitalize text-white`}>{role?.replace('_', ' ') || 'Admin'}</span>
+                                <span className={`font-medium text-[11px] text-white/50`}>{user.user_metadata?.full_name || user.email}</span>
                             </div>
                             <div className="w-10 h-10 rounded-full bg-[#15283D] flex items-center justify-center overflow-hidden shadow-inner shrink-0 border border-white/10">
                                 <img src={user.user_metadata?.custom_avatar_url || user.user_metadata?.avatar_url || `https://api.dicebear.com/9.x/notionists/svg?seed=${user.id}`} alt="Admin Avatar" className="w-[120%] h-[120%] object-cover object-bottom" />
@@ -261,37 +261,37 @@ const styles = `
    LEGACY .adm-* CLASSES 
    (Upgraded to match the new Awwwards-tier design so older pages don't look broken)
 */
-.adm-card { background: #FFF; border-radius: 32px; border: 1px solid #E5E7EB; padding: 32px; box-shadow: 0 20px 40px rgba(21,40,61,0.04); }
+.adm-card { background: #111111; border-radius: 32px; border: 1px solid rgba(255,255,255,0.05); padding: 32px; box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
 .adm-card-hd { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
-.adm-card-t { font-size: 20px; font-weight: 800; color: #15283D; margin: 0; letter-spacing: -0.02em; }
+.adm-card-t { font-size: 20px; font-weight: 800; color: #FFFFFF; margin: 0; letter-spacing: -0.02em; }
 
-.adm-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 24px; background: #334a89; color: #FFF; border: none; border-radius: 100px; font-family: 'Quicksand', sans-serif; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; cursor: pointer; transition: all 300ms; }
-.adm-btn:hover { background: #15283D; box-shadow: 0 10px 20px rgba(51,74,137,0.2); transform: translateY(-1px); }
+.adm-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 24px; background: #ffc715; color: #15283D; border: none; border-radius: 100px; font-family: 'Quicksand', sans-serif; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; cursor: pointer; transition: all 300ms; }
+.adm-btn:hover { background: #e0b012; box-shadow: 0 10px 20px rgba(255,199,21,0.2); transform: translateY(-1px); }
 
-.adm-btn-s { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 24px; background: #F4F6F8; color: #5C5C61; border: border: transparent; border-radius: 100px; font-family: 'Quicksand', sans-serif; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; cursor: pointer; transition: all 300ms; }
-.adm-btn-s:hover { background: #E5E7EB; color: #15283D; }
+.adm-btn-s { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 24px; background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.6); border: border: transparent; border-radius: 100px; font-family: 'Quicksand', sans-serif; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; cursor: pointer; transition: all 300ms; }
+.adm-btn-s:hover { background: rgba(255,255,255,0.1); color: #FFFFFF; }
 
 .adm-btn-d { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; background: rgba(244, 63, 94, 0.1); color: #F43F5E; border: none; border-radius: 100px; font-family: 'Quicksand', sans-serif; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; cursor: pointer; transition: all 300ms; }
 .adm-btn-d:hover { background: rgba(244, 63, 94, 0.15); color: #E11D48; }
 
-.adm-inp { width: 100%; height: 52px; padding: 0 20px; border: 1px solid transparent; border-radius: 20px; font-family: 'Quicksand', sans-serif; font-size: 15px; font-weight: 500; color: #15283D; background: #F4F6F8; outline: none; transition: all 300ms; box-sizing: border-box; }
-.adm-inp:focus { background: #FFF; border-color: rgba(51,74,137,0.3); box-shadow: 0 0 0 4px rgba(51,74,137,0.1); }
+.adm-inp { width: 100%; height: 52px; padding: 0 20px; border: 1px solid rgba(255,255,255,0.05); border-radius: 20px; font-family: 'Quicksand', sans-serif; font-size: 15px; font-weight: 500; color: #FFFFFF; background: rgba(255,255,255,0.03); outline: none; transition: all 300ms; box-sizing: border-box; }
+.adm-inp:focus { background: rgba(255,255,255,0.05); border-color: #ffc715; box-shadow: 0 0 0 4px rgba(255,199,21,0.1); }
 
-.adm-ta { width: 100%; min-height: 140px; padding: 20px; border: 1px solid transparent; border-radius: 24px; font-family: 'Quicksand', sans-serif; font-size: 15px; font-weight: 500; color: #15283D; background: #F4F6F8; outline: none; resize: vertical; transition: all 300ms; box-sizing: border-box; }
-.adm-ta:focus { background: #FFF; border-color: rgba(51,74,137,0.3); box-shadow: 0 0 0 4px rgba(51,74,137,0.1); }
+.adm-ta { width: 100%; min-height: 140px; padding: 20px; border: 1px solid rgba(255,255,255,0.05); border-radius: 24px; font-family: 'Quicksand', sans-serif; font-size: 15px; font-weight: 500; color: #FFFFFF; background: rgba(255,255,255,0.03); outline: none; resize: vertical; transition: all 300ms; box-sizing: border-box; }
+.adm-ta:focus { background: rgba(255,255,255,0.05); border-color: #ffc715; box-shadow: 0 0 0 4px rgba(255,199,21,0.1); }
 
-.adm-lbl { display: block; font-size: 11px; font-weight: 700; color: rgba(21,40,61,0.6); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 8px; padding-left: 4px; }
+.adm-lbl { display: block; font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 8px; padding-left: 4px; }
 
 .adm-tbl { width: 100%; border-collapse: collapse; min-width: 800px; }
-.adm-tbl th { text-align: left; font-size: 11px; font-weight: 700; color: #A0AEC0; text-transform: uppercase; letter-spacing: 0.15em; padding: 20px 24px; border-bottom: 1px solid #E5E7EB; background: #F8F9FA; }
-.adm-tbl td { padding: 20px 24px; font-size: 14px; font-weight: 500; color: #5C5C61; border-bottom: 1px solid #F4F6F8; transition: background 200ms; }
-.adm-tbl tr:hover td { background: rgba(248,249,250,0.5); }
+.adm-tbl th { text-align: left; font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.15em; padding: 20px 24px; border-bottom: 1px solid rgba(255,255,255,0.05); background: rgba(255,255,255,0.02); }
+.adm-tbl td { padding: 20px 24px; font-size: 14px; font-weight: 500; color: rgba(255,255,255,0.6); border-bottom: 1px solid rgba(255,255,255,0.02); transition: background 200ms; }
+.adm-tbl tr:hover td { background: rgba(255,255,255,0.03); }
 
 .adm-bdg { display: inline-flex; align-items: center; padding: 6px 12px; border-radius: 100px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; }
-.adm-bdg-g { background: #DCFCE7; color: #16A34A; }
-.adm-bdg-y { background: rgba(255,199,21,0.1); color: #b38b0f; }
-.adm-bdg-gr { background: #F4F6F8; color: #A0AEC0; }
-.adm-bdg-b { background: #DBEAFE; color: #2563EB; }
+.adm-bdg-g { background: rgba(22,163,74,0.1); color: #4ade80; }
+.adm-bdg-y { background: rgba(255,199,21,0.1); color: #ffc715; }
+.adm-bdg-gr { background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.4); }
+.adm-bdg-b { background: rgba(59,130,246,0.1); color: #60a5fa; }
 
-.adm-empty { text-align: center; padding: 64px 24px; color: #A0AEC0; font-size: 15px; font-weight: 500; }
+.adm-empty { text-align: center; padding: 64px 24px; color: rgba(255,255,255,0.4); font-size: 15px; font-weight: 500; }
 `

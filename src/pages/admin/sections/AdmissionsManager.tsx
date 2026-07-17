@@ -24,7 +24,7 @@ function CustomStatusSelect({ value, onChange, rowZIndex }: { value: string, onC
     }, [])
 
     const config: Record<string, { label: string, color: string, dot: string }> = {
-        submitted: { label: 'Submitted', color: 'bg-gray-50 text-gray-700 border-gray-200', dot: 'bg-gray-400' },
+        submitted: { label: 'Submitted', color: 'bg-white/5 text-gray-700 border-white/5', dot: 'bg-gray-400' },
         under_review: { label: 'Under Review', color: 'bg-[#ffc715]/10 text-[#b38b0f] border-[#ffc715]/30', dot: 'bg-[#ffc715] animate-pulse' },
         assessment_booked: { label: 'Assessment Booked', color: 'bg-indigo-50 text-indigo-700 border-indigo-200', dot: 'bg-indigo-500' },
         accepted: { label: 'Accepted', color: 'bg-emerald-50 text-emerald-700 border-emerald-200', dot: 'bg-emerald-500' },
@@ -38,7 +38,7 @@ function CustomStatusSelect({ value, onChange, rowZIndex }: { value: string, onC
             <button
                 type="button"
                 onClick={() => setIsOpen(!isOpen)}
-                className={`w-full flex items-center justify-between px-4 py-2.5 rounded-full border transition-all duration-300 font-['Quicksand'] font-bold text-[11px] uppercase tracking-widest outline-none ${activeConfig.color} ${isOpen ? 'ring-4 ring-[#334a89]/10 shadow-md' : 'hover:shadow-sm'}`}
+                className={`w-full flex items-center justify-between px-4 py-2.5 rounded-full border transition-all duration-300 font-['Quicksand'] font-bold text-[11px] uppercase tracking-widest outline-none ${activeConfig.color} ${isOpen ? 'ring-4 ring-[#334a89]/10 shadow-none' : 'hover:shadow-none'}`}
             >
                 <div className="flex items-center gap-2.5">
                     <span className={`w-1.5 h-1.5 rounded-full ${activeConfig.dot}`} />
@@ -48,7 +48,7 @@ function CustomStatusSelect({ value, onChange, rowZIndex }: { value: string, onC
             </button>
 
             <div
-                className={`absolute left-0 right-0 top-[calc(100%+8px)] bg-white border border-[#E5E7EB] rounded-[20px] shadow-[0_20px_40px_rgba(21,40,61,0.12)] overflow-hidden transition-all duration-300 origin-top ${
+                className={`absolute left-0 right-0 top-[calc(100%+8px)] bg-[#111111] border border-[#E5E7EB] rounded-[20px] shadow-[0_20px_40px_rgba(21,40,61,0.12)] overflow-hidden transition-all duration-300 origin-top ${
                     isOpen ? 'opacity-100 scale-y-100 pointer-events-auto' : 'opacity-0 scale-y-95 pointer-events-none'
                 }`}
             >
@@ -250,7 +250,7 @@ export default function AdmissionsManager() {
             </div>
 
             {/* Filter Command Bar */}
-            <div className="bg-white p-2 rounded-[20px] shadow-[0_8px_30px_rgba(21,40,61,0.03)] border border-[#E5E7EB] mb-8 flex flex-nowrap gap-2 items-center overflow-x-auto scrollbar-hide">
+            <div className="bg-[#111111] p-2 rounded-[20px] shadow-[0_8px_30px_rgba(21,40,61,0.03)] border border-[#E5E7EB] mb-8 flex flex-nowrap gap-2 items-center overflow-x-auto scrollbar-hide">
                 <div className="px-5 border-r border-[#E5E7EB] hidden lg:flex items-center gap-2 text-[#A0AEC0] shrink-0">
                     <SlidersHorizontal className="w-4 h-4" />
                     <span className="text-[11px] font-bold uppercase tracking-widest">Filter</span>
@@ -261,7 +261,7 @@ export default function AdmissionsManager() {
                         onClick={() => setFilter(f.id)}
                         className={`px-5 py-2.5 rounded-[14px] text-[13px] font-bold tracking-wide transition-all duration-300 shrink-0 whitespace-nowrap ${
                             filter === f.id
-                                ? 'bg-[#334a89] text-white shadow-md'
+                                ? 'bg-[#334a89] text-white shadow-none'
                                 : 'bg-transparent text-[#5C5C61] hover:bg-[#F4F6F8] hover:text-[#15283D]'
                         }`}
                     >
@@ -272,7 +272,7 @@ export default function AdmissionsManager() {
 
             {/* Main Data Table Card */}
             <div
-                className="bg-white rounded-[32px] shadow-[0_20px_60px_rgba(21,40,61,0.04)] border border-[#E5E7EB] flex flex-col relative transform-gpu pb-2"
+                className="bg-[#111111] rounded-[32px] shadow-[0_20px_60px_rgba(21,40,61,0.04)] border border-[#E5E7EB] flex flex-col relative transform-gpu pb-2"
                 style={{ clipPath: 'inset(0 round 32px)' }}
             >
                 {loading ? (
@@ -308,7 +308,7 @@ export default function AdmissionsManager() {
                         <table className="w-full text-left border-collapse min-w-[1000px]">
 
                             {/* Sticky Header */}
-                            <thead className="sticky top-0 z-30 shadow-sm">
+                            <thead className="sticky top-0 z-30 shadow-none">
                             <tr>
                                 <th className="bg-[#F8F9FA] px-8 py-6 text-[11px] font-bold text-[#A0AEC0] uppercase tracking-widest border-b border-[#E5E7EB] whitespace-nowrap">Applicant Data</th>
                                 <th className="bg-[#F8F9FA] px-6 py-6 text-[11px] font-bold text-[#A0AEC0] uppercase tracking-widest border-b border-[#E5E7EB] whitespace-nowrap">Guardian Connect</th>
@@ -318,7 +318,7 @@ export default function AdmissionsManager() {
                             </tr>
                             </thead>
 
-                            <tbody ref={tableRef} className="bg-white relative z-0">
+                            <tbody ref={tableRef} className="bg-[#111111] relative z-0">
                             {admissions.map((adm, index) => (
                                 <tr key={adm.id} className="adm-row group hover:bg-[#F8F9FA]/50 transition-colors border-b border-[#F4F6F8] last:border-0 relative">
                                     <td className="px-8 py-6">
@@ -384,7 +384,7 @@ export default function AdmissionsManager() {
             {selectedAdmission && (
                 <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-[#15283D]/40 backdrop-blur-md">
                     <div className="absolute inset-0 cursor-pointer" onClick={() => setSelectedAdmission(null)} />
-                    <div ref={modalRef} className="relative w-full max-w-lg bg-white rounded-[40px] shadow-[0_40px_80px_rgba(21,40,61,0.2)] border border-[#E5E7EB] overflow-hidden">
+                    <div ref={modalRef} className="relative w-full max-w-lg bg-[#111111] rounded-[40px] shadow-[0_40px_80px_rgba(21,40,61,0.2)] border border-[#E5E7EB] overflow-hidden">
 
                         <div className="px-10 py-8 border-b border-[#F4F6F8] flex items-center justify-between bg-[#F8F9FA]">
                             <div className="flex items-center gap-4">
@@ -398,7 +398,7 @@ export default function AdmissionsManager() {
                             </div>
                             <button
                                 onClick={() => setSelectedAdmission(null)}
-                                className="w-10 h-10 rounded-full bg-white border border-[#E5E7EB] flex items-center justify-center text-[#A0AEC0] hover:text-[#15283D] hover:border-[#15283D] hover:bg-[#F8F9FA] transition-all"
+                                className="w-10 h-10 rounded-full bg-[#111111] border border-[#E5E7EB] flex items-center justify-center text-[#A0AEC0] hover:text-[#15283D] hover:border-[#15283D] hover:bg-[#F8F9FA] transition-all"
                             >
                                 <X className="w-4 h-4" />
                             </button>
@@ -409,7 +409,7 @@ export default function AdmissionsManager() {
                                 This note will be instantly visible to <span className="font-bold text-[#334a89] px-2 py-1 bg-[#334a89]/5 rounded-md">{selectedAdmission.parent_name}</span> on their secure portal dashboard.
                             </p>
                             <textarea
-                                className="w-full h-40 bg-[#F4F6F8] rounded-[24px] p-6 font-medium text-[16px] text-[#15283D] placeholder-[#A0AEC0] border border-[#E5E7EB] focus:bg-white focus:border-[#334a89]/30 focus:ring-4 focus:ring-[#334a89]/10 outline-none transition-all duration-300 resize-none custom-scrollbar leading-relaxed"
+                                className="w-full h-40 bg-[#F4F6F8] rounded-[24px] p-6 font-medium text-[16px] text-[#15283D] placeholder-[#A0AEC0] border border-[#E5E7EB] focus:bg-[#111111] focus:border-[#334a89]/30 focus:ring-4 focus:ring-[#334a89]/10 outline-none transition-all duration-300 resize-none custom-scrollbar leading-relaxed"
                                 value={feedback}
                                 onChange={e => setFeedback(e.target.value)}
                                 placeholder="E.g. We loved meeting you! We would like to invite you for a formal assessment next week..."

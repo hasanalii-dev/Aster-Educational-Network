@@ -34,7 +34,7 @@ function CustomRoleSelect({ value, onChange, rowZIndex }: { value: string, onCha
         'super_admin': { label: 'Super Admin', color: 'bg-rose-50 text-rose-700 border-rose-200' },
         'moderator': { label: 'Moderator', color: 'bg-indigo-50 text-indigo-700 border-indigo-200' },
         'content_writer': { label: 'Content Writer', color: 'bg-[#ffc715]/10 text-[#b38b0f] border-[#ffc715]/30' },
-        'user': { label: 'Standard User', color: 'bg-gray-50 text-gray-700 border-gray-200' }
+        'user': { label: 'Standard User', color: 'bg-white/5 text-gray-700 border-white/5' }
     }
 
     const activeConfig = config[value] || config['user']
@@ -44,14 +44,14 @@ function CustomRoleSelect({ value, onChange, rowZIndex }: { value: string, onCha
             <button
                 type="button"
                 onClick={() => setIsOpen(!isOpen)}
-                className={`w-full flex items-center justify-between px-4 py-2.5 rounded-full border transition-all duration-300 font-['Quicksand'] font-bold text-[11px] uppercase tracking-widest outline-none ${activeConfig.color} ${isOpen ? 'ring-4 ring-[#334a89]/10 shadow-md' : 'hover:shadow-sm'}`}
+                className={`w-full flex items-center justify-between px-4 py-2.5 rounded-full border transition-all duration-300 font-['Quicksand'] font-bold text-[11px] uppercase tracking-widest outline-none ${activeConfig.color} ${isOpen ? 'ring-4 ring-[#334a89]/10 shadow-none' : 'hover:shadow-none'}`}
             >
                 <span className="truncate pr-2">{activeConfig.label}</span>
                 <ChevronDown className={`w-3.5 h-3.5 shrink-0 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
             </button>
 
             <div
-                className={`absolute right-0 top-[calc(100%+8px)] w-48 bg-white border border-[#E5E7EB] rounded-[20px] shadow-[0_20px_40px_rgba(21,40,61,0.12)] overflow-hidden transition-all duration-300 origin-top ${
+                className={`absolute right-0 top-[calc(100%+8px)] w-48 bg-[#111111] border border-[#E5E7EB] rounded-[20px] shadow-[0_20px_40px_rgba(21,40,61,0.12)] overflow-hidden transition-all duration-300 origin-top ${
                     isOpen ? 'opacity-100 scale-y-100 pointer-events-auto' : 'opacity-0 scale-y-95 pointer-events-none'
                 }`}
             >
@@ -208,7 +208,7 @@ export default function UsersManager() {
                 MAIN DATA TABLE (Zero Horizontal Scroll Forced)
             ========================================================= */}
             <div
-                className="bg-white rounded-[32px] shadow-[0_20px_60px_rgba(21,40,61,0.04)] border border-[#E5E7EB] flex flex-col relative transform-gpu pb-2 min-h-[500px]"
+                className="bg-[#111111] rounded-[32px] shadow-[0_20px_60px_rgba(21,40,61,0.04)] border border-[#E5E7EB] flex flex-col relative transform-gpu pb-2 min-h-[500px]"
                 style={{ clipPath: 'inset(0 round 32px)' }}
             >
                 {loading ? (
@@ -244,7 +244,7 @@ export default function UsersManager() {
                         */}
                         <table className="w-full text-left border-collapse">
 
-                            <thead className="sticky top-0 z-30 shadow-sm">
+                            <thead className="sticky top-0 z-30 shadow-none">
                             <tr>
                                 <th className="bg-[#F8F9FA] px-6 py-6 text-[11px] font-bold text-[#A0AEC0] uppercase tracking-widest border-b border-[#E5E7EB]">User Profile</th>
                                 <th className="bg-[#F8F9FA] px-4 py-6 text-[11px] font-bold text-[#A0AEC0] uppercase tracking-widest border-b border-[#E5E7EB] hidden md:table-cell">Email Address</th>
@@ -253,13 +253,13 @@ export default function UsersManager() {
                             </tr>
                             </thead>
 
-                            <tbody ref={tableRef} className="bg-white relative z-0">
+                            <tbody ref={tableRef} className="bg-[#111111] relative z-0">
                             {profiles.map((profile, index) => (
                                 <tr key={profile.id} className="adm-row opacity-0 group hover:bg-[#F8F9FA]/50 transition-colors border-b border-[#F4F6F8] last:border-0 relative">
 
                                     <td className="px-6 py-6">
                                         <div className="flex items-center gap-4">
-                                            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#15283D] to-[#334a89] text-white flex items-center justify-center font-bold text-[14px] shadow-sm shrink-0">
+                                            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#15283D] to-[#334a89] text-white flex items-center justify-center font-bold text-[14px] shadow-none shrink-0">
                                                 {profile.full_name ? profile.full_name.charAt(0).toUpperCase() : <User className="w-5 h-5" />}
                                             </div>
                                             <div className="min-w-0">
