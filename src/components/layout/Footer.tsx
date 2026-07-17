@@ -344,9 +344,9 @@ export function Footer() {
                                 <div className="footer-legal-links">
                                     <Link to="/safeguarding" className="footer-legal-item">Safeguarding</Link>
                                     <span className="footer-legal-dot">•</span>
-                                    <Link to="#" className="footer-legal-item">Privacy Policy</Link>
+                                    <Link to="/privacy-policy" className="footer-legal-item">Privacy Policy</Link>
                                     <span className="footer-legal-dot">•</span>
-                                    <Link to="#" className="footer-legal-item">Terms of Service</Link>
+                                    <Link to="/terms-of-service" className="footer-legal-item">Terms of Service</Link>
                                 </div>
                             </div>
                             

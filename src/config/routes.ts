@@ -32,6 +32,8 @@ const ProfileDashboard = lazy(() => import('@/pages/ProfileDashboard'))
 const Apply = lazy(() => import('@/pages/Apply'))
 const BookTour = lazy(() => import('@/pages/BookTour'))
 const JobOpenings = lazy(() => import('@/pages/JobOpenings'))
+const PrivacyPolicy = lazy(() => import('@/pages/PrivacyPolicy'))
+const TermsOfService = lazy(() => import('@/pages/TermsOfService'))
 
 // Route metadata for SEO and navigation
 export interface RouteConfig {
@@ -147,4 +149,6 @@ export const pageComponents = {
   Apply,
   BookTour,
   JobOpenings,
+  PrivacyPolicy,
+  TermsOfService,
 }

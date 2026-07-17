@@ -35,6 +35,8 @@ const {
   Apply,
   BookTour,
   JobOpenings,
+  PrivacyPolicy,
+  TermsOfService,
 } = pageComponents
 
 // Admin pages (lazy-loaded, separate bundle)
@@ -93,6 +95,8 @@ const router = createBrowserRouter([
       { path: 'profile', element: <ProfileDashboard /> },
       { path: 'apply', element: <Apply /> },
       { path: 'book-tour', element: <BookTour /> },
+      { path: 'privacy-policy', element: <PrivacyPolicy /> },
+      { path: 'terms-of-service', element: <TermsOfService /> },
       { path: '*', element: <NotFound /> },
     ],
   },
