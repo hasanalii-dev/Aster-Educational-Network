@@ -483,9 +483,9 @@ export default function UnifiedAuth() {
                                         <GoogleLogin
                                             onSuccess={handleGoogleSuccess}
                                             onError={handleGoogleError}
-                                            theme="filled_blue"
+                                            theme="outline"
                                             size="large"
-                                            shape="rectangular"
+                                            shape="pill"
                                             text={isSignUp ? "signup_with" : "continue_with"}
                                             width="320"
                                             logo_alignment="center"
