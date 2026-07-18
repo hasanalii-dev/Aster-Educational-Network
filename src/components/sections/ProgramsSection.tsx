@@ -113,6 +113,9 @@ export function ProgramsSection() {
                 <span>LEARNING IN ACTION</span>
               </div>
               <h2 className="learners-title">From Learners<br />To Leaders</h2>
+              <p className="font-['Quicksand'] text-[#555] text-[15px] leading-[1.6] mt-5 max-w-[95%]">
+                At Aster, transformation happens through experience. The shy child who once hesitated to speak begins presenting confidently on stage. The student experimenting with robotics learns to think strategically and solve problems independently. The child leading a fundraiser discovers empathy, ownership, and leadership. These experiences shape character and prepare them to lead with confidence.
+              </p>
             </div>
 
             <div className="learners-list">
