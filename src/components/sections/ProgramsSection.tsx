@@ -71,7 +71,7 @@ export function ProgramsSection() {
 
       <style>{programsStyles}</style>
 
-      <section id="learners-to-leaders" ref={learnerSectionRef} className="learners-section" data-cursor-scroll="true">
+      <section id="learners-to-leaders" ref={learnerSectionRef} className="learners-section">
         <div className="learners-container">
 
           {/* === LEFT COLUMN: Headings & Program List === */}
