@@ -89,7 +89,7 @@ const navItems: NavItem[] = [
         },
         children: [
             { label: 'About Us', href: '/about', description: 'Building future-ready learners' },
-            { label: 'The Aster Difference', href: '/aster-difference', description: 'Education designed for the world' },
+            { label: 'The Aster Difference', href: '/aster-difference', description: 'Education designed for life' },
             { label: 'Our Campuses', href: '/campuses', description: 'Clifton, PECHS, & Riyadh' },
             { label: 'Safeguarding', href: '/safeguarding', description: 'Every child deserves to feel safe' },
             { label: 'Careers', href: '/careers', description: 'Build the future with us' },
