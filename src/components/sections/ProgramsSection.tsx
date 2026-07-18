@@ -57,36 +57,9 @@ export function ProgramsSection() {
   const learnerSectionRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      let mm = gsap.matchMedia();
-
-      // Desktop Auto-Scrubbing Pin
-      mm.add("(min-width: 1024px)", () => {
-        if (learnerSectionRef.current) {
-          ScrollTrigger.create({
-            trigger: learnerSectionRef.current,
-            start: "center center",
-            end: "+=2400",
-            pin: true,
-            pinSpacing: true,
-            scrub: 1,
-            invalidateOnRefresh: true,
-            onUpdate: (self) => {
-              const totalItems = learnerData.length;
-              const newIndex = Math.min(totalItems - 1, Math.floor(self.progress * totalItems));
-              setActiveLearnerIndex((prevIndex) => {
-                  if (prevIndex !== newIndex) {
-                      return newIndex;
-                  }
-                  return prevIndex;
-              });
-            }
-          });
-        }
-      });
-    })
-
-    return () => ctx.revert()
+    // Scroll pinning has been removed.
+    // The section now relies entirely on the onClick handlers in the list to change images,
+    // matching the behavior of the PreschoolMaterials component.
   }, [])
 
   return (
@@ -157,17 +130,6 @@ export function ProgramsSection() {
               <p>
                 Experiences that build confidence, creativity, and courage. Meaningful learning happens when students actively participate, create, collaborate, and lead.
               </p>
-            </div>
-
-            {/* Pagination Dots (Far Right) */}
-            <div className="learners-pagination">
-              <div className="learners-dots-container">
-                {learnerData.map((_, i) => (
-                  <div key={i} className={`learner-dot-wrap ${activeLearnerIndex === i ? 'is-active' : ''}`}>
-                    <div className="learner-dot" />
-                  </div>
-                ))}
-              </div>
             </div>
 
           </div>
