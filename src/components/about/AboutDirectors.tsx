@@ -69,10 +69,19 @@ export function AboutDirectors() {
     return (
         <section ref={sectionRef} className="w-full py-20 md:py-32 bg-white relative z-10">
             <div className="max-w-[900px] mx-auto px-6 md:px-12">
-                <div className="flex flex-col items-center justify-center gap-4 mb-20 text-center">
-                    <h2 className="font-['Playfair_Display'] text-4xl md:text-5xl lg:text-[56px] font-bold text-[#15283D]">
+                <div className="flex flex-col items-center justify-center gap-4 mb-24 text-center">
+                    <div className="flex items-center gap-3 mb-2">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="text-[#ffc715]">
+                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"></path>
+                        </svg>
+                        <span className="font-['Quicksand'] font-bold text-sm md:text-base tracking-[0.3em] text-[#394da1] uppercase mt-1">
+                            LEADERSHIP
+                        </span>
+                    </div>
+                    <h2 className="font-['Playfair_Display'] text-5xl md:text-6xl lg:text-7xl font-bold text-[#15283D] tracking-tight">
                         Director Messages
                     </h2>
+                    <div className="w-24 h-[3px] bg-[#ffc715] mt-6 rounded-full" />
                 </div>
 
                 <div className="flex flex-col gap-24">
@@ -80,7 +89,7 @@ export function AboutDirectors() {
                         const isEven = idx % 2 === 0;
 
                         return (
-                            <div key={idx} className="director-card relative bg-[#b0b0b0] rounded-[40px] pt-16 pb-12 px-8 md:px-16 shadow-md mt-6">
+                            <div key={idx} className="director-card relative bg-gradient-to-br from-[#f8f9fa] to-white rounded-[40px] pt-16 pb-12 px-8 md:px-16 shadow-[0_8px_30px_rgb(51,74,137,0.06)] border border-[#334a89]/10 mt-6 hover:shadow-[0_20px_40px_rgb(51,74,137,0.08)] transition-shadow duration-500">
                                 
                                 {isEven ? (
                                     <>
@@ -115,13 +124,13 @@ export function AboutDirectors() {
                                 )}
 
                                 {/* Message */}
-                                <div className={`font-['Quicksand'] font-medium text-white text-[15px] md:text-[17px] leading-[1.8] italic flex flex-col gap-4 ${isEven ? 'text-left' : 'text-right'}`}>
+                                <div className={`font-['Quicksand'] font-medium text-[#15283D]/80 text-[16px] md:text-[18px] leading-[1.8] italic flex flex-col gap-4 ${isEven ? 'text-left' : 'text-right'}`}>
                                     {director.message.split('\n\n').map((para, i) => (
                                         <p key={i}>
                                             {para.includes('Whatever It Takes') ? (
                                                 <>
                                                     {para.split('Whatever It Takes')[0]}
-                                                    <span className="font-bold">Whatever It Takes!</span>
+                                                    <span className="font-bold text-[#334a89]">Whatever It Takes!</span>
                                                     {para.split('Whatever It Takes')[1]?.replace('!', '')}
                                                 </>
                                             ) : (
