@@ -110,18 +110,16 @@ export function DifferenceHero() {
 
             {/* Stationary Card Container */}
             <div className="absolute top-32 md:top-40 w-[calc(100%-3rem)] md:w-[calc(100%-6rem)] max-w-[1360px] h-[35vh] md:h-[50vh] min-h-[300px] pointer-events-none">
-                <div className="absolute left-1/2 -translate-x-1/2 bottom-0 translate-y-1/2 z-20 pointer-events-auto">
-                    <div
-                        ref={textStackRef}
-                        className="bg-[#394EA2] w-fit min-w-[85%] md:min-w-[700px] py-10 px-8 md:py-12 md:px-16 flex flex-col items-center text-center"
-                    >
-                        <span className="font-['Quicksand'] font-bold text-xs tracking-[0.3em] text-[#ffc715] uppercase block mb-4">
-                            THE ASTER DIFFERENCE
-                        </span>
-                        <h1 className="font-['Playfair_Display'] text-4xl md:text-6xl font-medium text-white tracking-tight leading-none ">
-                            Education designed for life
-                        </h1>
-                    </div>
+                <div
+                    ref={textStackRef}
+                    className="absolute -bottom-8 md:-bottom-12 left-1/2 -translate-x-1/2 bg-[#394EA2] w-fit min-w-[85%] md:min-w-[700px] py-10 px-8 md:py-12 md:px-16 text-left z-20 pointer-events-auto"
+                >
+                    <span className="font-['Quicksand'] font-bold text-xs tracking-[0.3em] text-[#ffc715] uppercase block mb-4">
+                        THE ASTER DIFFERENCE
+                    </span>
+                    <h1 className="font-['Playfair_Display'] text-4xl md:text-6xl font-medium text-white tracking-tight leading-none ">
+                        Education designed for life
+                    </h1>
                 </div>
             </div>
         </section>
