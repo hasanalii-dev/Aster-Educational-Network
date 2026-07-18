@@ -99,8 +99,8 @@ export function AboutPhilosophy() {
             </span>
                     </div>
 
-                    <h2 className="font-['Playfair_Display'] text-5xl md:text-7xl font-medium text-white tracking-tight leading-[1.08] relative z-10 max-w-2xl uppercase">
-                        OUR <em className="font-medium italic text-[#ffc715]">VISION</em>
+                    <h2 className="font-['Playfair_Display'] text-5xl md:text-7xl font-medium text-white tracking-tight leading-[1.08] relative z-10 max-w-2xl">
+                        Our <em className="font-medium italic text-[#ffc715]">Vision</em>
                     </h2>
 
                     <div className="w-20 h-[2px] bg-[#ffc715] mt-6 relative z-10" />
