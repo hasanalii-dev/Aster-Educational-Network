@@ -49,16 +49,16 @@ export function AboutDirectors() {
         const ctx = gsap.context(() => {
             gsap.fromTo(
                 ".director-card",
-                { opacity: 0, y: 30 },
+                { opacity: 0, y: 20 },
                 {
                     opacity: 1,
                     y: 0,
-                    duration: 0.6,
+                    duration: 0.5,
                     stagger: 0.1,
-                    ease: "power3.out",
+                    ease: "power2.out",
                     scrollTrigger: {
                         trigger: sectionRef.current,
-                        start: "top 75%",
+                        start: "top 80%",
                     }
                 }
             )
@@ -89,8 +89,8 @@ export function AboutDirectors() {
                         const isEven = idx % 2 === 0;
                         const isNavy = idx % 2 === 0;
                         const bgClass = isNavy ? "bg-[#334a89]" : "bg-[#ffc715]";
-                        const textClass = isNavy ? "text-white/90" : "text-[#15283D]/80";
-                        const headingClass = isNavy ? "text-white" : "text-[#15283D]";
+                        const textClass = isNavy ? "text-white/90" : "text-[#334a89]/90";
+                        const headingClass = isNavy ? "text-white" : "text-[#334a89]";
                         const quoteClass = isNavy ? "text-white/15" : "text-[#334a89]/15";
                         const highlightClass = isNavy ? "text-[#ffc715]" : "text-[#334a89]";
 
