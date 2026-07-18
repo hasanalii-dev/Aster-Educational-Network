@@ -244,7 +244,7 @@ export default function Home() {
                                 </svg>
                             </div>
                             <h2 className="wcu-heading">
-                                Unleash students<br />possibilities with us
+                                Education at Aster<br />prepares children for life
                             </h2>
                         </div>
                     </div>
@@ -253,7 +253,7 @@ export default function Home() {
                     <div className="wcu-content" ref={wcuContentRef}>
                         <p className="wcu-body">
                             The world our children are growing into demands more than memorization.
-                            It demands confidence. Communication. Adaptability. Leadership.
+                            It demands confidence, communication, adaptability, leadership.
                             The ability to think independently and solve real problems.
                             <br /><br />
                             At Aster, these qualities are intentionally developed from the
