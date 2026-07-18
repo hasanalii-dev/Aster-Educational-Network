@@ -47,21 +47,22 @@ export function AboutDirectors() {
 
     useEffect(() => {
         const ctx = gsap.context(() => {
-            gsap.fromTo(
-                ".director-card",
-                { opacity: 0, y: 40 },
-                {
-                    opacity: 1,
-                    y: 0,
-                    duration: 0.8,
-                    stagger: 0.15,
-                    ease: "power2.out",
-                    scrollTrigger: {
-                        trigger: sectionRef.current,
-                        start: "top 80%",
+            gsap.utils.toArray('.director-card').forEach((card: any) => {
+                gsap.fromTo(
+                    card,
+                    { opacity: 0, y: 50 },
+                    {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.8,
+                        ease: "power2.out",
+                        scrollTrigger: {
+                            trigger: card,
+                            start: "top 85%",
+                        }
                     }
-                }
-            )
+                )
+            })
         }, sectionRef)
         return () => ctx.revert()
     }, [])
@@ -89,9 +90,9 @@ export function AboutDirectors() {
                         const isEven = idx % 2 === 0;
                         const isNavy = idx % 2 === 0;
                         const bgClass = isNavy ? "bg-[#334a89]" : "bg-[#ffc715]";
-                        const textClass = isNavy ? "text-white/90" : "text-[#15283D]/80";
-                        const headingClass = isNavy ? "text-white" : "text-[#15283D]";
-                        const quoteClass = isNavy ? "text-white/15" : "text-[#334a89]/15";
+                        const textClass = isNavy ? "text-white/90" : "text-white/90";
+                        const headingClass = isNavy ? "text-white" : "text-white";
+                        const quoteClass = isNavy ? "text-white/15" : "text-white/20";
                         const highlightClass = isNavy ? "text-[#ffc715]" : "text-[#334a89]";
 
                         return (
@@ -104,7 +105,7 @@ export function AboutDirectors() {
                                             <img src={director.image} alt={director.name} className="w-full h-full object-cover" />
                                         </div>
                                         {/* Quotes Top Right */}
-                                        <div className={`absolute -top-10 right-6 md:right-12 text-8xl md:text-9xl font-['Playfair_Display'] ${quoteClass} leading-none select-none`}>
+                                        <div className={`absolute top-0 right-6 md:right-12 text-[140px] md:text-[200px] font-['Playfair_Display'] ${quoteClass} leading-none select-none`}>
                                             ”
                                         </div>
                                         {/* Name aligned with image */}
@@ -119,7 +120,7 @@ export function AboutDirectors() {
                                             <img src={director.image} alt={director.name} className="w-full h-full object-cover" />
                                         </div>
                                         {/* Quotes Top Left */}
-                                        <div className={`absolute -top-6 left-6 md:left-12 text-8xl md:text-9xl font-['Playfair_Display'] ${quoteClass} leading-none select-none`}>
+                                        <div className={`absolute top-0 left-6 md:left-12 text-[140px] md:text-[200px] font-['Playfair_Display'] ${quoteClass} leading-none select-none`}>
                                             “
                                         </div>
                                         {/* Name aligned with image */}
