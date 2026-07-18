@@ -87,9 +87,15 @@ export function AboutDirectors() {
                 <div className="flex flex-col gap-24">
                     {directors.map((director, idx) => {
                         const isEven = idx % 2 === 0;
+                        const isNavy = idx % 2 === 0;
+                        const bgClass = isNavy ? "bg-[#334a89]" : "bg-[#ffc715]";
+                        const textClass = isNavy ? "text-white/90" : "text-[#15283D]/80";
+                        const headingClass = isNavy ? "text-white" : "text-[#15283D]";
+                        const quoteClass = isNavy ? "text-white/15" : "text-[#334a89]/15";
+                        const highlightClass = isNavy ? "text-[#ffc715]" : "text-[#334a89]";
 
                         return (
-                            <div key={idx} className="director-card relative bg-gradient-to-br from-[#f8f9fa] to-white rounded-[40px] pt-16 pb-12 px-8 md:px-16 shadow-[0_8px_30px_rgb(51,74,137,0.06)] border border-[#334a89]/10 mt-6 hover:shadow-[0_20px_40px_rgb(51,74,137,0.08)] transition-shadow duration-500">
+                            <div key={idx} className={`director-card relative ${bgClass} rounded-[40px] pt-16 pb-12 px-8 md:px-16 shadow-[0_8px_30px_rgb(51,74,137,0.1)] mt-6 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgb(51,74,137,0.15)] transition-all duration-500`}>
                                 
                                 {isEven ? (
                                     <>
@@ -98,11 +104,11 @@ export function AboutDirectors() {
                                             <img src={director.image} alt={director.name} className="w-full h-full object-cover" />
                                         </div>
                                         {/* Quotes Top Right */}
-                                        <div className="absolute -top-10 right-6 md:right-12 text-8xl md:text-9xl font-['Playfair_Display'] text-[#334a89] leading-none select-none">
+                                        <div className={`absolute -top-10 right-6 md:right-12 text-8xl md:text-9xl font-['Playfair_Display'] ${quoteClass} leading-none select-none`}>
                                             ”
                                         </div>
                                         {/* Name aligned with image */}
-                                        <h3 className="font-['Playfair_Display'] text-2xl md:text-4xl font-bold text-[#15283D] ml-32 md:ml-40 mb-10 mt-2">
+                                        <h3 className={`font-['Playfair_Display'] text-2xl md:text-4xl font-bold ${headingClass} ml-32 md:ml-40 mb-10 mt-2`}>
                                             {director.name}
                                         </h3>
                                     </>
@@ -113,24 +119,24 @@ export function AboutDirectors() {
                                             <img src={director.image} alt={director.name} className="w-full h-full object-cover" />
                                         </div>
                                         {/* Quotes Top Left */}
-                                        <div className="absolute -top-6 left-6 md:left-12 text-8xl md:text-9xl font-['Playfair_Display'] text-[#334a89] leading-none select-none">
+                                        <div className={`absolute -top-6 left-6 md:left-12 text-8xl md:text-9xl font-['Playfair_Display'] ${quoteClass} leading-none select-none`}>
                                             “
                                         </div>
                                         {/* Name aligned with image */}
-                                        <h3 className="font-['Playfair_Display'] text-2xl md:text-4xl font-bold text-[#15283D] mr-32 md:mr-40 mb-10 mt-2 text-right">
+                                        <h3 className={`font-['Playfair_Display'] text-2xl md:text-4xl font-bold ${headingClass} mr-32 md:mr-40 mb-10 mt-2 text-right`}>
                                             {director.name}
                                         </h3>
                                     </>
                                 )}
 
                                 {/* Message */}
-                                <div className={`font-['Quicksand'] font-medium text-[#15283D]/80 text-[16px] md:text-[18px] leading-[1.8] italic flex flex-col gap-4 ${isEven ? 'text-left' : 'text-right'}`}>
+                                <div className={`font-['Quicksand'] font-medium ${textClass} text-[16px] md:text-[18px] leading-[1.8] italic flex flex-col gap-4 ${isEven ? 'text-left' : 'text-right'}`}>
                                     {director.message.split('\n\n').map((para, i) => (
                                         <p key={i}>
                                             {para.includes('Whatever It Takes') ? (
                                                 <>
                                                     {para.split('Whatever It Takes')[0]}
-                                                    <span className="font-bold text-[#334a89]">Whatever It Takes!</span>
+                                                    <span className={`font-bold ${highlightClass}`}>Whatever It Takes!</span>
                                                     {para.split('Whatever It Takes')[1]?.replace('!', '')}
                                                 </>
                                             ) : (
