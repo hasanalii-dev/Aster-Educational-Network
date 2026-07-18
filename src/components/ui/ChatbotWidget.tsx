@@ -265,9 +265,9 @@ export function ChatbotWidget() {
                     <div className="bg-gradient-to-r from-[#394EA2] to-[#2a3c82] px-5 py-4 flex items-center justify-between shadow-sm relative z-10">
                         <div className="flex items-center gap-3">
                             <div className="relative">
-                                {/* Aster Logo instead of Bot Icon */}
-                                <div className="w-10 h-10 bg-white rounded-none flex items-center justify-center p-1 border border-white/20 shadow-inner">
-                                    <img src="/logo.jpg" alt="Aster" className="w-full h-full object-contain rounded-none" />
+                                {/* Bot Avatar */}
+                                <div className="w-10 h-10 bg-white rounded-none flex items-center justify-center border border-[#ffc715]/30 shadow-inner overflow-hidden">
+                                    <img src="https://api.dicebear.com/9.x/bottts-neutral/svg?seed=aster-bot&backgroundColor=394EA2" alt="Aster Bot" className="w-[120%] h-[120%] object-cover object-bottom" />
                                 </div>
                                 <span className="absolute -bottom-1 -right-1 w-3.5 h-3.5 bg-green-400 border-2 border-[#2a3c82] rounded-full"></span>
                             </div>
@@ -294,8 +294,8 @@ export function ChatbotWidget() {
                                 className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'} animate-in fade-in slide-in-from-bottom-2 duration-300 items-end gap-2`}
                             >
                                 {msg.sender === 'bot' && (
-                                    <div className="w-8 h-8 rounded-full bg-white border border-gray-200 shadow-sm flex-shrink-0 overflow-hidden flex items-center justify-center p-1">
-                                        <img src="/logo.jpg" alt="Aster Bot" className="w-full h-full object-contain rounded-full" />
+                                    <div className="w-8 h-8 rounded-full bg-white border border-[#ffc715]/30 shadow-sm flex-shrink-0 overflow-hidden flex items-center justify-center">
+                                        <img src="https://api.dicebear.com/9.x/bottts-neutral/svg?seed=aster-bot&backgroundColor=394EA2" alt="Aster Bot" className="w-[120%] h-[120%] object-cover object-bottom" />
                                     </div>
                                 )}
                                 <div className={`max-w-[80%] px-4 py-3 rounded-2xl font-['Quicksand'] text-[15px] leading-relaxed ${
