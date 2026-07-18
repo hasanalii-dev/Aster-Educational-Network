@@ -24,21 +24,7 @@ const fallbackTestimonials = [
 
 export function TestimonialsSection() {
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
-    const [testimonialsData, setTestimonialsData] = useState<any[]>([])
-    const [, setLoading] = useState(true)
-
-    useEffect(() => {
-        const fetchTestimonials = async () => {
-            const { data } = await supabase.from('parent_stories').select('*').eq('is_active', true).limit(3)
-            if (data && data.length > 0) {
-                setTestimonialsData(data)
-            } else {
-                setTestimonialsData(fallbackTestimonials)
-            }
-            setLoading(false)
-        }
-        fetchTestimonials()
-    }, [])
+    const testimonialsData = fallbackTestimonials
 
     return (
         <>
