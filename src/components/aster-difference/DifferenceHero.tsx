@@ -88,7 +88,7 @@ export function DifferenceHero() {
     }, [])
 
     return (
-        <section ref={sectionRef} className="w-full pt-32 md:pt-40 pb-32 md:pb-40 relative z-10 flex flex-col items-center bg-white select-none overflow-x-hidden">
+        <section ref={sectionRef} className="w-full pt-28 md:pt-32 pb-16 md:pb-24 relative z-10 flex flex-col items-center bg-white select-none overflow-x-hidden">
             <div className="flex justify-center w-full">
                 <div
                     ref={bannerFrameRef}
@@ -109,7 +109,7 @@ export function DifferenceHero() {
             </div>
 
             {/* Stationary Card Container */}
-            <div className="absolute top-32 md:top-40 w-[calc(100%-3rem)] md:w-[calc(100%-6rem)] max-w-[1360px] h-[35vh] md:h-[50vh] min-h-[300px] pointer-events-none">
+            <div className="absolute top-28 md:top-32 w-[calc(100%-3rem)] md:w-[calc(100%-6rem)] max-w-[1360px] h-[35vh] md:h-[50vh] min-h-[300px] pointer-events-none">
                 <div
                     ref={textStackRef}
                     className="absolute -bottom-8 md:-bottom-12 left-1/2 -translate-x-1/2 bg-[#394EA2] w-fit min-w-[85%] md:min-w-[700px] py-10 px-8 md:py-12 md:px-16 text-left z-20 pointer-events-auto"
