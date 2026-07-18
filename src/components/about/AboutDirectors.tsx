@@ -162,45 +162,46 @@ export function AboutDirectors() {
                                     onClick={() => setSelectedDirector(idx)}
                                 >
                                     <div 
-                                        className="relative rounded-2xl overflow-hidden aspect-[3/4] border border-white/[0.08] transition-all duration-500 group-hover:border-white/20 group-hover:shadow-[0_0_40px_rgba(51,74,137,0.15)]"
-                                        style={{
-                                            background: `linear-gradient(180deg, ${director.color}15 0%, ${director.color}08 50%, ${director.color}20 100%)`
-                                        }}
+                                        className="relative rounded-2xl overflow-hidden aspect-[3/4] border border-white/[0.08] transition-all duration-500 group-hover:border-[#394da1]/60 group-hover:shadow-[0_0_50px_rgba(57,77,161,0.25)]"
                                     >
                                         {/* Photo */}
                                         <img 
                                             src={director.image} 
                                             alt={director.name}
-                                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                            className="w-full h-full object-cover"
                                         />
 
-                                        {/* Gradient overlay at bottom */}
-                                        <div 
-                                            className="absolute inset-x-0 bottom-0 h-2/3 pointer-events-none transition-opacity duration-500"
-                                            style={{
-                                                background: `linear-gradient(to top, ${director.color}ee 0%, ${director.color}80 35%, transparent 100%)`
-                                            }}
-                                        />
+                                        {/* Default bottom gradient for name (visible when NOT hovered) */}
+                                        <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/70 via-black/30 to-transparent pointer-events-none transition-opacity duration-500 group-hover:opacity-0" />
 
-                                        {/* Name overlay - slides up on hover */}
-                                        <div className="absolute inset-x-0 bottom-0 p-5 md:p-6 transition-transform duration-500 translate-y-2 group-hover:translate-y-0">
+                                        {/* Default name at bottom (fades out on hover) */}
+                                        <div className="absolute inset-x-0 bottom-0 p-5 md:p-6 transition-all duration-500 group-hover:opacity-0 group-hover:translate-y-4">
                                             <h3 className="font-['Playfair_Display'] text-xl md:text-2xl font-bold text-white leading-tight drop-shadow-lg">
                                                 {director.name}
                                             </h3>
-                                            <p className="font-['Quicksand'] text-[11px] font-bold tracking-[0.15em] uppercase mt-1 drop-shadow-lg"
-                                               style={{ color: '#ffc715' }}
-                                            >
+                                            <p className="font-['Quicksand'] text-[11px] font-bold tracking-[0.15em] uppercase mt-1 text-[#ffc715] drop-shadow-lg">
                                                 Director
                                             </p>
                                         </div>
 
-                                        {/* Hover glow ring */}
-                                        <div 
-                                            className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                                            style={{
-                                                boxShadow: `inset 0 0 0 2px ${director.color}60, 0 0 30px ${director.color}20`
-                                            }}
-                                        />
+                                        {/* HOVER: Full Aster Blue overlay that slides up */}
+                                        <div className="absolute inset-0 bg-[#394da1]/[0.92] flex flex-col justify-between p-6 md:p-7 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]">
+                                            
+                                            {/* Top: Name + Role */}
+                                            <div>
+                                                <h3 className="font-['Playfair_Display'] text-xl md:text-2xl font-bold text-white leading-tight">
+                                                    {director.name}
+                                                </h3>
+                                                <p className="font-['Quicksand'] text-[11px] font-bold tracking-[0.15em] uppercase mt-1 text-[#ffc715]">
+                                                    Director
+                                                </p>
+                                            </div>
+
+                                            {/* Bottom: Message excerpt */}
+                                            <p className="font-['Quicksand'] font-medium text-[12px] md:text-[13px] text-white/80 leading-[1.7] line-clamp-6">
+                                                {director.message}
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                             ))}
