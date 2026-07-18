@@ -266,10 +266,10 @@ export function ChatbotWidget() {
                         <div className="flex items-center gap-3">
                             <div className="relative">
                                 {/* Bot Avatar */}
-                                <div className="w-10 h-10 bg-white rounded-none flex items-center justify-center border border-[#ffc715]/30 shadow-inner overflow-hidden">
-                                    <img src="https://api.dicebear.com/9.x/bottts-neutral/svg?seed=aster-bot&backgroundColor=394EA2" alt="Aster Bot" className="w-[120%] h-[120%] object-cover object-bottom" />
+                                <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center border-2 border-white/20 shadow-inner overflow-hidden">
+                                    <img src="https://api.dicebear.com/9.x/bottts-neutral/svg?seed=aster-happy&backgroundColor=394EA2&mouth=smile01,smile02&eyes=happy,glow" alt="Aster Bot" className="w-[120%] h-[120%] object-cover object-bottom" />
                                 </div>
-                                <span className="absolute -bottom-1 -right-1 w-3.5 h-3.5 bg-green-400 border-2 border-[#2a3c82] rounded-full"></span>
+                                <span className="absolute -bottom-1 -right-1 w-3.5 h-3.5 bg-green-400 border-2 border-[#394EA2] rounded-full"></span>
                             </div>
                             <div>
                                 <h3 className="font-['Quicksand'] font-bold text-white text-lg leading-tight">Aster Assistant</h3>
@@ -294,8 +294,8 @@ export function ChatbotWidget() {
                                 className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'} animate-in fade-in slide-in-from-bottom-2 duration-300 items-end gap-2`}
                             >
                                 {msg.sender === 'bot' && (
-                                    <div className="w-8 h-8 rounded-full bg-white border border-[#ffc715]/30 shadow-sm flex-shrink-0 overflow-hidden flex items-center justify-center">
-                                        <img src="https://api.dicebear.com/9.x/bottts-neutral/svg?seed=aster-bot&backgroundColor=394EA2" alt="Aster Bot" className="w-[120%] h-[120%] object-cover object-bottom" />
+                                    <div className="w-8 h-8 rounded-full bg-white border border-gray-200 shadow-sm flex-shrink-0 overflow-hidden flex items-center justify-center">
+                                        <img src="https://api.dicebear.com/9.x/bottts-neutral/svg?seed=aster-happy&backgroundColor=394EA2&mouth=smile01,smile02&eyes=happy,glow" alt="Aster Bot" className="w-[120%] h-[120%] object-cover object-bottom" />
                                     </div>
                                 )}
                                 <div className={`max-w-[80%] px-4 py-3 rounded-2xl font-['Quicksand'] text-[15px] leading-relaxed ${
