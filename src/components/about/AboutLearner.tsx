@@ -206,7 +206,7 @@ export function AboutLearner() {
                         </div>
 
                         <p className="font-['Quicksand'] text-base md:text-lg text-[#5C5C61] font-medium leading-relaxed">
-                            Through practical robotics, structured competitive sports, sustainability initiatives, early entrepreneurship, and rigorous social-emotional learning, we bridge the gap between classroom theory and real-world execution.
+                            Through meaningful experiences, hands-on learning, leadership opportunities, sports, technology, creativity, and strong values, students develop the confidence and mindset needed to thrive in an ever-changing world.
                         </p>
 
                         {/*
