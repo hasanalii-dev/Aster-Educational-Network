@@ -113,7 +113,7 @@ export function ProgramsSection() {
                 <span>LEARNING IN ACTION</span>
               </div>
               <h2 className="learners-title">From Learners<br />To Leaders</h2>
-              <p className="font-['Quicksand'] text-[#555] text-[15px] leading-[1.6] mt-5 max-w-[95%]">
+              <p className="font-['Quicksand'] text-[#555] text-[15px] leading-[1.6] max-w-[95%]">
                 At Aster, transformation happens through experience. The shy child who once hesitated to speak begins presenting confidently on stage. The student experimenting with robotics learns to think strategically and solve problems independently. The child leading a fundraiser discovers empathy, ownership, and leadership. These experiences shape character and prepare them to lead with confidence.
               </p>
             </div>
@@ -249,7 +249,7 @@ const programsStyles = `
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 40px;
+  gap: 32px;
   width: 440px;
   flex-shrink: 0;
 }
@@ -303,7 +303,7 @@ const programsStyles = `
 .learners-list {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
   padding-left: 12px;
   width: 100%;
 }
