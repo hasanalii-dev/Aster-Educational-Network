@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
@@ -9,6 +9,7 @@ export function AboutFounder() {
     const profileCardRef = useRef<HTMLDivElement>(null)
     const speechWrapperRef = useRef<HTMLDivElement>(null)
     const speechParagraphsRef = useRef<HTMLParagraphElement[]>([])
+    const [isFlipped, setIsFlipped] = useState(false)
 
     useEffect(() => {
         const ctx = gsap.context(() => {
@@ -92,12 +93,50 @@ export function AboutFounder() {
                             </span>
                         </div>
 
-                        <div className="w-full aspect-[3/4] rounded-none overflow-hidden bg-[#334a89]/5 mb-6 shadow-2xl border border-[#334a89]/15">
-                            <img
-                                src="/founder.jpg"
-                                alt="Falak Shaikhani"
-                                className="w-full h-full object-cover contrast-105"
-                            />
+                        <div className="w-full aspect-[3/4] rounded-none mb-6 shadow-2xl bg-transparent [perspective:1000px]">
+                            <div className={`relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d] ${isFlipped ? '[transform:rotateY(180deg)]' : ''}`}>
+                                
+                                {/* Front of Card */}
+                                <div className="absolute inset-0 w-full h-full [backface-visibility:hidden] bg-[#334a89]/5 border border-[#334a89]/15">
+                                    <img
+                                        src="/founder.jpg"
+                                        alt="Falak Shaikhani"
+                                        className="w-full h-full object-cover contrast-105"
+                                    />
+                                    <button 
+                                        onClick={() => setIsFlipped(true)}
+                                        className="absolute bottom-4 right-4 bg-white/90 hover:bg-white text-[#334a89] p-3 rounded-full shadow-lg transition-colors z-10"
+                                        aria-label="View biography"
+                                    >
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                            <circle cx="12" cy="12" r="10"></circle>
+                                            <path d="M12 16v-4"></path>
+                                            <path d="M12 8h.01"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+
+                                {/* Back of Card */}
+                                <div className="absolute inset-0 w-full h-full [backface-visibility:hidden] [transform:rotateY(180deg)] bg-[#334a89] text-white p-8 flex flex-col items-center justify-center border border-[#334a89]/15">
+                                    <button 
+                                        onClick={() => setIsFlipped(false)}
+                                        className="absolute top-4 right-4 text-white/70 hover:text-white p-2 transition-colors"
+                                        aria-label="Back to image"
+                                    >
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                                        </svg>
+                                    </button>
+                                    <div className="flex flex-col gap-4 font-['Quicksand'] font-medium text-xs md:text-sm text-white/90 leading-relaxed overflow-y-auto pr-2 custom-scrollbar text-center">
+                                        <p>An educationist, entrepreneur, and visionary leader passionate about transforming education through meaningful and future-focused learning.</p>
+                                        <p>She holds a Master’s degree in Economics from the London School of Economics and Political Science and has professional experience working with globally recognized organizations including Deutsche Bank, JPMorgan Chase, and Deloitte.</p>
+                                        <p>Her educational journey also includes specialized training in education and leadership through programs associated with Harvard University and Finland’s globally recognized education system, alongside participation in international education conferences around the world.</p>
+                                        <p>Her vision is to transform the world through leadership that uplifts humanity creating learning environments where children grow into confident, compassionate, and purpose-driven individuals prepared to make a meaningful difference in the world.</p>
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
 
                         <h3 className="font-['Playfair_Display'] text-3xl md:text-4xl font-bold text-[#334a89] leading-tight">
@@ -106,13 +145,6 @@ export function AboutFounder() {
                         <p className="font-['Quicksand'] text-xs font-bold text-[#e97f7b] tracking-[0.15em] uppercase mt-1 mb-6">
                             Founder &amp; Director, The Aster School
                         </p>
-
-                        <div className="flex flex-col gap-3 font-['Quicksand'] font-medium text-sm md:text-base text-[#15283D]/75 leading-relaxed">
-                            <p>An educationist, entrepreneur, and visionary leader passionate about transforming education through meaningful and future-focused learning.</p>
-                            <p>She holds a Master’s degree in Economics from the London School of Economics and Political Science and has professional experience working with globally recognized organizations including Deutsche Bank, JPMorgan Chase, and Deloitte.</p>
-                            <p>Her educational journey also includes specialized training in education and leadership through programs associated with Harvard University and Finland’s globally recognized education system, alongside participation in international education conferences around the world.</p>
-                            <p>Her vision is to transform the world through leadership that uplifts humanity creating learning environments where children grow into confident, compassionate, and purpose-driven individuals prepared to make a meaningful difference in the world.</p>
-                        </div>
 
                     </div>
 
