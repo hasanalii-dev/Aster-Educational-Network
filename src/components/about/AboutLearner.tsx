@@ -181,7 +181,7 @@ export function AboutLearner() {
                             </ul>
 
                             <p className="font-['Quicksand'] font-medium text-xs md:text-sm text-[#5C5C61] leading-relaxed border-t border-[#334a89]/10 pt-5">
-                                Through meaningful experiences, hands-on learning, leadership opportunities, sports, and creativity, students develop an unshakeable inner foundation.
+                                At Aster, education extends beyond the classroom walls. Through robotics, sports, sustainability initiatives, entrepreneurship, social-emotional learning, annual performances, leadership opportunities, and experiential projects, students develop the practical skills and mindset needed for the future.
                             </p>
                         </div>
 
