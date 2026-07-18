@@ -47,22 +47,21 @@ export function AboutDirectors() {
 
     useEffect(() => {
         const ctx = gsap.context(() => {
-            gsap.utils.toArray('.director-card').forEach((card: any) => {
-                gsap.fromTo(
-                    card,
-                    { opacity: 0, y: 50 },
-                    {
-                        opacity: 1,
-                        y: 0,
-                        duration: 0.8,
-                        ease: "power2.out",
-                        scrollTrigger: {
-                            trigger: card,
-                            start: "top 85%",
-                        }
+            gsap.fromTo(
+                ".director-card",
+                { opacity: 0, y: 30 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.6,
+                    stagger: 0.1,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: sectionRef.current,
+                        start: "top 75%",
                     }
-                )
-            })
+                }
+            )
         }, sectionRef)
         return () => ctx.revert()
     }, [])
@@ -90,9 +89,9 @@ export function AboutDirectors() {
                         const isEven = idx % 2 === 0;
                         const isNavy = idx % 2 === 0;
                         const bgClass = isNavy ? "bg-[#334a89]" : "bg-[#ffc715]";
-                        const textClass = isNavy ? "text-white/90" : "text-white/90";
-                        const headingClass = isNavy ? "text-white" : "text-white";
-                        const quoteClass = isNavy ? "text-white/15" : "text-white/20";
+                        const textClass = isNavy ? "text-white/90" : "text-[#15283D]/80";
+                        const headingClass = isNavy ? "text-white" : "text-[#15283D]";
+                        const quoteClass = isNavy ? "text-white/15" : "text-[#334a89]/15";
                         const highlightClass = isNavy ? "text-[#ffc715]" : "text-[#334a89]";
 
                         return (
