@@ -100,30 +100,34 @@ export function AboutDirectors() {
                                 {isEven ? (
                                     <>
                                         {/* Image Top Left */}
-                                        <div className="absolute -top-12 left-6 md:left-12 w-28 h-28 md:w-36 md:h-36 rounded-full border-[6px] border-white overflow-hidden shadow-lg bg-white">
-                                            <img src={director.image} alt={director.name} className="w-full h-full object-cover" />
+                                        <div className="absolute -top-12 left-6 md:left-12 w-28 h-28 md:w-36 md:h-36 rounded-full border-[8px] border-white/20 overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.12)] bg-white group-hover:scale-105 transition-transform duration-500">
+                                            <div className="w-full h-full rounded-full border-4 border-white overflow-hidden">
+                                                <img src={director.image} alt={director.name} className="w-full h-full object-cover" />
+                                            </div>
                                         </div>
                                         {/* Quotes Top Right */}
-                                        <div className={`absolute top-0 right-6 md:right-12 text-[140px] md:text-[200px] font-['Playfair_Display'] ${quoteClass} leading-none select-none`}>
+                                        <div className={`absolute top-0 right-6 md:right-12 text-[140px] md:text-[200px] font-['Quicksand'] font-medium ${quoteClass} leading-none select-none tracking-tighter`}>
                                             ”
                                         </div>
                                         {/* Name aligned with image */}
-                                        <h3 className={`font-['Playfair_Display'] text-2xl md:text-4xl font-bold ${headingClass} ml-32 md:ml-40 mb-10 mt-2`}>
+                                        <h3 className={`font-['Quicksand'] text-2xl md:text-[32px] font-bold ${headingClass} tracking-tight ml-32 md:ml-40 mb-10 mt-4`}>
                                             {director.name}
                                         </h3>
                                     </>
                                 ) : (
                                     <>
                                         {/* Image Top Right */}
-                                        <div className="absolute -top-12 right-6 md:right-12 w-28 h-28 md:w-36 md:h-36 rounded-full border-[6px] border-white overflow-hidden shadow-lg bg-white">
-                                            <img src={director.image} alt={director.name} className="w-full h-full object-cover" />
+                                        <div className="absolute -top-12 right-6 md:right-12 w-28 h-28 md:w-36 md:h-36 rounded-full border-[8px] border-white/20 overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.12)] bg-white group-hover:scale-105 transition-transform duration-500">
+                                            <div className="w-full h-full rounded-full border-4 border-white overflow-hidden">
+                                                <img src={director.image} alt={director.name} className="w-full h-full object-cover" />
+                                            </div>
                                         </div>
                                         {/* Quotes Top Left */}
-                                        <div className={`absolute top-0 left-6 md:left-12 text-[140px] md:text-[200px] font-['Playfair_Display'] ${quoteClass} leading-none select-none`}>
+                                        <div className={`absolute top-0 left-6 md:left-12 text-[140px] md:text-[200px] font-['Quicksand'] font-medium ${quoteClass} leading-none select-none tracking-tighter`}>
                                             “
                                         </div>
                                         {/* Name aligned with image */}
-                                        <h3 className={`font-['Playfair_Display'] text-2xl md:text-4xl font-bold ${headingClass} mr-32 md:mr-40 mb-10 mt-2 text-right`}>
+                                        <h3 className={`font-['Quicksand'] text-2xl md:text-[32px] font-bold ${headingClass} tracking-tight mr-32 md:mr-40 mb-10 mt-4 text-right`}>
                                             {director.name}
                                         </h3>
                                     </>
