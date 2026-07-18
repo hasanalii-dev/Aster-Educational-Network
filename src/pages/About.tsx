@@ -41,7 +41,11 @@ export default function About() {
 
     return (
         <div id="page-about" ref={masterRef} className="bg-white selection:bg-[#ffc715] selection:text-[#334a89]">
-            <SEO title="About Us" />
+            <SEO 
+                title="About Us" 
+                keywords="about aster school, best school in karachi, senior school karachi, O levels karachi, A levels karachi, school leadership, aster philosophy"
+                description="Learn about The Aster School's philosophy, leadership, and our commitment to nurturing resilient, lifelong learners in Karachi."
+            />
             {/* Google Fonts: Upright Garamond strictly for Headings; Quicksand for Body */}
             <link rel="preconnect" href="https://fonts.googleapis.com" />
             <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />

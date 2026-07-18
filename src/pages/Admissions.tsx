@@ -38,7 +38,11 @@ export default function Admissions() {
 
     return (
         <div id="page-admissions" ref={masterRef} className="bg-white selection:bg-[#ffc715] selection:text-[#334a89]">
-            <SEO title="Admissions — The Aster School" />
+            <SEO 
+                title="Admissions" 
+                keywords="school admissions karachi, enrol school karachi, senior school admission, elementary school admission karachi, best school in karachi fees"
+                description="Join The Aster School. Learn about our admissions process, criteria, and how to apply for our Preschool, Elementary, and Senior School programs in Karachi."
+            />
             {/* Google Fonts: Upright Garamond strictly for Headings; Quicksand for Body */}
             <link rel="preconnect" href="https://fonts.googleapis.com" />
             <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />

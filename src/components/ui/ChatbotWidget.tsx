@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { MessageCircle, X, Send, Minus } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import gsap from 'gsap';
+import { useAuth } from '@/hooks/useAuth';
 
 type Message = {
     id: string;
@@ -18,6 +19,10 @@ const INITIAL_MESSAGES: Message[] = [
 ];
 
 export function ChatbotWidget() {
+    const { user, role } = useAuth();
+    const defaultUserAvatar = 'https://api.dicebear.com/9.x/notionists/svg?seed=guest';
+    const userAvatar = user ? (user.user_metadata?.custom_avatar_url || (['admin', 'super_admin', 'moderator'].includes(role || '') ? `https://api.dicebear.com/9.x/micah/svg?seed=${user.id}&backgroundColor=ffc715` : `https://api.dicebear.com/9.x/notionists/svg?seed=${user.id}`)) : defaultUserAvatar;
+
     const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState<Message[]>(INITIAL_MESSAGES);
     const [isTyping, setIsTyping] = useState(false);
@@ -286,15 +291,25 @@ export function ChatbotWidget() {
                         {messages.map((msg) => (
                             <div
                                 key={msg.id}
-                                className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'} animate-in fade-in slide-in-from-bottom-2 duration-300`}
+                                className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'} animate-in fade-in slide-in-from-bottom-2 duration-300 items-end gap-2`}
                             >
-                                <div className={`max-w-[85%] px-4 py-3 rounded-2xl font-['Quicksand'] text-[15px] leading-relaxed ${
+                                {msg.sender === 'bot' && (
+                                    <div className="w-8 h-8 rounded-full bg-white border border-gray-200 shadow-sm flex-shrink-0 overflow-hidden flex items-center justify-center p-1">
+                                        <img src="/logo.jpg" alt="Aster Bot" className="w-full h-full object-contain rounded-full" />
+                                    </div>
+                                )}
+                                <div className={`max-w-[80%] px-4 py-3 rounded-2xl font-['Quicksand'] text-[15px] leading-relaxed ${
                                     msg.sender === 'user' 
                                         ? 'bg-[#f0f0f0] text-[#15283D] rounded-br-sm' 
                                         : 'bg-[#394EA2] text-white rounded-bl-sm shadow-md'
                                 }`}>
                                     {msg.text}
                                 </div>
+                                {msg.sender === 'user' && (
+                                    <div className="w-8 h-8 rounded-full bg-white border border-gray-200 shadow-sm flex-shrink-0 overflow-hidden">
+                                        <img src={userAvatar} alt="User" className="w-full h-full object-cover" />
+                                    </div>
+                                )}
                             </div>
                         ))}
 

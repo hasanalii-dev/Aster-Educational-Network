@@ -13,7 +13,11 @@ export default function SeniorSchool() {
 
     return (
         <main className="w-full bg-[#FAFAFA] relative">
-            <SEO title="Senior School | The Aster School" />
+            <SEO 
+                title="Senior School" 
+                keywords="senior school karachi, O levels karachi, A levels karachi, igcse karachi, high school karachi, best senior school in karachi, aster senior school"
+                description="The Aster Senior School prepares students for global success through rigorous O Level and A Level programs in Karachi, fostering independence and leadership."
+            />
             <SeniorHero />
             <SeniorIntro />
             <SeniorCambridge />

@@ -165,7 +165,24 @@ export default function Home() {
 
     return (
         <div id="page-home" className="page-wrapper">
-            <SEO title="Home" />
+            <SEO 
+                title="Home" 
+                keywords="school karachi, best school in karachi, senior school karachi, O levels karachi, A levels karachi, aster school karachi, top schools in karachi, primary school karachi, pre school karachi, aster edu pk"
+                schema={`{
+                  "@context": "https://schema.org",
+                  "@type": "School",
+                  "name": "The Aster School",
+                  "url": "https://aster.edu.pk",
+                  "logo": "https://aster.edu.pk/logo.jpg",
+                  "description": "The Aster School empowers students to become confident, resilient, and lifelong learners in Karachi. We offer outstanding Preschool, Elementary, and Senior School education.",
+                  "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": "Karachi",
+                    "addressRegion": "Sindh",
+                    "addressCountry": "PK"
+                  }
+                }`}
+            />
             <style>{homeStyles}</style>
 
             {/* =========================================
