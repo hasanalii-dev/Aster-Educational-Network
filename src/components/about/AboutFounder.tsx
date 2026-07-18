@@ -109,8 +109,9 @@ export function AboutFounder() {
 
                         <div className="flex flex-col gap-3 font-['Quicksand'] font-medium text-sm md:text-base text-[#15283D]/75 leading-relaxed">
                             <p>An educationist, entrepreneur, and visionary leader passionate about transforming education through meaningful and future-focused learning.</p>
-                            <p>She holds a Master's degree in Economics from the London School of Economics and Political Science and has professional experience working with globally recognized organizations including Deutsche Bank, JPMorgan Chase, and Deloitte.</p>
-                            <p>Her specialized training includes leadership programs associated with Harvard University and Finland's globally recognized education system.</p>
+                            <p>She holds a Master’s degree in Economics from the London School of Economics and Political Science and has professional experience working with globally recognized organizations including Deutsche Bank, JPMorgan Chase, and Deloitte.</p>
+                            <p>Her educational journey also includes specialized training in education and leadership through programs associated with Harvard University and Finland’s globally recognized education system, alongside participation in international education conferences around the world.</p>
+                            <p>Her vision is to transform the world through leadership that uplifts humanity creating learning environments where children grow into confident, compassionate, and purpose-driven individuals prepared to make a meaningful difference in the world.</p>
                         </div>
 
                     </div>
@@ -125,27 +126,21 @@ export function AboutFounder() {
 
                     <div className="relative z-10 flex flex-col gap-8 font-['Quicksand'] font-medium text-lg md:text-xl text-[#15283D] leading-relaxed">
                         <p ref={el => { if (el) speechParagraphsRef.current[0] = el }}>
-                            At Aster, we believe education is about far more than academics. It is about shaping confident, compassionate, and purposeful individuals who are prepared not only for school, but for life.
+                            "At Aster, we believe education is about far more than academics. It is about helping children discover who they are, what they value, and who they have the potential to become. Our vision is to develop individuals with the character, confidence, and skills to succeed in whatever they choose to do in life. We want every child to grow into a resilient, compassionate, and purpose-driven individual who is prepared not only for school, but for life.
                         </p>
                         <p ref={el => { if (el) speechParagraphsRef.current[1] = el }}>
-                            As a mother and educator, I have always believed that the early years are deeply important. When children grow in environments where they feel safe, respected, inspired, and heard, they develop confidence, resilience, curiosity, and a genuine love for learning.
+                            As a mother and educator, I have always believed that children thrive when they feel safe, respected, inspired, and heard. When given the right environment and opportunities, they develop curiosity, confidence, independence, and a lifelong love for learning.
                         </p>
                         <p ref={el => { if (el) speechParagraphsRef.current[2] = el }}>
-                            Our vision is to create meaningful learning experiences that nurture the whole child — intellectually, emotionally, socially, and morally. Inspired by progressive educational approaches including Montessori, hands-on, inquiry-based learning, and social-emotional development, we encourage children to learn through exploration, creativity, collaboration, and real-world experiences.
-                        </p>
-                        <p ref={el => { if (el) speechParagraphsRef.current[3] = el }}>
-                            At Aster, learning extends beyond classroom walls. We aim to raise future-ready learners who think independently, lead with empathy, remain grounded in their values, and contribute positively to their communities and the world around them.
-                        </p>
-                        <p ref={el => { if (el) speechParagraphsRef.current[4] = el }}>
-                            We also believe education is strongest when schools and families work together with a shared vision for the child. Together, we can nurture a generation that is not only successful, but also kind, conscious, resilient, and impactful.
+                            At Aster, we are committed to creating meaningful learning experiences that nurture the whole child while building strong partnerships with families. Together, we can raise a generation that leads with integrity, pursues excellence with purpose, and contributes positively to the world around them.
                         </p>
 
                         {/* Slogan Pull-Quote */}
-                        <div ref={el => { if (el) speechParagraphsRef.current[5] = el! }} className="mt-6 pt-8 border-t-2 border-[#ffc715] flex flex-col gap-4">
+                        <div ref={el => { if (el) speechParagraphsRef.current[3] = el! }} className="mt-6 pt-8 border-t-2 border-[#ffc715] flex flex-col gap-4">
                             <p className="font-['Quicksand'] font-bold text-xl md:text-2xl text-[#334a89] leading-snug">
-                                Every child deserves an education that helps them discover who they are, what they value, and how they can make a difference in the world. And that is the future we continue to build every single day —{' '}
+                                And that is the future we continue to build every single day —{' '}
                                 <span className="animate-slogan-gradient bg-gradient-to-r from-[#e97f7b] via-[#9765d1] via-60% to-[#6ab39d] bg-clip-text text-transparent font-extrabold tracking-tight pb-0.5 border-b-4 border-[#ffc715]">
-                  Whatever It Takes.
+                  Whatever It Takes."
                 </span>
                             </p>
 

@@ -7,6 +7,7 @@ import { AboutHero } from '@/components/about/AboutHero'
 import { AboutPrologue } from '@/components/about/AboutPrologue'
 import { AboutStory } from '@/components/about/AboutStory'
 import { AboutFounder } from '@/components/about/AboutFounder'
+import { AboutDirectors } from '@/components/about/AboutDirectors'
 import { AboutPhilosophy } from '@/components/about/AboutPhilosophy'
 import { AboutValues } from '@/components/about/AboutValues'
 import { AboutLearner } from '@/components/about/AboutLearner'
@@ -55,6 +56,7 @@ export default function About() {
             <AboutPrologue />
             <AboutStory />
             <AboutFounder />
+            <AboutDirectors />
             <AboutPhilosophy />
             <AboutValues />
             <AboutLearner />
