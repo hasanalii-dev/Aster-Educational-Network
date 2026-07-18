@@ -248,8 +248,10 @@ export function ChatbotWidget() {
                     className="fixed bottom-6 right-6 z-[999] w-14 h-14 bg-[#394EA2] rounded-full flex items-center justify-center shadow-2xl hover:scale-110 hover:shadow-[#394EA2]/30 hover:shadow-2xl transition-all duration-300 group"
                     aria-label="Open Chatbot"
                 >
-                    <span className="absolute top-0 right-0 w-3 h-3 bg-[#ffc715] rounded-full animate-ping opacity-75"></span>
-                    <span className="absolute top-0 right-0 w-3 h-3 bg-[#ffc715] rounded-full border-2 border-[#394EA2]"></span>
+                    {/* Soft yellow glow behind dot */}
+                    <span className="absolute -top-1 -right-1 w-6 h-6 bg-[#ffc715]/40 rounded-full animate-pulse"></span>
+                    {/* The dot with blue border */}
+                    <span className="absolute -top-0 -right-0 w-4 h-4 bg-[#ffc715] rounded-full border-[3px] border-[#394EA2] z-10"></span>
                     <MessageCircle className="w-6 h-6 text-white group-hover:scale-110 transition-transform duration-300" />
                 </button>
             )}
@@ -266,10 +268,15 @@ export function ChatbotWidget() {
                         <div className="flex items-center gap-3">
                             <div className="relative">
                                 {/* Bot Avatar */}
-                                <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center border-2 border-white/20 shadow-inner overflow-hidden">
-                                    <img src="https://api.dicebear.com/9.x/bottts-neutral/svg?seed=aster-happy&backgroundColor=394EA2&mouth=smile01,smile02&eyes=happy,glow" alt="Aster Bot" className="w-[120%] h-[120%] object-cover object-bottom" />
+                                <div className="w-10 h-10 bg-[#ffc715] rounded-full flex items-center justify-center border-2 border-white/20 shadow-inner overflow-hidden relative">
+                                    <img 
+                                        src="https://api.dicebear.com/9.x/bottts-neutral/svg?seed=aster-happy&mouth=smile01,smile02&eyes=happy,glow&backgroundColor=transparent" 
+                                        alt="Aster Bot" 
+                                        className="w-[120%] h-[120%] object-cover object-bottom"
+                                        style={{ filter: 'brightness(0) invert(1)' }}
+                                    />
                                 </div>
-                                <span className="absolute -bottom-1 -right-1 w-3.5 h-3.5 bg-green-400 border-2 border-[#394EA2] rounded-full"></span>
+                                <span className="absolute -bottom-1 -right-1 w-3.5 h-3.5 bg-green-400 border-2 border-[#394EA2] rounded-full z-10"></span>
                             </div>
                             <div>
                                 <h3 className="font-['Quicksand'] font-bold text-white text-lg leading-tight">Aster Assistant</h3>
@@ -294,8 +301,13 @@ export function ChatbotWidget() {
                                 className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'} animate-in fade-in slide-in-from-bottom-2 duration-300 items-end gap-2`}
                             >
                                 {msg.sender === 'bot' && (
-                                    <div className="w-8 h-8 rounded-full bg-white border border-gray-200 shadow-sm flex-shrink-0 overflow-hidden flex items-center justify-center">
-                                        <img src="https://api.dicebear.com/9.x/bottts-neutral/svg?seed=aster-happy&backgroundColor=394EA2&mouth=smile01,smile02&eyes=happy,glow" alt="Aster Bot" className="w-[120%] h-[120%] object-cover object-bottom" />
+                                    <div className="w-8 h-8 rounded-full bg-[#ffc715] border border-gray-200 shadow-sm flex-shrink-0 overflow-hidden flex items-center justify-center">
+                                        <img 
+                                            src="https://api.dicebear.com/9.x/bottts-neutral/svg?seed=aster-happy&mouth=smile01,smile02&eyes=happy,glow&backgroundColor=transparent" 
+                                            alt="Aster Bot" 
+                                            className="w-[120%] h-[120%] object-cover object-bottom"
+                                            style={{ filter: 'brightness(0) invert(1)' }}
+                                        />
                                     </div>
                                 )}
                                 <div className={`max-w-[80%] px-4 py-3 rounded-2xl font-['Quicksand'] text-[15px] leading-relaxed ${
