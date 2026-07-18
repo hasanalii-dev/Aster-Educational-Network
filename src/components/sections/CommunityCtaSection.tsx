@@ -80,7 +80,7 @@ export function CommunityCtaSection() {
                         </h2>
 
                         <p className="chest-body-copy z-10 relative">
-                            At Aster, students are guided to grow with confidence, humility, resilience, and purpose; preparing them not only for academic success, but for life beyond the classroom.
+                            At Aster, students are guided to grow with confidence, humility, resilience, and purpose; preparing them not only for academic success, but for life beyond the classroom. The Aster School – Whatever It Takes!
                         </p>
 
                         <div className="action-trigger-box z-10 relative">
