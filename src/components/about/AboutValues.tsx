@@ -73,7 +73,7 @@ export function AboutValues() {
                         </h2>
 
                         <p className="font-['Quicksand'] text-base md:text-lg text-white/85 !text-white/85 max-w-md font-medium leading-relaxed">
-                            We always do our best to make a difference, leading by helping others and doing what is right.
+                            We always do our best to make a difference.
                         </p>
                     </div>
 
@@ -135,8 +135,8 @@ export function AboutValues() {
                                 Values Designed for Global Impact & Human Leadership
                             </h3>
 
-                            <p className="font-['Quicksand'] text-sm md:text-base text-[#5C5C61] !text-[#5C5C61] font-medium leading-relaxed max-w-[320px]">
-                                We speak the truth, follow our values from the heart, and care for people, animals, and our planet.
+                            <p className="font-['Quicksand'] text-sm md:text-base text-[#5C5C61] !text-[#5C5C61] font-medium leading-relaxed max-w-[380px]">
+                                We lead by helping others and doing what is right. We speak the truth and follow our values from the heart. We care for people, animals, and our planet. We keep asking, learning, and finding new ways to grow.
                             </p>
                         </div>
 
@@ -151,7 +151,7 @@ export function AboutValues() {
                                     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                                     <path d="m9 12 2 2 4-4" />
                                 </svg>
-                                <span>Absolute Integrity</span>
+                                <span>Integrity</span>
                             </div>
 
                             {/* Lavender Lightbulb (Strict shadow-none) */}
@@ -164,7 +164,7 @@ export function AboutValues() {
                                     <path d="M9 18h6" />
                                     <path d="M10 22h4" />
                                 </svg>
-                                <span>Lifelong Innovation</span>
+                                <span>Innovation & Lifelong Learning</span>
                             </div>
                         </div>
 
@@ -183,8 +183,8 @@ export function AboutValues() {
                             Values Designed for Global Impact & Human Leadership
                         </h3>
 
-                        <p className="font-['Quicksand'] text-xs text-[#5C5C61] font-medium leading-relaxed mb-8">
-                            We speak the truth, follow our values from the heart, and care for people, animals, and our planet.
+                        <p className="font-['Quicksand'] text-xs text-[#5C5C61] font-medium leading-relaxed mb-8 max-w-[320px] mx-auto">
+                            We lead by helping others and doing what is right. We speak the truth and follow our values from the heart. We care for people, animals, and our planet. We keep asking, learning, and finding new ways to grow.
                         </p>
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full max-w-sm">
@@ -198,11 +198,11 @@ export function AboutValues() {
                             </div>
                             <div className="bg-[#ffc715] text-[#334a89] border border-[#d9a400]/30 px-4 py-3 rounded-2xl font-['Quicksand'] font-extrabold text-xs flex items-center gap-2.5 text-left shadow-none">
                                 <svg className="w-4 h-4 text-[#334a89] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /><path d="m9 12 2 2 4-4" /></svg>
-                                <span>Absolute Integrity</span>
+                                <span>Integrity</span>
                             </div>
                             <div className="bg-[#9765d1] text-white border border-[#7d4bb5]/30 px-4 py-3 rounded-2xl font-['Quicksand'] font-bold text-xs flex items-center gap-2.5 text-left shadow-none">
                                 <svg className="w-4 h-4 text-white shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" /><path d="M9 18h6" /><path d="M10 22h4" /></svg>
-                                <span>Lifelong Innovation</span>
+                                <span>Innovation & Lifelong Learning</span>
                             </div>
                         </div>
                     </div>
