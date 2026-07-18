@@ -244,7 +244,7 @@ export default function Home() {
                                 </svg>
                             </div>
                             <h2 className="wcu-heading">
-                                Education at Aster<br />prepares children for life
+                                Education at Aster prepares<br />children for life
                             </h2>
                         </div>
                     </div>
