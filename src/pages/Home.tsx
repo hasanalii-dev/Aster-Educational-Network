@@ -167,14 +167,16 @@ export default function Home() {
         <div id="page-home" className="page-wrapper">
             <SEO 
                 title="Home" 
-                keywords="school karachi, best school in karachi, senior school karachi, O levels karachi, A levels karachi, aster school karachi, top schools in karachi, primary school karachi, pre school karachi, aster edu pk"
+                keywords="best school in karachi, top 10 schools in karachi, best O level school in karachi, best A level college in karachi, primary school karachi, kindergarten karachi, private schools in karachi, aster school karachi, aster edu pk, best education in karachi, early years education karachi, top schools in DHA karachi, best elementary school karachi, senior school karachi, cambridge school karachi, igcse karachi, admission in karachi school"
                 schema={`{
                   "@context": "https://schema.org",
                   "@type": "School",
                   "name": "The Aster School",
+                  "alternateName": ["Aster School Karachi", "Aster Pakistan"],
                   "url": "https://aster.edu.pk",
                   "logo": "https://aster.edu.pk/logo.jpg",
-                  "description": "The Aster School empowers students to become confident, resilient, and lifelong learners in Karachi. We offer outstanding Preschool, Elementary, and Senior School education.",
+                  "description": "The Aster School is widely considered the best school in Karachi, offering an outstanding Cambridge curriculum from Preschool through Senior School (O Levels and A Levels). If you are looking for the top schools in Karachi, The Aster School stands out for its premium education, holistic student development, and state-of-the-art facilities.",
+                  "knowsAbout": ["O Levels", "A Levels", "Preschool Education", "Elementary Education", "Cambridge Curriculum", "IGCSE", "Holistic Education"],
                   "address": {
                     "@type": "PostalAddress",
                     "addressLocality": "Karachi",

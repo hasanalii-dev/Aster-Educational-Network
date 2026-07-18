@@ -12,10 +12,10 @@ interface SEOProps {
 
 export function SEO({ 
   title, 
-  description = "The Aster School — Empowering students to become confident, resilient, and lifelong learners in Karachi. We offer outstanding Preschool, Elementary, and Senior School education.", 
+  description = "The Aster School is widely recognized as one of the best schools in Karachi, offering premium education from Preschool and Kindergarten through Elementary, Middle, and Senior School (O Levels and A Levels). We empower students to become confident, resilient, and lifelong learners with top-tier academics, robotics, sports, and holistic development in Karachi, Pakistan.", 
   image = "https://aster.edu.pk/logo.jpg", 
   url = "https://aster.edu.pk",
-  keywords = "school karachi, best school in karachi, senior school karachi, O levels karachi, A levels karachi, aster school karachi, top schools in karachi, primary school karachi, pre school karachi",
+  keywords = "best school in karachi, top schools in karachi, school karachi, senior school karachi, O levels karachi, A levels karachi, aster school karachi, primary school karachi, pre school karachi, kindergarten karachi, best private school karachi, cambridge school karachi, igcse karachi, early years education karachi, best elementary school karachi, top 10 schools in karachi, aster edu pk, best education in karachi, best A level college karachi",
   canonicalUrl,
   schema
 }: SEOProps) {
