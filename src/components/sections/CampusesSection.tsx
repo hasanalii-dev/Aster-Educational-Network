@@ -95,7 +95,7 @@ const campusesData: CampusItem[] = [
         grades: "EARLY YEARS – GRADE 4",
         desc: "A nurturing environment focused on foundational learning, confidence-building, and curiosity-driven exploration.",
         image: "https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783171182/500077944_1251016823698585_2689627082250163943_n_bmhohl.jpg",
-        video: "https://alpha.edu.pk/img/hero.mp4",
+        video: "https://res.cloudinary.com/lpxp5l3a/video/upload/q_auto,f_auto/v1/Transportation_Adventure_Playdate_Toddlers_Oct_31_FINAL_ui3cvs.mp4",
         path: "/campuses"
     },
     {
@@ -103,7 +103,7 @@ const campusesData: CampusItem[] = [
         grades: "GRADE 5 – GRADE 11",
         desc: "A future-focused environment where students develop leadership, academic excellence, independence, and real-world readiness.",
         image: "https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783171285/image00022_pbq3wd.jpg",
-        video: "https://alpha.edu.pk/img/hero.mp4",
+        video: "https://res.cloudinary.com/lpxp5l3a/video/upload/q_auto,f_auto/v1/Aster_Fundraiser_2025_-_Final_Video_arevxn.mp4",
         path: "/campuses"
     },
     {
@@ -111,7 +111,7 @@ const campusesData: CampusItem[] = [
         grades: "EARLY YEARS – GRADE 5",
         desc: "A vibrant learning space where creativity, exploration, and skill-building are woven into everyday learning.",
         image: "https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783171083/1000555027_lxuh4i.jpg",
-        video: "https://alpha.edu.pk/img/hero.mp4",
+        video: "https://res.cloudinary.com/lpxp5l3a/video/upload/q_auto,f_auto/v1/Pet_Day_Video_-_Clifton_and_PECHS_bug9eb.mp4",
         path: "/campuses"
     }
 ]

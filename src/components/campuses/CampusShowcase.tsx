@@ -10,7 +10,7 @@ const campuses = [
     {
         id: 'clifton',
         name: 'Clifton Campus',
-        grades: 'Early Years – Grade 5',
+        grades: 'Early Years – Grade 6',
         description: 'Our Clifton Campus provides a nurturing and engaging environment where children build strong foundations for lifelong learning.\n\nFrom the Early Years through Elementary School, students are encouraged to explore, question, create, and grow through meaningful learning experiences that develop both academic competence and character.',
         benefits: [
             'Montessori-inspired Early Years education',
@@ -23,7 +23,7 @@ const campuses = [
         ],
         finaleText: 'A place where curiosity is encouraged, confidence grows, and learning comes to life.',
         image: 'https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783171083/1000555027_lxuh4i.jpg', // Reel aspect ratio
-        video: 'https://alpha.edu.pk/img/hero.mp4',
+        video: 'https://res.cloudinary.com/lpxp5l3a/video/upload/q_auto,f_auto/v1/Pet_Day_Video_-_Clifton_and_PECHS_bug9eb.mp4',
         mapQuery: 'Plot+D%2C+97%2C+Block+4%2C+Block+2+Clifton%2C+Karachi%2C+Pakistan',
     },
     {
@@ -42,7 +42,7 @@ const campuses = [
         ],
         finaleText: 'A place where children develop independence, confidence, and a genuine love for learning.',
         image: 'https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783171182/500077944_1251016823698585_2689627082250163943_n_bmhohl.jpg', // Reel aspect ratio
-        video: 'https://alpha.edu.pk/img/hero.mp4',
+        video: 'https://res.cloudinary.com/lpxp5l3a/video/upload/q_auto,f_auto/v1/Transportation_Adventure_Playdate_Toddlers_Oct_31_FINAL_ui3cvs.mp4',
         mapQuery: 'Plot+37+C%2C+Block-6+PECHS%2C+Karachi+City%2C+Sindh%2C+Pakistan%2C+75500',
     },
     {
@@ -63,7 +63,7 @@ const campuses = [
         ],
         finaleText: 'A learning environment where students are challenged to think critically, lead confidently, and contribute meaningfully.',
         image: 'https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783171285/image00022_pbq3wd.jpg', // Reel aspect ratio
-        video: 'https://alpha.edu.pk/img/hero.mp4',
+        video: 'https://res.cloudinary.com/lpxp5l3a/video/upload/q_auto,f_auto/v1/Aster_Fundraiser_2025_-_Final_Video_arevxn.mp4',
         mapQuery: '33-D%2C+Block+6%2C+PECHS%2C+Shahrah-e-Faisal+Road%2C+Karachi%2C+Pakistan%2C+75500',
     }
 ]
@@ -185,7 +185,7 @@ function CampusCard({ campus, isEven }: { campus: any, isEven: boolean }) {
 
             {/* Content Side */}
             <div className="campus-content w-full lg:w-7/12 flex flex-col pt-8">
-                <div className="flex items-center gap-3 mb-6">
+                <div className="flex items-center gap-3 mb-4">
                     <svg className="w-4 h-4 text-[#FBBB21]" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
                     </svg>
@@ -193,9 +193,15 @@ function CampusCard({ campus, isEven }: { campus: any, isEven: boolean }) {
                         CAMPUS PROFILE
                     </span>
                 </div>
-                <h2 className="font-['Playfair_Display'] text-4xl md:text-5xl font-medium text-[#334a89] mb-8 leading-[1.1]">
+                <h2 className="font-['Playfair_Display'] text-4xl md:text-5xl font-medium text-[#334a89] mb-4 leading-[1.1]">
                     {campus.name}
                 </h2>
+                
+                <div className="mb-8">
+                    <span className="inline-block bg-[#3A53A4]/10 text-[#3A53A4] font-['Quicksand'] font-bold tracking-widest text-xs uppercase px-4 py-2 rounded-full">
+                        {campus.grades}
+                    </span>
+                </div>
                 
                 <div className="font-['Quicksand'] font-medium text-lg text-[#5C5C61] leading-relaxed mb-10 whitespace-pre-line">
                     {campus.description}
