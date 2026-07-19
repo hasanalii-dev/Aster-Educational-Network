@@ -136,6 +136,7 @@ export function CampusShowcase() {
 
 function CampusCard({ campus, isEven }: { campus: any, isEven: boolean }) {
     const [isHovered, setIsHovered] = useState(false)
+    const [isVideoLoaded, setIsVideoLoaded] = useState(false)
     const videoRef = useRef<HTMLVideoElement>(null)
 
     useEffect(() => {
@@ -171,8 +172,14 @@ function CampusCard({ campus, isEven }: { campus: any, isEven: boolean }) {
                         muted
                         playsInline
                         preload="none"
-                        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 will-change-transform pointer-events-none ${isHovered ? 'opacity-100' : 'opacity-0'}`}
+                        onLoadedData={() => setIsVideoLoaded(true)}
+                        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 will-change-transform pointer-events-none ${isHovered && isVideoLoaded ? 'opacity-100' : 'opacity-0'}`}
                     />
+                    
+                    {/* Skeleton Loader */}
+                    {isHovered && !isVideoLoaded && (
+                        <div className="absolute inset-0 w-full h-full bg-[#334a89]/20 animate-pulse pointer-events-none transition-opacity duration-300" />
+                    )}
                     
                     {/* Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />

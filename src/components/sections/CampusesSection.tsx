@@ -53,6 +53,11 @@ const CampusCard = ({ campus }: { campus: CampusItem }) => {
                 />
             </div>
 
+            {/* === SKELETON LOADER === */}
+            {isHovered && !isVideoReady && (
+                <div className="absolute inset-0 w-full h-full bg-[#334a89]/20 animate-pulse z-[2] transition-opacity duration-300" />
+            )}
+
             {/* === LAYER 2: HOVER VIDEO === */}
             <video
                 ref={videoRef}
@@ -60,6 +65,7 @@ const CampusCard = ({ campus }: { campus: CampusItem }) => {
                 loop
                 muted
                 playsInline
+                preload="none"
                 onLoadedData={() => setIsVideoReady(true)}
             >
                 <source src={campus.video} type="video/mp4" />
