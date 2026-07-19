@@ -113,7 +113,10 @@ export function StudentLifeExperiences() {
                 {/* The Experiences They Love */}
                 <div className="text-center mb-16 exp-intro">
                     <h3 className="font-['Playfair_Display'] text-3xl md:text-4xl mb-4 !text-white">The Experiences Students Love Most</h3>
-                    <p className="font-['Quicksand'] text-white/70">Where Passion Meets Participation</p>
+                    <p className="font-['Quicksand'] text-white/70 mb-6">Where Passion Meets Participation</p>
+                    <p className="font-['Quicksand'] text-lg text-white/90 max-w-[800px] mx-auto leading-relaxed">
+                        Ask an Aster student about their favorite part of school, and chances are you'll hear the same few answers again and again.
+                    </p>
                 </div>
 
                 <div className="space-y-16 md:space-y-24">

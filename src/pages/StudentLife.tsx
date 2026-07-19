@@ -6,7 +6,6 @@ import { StudentLifeExperiences } from '@/components/student-life/StudentLifeExp
 import { StudentLifeTraditions } from '@/components/student-life/StudentLifeTraditions'
 import { StudentLifeGrowth } from '@/components/student-life/StudentLifeGrowth'
 import { StudentLifeOutro } from '@/components/student-life/StudentLifeOutro'
-import { CommunityCtaSection } from '@/components/sections/CommunityCtaSection'
 
 export default function StudentLife() {
 
@@ -20,7 +19,6 @@ export default function StudentLife() {
       <StudentLifeTraditions />
       <StudentLifeGrowth />
       <StudentLifeOutro />
-      <CommunityCtaSection />
     </div>
   )
 }

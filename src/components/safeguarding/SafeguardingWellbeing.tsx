@@ -85,7 +85,7 @@ export function SafeguardingWellbeing() {
                 </div>
 
                 <h2 className="font-['Playfair_Display'] text-4xl md:text-5xl lg:text-[64px] font-medium text-white !text-white leading-[1.05] mb-8 wellbeing-text tracking-tight">
-                    Supporting the Whole <em className="italic text-[#334a89] !text-[#334a89]">Child</em>
+                    Supporting the Whole <em className="italic text-[#334a89] !text-[#334a89]">Child Experience</em>
                 </h2>
 
                 <div className="w-16 h-[2px] bg-white mb-10 wellbeing-text shadow-sm" />

@@ -110,10 +110,13 @@ export function SeniorCommunication() {
                         
                         <div className="comm-reveal font-['Quicksand'] text-lg md:text-xl text-white/90 space-y-6 font-medium leading-[1.65]">
                             <p>
-                                Strong communication skills open doors to opportunity, leadership, and lifelong success. At Aster, students develop proficiency in English, Urdu, and Arabic, with Mandarin available as an additional language option.
+                                At Aster, students develop proficiency in English, Urdu, and Arabic, with Mandarin available as an additional language option. Learning multiple languages strengthens communication, cultural awareness, cognitive flexibility, and confidence.
                             </p>
                             <p>
                                 Arabic holds a special place within the Aster experience. As a compulsory language and the language of the Holy Qur'an, it helps students deepen their understanding of Islam while developing strong reading, writing, speaking, and comprehension skills.
+                            </p>
+                            <p>
+                                These experiences help students become articulate communicators who can confidently engage with diverse perspectives and global issues.
                             </p>
                         </div>
 

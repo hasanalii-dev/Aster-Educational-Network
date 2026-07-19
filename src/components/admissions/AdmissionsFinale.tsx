@@ -83,7 +83,7 @@ export function AdmissionsFinale() {
                             Limited Seats. Exceptional Opportunities.
                         </h3>
                         <p className="font-['Quicksand'] text-[#5C5C61] !text-[#5C5C61] text-base md:text-lg font-medium leading-[1.6]">
-                            To maintain meaningful learning experiences and personalized attention, class sizes are carefully managed across all campuses. Families are encouraged to begin the admissions process early to secure priority consideration for future openings.
+                            As demand continues to grow, seats may become limited in certain grades and campuses. Families are encouraged to begin the admissions process early and join the waitlist to secure priority consideration for future openings.
                         </p>
                     </div>
                 </div>
@@ -110,7 +110,7 @@ export function AdmissionsFinale() {
                     </div>
 
                     <h2 className="finale-stagger font-['Playfair_Display'] text-4xl md:text-5xl lg:text-6xl font-medium text-white max-w-4xl leading-[1.1] mb-10 relative z-10">
-                        Join a community committed to developing confident learners.
+                        Join a community committed to developing confident learners, compassionate leaders, and future-ready individuals.
                     </h2>
 
                     <p className="finale-stagger text-xl md:text-2xl font-['Quicksand'] font-medium text-white/95 relative z-10 mb-12">

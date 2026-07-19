@@ -20,18 +20,69 @@ export function CampusesIntro() {
                 }
             )
 
+            // Full text reveal animation for the intro paragraph
+            gsap.fromTo('.reveal-word',
+                { opacity: 0, yPercent: 100, rotation: 5 },
+                {
+                    opacity: 1, 
+                    yPercent: 0, 
+                    rotation: 0,
+                    duration: 0.8, 
+                    ease: 'power3.out',
+                    stagger: 0.015,
+                    scrollTrigger: {
+                        trigger: '.campuses-text-container',
+                        start: 'top 80%',
+                    }
+                }
+            )
+
         }, sectionRef)
 
         return () => ctx.revert()
     }, [])
 
+    const textSegments = [
+        { text: "Since opening our doors in ", style: "" },
+        { text: "2019", style: "font-bold text-[#394EA2]" },
+        { text: ", The Aster School has grown into a ", style: "" },
+        { text: "thriving learning community", style: "font-bold text-[#394EA2]" },
+        { text: " committed to developing ", style: "" },
+        { text: "confident learners", style: "italic font-bold" },
+        { text: ", ", style: "" },
+        { text: "compassionate leaders", style: "italic font-bold" },
+        { text: ", and ", style: "" },
+        { text: "future-ready individuals", style: "italic font-bold" },
+        { text: ". Today, our campuses across ", style: "" },
+        { text: "Karachi", style: "font-bold text-[#394EA2]" },
+        { text: " serve students at different stages of their educational journey, while our expansion into ", style: "" },
+        { text: "Riyadh", style: "font-bold text-[#394EA2]" },
+        { text: " reflects a growing vision to bring ", style: "" },
+        { text: "meaningful, child-centered education", style: "italic text-[#394EA2] font-semibold" },
+        { text: " to families beyond Pakistan. While each campus has its own identity, every Aster student experiences the same commitment to ", style: "" },
+        { text: "excellence, resilience, humility, innovation, and purposeful learning", style: "font-bold text-[#394EA2]" },
+        { text: ".", style: "" },
+    ];
+
     return (
         <section ref={sectionRef} className="py-20 md:py-32 bg-[#fbfaf8] px-6 md:px-12">
             <div className="max-w-[1000px] mx-auto text-center campuses-intro-content flex flex-col items-center">
-                <p className="font-['Quicksand'] text-lg md:text-xl text-[#5C5C61] leading-relaxed max-w-4xl mb-16">
-                    Since opening our doors in 2019, The Aster School has grown into a thriving learning community committed to developing confident learners, compassionate leaders, and future-ready individuals.
-                    Today, our campuses across Karachi serve students at different stages of their educational journey, while our expansion into Riyadh reflects a growing vision to bring meaningful, child-centered education to families beyond Pakistan.
-                    While each campus has its own identity, every Aster student experiences the same commitment to excellence, resilience, humility, innovation, and purposeful learning.
+                <p className="campuses-text-container font-['Quicksand'] text-lg md:text-xl text-[#5C5C61] leading-relaxed max-w-4xl mb-16">
+                    {textSegments.map((seg, idx) => {
+                        const words = seg.text.split(/(\s+)/);
+                        return words.map((token, tIdx) => {
+                            if (token.trim() === '') {
+                                return <span key={`${idx}-${tIdx}`}>{token}</span>;
+                            }
+                            return (
+                                <span key={`${idx}-${tIdx}`} className="inline-block overflow-hidden align-bottom pb-1 -mb-1">
+                                    <span className={`inline-block reveal-word ${seg.style}`}>
+                                        {token}
+                                    </span>
+                                </span>
+                            );
+                        });
+                    })}
                 </p>
 
                 <div className="flex items-center gap-3 mb-6">

@@ -28,6 +28,16 @@ export function ElementaryResources() {
             title: "Meaningful Application",
             text: "Real-world problems that encourage students to apply what they learn.",
             image: "https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783269996/494470437_1233498812117053_8680063396234529913_n_gbw9kx.jpg"
+        },
+        {
+            title: "Learn independently",
+            text: "Fostering self-guided exploration and autonomy in their academic journey.",
+            image: "https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783170968/471264397_1668017843779408_2247922833050165345_n_kmaaqh.jpg"
+        },
+        {
+            title: "Develop strong foundations",
+            text: "Building core understanding without relying on rote memorization.",
+            image: "https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783170483/MEP04640_qkhjcw.jpg"
         }
     ]
 
@@ -87,9 +97,47 @@ export function ElementaryResources() {
                     )
                 }
             }
+
+            if (sectionRef.current) {
+                const words = sectionRef.current.querySelectorAll('.gsap-prose-word')
+                const revealContainer = sectionRef.current.querySelector('.reveal-text')
+                if (words.length > 0 && revealContainer) {
+                    gsap.fromTo(
+                        words,
+                        {
+                            color: 'rgba(92, 92, 97, 0.15)',
+                            y: 4
+                        },
+                        {
+                            color: (_, el) => el.dataset.color || '#15283D',
+                            y: 0,
+                            stagger: 0.02,
+                            duration: 0.4,
+                            ease: 'power1.out',
+                            scrollTrigger: {
+                                trigger: revealContainer,
+                                start: 'top 85%',
+                                once: true
+                            }
+                        }
+                    )
+                }
+            }
         }, sectionRef)
         return () => ctx.revert()
     }, [])
+
+    const renderWords = (text: string, finalColorHex: string, customClass: string = '') => {
+        return text.split(' ').map((word, i) => (
+            <span
+                key={i}
+                className={`gsap-prose-word inline-block mr-[0.25em] will-change-transform ${customClass}`}
+                data-color={finalColorHex}
+            >
+                {word}
+            </span>
+        ))
+    }
 
     return (
         <section ref={sectionRef} className="py-24 md:py-36 px-6 md:px-12 bg-[#FAFAFA] text-[#15283D] overflow-hidden">
@@ -115,7 +163,7 @@ export function ElementaryResources() {
                             At Aster, we believe learning resources should evolve alongside the world our children are growing into.
                         </p>
                         <p className="gsap-stagger-item">
-                            To support deeper understanding and more meaningful learning, our academic team develops and continuously refines Aster's own in-house workbooks and learning materials.
+                            To support deeper understanding and more meaningful learning, our academic team develops and continuously refines Aster's own in-house workbooks and learning materials. These resources are thoughtfully designed to make learning more accessible, engaging, and effective for young learners.
                         </p>
                         <p className="gsap-stagger-item font-bold text-[#334a89] pt-2">
                             Our workbooks help students:
@@ -187,6 +235,16 @@ export function ElementaryResources() {
                     ))}
                 </div>
 
+            </div>
+
+            {/* Bottom Centered Text */}
+            <div className="max-w-[1000px] mx-auto mt-20 md:mt-28 px-6 md:px-12 text-center reveal-text">
+                <p className="font-['Quicksand'] text-lg md:text-xl lg:text-2xl leading-[1.6] font-bold">
+                    {renderWords(
+                        "By combining strong teaching with carefully designed learning materials, we create an academic experience that supports every child in learning with confidence and understanding.",
+                        "#15283D"
+                    )}
+                </p>
             </div>
         </section>
     )

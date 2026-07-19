@@ -99,7 +99,7 @@ export function ElementaryCuriosity() {
                         </p>
                         <div className="w-12 h-[2px] bg-[#ffc715] my-4 mx-auto" />
                         <p className="text-[#15283D] font-bold text-lg">
-                            Rather than relying solely on memorization, students are guided to understand concepts deeply and make connections across subjects.
+                            Rather than relying solely on memorization, students are guided to understand concepts deeply, make connections across subjects, and develop confidence in their own thinking.
                         </p>
                     </div>
                 </div>

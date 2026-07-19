@@ -129,8 +129,8 @@ export function ApproachHero() {
                         <span className="font-['Quicksand'] font-bold text-xs tracking-[0.3em] text-[#ffc715] uppercase block mb-4">
                             APPROACH
                         </span>
-                        <h1 className="font-['Playfair_Display'] text-4xl md:text-5xl lg:text-[56px] font-medium text-white tracking-tight leading-[1.1] whitespace-nowrap">
-                            Our Approach
+                        <h1 className="font-['Playfair_Display'] text-3xl md:text-4xl lg:text-[48px] font-medium text-white tracking-tight leading-[1.2]">
+                            Preparing Children for Life, Not Just School
                         </h1>
                     </div>
                 </div>

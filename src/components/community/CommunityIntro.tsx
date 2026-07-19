@@ -38,8 +38,14 @@ export function CommunityIntro() {
                 </h2>
 
                 <div className="intro-body max-w-[800px] font-['Quicksand'] font-medium text-lg md:text-xl text-[#5C5C61] leading-relaxed flex flex-col gap-8">
+                    <h3 className="intro-body font-['Playfair_Display'] text-2xl md:text-3xl text-[#334a89] italic -mb-4">
+                        Parents: A Child's First Teachers
+                    </h3>
                     <p>
                         Parents play one of the most important roles in a child's development. At Aster, we view families as partners in the educational journey and believe that meaningful collaboration between school and home creates the strongest outcomes for children.
+                    </p>
+                    <p>
+                        Through regular communication, parent engagement opportunities, workshops, and school events, we work together to support each child's academic, social, emotional, and personal growth. We believe when schools and families share a common purpose, children benefit the most.
                     </p>
                     <p>
                         Children thrive when they experience consistency between home and school, when the adults around them communicate openly, and when they feel supported by a community that genuinely cares about their growth and well-being.

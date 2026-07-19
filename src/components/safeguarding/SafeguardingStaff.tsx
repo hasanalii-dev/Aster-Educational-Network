@@ -76,7 +76,7 @@ export function SafeguardingStaff() {
                     
                     <div className="font-['Quicksand'] font-medium text-lg md:text-xl text-[#5C5C61] leading-relaxed flex flex-col gap-6">
                         <p className="staff-text">
-                            All staff members play an active role in safeguarding and child protection. Our team receives rigorous training and follows established procedures to ensure concerns are recognised and addressed.
+                            All staff members play an active role in safeguarding and child protection. Our team receives safeguarding training and follows established procedures designed to ensure concerns are recognized, reported, and addressed appropriately.
                         </p>
                         <p className="staff-text">
                             The school also maintains designated safeguarding leadership to oversee safeguarding practices and support the wellbeing of students across our campuses.

@@ -183,7 +183,7 @@ export function ElementaryLanguages() {
                     {/* One-Shot Typesetting Thesis */}
                     <div ref={textRef} className="gsap-stagger-item w-full pt-8">
                         <p className="font-['Quicksand'] font-bold text-xl md:text-2xl lg:text-[26px] text-[#334a89] !text-[#334a89]">
-                            {renderWords("Every new language opens a new way of thinking, connecting, and understanding the world.")}
+                            {renderWords("Learning multiple languages strengthens communication, cognitive development, confidence, and cultural understanding.")}
                         </p>
                     </div>
 

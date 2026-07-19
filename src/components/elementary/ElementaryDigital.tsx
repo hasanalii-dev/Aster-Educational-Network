@@ -102,9 +102,9 @@ export function ElementaryDigital() {
     }
 
     const skills = [
-        { label: 'Logical Thinking', icon: Terminal },
-        { label: 'Complex Problem Solving', icon: Layers },
-        { label: 'Safe Digital Exploration', icon: ShieldCheck },
+        { label: 'Problem-solving skills', icon: Terminal },
+        { label: 'Creativity', icon: Layers },
+        { label: 'Computational thinking', icon: ShieldCheck },
     ]
 
     return (
@@ -157,7 +157,7 @@ export function ElementaryDigital() {
                     {/* One-Shot Typesetting Thesis */}
                     <div ref={textRef} className="gsap-stagger-item pt-8 border-t border-[#15283D]/10">
                         <p className="font-['Quicksand'] text-lg md:text-xl font-bold text-[#334a89] !text-[#334a89] leading-[1.6]">
-                            {renderWords("Students learn to think critically and engage confidently with technology through coding, robotics, and digital exploration.")}
+                            {renderWords("These experiences help students become active creators, innovators, and critical thinkers in an increasingly digital future.")}
                         </p>
                     </div>
                 </div>

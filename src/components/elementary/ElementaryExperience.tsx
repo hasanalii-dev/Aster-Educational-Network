@@ -171,7 +171,7 @@ export function ElementaryExperience() {
                     {/* ONE-SHOT TYPESETTING THESIS */}
                     <div ref={textRef} className="gsap-stagger-item w-full pb-8">
                         <p className="font-['Quicksand'] font-bold text-lg md:text-xl text-[#334a89] !text-[#334a89]">
-                            {renderWords("Because confidence grows when children actively participate rather than simply observe.")}
+                            {renderWords("Because confidence grows when children actively participate rather than simply observe. These opportunities help students build confidence, communication skills, teamwork, creativity, and resilience through real participation and meaningful challenges.")}
                         </p>
                     </div>
                 </div>

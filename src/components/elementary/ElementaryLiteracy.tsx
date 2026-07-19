@@ -55,10 +55,10 @@ export function ElementaryLiteracy() {
     }, [])
 
     return (
-        <section ref={sectionRef} className="w-full flex flex-col lg:flex-row min-h-[700px] lg:h-[800px] bg-[#15283D] overflow-hidden">
+        <section ref={sectionRef} className="w-full flex flex-col lg:flex-row min-h-[700px] lg:min-h-[800px] bg-[#15283D] overflow-hidden">
             
             {/* Left: 100% Height Immersive Image */}
-            <div className="w-full lg:w-1/2 h-[500px] lg:h-full relative overflow-hidden" style={{ borderRadius: '0px' }}>
+            <div className="w-full lg:w-1/2 h-[500px] lg:h-auto relative overflow-hidden" style={{ borderRadius: '0px' }}>
                 <img 
                     ref={imgRef}
                     src="https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_800,q_auto,f_auto/v1783270148/493886413_1229984639135137_8049021980507870553_n_jwuerv.jpg" 
@@ -85,12 +85,18 @@ export function ElementaryLiteracy() {
 
                     <div className="literacy-reveal w-16 h-[3px] bg-[#ffc715] mb-8" />
 
-                    <div className="literacy-reveal font-['Quicksand'] text-lg md:text-xl text-white space-y-6 font-medium leading-[1.6]">
+                    <div className="literacy-reveal font-['Quicksand'] text-base md:text-lg text-white space-y-6 font-medium leading-[1.6]">
+                        <h3 className="font-['Quicksand'] font-bold text-lg md:text-xl uppercase tracking-wider mb-2 text-[#ffc715]">
+                            BUILDING A LIFELONG RELATIONSHIP WITH READING
+                        </h3>
                         <p>
-                            We believe that strong reading skills are the absolute foundation of all learning.
+                            At Aster, reading is not treated as an isolated classroom activity but as an essential part of daily life. Through our Drop Everything and Read (DEAR) program, classroom libraries, storytelling experiences, guided reading sessions, and literacy-rich environments, students develop both skill and enjoyment in reading.
                         </p>
                         <p>
-                            Through dedicated reading time, classroom libraries, and storytelling, students develop a deep love for literature. We emphasize comprehension, vocabulary building, and expression, ensuring students become confident readers and articulate communicators.
+                            As students grow as readers, they also develop stronger comprehension, communication, imagination, vocabulary, and independent thinking.
+                        </p>
+                        <p>
+                            Our goal is simple: <strong>to help children discover the joy and power of books.</strong>
                         </p>
                     </div>
                     

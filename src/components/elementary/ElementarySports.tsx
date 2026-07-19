@@ -149,10 +149,10 @@ export function ElementarySports() {
                     {/* One-Shot Typesetting Thesis (Inverted to White) */}
                     <div ref={textRef} className="gsap-stagger-item pt-8 border-t border-white/20 max-w-2xl">
                         <p className="font-['Quicksand'] text-lg md:text-xl font-bold text-white !text-white leading-[1.6] mb-4 drop-shadow-sm">
-                            {renderWords("From the Elementary years, students are immersed in a culture that values commitment, perseverance, and continuous growth.")}
+                            {renderWords("Every practice session, every challenge, and every competition becomes an opportunity to develop focus, teamwork, leadership, perseverance, and self-belief because excellence is built through consistent effort, purposeful training, and the mindset our students carry with them every day.")}
                         </p>
                         <p className="font-['Quicksand'] text-lg md:text-xl font-bold text-white !text-white leading-[1.6] drop-shadow-sm">
-                            {renderWords("Through regular training, practice, and participation, students learn to challenge themselves, work as a team, and pursue excellence with resilience and determination.")}
+                            {renderWords("At Aster, we develop athletes, leaders, and resilient individuals who learn to do whatever it takes to reach their potential")}
                         </p>
                     </div>
                 </div>

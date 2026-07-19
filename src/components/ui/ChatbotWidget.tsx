@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { MessageCircle, X, Send, Minus } from 'lucide-react';
+import { X, Send, Minus } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { useAuth } from '@/hooks/useAuth';
@@ -252,7 +252,7 @@ export function ChatbotWidget() {
                     <span className="absolute -top-1 -right-1 w-6 h-6 bg-[#ffc715]/40 rounded-full animate-pulse"></span>
                     {/* The dot with blue border */}
                     <span className="absolute -top-0 -right-0 w-4 h-4 bg-[#ffc715] rounded-full border-[3px] border-[#394EA2] z-10"></span>
-                    <MessageCircle className="w-6 h-6 text-white group-hover:scale-110 transition-transform duration-300" />
+                    <img src="/chat-bot.svg" alt="Chat" className="w-8 h-8 group-hover:scale-110 transition-transform duration-300 invert brightness-0" />
                 </button>
             )}
 
@@ -273,7 +273,7 @@ export function ChatbotWidget() {
                                         src="https://api.dicebear.com/9.x/bottts-neutral/svg?seed=aster-happy&mouth=smile01,smile02&eyes=happy,glow&backgroundColor=transparent" 
                                         alt="Aster Bot" 
                                         className="w-[120%] h-[120%] object-cover object-bottom"
-                                        style={{ filter: 'brightness(0) invert(1)' }}
+                                        style={{ filter: 'brightness(0) invert(14%) sepia(21%) saturate(3015%) hue-rotate(185deg) brightness(96%) contrast(92%)' }}
                                     />
                                 </div>
                                 <span className="absolute -bottom-1 -right-1 w-3.5 h-3.5 bg-green-400 border-2 border-[#394EA2] rounded-full z-10"></span>
@@ -306,7 +306,7 @@ export function ChatbotWidget() {
                                             src="https://api.dicebear.com/9.x/bottts-neutral/svg?seed=aster-happy&mouth=smile01,smile02&eyes=happy,glow&backgroundColor=transparent" 
                                             alt="Aster Bot" 
                                             className="w-[120%] h-[120%] object-cover object-bottom"
-                                            style={{ filter: 'brightness(0) invert(1)' }}
+                                            style={{ filter: 'brightness(0) invert(14%) sepia(21%) saturate(3015%) hue-rotate(185deg) brightness(96%) contrast(92%)' }}
                                         />
                                     </div>
                                 )}

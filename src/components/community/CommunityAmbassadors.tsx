@@ -163,12 +163,12 @@ export function CommunityAmbassadors() {
                         <Star className="gsap-stagger-item w-8 h-8 text-[#ffc715] mb-10" fill="currentColor" />
 
                         <p className="gsap-stagger-item font-['Quicksand'] text-white/90 !text-white/90 text-base md:text-lg leading-[1.65] font-medium mb-10">
-                            One of the most cherished experiences within our Early Years program is Star Parent Day. Each week, a parent is invited into the classroom to participate in engaging activities alongside students and educators.
+                            Each week, a parent is invited into the classroom to participate in engaging activities alongside students and educators.
                         </p>
 
                         <div className="gsap-stagger-item pt-8 border-t border-white/20">
                             <p className="font-['Quicksand'] font-bold text-lg md:text-xl text-white !text-white leading-[1.6]">
-                                {renderWords("For children, it is a moment of pride and joy. For parents, it offers a unique opportunity to experience learning firsthand and create meaningful memories together.")}
+                                {renderWords("For children, seeing a parent become part of their school experience is a moment of pride, excitement, and joy. For parents, it offers a unique opportunity to step into their child's world, experience learning firsthand, and create meaningful memories together.")}
                             </p>
                         </div>
                     </div>

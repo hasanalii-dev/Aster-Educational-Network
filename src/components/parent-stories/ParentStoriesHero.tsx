@@ -100,7 +100,7 @@ export function ParentStoriesHero() {
                     <span className="font-['Quicksand'] font-bold text-xs tracking-[0.3em] text-[#ffc715] uppercase block mb-4">
                         PARENT STORIES
                     </span>
-                    <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold font-serif text-white leading-[1.1] md:leading-[1.1]">
+                    <h1 className="text-3xl md:text-4xl lg:text-5xl font-['Playfair_Display'] font-normal text-white leading-[1.1] md:leading-[1.1]">
                         What Our Community Says
                     </h1>
                 </div>

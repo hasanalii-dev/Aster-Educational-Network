@@ -126,7 +126,7 @@ export function PreschoolHero() {
                         className="absolute -bottom-8 md:-bottom-12 left-1/2 -translate-x-1/2 bg-[#394EA2] w-fit min-w-[85%] md:min-w-[700px] py-10 px-8 md:py-12 md:px-16 text-left z-20 pointer-events-auto"
                     >
                         <span className="font-['Quicksand'] font-bold text-xs tracking-[0.3em] text-[#ffc715] uppercase block mb-4">
-                            PRESCHOOL
+                            ACADEMICS
                         </span>
                         <h1 className="font-['Playfair_Display'] text-4xl md:text-5xl lg:text-[56px] font-medium text-white tracking-tight leading-[1.1] whitespace-nowrap">
                             Preschool
@@ -136,6 +136,9 @@ export function PreschoolHero() {
             </div>
 
             <div ref={contentRef} className="mt-24 md:mt-32 max-w-[900px] mx-auto px-6 md:px-12 text-center flex flex-col gap-6">
+                <h2 className="font-['Playfair_Display'] text-3xl md:text-4xl lg:text-[42px] font-medium text-[#15283D] tracking-tight leading-[1.2] mb-2">
+                    Where Independence Begins and Curiosity Flourishes
+                </h2>
                 <p className="font-['Quicksand'] font-medium text-lg md:text-xl text-[#5C5C61] leading-[1.7]">
                     The early years are the foundation of who a child becomes. At The Aster School, our Preschool program is inspired by Montessori philosophy and built around a deep respect for childhood. We believe children learn best when they are free to explore, make choices, work with their hands, and progress at a pace that is right for them.
                 </p>

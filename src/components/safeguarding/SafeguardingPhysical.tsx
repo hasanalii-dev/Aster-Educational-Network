@@ -9,7 +9,7 @@ const measures = [
     'Visitor identification and check-in procedures',
     'Controlled campus access',
     'Supervised learning and activity spaces',
-    'Clear arrival and dismissal protocols',
+    'Clear arrival and dismissal protocols and notifications on the app',
     'Parent notifications through school communication systems'
 ]
 

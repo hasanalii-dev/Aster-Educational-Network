@@ -4,8 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { SEO } from '@/components/seo/SEO'
 
 import { ParentStoriesHero } from '@/components/parent-stories/ParentStoriesHero'
-import { ParentStoriesMasonry } from '@/components/parent-stories/ParentStoriesMasonry'
-import { ParentStoriesFinale } from '@/components/parent-stories/ParentStoriesFinale'
+import { ParentStoriesContent } from '@/components/parent-stories/ParentStoriesContent'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -43,8 +42,7 @@ export default function ParentStories() {
             <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
             <ParentStoriesHero />
-            <ParentStoriesMasonry />
-            <ParentStoriesFinale />
+            <ParentStoriesContent />
         </div>
     )
 }

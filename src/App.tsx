@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { Layout } from '@/components/layout'
 import { pageComponents } from '@/config/routes'
 import { lazy, Suspense } from 'react'
+import { GoogleOAuthProvider } from '@react-oauth/google'
 import { PageLoader } from '@/components/ui/PageLoader'
 import { HelmetProvider } from 'react-helmet-async'
 
@@ -130,15 +131,18 @@ const router = createBrowserRouter([
 import ClickSpark from '@/components/ui/ClickSpark'
 
 function App() {
+  const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID || ''
+
   return (
     <HelmetProvider>
-      <ClickSpark sparkCount={10} sparkRadius={25}>
-        <PageLoader />
-        <RouterProvider router={router} />
-      </ClickSpark>
+      <GoogleOAuthProvider clientId={googleClientId}>
+        <ClickSpark sparkCount={10} sparkRadius={25}>
+          <PageLoader />
+          <RouterProvider router={router} />
+        </ClickSpark>
+      </GoogleOAuthProvider>
     </HelmetProvider>
   )
 }
 
 export default App
-

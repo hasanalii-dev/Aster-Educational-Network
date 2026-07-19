@@ -1,6 +1,56 @@
+import { Award, Target, MapPin, Globe } from 'lucide-react'
+
 export function AdmissionsIntro() {
     return (
-        <section className="bg-white py-24 border-b border-[#E5E7EB]">
+        <section className="bg-white pt-20 pb-24 border-b border-[#E5E7EB]">
+            <div className="max-w-[1360px] mx-auto px-6 md:px-12 lg:px-24 mb-20 md:mb-24 mt-[-20px] md:mt-[-40px]">
+                <div className="gsap-fade w-full bg-[#15283D] border border-white/10 shadow-2xl rounded-[24px] p-6 md:p-8 flex flex-col lg:flex-row justify-between items-center gap-8 lg:gap-4 relative overflow-hidden">
+                    {/* Subtle decorative background gradient */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-black/20 pointer-events-none" />
+                    
+                    <div className="relative flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left hover:scale-105 transition-transform duration-300">
+                        <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-white/10 flex items-center justify-center shrink-0 text-white">
+                            <Award className="w-6 h-6 md:w-7 md:h-7" strokeWidth={2} />
+                        </div>
+                        <span className="font-['Quicksand'] font-bold text-sm md:text-base text-[#ffc715] tracking-widest uppercase">
+                            Licensed Cambridge<br className="hidden lg:block"/> School
+                        </span>
+                    </div>
+
+                    <div className="hidden lg:block w-px h-16 bg-white/20 relative" />
+
+                    <div className="relative flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left hover:scale-105 transition-transform duration-300">
+                        <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-white/10 flex items-center justify-center shrink-0 text-white">
+                            <Target className="w-6 h-6 md:w-7 md:h-7" strokeWidth={2} />
+                        </div>
+                        <span className="font-['Quicksand'] font-bold text-sm md:text-base text-[#ffc715] tracking-widest uppercase">
+                            100% Cambridge<br className="hidden lg:block"/> Success Rate
+                        </span>
+                    </div>
+
+                    <div className="hidden lg:block w-px h-16 bg-white/20 relative" />
+
+                    <div className="relative flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left hover:scale-105 transition-transform duration-300">
+                        <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-white/10 flex items-center justify-center shrink-0 text-white">
+                            <MapPin className="w-6 h-6 md:w-7 md:h-7" strokeWidth={2} />
+                        </div>
+                        <span className="font-['Quicksand'] font-bold text-sm md:text-base text-[#ffc715] tracking-widest uppercase">
+                            3<br className="hidden lg:block"/> Campuses
+                        </span>
+                    </div>
+
+                    <div className="hidden lg:block w-px h-16 bg-white/20 relative" />
+
+                    <div className="relative flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left hover:scale-105 transition-transform duration-300">
+                        <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-white/10 flex items-center justify-center shrink-0 text-white">
+                            <Globe className="w-6 h-6 md:w-7 md:h-7" strokeWidth={2} />
+                        </div>
+                        <span className="font-['Quicksand'] font-bold text-sm md:text-base text-[#ffc715] tracking-widest uppercase">
+                            International Expansion<br className="hidden lg:block"/> to Riyadh
+                        </span>
+                    </div>
+                </div>
+            </div>
             <div className="max-w-[1360px] mx-auto px-6 md:px-12 lg:px-24">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
                     

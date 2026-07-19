@@ -1,10 +1,17 @@
-import { useState, useEffect } from 'react'
-import { supabase } from '@/lib/supabase'
+import { useState } from 'react'
+
+interface Testimonial {
+    quote: string;
+    parent_name: string;
+    child_program: string;
+    role?: string;
+    name?: string;
+}
 
 /* ----------------------------------------
  * Verified Parent Feedback Data (Fallback)
  * ---------------------------------------- */
-const fallbackTestimonials = [
+const fallbackTestimonials: Testimonial[] = [
     {
         quote: "The balance between academics, character-building, and practical learning is what truly sets Aster apart. I can’t explain how much joy it brings to see my child working on his own ventures and succeeding in it.",
         parent_name: "Parent of Senior School Student",
