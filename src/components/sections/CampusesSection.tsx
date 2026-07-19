@@ -24,7 +24,7 @@ const CampusCard = ({ campus }: { campus: CampusItem }) => {
 
     const handleMouseEnter = () => {
         setIsHovered(true)
-        if (videoRef.current && isVideoReady) {
+        if (videoRef.current) {
             videoRef.current.play().catch(() => {})
         }
     }
@@ -61,15 +61,14 @@ const CampusCard = ({ campus }: { campus: CampusItem }) => {
             {/* === LAYER 2: HOVER VIDEO === */}
             <video
                 ref={videoRef}
+                src={campus.video}
                 className={`campus-hover-video ${isVideoReady && isHovered ? 'is-playing' : ''}`}
                 loop
                 muted
                 playsInline
                 preload="none"
                 onLoadedData={() => setIsVideoReady(true)}
-            >
-                <source src={campus.video} type="video/mp4" />
-            </video>
+            />
 
             {/* === LAYER 3: CINEMATIC VIGNETTE === */}
             <div className="campus-vignette"></div>
