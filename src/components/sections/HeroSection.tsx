@@ -6,8 +6,12 @@ export function HeroSection() {
     const [isVideoLoaded, setIsVideoLoaded] = useState(false)
 
     useEffect(() => {
-        if (videoRef.current && videoRef.current.readyState >= 2) {
-            setIsVideoLoaded(true)
+        if (videoRef.current) {
+            if (videoRef.current.readyState >= 2) {
+                setIsVideoLoaded(true)
+            }
+            // Explicitly force play for browsers that ignore the autoPlay prop
+            videoRef.current.play().catch(() => {})
         }
     }, [])
 
@@ -27,17 +31,16 @@ export function HeroSection() {
                 
                 <video
                     ref={videoRef}
+                    src="https://res.cloudinary.com/lpxp5l3a/video/upload/q_auto,f_auto,w_1920/ASTER_SCHOOL__2_3_ldqbk5.mp4"
                     className={`cinematic-video-bg transition-opacity duration-1000 ${isVideoLoaded ? 'opacity-100' : 'opacity-0'}`}
                     onLoadedData={() => setIsVideoLoaded(true)}
-                    autoPlay
+                    autoPlay={true}
                     loop
                     muted // Hard-locked permanently
                     playsInline
                     preload="auto"
                     poster="https://res.cloudinary.com/lpxp5l3a/video/upload/f_auto,q_auto/v1/ASTER_SCHOOL__2_3_ldqbk5.jpg"
-                >
-                    <source src="https://res.cloudinary.com/lpxp5l3a/video/upload/q_auto,f_auto,w_1920/ASTER_SCHOOL__2_3_ldqbk5.mp4" type="video/mp4" />
-                </video>
+                />
 
                 {/* Master Vignette to guarantee text contrast */}
                 <div className="cinematic-vignette"></div>
