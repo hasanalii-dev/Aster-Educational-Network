@@ -45,6 +45,18 @@ const CATEGORIES = [
     'School Stories'
 ];
 
+const QUILL_MODULES = {
+    toolbar: [
+        [{ 'header': [2, 3, 4, false] }],
+        ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+        [{ 'color': [] }, { 'background': [] }],
+        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+        [{ 'align': [] }],
+        ['link', 'image', 'video'],
+        ['clean']
+    ]
+};
+
 // =========================================================
 // CUSTOM SAAS CATEGORY DROPDOWN
 // =========================================================
@@ -166,15 +178,16 @@ export default function JournalManager() {
     }, [articles, loading, editing])
 
     // GSAP Editor Entrance Animation
+    const isEditingOpen = !!editing;
     useEffect(() => {
-        if (editing && editorRef.current) {
+        if (isEditingOpen && editorRef.current) {
             gsap.fromTo(editorRef.current,
                 { opacity: 0, y: 40 },
                 { opacity: 1, y: 0, duration: 0.6, ease: 'expo.out' }
             )
             window.scrollTo({ top: 0, behavior: 'smooth' })
         }
-    }, [editing])
+    }, [isEditingOpen])
 
     const handleSave = async () => {
         if (!editing?.title || !editing?.content) {
@@ -543,17 +556,7 @@ export default function JournalManager() {
                                     theme="snow"
                                     value={editing.content || ''}
                                     onChange={(val) => setEditing({ ...editing, content: val })}
-                                    modules={{
-                                        toolbar: [
-                                            [{ 'header': [2, 3, 4, false] }],
-                                            ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-                                            [{ 'color': [] }, { 'background': [] }],
-                                            [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-                                            [{ 'align': [] }],
-                                            ['link', 'image', 'video'],
-                                            ['clean']
-                                        ]
-                                    }}
+                                    modules={QUILL_MODULES}
                                 />
                             </div>
                         </div>

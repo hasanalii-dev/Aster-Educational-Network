@@ -83,7 +83,7 @@ export function AboutStory() {
                 const card2 = cardRefs.current[cardRefs.current.length - 1]
 
                 if (card0 && card2) {
-                    // 1. Spine Liquid Fill (Scrub lag set to 0.5 for weighted laptop trackpad feel)
+                    // 1. Spine Liquid Fill
                     gsap.fromTo(
                         '.desktop-fill-runner',
                         { scaleY: 0 },
@@ -95,7 +95,7 @@ export function AboutStory() {
                                 start: 'top 50%', // The 50% Monitor Strike Line
                                 endTrigger: card2,
                                 end: 'top 50%',
-                                scrub: 0.5,
+                                scrub: true,
                             },
                         }
                     )
@@ -112,7 +112,7 @@ export function AboutStory() {
                                 start: 'top 50%',
                                 endTrigger: card2,
                                 end: 'top 50%',
-                                scrub: 0.5,
+                                scrub: true,
                             },
                         }
                     )
@@ -126,36 +126,30 @@ export function AboutStory() {
                     const year = yearRefs.current[i]
                     const isLeft = milestones[i].side === 'left'
 
-                    // A. Card container floats in gently BEFORE the dot arrives
-                    gsap.fromTo(
-                        card,
-                        { opacity: 0, x: isLeft ? -70 : 70 },
-                        {
-                            opacity: 1,
-                            x: 0,
-                            duration: 0.8,
-                            ease: 'power3.out',
-                            scrollTrigger: {
-                                trigger: card,
-                                start: 'top 80%',
-                                end: 'top 55%',
-                                scrub: true,
-                            },
-                        }
-                    )
+                    const contentParts = [
+                        card.querySelector('.story-year-badge'),
+                        card.querySelector('.story-card-text'),
+                        card.querySelector('.story-img-frame')
+                    ]
+                    
+                    gsap.set(contentParts, { opacity: 0, x: isLeft ? -40 : 40 })
 
                     // B. ATOMIC 50% SNAP-STRIKE (Fires instantly the exact millisecond the dot hits the node)
                     ScrollTrigger.create({
                         trigger: card,
                         start: 'top 50%',
                         onEnter: () => {
-                            if (node) gsap.to(node, { scale: 1.35, backgroundColor: '#ffc715', borderColor: '#ffffff', boxShadow: '0 0 26px rgba(255,199,21,0.85)', duration: 0.3, ease: 'back.out(2.5)' })
+                            if (node) gsap.to(node, { scale: 1.35, backgroundColor: '#ffc715', borderColor: '#ffffff', boxShadow: 'none', duration: 0.3, ease: 'back.out(2.5)' })
                             if (ring) gsap.fromTo(ring, { scale: 0.5, opacity: 0.9 }, { scale: 3.5, opacity: 0, duration: 0.8, ease: 'power2.out' })
-                            if (year) gsap.to(year, { color: '#ffc715', scale: 1.05, textShadow: '0 0 30px rgba(255,199,21,0.5)', duration: 0.3 })
+                            if (year) gsap.to(year, { color: '#ffc715', textShadow: '0 0 30px rgba(255,199,21,0.5)', duration: 0.3 })
+                            
+                            gsap.to(contentParts, { opacity: 1, x: 0, duration: 0.6, ease: 'power3.out', stagger: 0.1 })
                         },
                         onLeaveBack: () => {
                             if (node) gsap.to(node, { scale: 1.0, backgroundColor: 'rgba(255,255,255,0.15)', borderColor: 'rgba(255,255,255,0.3)', boxShadow: 'none', duration: 0.3 })
-                            if (year) gsap.to(year, { color: 'rgba(255,199,21,0.7)', scale: 1.0, textShadow: 'none', duration: 0.3 })
+                            if (year) gsap.to(year, { color: 'rgba(255,199,21,0.7)', textShadow: 'none', duration: 0.3 })
+                            
+                            gsap.to(contentParts, { opacity: 0, x: isLeft ? -40 : 40, duration: 0.4 })
                         },
                     })
 
@@ -179,22 +173,34 @@ export function AboutStory() {
                 const card2 = cardRefs.current[cardRefs.current.length - 1]
 
                 if (card0 && card2) {
-                    gsap.fromTo('.mobile-fill-runner', { scaleY: 0 }, { scaleY: 1, ease: 'none', scrollTrigger: { trigger: card0, start: 'top 55%', endTrigger: card2, end: 'top 55%', scrub: 0.5 } })
-                    gsap.fromTo('.mobile-glow-runner', { top: '0%' }, { top: '100%', ease: 'none', scrollTrigger: { trigger: card0, start: 'top 55%', endTrigger: card2, end: 'top 55%', scrub: 0.5 } })
+                    gsap.fromTo('.mobile-fill-runner', { scaleY: 0 }, { scaleY: 1, ease: 'none', scrollTrigger: { trigger: card0, start: 'top 55%', endTrigger: card2, end: 'top 55%', scrub: true } })
+                    gsap.fromTo('.mobile-glow-runner', { top: '0%' }, { top: '100%', ease: 'none', scrollTrigger: { trigger: card0, start: 'top 55%', endTrigger: card2, end: 'top 55%', scrub: true } })
                 }
 
                 cardRefs.current.forEach((card, i) => {
                     if (!card) return
                     const node = mobileNodeRefs.current[i]
 
-                    gsap.fromTo(card, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: card, start: 'top 82%' } })
+                    const contentParts = [
+                        card.querySelector('.story-year-badge'),
+                        card.querySelector('.story-card-text'),
+                        card.querySelector('.story-img-frame')
+                    ]
+                    
+                    gsap.set(contentParts, { opacity: 0, y: 30 })
 
                     if (node) {
                         ScrollTrigger.create({
                             trigger: card,
                             start: 'top 55%',
-                            onEnter: () => gsap.to(node, { scale: 1.25, backgroundColor: '#ffc715', borderColor: '#ffffff', boxShadow: '0 0 18px rgba(255,199,21,0.6)', duration: 0.25 }),
-                            onLeaveBack: () => gsap.to(node, { scale: 1, backgroundColor: 'rgba(255,255,255,0.15)', borderColor: 'rgba(255,255,255,0.3)', boxShadow: 'none', duration: 0.25 })
+                            onEnter: () => {
+                                gsap.to(node, { scale: 1.25, backgroundColor: '#ffc715', borderColor: '#ffffff', boxShadow: 'none', duration: 0.25 })
+                                gsap.to(contentParts, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out', stagger: 0.1 })
+                            },
+                            onLeaveBack: () => {
+                                gsap.to(node, { scale: 1, backgroundColor: 'rgba(255,255,255,0.15)', borderColor: 'rgba(255,255,255,0.3)', boxShadow: 'none', duration: 0.25 })
+                                gsap.to(contentParts, { opacity: 0, y: 30, duration: 0.4 })
+                            }
                         })
                     }
                 })
@@ -233,23 +239,7 @@ export function AboutStory() {
             <div className="absolute -right-20 -bottom-20 w-96 h-96 rounded-full bg-[#394da1]/50 blur-3xl pointer-events-none" />
             <div className="absolute left-[-10%] top-[20%] w-[500px] h-[500px] rounded-full bg-[#263a6e]/40 blur-[120px] pointer-events-none" />
 
-            {/* ── Oxygen Bubbles ── */}
-            <div className="story-bubbles-container" aria-hidden="true">
-                {Array.from({ length: 18 }).map((_, i) => (
-                    <div
-                        key={i}
-                        className="story-bubble"
-                        style={{
-                            '--bubble-size': `${6 + Math.random() * 16}px`,
-                            '--bubble-left': `${5 + Math.random() * 90}%`,
-                            '--bubble-duration': `${6 + Math.random() * 10}s`,
-                            '--bubble-delay': `${Math.random() * 12}s`,
-                            '--bubble-wobble': `${15 + Math.random() * 30}px`,
-                            '--bubble-opacity': `${0.15 + Math.random() * 0.25}`,
-                        } as React.CSSProperties}
-                    />
-                ))}
-            </div>
+
 
             <div className="max-w-[1360px] mx-auto flex flex-col relative z-10 pt-16">
 
@@ -281,15 +271,15 @@ export function AboutStory() {
                     {/* ── Desktop Calibrated Spine Wrapper ── */}
                     <div ref={desktopSpineRef} className="absolute left-1/2 w-1 transform -translate-x-1/2 z-10 hidden lg:block will-change-transform">
                         <div className="absolute inset-0 bg-white/10 rounded-full" />
-                        <div className="desktop-fill-runner absolute top-0 left-0 right-0 bg-gradient-to-b from-[#ffc715] to-[#ffdd6b] rounded-full origin-top shadow-[0_0_14px_#ffc715]" />
-                        <div className="desktop-glow-runner absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3.5 h-3.5 bg-[#ffc715] rounded-full shadow-[0_0_20px_6px_rgba(255,199,21,0.5),_0_0_60px_12px_rgba(255,199,21,0.2)]" />
+                        <div className="desktop-fill-runner absolute top-0 bottom-0 left-0 right-0 bg-gradient-to-b from-[#ffc715] to-[#ffdd6b] rounded-full origin-top shadow-[0_0_14px_#ffc715]" />
+                        <div className="desktop-glow-runner absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3.5 h-3.5 bg-[#ffc715] rounded-full" />
                     </div>
 
                     {/* ── Mobile Calibrated Spine Wrapper ── */}
                     <div ref={mobileSpineRef} className="absolute left-[8px] transform -translate-x-1/2 w-[3px] z-10 block lg:hidden will-change-transform">
                         <div className="absolute inset-0 bg-white/10 rounded-full" />
-                        <div className="mobile-fill-runner absolute top-0 left-0 right-0 bg-gradient-to-b from-[#ffc715] to-[#ffdd6b] rounded-full origin-top shadow-[0_0_12px_#ffc715]" />
-                        <div className="mobile-glow-runner absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-[#ffc715] rounded-full shadow-[0_0_16px_4px_rgba(255,199,21,0.6)]" />
+                        <div className="mobile-fill-runner absolute top-0 bottom-0 left-0 right-0 bg-gradient-to-b from-[#ffc715] to-[#ffdd6b] rounded-full origin-top shadow-[0_0_12px_#ffc715]" />
+                        <div className="mobile-glow-runner absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-[#ffc715] rounded-full" />
                     </div>
 
                     {/* ── Milestone Cards Deck ── */}
@@ -429,61 +419,5 @@ const storyStyles = `
     pointer-events: none;
 }
 
-/* ── BUBBLES ── */
-.story-bubbles-container {
-    position: absolute;
-    inset: 0;
-    overflow: hidden;
-    pointer-events: none;
-    z-index: 1;
-}
 
-.story-bubble {
-    position: absolute;
-    bottom: -20px;
-    left: var(--bubble-left);
-    width: var(--bubble-size);
-    height: var(--bubble-size);
-    border-radius: 50%;
-    background: radial-gradient(circle at 30% 30%,
-        rgba(255, 255, 255, 0.5),
-        rgba(255, 255, 255, 0.08) 60%,
-        transparent 100%
-    );
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    opacity: 0;
-    animation:
-        bubble-rise var(--bubble-duration) var(--bubble-delay) infinite ease-in,
-        bubble-wobble var(--bubble-duration) var(--bubble-delay) infinite ease-in-out;
-}
-
-@keyframes bubble-rise {
-    0% {
-        transform: translateY(0) scale(0.4);
-        opacity: 0;
-    }
-    10% {
-        opacity: var(--bubble-opacity);
-        transform: translateY(-5vh) scale(0.8);
-    }
-    80% {
-        opacity: var(--bubble-opacity);
-        transform: translateY(-85vh) scale(1);
-    }
-    90% {
-        opacity: var(--bubble-opacity);
-        transform: translateY(-92vh) scale(1.3);
-    }
-    100% {
-        opacity: 0;
-        transform: translateY(-100vh) scale(1.6);
-    }
-}
-
-@keyframes bubble-wobble {
-    0%, 100% { margin-left: 0; }
-    25% { margin-left: var(--bubble-wobble); }
-    50% { margin-left: 0; }
-    75% { margin-left: calc(var(--bubble-wobble) * -0.7); }
-}
 `

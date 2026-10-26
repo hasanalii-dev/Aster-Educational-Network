@@ -19,9 +19,17 @@ interface TransitionLinkProps {
 export function TransitionLink({ to, children, className, id, onClick, ...rest }: TransitionLinkProps) {
     const { navigateWithTransition } = useTransition()
 
+    const isExternal = to.startsWith('http')
+
     const handleClick = (e: MouseEvent<HTMLAnchorElement>) => {
-        e.preventDefault()
         onClick?.()
+        
+        if (isExternal) {
+            // Let the browser handle external links naturally
+            return
+        }
+        
+        e.preventDefault()
         navigateWithTransition(to)
     }
 
@@ -31,6 +39,8 @@ export function TransitionLink({ to, children, className, id, onClick, ...rest }
             className={className}
             id={id}
             onClick={handleClick}
+            target={isExternal ? '_blank' : undefined}
+            rel={isExternal ? 'noopener noreferrer' : undefined}
             {...rest}
         >
             {children}

@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from 'react'
 import { supabase } from '@/lib/supabase'
 import gsap from 'gsap'
 import {
-    SlidersHorizontal, MessageSquare,
+    SlidersHorizontal, MessageSquare, Phone,
     ChevronDown, Check, FileText, GraduationCap, User, Mail, Calendar, X, CheckCircle2, Download
 } from 'lucide-react'
 
@@ -79,6 +79,64 @@ function CustomStatusSelect({ value, onChange, rowZIndex }: { value: string, onC
 }
 
 // =========================================================
+// GENERIC CUSTOM SAAS SELECT (For Export Modal)
+// =========================================================
+function CustomSelect({ value, onChange, options, zIndex }: { value: string, onChange: (val: string) => void, options: {value: string, label: string}[], zIndex: number }) {
+    const [isOpen, setIsOpen] = useState(false)
+    const dropdownRef = useRef<HTMLDivElement>(null)
+
+    useEffect(() => {
+        function handleClickOutside(event: MouseEvent) {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) setIsOpen(false)
+        }
+        document.addEventListener("mousedown", handleClickOutside)
+        return () => document.removeEventListener("mousedown", handleClickOutside)
+    }, [])
+
+    const activeOption = options.find(o => o.value === value)
+
+    return (
+        <div className="relative w-full" ref={dropdownRef} style={{ zIndex: isOpen ? zIndex + 10 : zIndex }}>
+            <button
+                type="button"
+                onClick={() => setIsOpen(!isOpen)}
+                className={`w-full flex items-center justify-between px-5 py-4 bg-[#F4F6F8] rounded-[20px] font-medium text-[14px] text-[#15283D] border transition-all duration-300 outline-none ${
+                    isOpen ? 'bg-white border-[#334a89]/30 ring-4 ring-[#334a89]/10' : 'border-transparent hover:bg-[#E5E7EB]'
+                }`}
+            >
+                <span className="truncate pr-2">{activeOption?.label || 'Select...'}</span>
+                <ChevronDown className={`w-4 h-4 text-[#A0AEC0] shrink-0 transition-transform duration-300 ${isOpen ? 'rotate-180 text-[#334a89]' : ''}`} />
+            </button>
+
+            <div
+                className={`absolute left-0 right-0 top-[calc(100%+8px)] bg-white border border-[#E5E7EB] rounded-[20px] shadow-[0_20px_40px_rgba(21,40,61,0.12)] overflow-hidden transition-all duration-300 origin-top ${
+                    isOpen ? 'opacity-100 scale-y-100 pointer-events-auto' : 'opacity-0 scale-y-95 pointer-events-none'
+                }`}
+            >
+                <div className="py-2 flex flex-col max-h-[240px] overflow-y-auto custom-scrollbar">
+                    {options.map((opt) => {
+                        const isSelected = value === opt.value;
+                        return (
+                            <button
+                                key={opt.value}
+                                type="button"
+                                onClick={() => { onChange(opt.value); setIsOpen(false); }}
+                                className={`w-full flex items-center justify-between px-5 py-3 font-['Quicksand'] text-[13px] font-bold uppercase tracking-widest transition-colors ${
+                                    isSelected ? 'bg-[#F8F9FA] text-[#334a89]' : 'text-[#5C5C61] hover:bg-[#F4F6F8] hover:text-[#15283D]'
+                                }`}
+                            >
+                                {opt.label}
+                                {isSelected && <Check className="w-3.5 h-3.5 text-[#334a89]" />}
+                            </button>
+                        )
+                    })}
+                </div>
+            </div>
+        </div>
+    )
+}
+
+// =========================================================
 // MAIN MANAGER COMPONENT
 // =========================================================
 export default function AdmissionsManager() {
@@ -87,6 +145,12 @@ export default function AdmissionsManager() {
     const [selectedAdmission, setSelectedAdmission] = useState<any | null>(null)
     const [feedback, setFeedback] = useState('')
     const [loading, setLoading] = useState(true)
+
+    const [exportModalOpen, setExportModalOpen] = useState(false)
+    const [exportTime, setExportTime] = useState('recent')
+    const [exportDate, setExportDate] = useState('')
+    const [exportSearch, setExportSearch] = useState('')
+    const [exportSort, setExportSort] = useState('none')
 
     const tableRef = useRef<HTMLTableSectionElement>(null)
     const modalRef = useRef<HTMLDivElement>(null)
@@ -152,8 +216,32 @@ export default function AdmissionsManager() {
         })
     }
 
-    const exportToCSV = () => {
-        if (admissions.length === 0) return
+    const executeExport = () => {
+        let data = [...admissions]
+
+        if (exportSearch) {
+            const q = exportSearch.toLowerCase()
+            data = data.filter(a => (a.child_full_name || '').toLowerCase().includes(q) || (a.parent_name || '').toLowerCase().includes(q))
+        }
+
+        if (exportTime === 'specific' && exportDate) {
+            data = data.filter(a => a.created_at.startsWith(exportDate))
+        } else if (exportTime === 'oldest') {
+            data.sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime())
+        } else if (exportTime === 'recent') {
+            data.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
+        }
+
+        if (exportSort === 'asc') {
+            data.sort((a, b) => (a.child_full_name || '').localeCompare(b.child_full_name || ''))
+        } else if (exportSort === 'desc') {
+            data.sort((a, b) => (b.child_full_name || '').localeCompare(a.child_full_name || ''))
+        }
+
+        if (data.length === 0) {
+            alert('No records match your export filters.')
+            return
+        }
 
         const headers = [
             "ID",
@@ -171,7 +259,7 @@ export default function AdmissionsManager() {
 
         const csvContent = [
             headers.join(','),
-            ...admissions.map(adm => [
+            ...data.map(adm => [
                 `"${adm.id}"`,
                 `"${adm.child_full_name || ''}"`,
                 `"${adm.child_dob || ''}"`,
@@ -195,6 +283,8 @@ export default function AdmissionsManager() {
         document.body.appendChild(link)
         link.click()
         document.body.removeChild(link)
+        
+        setExportModalOpen(false)
     }
 
     return (
@@ -241,7 +331,7 @@ export default function AdmissionsManager() {
                     <p className="text-[#5C5C61] font-medium text-[15px]">Manage, review, and update prospective student applications.</p>
                 </div>
                 <button
-                    onClick={exportToCSV}
+                    onClick={() => setExportModalOpen(true)}
                     className="flex items-center gap-2 px-6 py-3 bg-[#334a89]/10 text-[#334a89] rounded-full font-bold text-[13px] uppercase tracking-widest hover:bg-[#334a89]/20 transition-colors shrink-0"
                 >
                     <Download className="w-4 h-4" />
@@ -342,6 +432,10 @@ export default function AdmissionsManager() {
                                                 <Mail className="w-3.5 h-3.5 text-[#A0AEC0]" />
                                                 {adm.parent_email}
                                             </div>
+                                            <div className="flex items-center gap-2 text-[#5C5C61] font-medium text-[13px]">
+                                                <Phone className="w-3.5 h-3.5 text-[#A0AEC0]" />
+                                                {adm.country_code}{adm.parent_phone}
+                                            </div>
                                         </div>
                                     </td>
                                     <td className="px-6 py-6 relative">
@@ -432,6 +526,100 @@ export default function AdmissionsManager() {
                             </button>
                         </div>
 
+                    </div>
+                </div>
+            )}
+
+            {/* =========================================================
+                EXPORT FILTERS MODAL
+            ========================================================= */}
+            {exportModalOpen && (
+                <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-[#15283D]/40 backdrop-blur-md">
+                    <div className="absolute inset-0 cursor-pointer" onClick={() => setExportModalOpen(false)} />
+                    <div className="relative w-full max-w-3xl bg-white rounded-[40px] shadow-[0_40px_80px_rgba(21,40,61,0.2)] border border-[#E5E7EB] overflow-hidden">
+                        
+                        <div className="px-10 py-8 border-b border-[#F4F6F8] flex items-center justify-between bg-[#F8F9FA]">
+                            <div className="flex items-center gap-4">
+                                <div className="w-12 h-12 rounded-[16px] bg-[#334a89]/10 border border-[#334a89]/10 flex items-center justify-center">
+                                    <Download className="w-5 h-5 text-[#334a89]" />
+                                </div>
+                                <div>
+                                    <h3 className="font-bold text-[18px] text-[#15283D] tracking-tight mb-0.5">Export CSV</h3>
+                                    <p className="font-bold text-[11px] uppercase tracking-widest text-[#A0AEC0]">Download Filters</p>
+                                </div>
+                            </div>
+                            <button
+                                onClick={() => setExportModalOpen(false)}
+                                className="w-10 h-10 rounded-full bg-white border border-[#E5E7EB] flex items-center justify-center text-[#A0AEC0] hover:text-[#15283D] hover:border-[#15283D] hover:bg-[#F8F9FA] transition-all"
+                            >
+                                <X className="w-4 h-4" />
+                            </button>
+                        </div>
+
+                        <div className="p-10 grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div className="flex flex-col gap-3 relative z-30">
+                                <label className="font-bold text-[11px] text-[#A0AEC0] uppercase tracking-[0.2em]">Time Based</label>
+                                <CustomSelect 
+                                    value={exportTime} 
+                                    onChange={setExportTime}
+                                    options={[
+                                        { value: 'recent', label: 'Most Recent First' },
+                                        { value: 'oldest', label: 'Oldest First' },
+                                        { value: 'specific', label: 'Specific Date' }
+                                    ]}
+                                    zIndex={30}
+                                />
+                                {exportTime === 'specific' && (
+                                    <input 
+                                        type="date" 
+                                        value={exportDate}
+                                        onChange={e => setExportDate(e.target.value)}
+                                        className="w-full px-5 py-4 mt-2 bg-[#F4F6F8] rounded-[20px] font-medium text-[14px] text-[#15283D] border border-transparent focus:bg-white focus:border-[#334a89]/30 outline-none transition-all"
+                                    />
+                                )}
+                            </div>
+
+                            <div className="flex flex-col gap-3 relative z-20">
+                                <label className="font-bold text-[11px] text-[#A0AEC0] uppercase tracking-[0.2em]">By Student</label>
+                                <input 
+                                    type="text" 
+                                    placeholder="Search student or parent name..."
+                                    value={exportSearch}
+                                    onChange={e => setExportSearch(e.target.value)}
+                                    className="w-full px-5 py-4 bg-[#F4F6F8] rounded-[20px] font-medium text-[14px] text-[#15283D] border border-transparent focus:bg-white focus:border-[#334a89]/30 outline-none transition-all placeholder-[#A0AEC0]"
+                                />
+                            </div>
+
+                            <div className="flex flex-col gap-3 relative z-10 md:col-span-2">
+                                <label className="font-bold text-[11px] text-[#A0AEC0] uppercase tracking-[0.2em]">Alphabetical</label>
+                                <CustomSelect 
+                                    value={exportSort} 
+                                    onChange={setExportSort}
+                                    options={[
+                                        { value: 'none', label: 'No Alphabetical Sort' },
+                                        { value: 'asc', label: 'A to Z' },
+                                        { value: 'desc', label: 'Z to A' }
+                                    ]}
+                                    zIndex={10}
+                                />
+                            </div>
+                        </div>
+
+                        <div className="px-10 py-6 border-t border-[#F4F6F8] bg-[#F8F9FA] flex items-center justify-end gap-4">
+                            <button
+                                className="px-6 py-4 rounded-full font-bold text-[13px] uppercase tracking-widest text-[#5C5C61] hover:bg-[#E5E7EB] hover:text-[#15283D] transition-colors"
+                                onClick={() => setExportModalOpen(false)}
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                className="flex items-center gap-2 px-8 py-4 bg-[#334a89] text-white rounded-full font-bold text-[13px] uppercase tracking-widest hover:bg-[#15283D] shadow-[0_10px_20px_rgba(51,74,137,0.2)] hover:shadow-[0_15px_30px_rgba(21,40,61,0.3)] transition-all group"
+                                onClick={executeExport}
+                            >
+                                <Download className="w-4 h-4 transition-transform group-hover:scale-110" />
+                                Download CSV
+                            </button>
+                        </div>
                     </div>
                 </div>
             )}

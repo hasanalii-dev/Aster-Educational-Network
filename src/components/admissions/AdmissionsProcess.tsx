@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { Link } from 'react-router-dom'
+
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
@@ -17,7 +17,7 @@ export function AdmissionsProcess() {
             desc: "Complete the enquiry form and share your child's details with our admissions team.",
             action: {
                 label: "Fill Admissions Form",
-                href: "/apply"
+                href: "https://form.jotform.com/222871184574462"
             }
         },
         {
@@ -148,10 +148,10 @@ export function AdmissionsProcess() {
                                     {step.desc}
                                 </p>
                                 {step.action && (
-                                    <Link to={step.action.href} className="inline-flex items-center gap-2 mt-4 font-['Quicksand'] font-bold text-sm tracking-widest text-[#334a89] uppercase transition-colors hover:text-[#ffc715]">
+                                    <a href={step.action.href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 mt-4 font-['Quicksand'] font-bold text-sm tracking-widest text-[#334a89] uppercase transition-colors hover:text-[#ffc715]">
                                         {step.action.label}
                                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
-                                    </Link>
+                                    </a>
                                 )}
                             </div>
 

@@ -4,7 +4,7 @@ import { SEO } from '@/components/seo/SEO'
 import { useDraggableScroll } from '@/hooks/useDraggableScroll'
 import { HeroSection, CampusesSection, ProgramsSection, TestimonialsSection, CommunityCtaSection } from '@/components/sections'
 import gsap from 'gsap'
-import ribbonSvg from '@/assets/ribbon.svg'
+
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -201,10 +201,7 @@ export default function Home() {
             ========================================= */}
             <section id="why-choose-us" className="wcu-section" ref={wcuSectionRef}>
 
-                {/* Custom SVG Ornament (Top Right) */}
-                <div className="wcu-ornament-grid" aria-hidden="true" ref={wcuOrnamentRef}>
-                    <img src={ribbonSvg} alt="" className="wcu-lines-svg" />
-                </div>
+
 
                 <div className="wcu-container">
 

@@ -1,5 +1,5 @@
 import { SEO } from '@/components/seo/SEO'
-import { CustomCursor } from '@/components/ui/CustomCursor'
+
 
 import { DifferenceHero } from '@/components/aster-difference/DifferenceHero'
 import { DifferenceIntro } from '@/components/aster-difference/DifferenceIntro'
@@ -18,7 +18,7 @@ export default function AsterDifference() {
     return (
         <div id="page-aster-difference" className="bg-[#FAFAFA] min-h-screen">
             <SEO title="The Aster Difference" />
-            <CustomCursor />
+
             <DifferenceHero />
             <DifferenceIntro />
             <DifferenceFutureReady />

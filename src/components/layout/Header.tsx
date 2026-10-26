@@ -141,7 +141,7 @@ const navItems: NavItem[] = [
         },
         children: [
             { label: 'How to Apply', href: '/admissions', description: 'Begin your Aster journey' },
-            { label: 'Apply Now', href: '/apply', description: 'Submit your application form' },
+            { label: 'Apply Now', href: 'https://form.jotform.com/222871184574462', description: 'Submit your application form' },
             { label: 'Book a Tour', href: '/book-tour', description: 'Schedule a campus visit' },
             { label: 'Parent Stories', href: '/parent-stories', description: 'The growth parents see' },
             { label: 'FAQs', href: '/faqs', description: 'Everything you need to know' },

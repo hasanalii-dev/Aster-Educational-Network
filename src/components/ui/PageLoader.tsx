@@ -113,12 +113,12 @@ export function PageLoader() {
         }, "-=0.2")
 
         // F. THE WATER DRAIN OUT
-        // Waves get agitated as water drains
-        tl.to('.ldr-wave-surface', { scaleY: 2.0, duration: 0.3, ease: 'power2.out' }, "-=0.2")
         
         // The entire water tank drops down to empty
         tl.to(layer3.current, { 
             y: window.innerHeight + 400, 
+            borderTopLeftRadius: '50vw 15vh',
+            borderTopRightRadius: '50vw 15vh',
             duration: 1.0, 
             ease: 'power2.inOut' 
         }, "-=0.1")
@@ -144,21 +144,7 @@ export function PageLoader() {
             <div ref={containerRef} className="smart-loader-master-veil">
                 <div ref={layer3} className="ldr-layer ldr-layer-3">
 
-                    {/* The Water Surface — 4 animated layers matching PageTransition */}
-                    <div className="ldr-wave-surface">
-                        <svg className="ldr-wave-svg ldr-wave-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 160" preserveAspectRatio="none">
-                            <path d="M0,64 C120,20 240,100 360,64 C480,28 600,100 720,64 C840,28 960,100 1080,64 C1200,28 1320,100 1440,64 L1440,160 L0,160 Z" fill="#8999CC" />
-                        </svg>
-                        <svg className="ldr-wave-svg ldr-wave-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 160" preserveAspectRatio="none">
-                            <path d="M0,80 C160,40 320,120 480,80 C640,40 800,120 960,80 C1120,40 1280,120 1440,80 L1440,160 L0,160 Z" fill="#6272B5" />
-                        </svg>
-                        <svg className="ldr-wave-svg ldr-wave-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 160" preserveAspectRatio="none">
-                            <path d="M0,96 C200,50 400,130 600,96 C800,62 1000,130 1200,96 C1300,80 1400,110 1440,96 L1440,160 L0,160 Z" fill="#4A5FA6" />
-                        </svg>
-                        <svg className="ldr-wave-svg ldr-wave-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 160" preserveAspectRatio="none">
-                            <path d="M0,110 C240,75 480,140 720,110 C960,80 1200,140 1440,110 L1440,160 L0,160 Z" fill="#3D5298" />
-                        </svg>
-                    </div>
+
 
                     <div className="smart-sanctuary-portal">
 

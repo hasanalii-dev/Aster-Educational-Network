@@ -45,12 +45,14 @@ export function ContactJourney() {
                         <span className="btn-arrow" style={{ marginLeft: 4 }}>→</span>
                     </Link>
                     
-                    <Link
-                        to="/apply"
+                    <a
+                        href="https://form.jotform.com/222871184574462"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="btn-aster btn-aster-white w-full sm:w-auto"
                     >
                         <span>Join the Waitlist</span>
-                    </Link>
+                    </a>
                 </div>
 
             </div>

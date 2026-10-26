@@ -43,101 +43,6 @@ const footerLinks = {
     ]
 }
 
-function OxygenBubbles() {
-    const containerRef = useRef<HTMLDivElement>(null)
-
-    useEffect(() => {
-        if (!containerRef.current) return
-        const container = containerRef.current
-
-        let isActive = true
-        const spawnBubble = () => {
-            if (!isActive) return
-            const bubble = document.createElement('div')
-            const size = gsap.utils.random(12, 32)
-            const startX = gsap.utils.random(5, 95) // percentage
-            const opacity = gsap.utils.random(0.05, 0.15) // highly transparent
-
-            bubble.style.position = 'absolute'
-            bubble.style.bottom = '-40px'
-            bubble.style.left = `${startX}%`
-            bubble.style.width = `${size}px`
-            bubble.style.height = `${size}px`
-            bubble.style.borderRadius = '50%'
-            bubble.style.backgroundColor = `rgba(255, 255, 255, ${opacity * 0.5})`
-            bubble.style.border = `1px solid rgba(255, 255, 255, ${opacity * 2})`
-            bubble.style.pointerEvents = 'none'
-            bubble.style.zIndex = '1'
-
-            const highlight = document.createElement('div')
-            highlight.style.position = 'absolute'
-            highlight.style.bottom = '10%'
-            highlight.style.right = '10%'
-            highlight.style.width = '60%'
-            highlight.style.height = '60%'
-            highlight.style.borderRadius = '50%'
-            highlight.style.borderBottom = `1.5px solid rgba(255, 255, 255, ${opacity * 4})`
-            highlight.style.transform = 'rotate(-45deg)'
-
-            bubble.appendChild(highlight)
-
-            container.appendChild(bubble)
-
-            const duration = gsap.utils.random(15, 30)
-            const targetY = -gsap.utils.random(300, 800)
-
-            const tl = gsap.timeline({
-                onComplete: () => {
-                    if (!isActive) return
-                    // Bubble Pop Animation
-                    gsap.to(bubble, {
-                        scale: 1.8,
-                        opacity: 0,
-                        duration: 0.25,
-                        ease: 'power2.out',
-                        onComplete: () => {
-                            if (bubble.parentNode === container) {
-                                bubble.remove()
-                            }
-                        }
-                    })
-                }
-            })
-
-            // Rise Up
-            tl.to(bubble, {
-                y: targetY,
-                duration: duration,
-                ease: 'power1.inOut'
-            }, 0)
-
-            // Zig Zag / Drift
-            tl.to(bubble, {
-                x: `+=${gsap.utils.random(-80, 80)}`,
-                duration: duration / 3,
-                yoyo: true,
-                repeat: 2,
-                ease: 'sine.inOut'
-            }, 0)
-
-            // Fade in slightly at start
-            gsap.fromTo(bubble, { opacity: 0 }, { opacity: 1, duration: 0.5 })
-
-            setTimeout(spawnBubble, gsap.utils.random(1500, 3500))
-        }
-
-        // Start a few bubbles immediately
-        for(let i=0; i<2; i++) {
-            setTimeout(spawnBubble, i * 400)
-        }
-
-        return () => {
-            isActive = false
-        }
-    }, [])
-
-    return <div ref={containerRef} className="absolute inset-0 overflow-hidden pointer-events-none z-0" />
-}
 
 export function Footer() {
     const currentYear = new Date().getFullYear()
@@ -278,7 +183,7 @@ export function Footer() {
                 </div>
 
                 <div className="footer-background">
-                    <OxygenBubbles />
+
                     <div ref={contentRef} className="footer-content-wrapper">
                         <div className="footer-grid">
                             <div className="footer-brand-col footer-anim-group">
@@ -293,7 +198,7 @@ export function Footer() {
                                 </p>
                                 <div className="footer-contact">
                                     <a href="mailto:info@aster.edu.pk" className="footer-contact-link">info@aster.edu.pk</a>
-                                    <a href="tel:+923368827837" className="footer-contact-link">+92 336 882 7837</a>
+                                    <a href="tel:+923358328671" className="footer-contact-link">+92 335 832 8671</a>
                                 </div>
                             </div>
                             <div className="footer-links-grid">

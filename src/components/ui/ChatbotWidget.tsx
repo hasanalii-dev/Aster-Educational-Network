@@ -147,9 +147,9 @@ export function ChatbotWidget() {
                     response = (
                         <div className="flex flex-col gap-3">
                             <p>We are currently accepting applications! Our admissions process is designed to be smooth and welcoming.</p>
-                            <Link to="/admissions" onClick={handleClose} className="bg-white text-[#394EA2] px-4 py-2 rounded-lg text-sm font-bold text-center hover:bg-[#ffc715] hover:text-[#15283D] transition-colors shadow-sm">
+                            <a href="https://form.jotform.com/222871184574462" target="_blank" rel="noopener noreferrer" onClick={handleClose} className="bg-white text-[#394EA2] px-4 py-2 rounded-lg text-sm font-bold text-center hover:bg-[#ffc715] hover:text-[#15283D] transition-colors shadow-sm">
                                 View Admissions Process
-                            </Link>
+                            </a>
                         </div>
                     );
                     break;
@@ -163,7 +163,7 @@ export function ChatbotWidget() {
                         </div>
                     );
                     break;
-                case "ciriculum":
+                case "curriculum":
                     response = (
                         <div className="flex flex-col gap-3">
                             <p>Our curriculum blends the National Curriculum of England with the International Primary Curriculum (IPC), focusing on holistic development.</p>
@@ -343,7 +343,7 @@ export function ChatbotWidget() {
                     <div className="px-4 py-3 bg-white border-t border-gray-50 min-h-[60px]">
                         {showOptions && !isTyping && (
                             <div className="flex flex-wrap gap-2 animate-in fade-in slide-in-from-bottom-2 duration-500">
-                                {['admission', 'signing up', 'book a campus tour', 'ciriculum', 'applying for job', 'contacting'].map((opt) => (
+                                {['admission', 'signing up', 'book a campus tour', 'curriculum', 'applying for job', 'contacting'].map((opt) => (
                                     <button
                                         key={opt}
                                         onClick={() => triggerPreRecordedResponse(opt)}

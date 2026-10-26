@@ -165,7 +165,7 @@ export default function ProfileDashboard() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
             
             {/* Action Tile 1: Start Application */}
-            <Link to="/apply" className="gsap-action-tile opacity-0 group bg-white rounded-[24px] p-6 shadow-[0_8px_20px_rgba(21,40,61,0.03)] border border-[#E5E7EB] hover:border-[#334a89]/20 hover:shadow-[0_12px_30px_rgba(51,74,137,0.08)] transition-all duration-300 hover:-translate-y-1.5 flex items-start gap-5">
+            <a href="https://form.jotform.com/222871184574462" target="_blank" rel="noopener noreferrer" className="gsap-action-tile opacity-0 group bg-white rounded-[24px] p-6 shadow-[0_8px_20px_rgba(21,40,61,0.03)] border border-[#E5E7EB] hover:border-[#334a89]/20 hover:shadow-[0_12px_30px_rgba(51,74,137,0.08)] transition-all duration-300 hover:-translate-y-1.5 flex items-start gap-5">
                 <div className="w-14 h-14 bg-[#F4F6F8] group-hover:bg-[#334a89]/5 rounded-2xl flex items-center justify-center shrink-0 transition-colors duration-300">
                     <GraduationCap className="w-7 h-7 text-[#334a89]" />
                 </div>
@@ -173,7 +173,7 @@ export default function ProfileDashboard() {
                     <h3 className="font-extrabold text-[#15283D] text-[17px] mb-1">Start Application</h3>
                     <p className="text-[14px] text-[#5C5C61] font-bold leading-snug">Begin an admission application for your child.</p>
                 </div>
-            </Link>
+            </a>
 
             {/* Action Tile 2: Book Tour (White glass card) */}
             <Link to="/book-tour" className="gsap-action-tile opacity-0 group bg-white rounded-[24px] p-6 shadow-[0_8px_20px_rgba(21,40,61,0.03)] border border-[#E5E7EB] hover:border-[#334a89]/30 hover:shadow-[0_20px_40px_rgba(51,74,137,0.08)] transition-all duration-500 hover:-translate-y-1.5 flex items-start gap-5">
@@ -238,9 +238,9 @@ export default function ProfileDashboard() {
                         You haven't submitted any admission applications or booked any campus tours yet. When you do, you'll be able to track their progress securely right here.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-5">
-                        <Link to="/apply" className="px-8 py-4 bg-[#334a89] text-white rounded-full font-extrabold text-[15px] tracking-wide hover:bg-[#15283D] hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2">
+                        <a href="https://form.jotform.com/222871184574462" target="_blank" rel="noopener noreferrer" className="px-8 py-4 bg-[#334a89] text-white rounded-full font-extrabold text-[15px] tracking-wide hover:bg-[#15283D] hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2">
                             Start Application <ArrowRight className="w-5 h-5" />
-                        </Link>
+                        </a>
                         <Link to="/book-tour" className="px-8 py-4 bg-white text-[#334a89] border-2 border-[#E5E7EB] rounded-full font-extrabold text-[15px] tracking-wide hover:border-[#334a89]/30 hover:bg-[#F4F6F8] transition-all duration-300 flex items-center justify-center gap-2">
                             Book a Tour <ChevronRight className="w-5 h-5" />
                         </Link>

@@ -28,9 +28,18 @@ export default function NewsletterManager() {
         }
 
         const bccList = activeSubscribers.join(',')
+        
+        // Fallback: Copy to clipboard just in case mailto doesn't work
+        navigator.clipboard.writeText(bccList).then(() => {
+            showToast('Emails copied to clipboard! Opening email client...', 'success')
+        }).catch(() => {
+            showToast('Opening email client...', 'success')
+        });
+
         const subject = encodeURIComponent('Update from The Aster School')
         const mailtoLink = `mailto:?bcc=${bccList}&subject=${subject}`
         
+        // Execute mailto in the current window to avoid opening a blank tab
         window.location.href = mailtoLink
     }
 

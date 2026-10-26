@@ -6,7 +6,7 @@ import { useScrollToTop } from '@/hooks/useScrollToTop'
 import { useSmoothScroll } from '@/hooks/useSmoothScroll'
 import { useGlobalReveal } from '@/hooks/useGlobalReveal'
 import { TransitionProvider } from '@/components/ui/PageTransition'
-import { CustomCursor } from '@/components/ui/CustomCursor'
+
 import { ChatbotWidget } from '@/components/ui/ChatbotWidget'
 import { PageSkeleton } from '@/components/ui/PageSkeleton'
 import { supabase } from '@/lib/supabase'
@@ -32,7 +32,7 @@ export function Layout() {
 
   return (
     <TransitionProvider>
-      <CustomCursor />
+
       <div className="flex flex-col min-h-screen">
         <Header 
             marqueeText={settings?.marquee_text} 

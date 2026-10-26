@@ -80,7 +80,7 @@ export function ContactLocations() {
         {
             name: "PECHS Junior Campus",
             address: "Plot 37 C, Block-6 PECHS, Karachi City, Sindh, Pakistan, 75500",
-            phone: "+92 336 882 7837",
+            phone: "+92 335 832 8671",
             email: "info@aster.edu.pk",
             mapImage: "https://res.cloudinary.com/lpxp5l3a/image/upload/c_scale,w_600,q_auto,f_auto/v1783163524/junior_b24khc.png",
             mapLink: "https://maps.google.com/?q=Plot+37+C%2C+Block-6+PECHS%2C+Karachi+City%2C+Sindh%2C+Pakistan%2C+75500"
@@ -141,7 +141,7 @@ export function ContactLocations() {
                             <div>
                                 <h4 className="font-['Quicksand'] font-bold text-white text-[16px] mb-2 tracking-wide">Email & Phone</h4>
                                 <a href="mailto:info@aster.edu.pk" className="block font-['Quicksand'] text-white/80 font-medium text-[15px] group-hover:text-[#ffc715] transition-colors">info@aster.edu.pk</a>
-                                <a href="tel:+923368827837" className="block font-['Quicksand'] text-white/80 font-medium text-[15px] mt-1 group-hover:text-[#ffc715] transition-colors">+92 336 882 7837</a>
+                                <a href="tel:+923358328671" className="block font-['Quicksand'] text-white/80 font-medium text-[15px] mt-1 group-hover:text-[#ffc715] transition-colors">+92 335 832 8671</a>
                             </div>
                         </div>
                         <div className="flex items-start gap-5">

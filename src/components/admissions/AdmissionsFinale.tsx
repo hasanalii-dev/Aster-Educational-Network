@@ -119,13 +119,15 @@ export function AdmissionsFinale() {
 
                     <div className="finale-stagger w-full max-w-4xl border-t border-white/20 pt-10 flex flex-col items-center relative z-10">
                         <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-4 w-full">
-                            <Link
-                                to="/apply"
+                            <a
+                                href="https://form.jotform.com/222871184574462"
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 className="btn-aster btn-aster-primary rounded-full flex items-center justify-center gap-3 hover-shimmer relative overflow-hidden px-8 py-4 text-sm md:text-base font-bold tracking-[0.1em] uppercase"
                             >
                                 <UserPlus className="w-5 h-5" />
                                 Join the Waitlist
-                            </Link>
+                            </a>
                             <Link
                                 to="/campuses"
                                 className="btn-aster btn-aster-white rounded-full flex items-center justify-center gap-3 hover-shimmer relative overflow-hidden px-8 py-4 text-sm md:text-base font-bold tracking-[0.1em] uppercase"
